@@ -3,17 +3,16 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 [![NPM downloads](https://img.shields.io/npm/dy/excel-builder-vanilla)](https://npmjs.org/package/excel-builder-vanilla)
-[![Playwright](https://img.shields.io/badge/tested%20with-Playwright-45ba4b.svg?logo=playwright)](https://playwright.dev/)
 [![npm](https://img.shields.io/npm/v/excel-builder-vanilla.svg?logo=npm&logoColor=fff&label=npm)](https://www.npmjs.com/package/excel-builder-vanilla)
 [![Actions Status](https://github.com/ghiscoding/excel-builder-vanilla/actions/workflows/main.yml/badge.svg)](https://github.com/ghiscoding/excel-builder-vanilla/actions)
 
-## First Release after Full Rewrite
+## Live Demo
 
-We now have a fully working and official release including a [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) for displaying all available options/methods. You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
+We also have a new [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) for displaying all available options/methods. You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
 
 ## Description
 
-Excel-Builder-Vanilla is a fork of the popular [excel-builder](https://github.com/stephenliberty/excel-builder.js) library (thanks to @stephenliberty for this great lib). This fork was based on its latest known version. The main difference from the original lib is that we dropped the `Q` and `Lodash` dependencies and we now use native code and this mean there is only 1 external dependency left which is JSZip.
+Excel-Builder-Vanilla is a fork of the popular [excel-builder](https://github.com/stephenliberty/excel-builder.js) library (thanks to @stephenliberty for this great lib). This fork was based on its latest known version. The main difference from the original lib is that we migrated the project to TypeScript and dropped the `Q` and `Lodash` dependencies and we now use native code and this mean there is only 1 external dependency left which is JSZip.
 
 This lib allows you to build an Excel file dynamically.
 
