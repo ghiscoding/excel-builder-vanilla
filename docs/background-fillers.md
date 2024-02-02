@@ -6,9 +6,9 @@ There are two possible types of fill. A pattern fill and a gradient fill. These 
 
 The pattern fill requires a pattern type (or solid, if one just wants a solid background color). It also requires a foreground and background color. The trick to remember is that a foreground color is for the pattern (or in the case of a solid background, the actual color you want the background to be). The background color is for whatever the pattern goes on top of.
 
-A gradient fill requires a 'degree' (or if no degree, a 'left', 'right', 'top' and 'bottom'). Then, the start and end instructions. The start and end instructions can be simple colors, by which EB will just assume that you want the start color to be pure at 'zero' (i.e. the beginning) and the end color to be pure at the 'one' (i.e. the end). In the example below, I want the end color to be pure 80% into the cell.
+A gradient fill requires a `degree` (or if no degree, a `left`, `right`, `top` and `bottom`). Then, the start and end instructions. The start and end instructions can be simple colors, by which EB will just assume that you want the start color to be pure at 'zero' (i.e. the beginning) and the end color to be pure at the 'one' (i.e. the end). In the example below, I want the end color to be pure 80% into the cell.
 
-**Note:** HTML color requires the `#` prefix to be escaped as `FF`, for example `#C0C0C0` must be written as `FFC0C0C0`
+**Note:** HTML color requires the `#` prefix to be escaped as `FF`, for example the HTML color `#0000FF` (blue) must be converted to `FF0000FF`
 
 ```ts
 import { ExcelBuilder } from 'excel-builder-vanilla';
