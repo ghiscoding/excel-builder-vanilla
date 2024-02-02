@@ -12,23 +12,23 @@ npm install excel-builder-vanilla
 
 ### Features Supported
 
-Number and date formatting
-Font sizes and colors
-Borders
-Multiple worksheets (with customizable names)
-Table views
-Setting page layout
-Setting page headers and footers
-Formula support
-Insertion of pictures
+- Number and date formatting
+- Font sizes and colors
+- Borders
+- Multiple worksheets (with customizable names)
+- Table views
+- Setting page layout
+- Setting page headers and footers
+- Formula support
+- Insertion of pictures
 
 ### TODO (in order of priority)
 
-Better code documentation, and add actual site documentation
-General code cleanup
-Should be able to create a custom theme
-Tables are done, but Pivot tables need to be done
-Charts
+- Better code documentation, and add actual site documentation
+- General code cleanup
+- Should be able to create a custom theme
+- Tables are done, but Pivot tables need to be done
+- Charts
 
 ### Why on earth would you build an excel file in JavaScript?!?!
 
@@ -46,12 +46,12 @@ Heck, if you've been in the development business for more than 5 years, you prob
 
 Here's the tricky part. There are a couple different ways of doing this, so pick the one that is least painful.
 
-Use the Downloadify project - this is what I'll be using in my demos
-Use the newer browser's API's to create a Blob and save it. Google always helps here..
-Chrome has a non-standard attribute called 'download' on anchor tags. Assign a data-uri representing the file you want downloaded to the href and then specify the file name in the 'download' attribute. When the user clicks on the link, it will download the file just like normal.
-Create a very simple and inexpensive web service to 'echo' back anything you send it. It still takes the pain away from creating the entire file in the backend with all the data fetching, translations and etc. However it also will work for all browses. You could also look into a simple Google App Engine setup.
-Combining some of these approaches seems like a noteworthy goal.. perhaps a script in the future to do so?
+- Use the Downloadify project - this is what I'll be using in my demos
+- Use the newer browser's API's to create a Blob and save it. Google always helps here..
+- Chrome has a non-standard attribute called 'download' on anchor tags. Assign a data-uri representing the file you want downloaded to the href and then specify the file name in the 'download' attribute. When the user clicks on the link, it will download the file just like normal.
+- Create a very simple and inexpensive web service to 'echo' back anything you send it. It still takes the pain away from creating the entire file in the backend with all the data fetching, translations and etc. However it also will work for all browses. You could also look into a simple Google App Engine setup.
+- Combining some of these approaches seems like a noteworthy goal.. perhaps a script in the future to do so?
 
 ### License
 
-MIT
+MIT License
