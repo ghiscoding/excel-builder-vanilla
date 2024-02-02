@@ -27,4 +27,4 @@ const data = new ExcelBuilder().createFile(artistWorkbook);
 downloader('Artist WB.xlsx', data);
 ```
 
-If you want to get the R1C1 position, you can use the 'util.positionToLetterRef' method, which accepts the 'X' position and the 'Y' position, then returns an R1C1 based off of that.
+If you want to get the `R1C1` position, you can use the `util.positionToLetterRef(x, y)` method, which accepts the `X` position and the `Y` position, then returns an `R1C1` based off of that.
