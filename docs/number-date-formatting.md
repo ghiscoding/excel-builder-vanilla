@@ -4,13 +4,13 @@ Formatting data is very straightforward. You create a 'formatter' and a style to
 
 If you don't know what a 'format' should contain, open Excel and go to the cell formatter.
 
-![](https://user-images.githubusercontent.com/643976/496be8b3-dc89-4c6a-b3b2-a87590fa9b28.gif)
+![](https://github.com/ghiscoding/excel-builder-vanilla/assets/643976/badc2d94-e0be-4c05-9360-cdfc3e654f20)
 
 There you should see a list of different predefined formats - choose or create as you feel necessary.
 
-![](https://github.com/ghiscoding/slickgrid-universal/assets/643976/51c77ca9-5117-49a9-94a6-31ff69f4c1fa.png)
+![](https://github.com/ghiscoding/excel-builder-vanilla/assets/643976/53e74ac0-c7c9-431b-bf1e-3890b819c2fa)
 
-Once you have the format how you'd like, click on the 'Custom' option. This will have the code that you had selected/setup in the 'Type' box. Just copy and paste that code into the 'format' property.
+Once you have the format how you'd like, click on the 'Custom' option. This will have the code that youhad selected/setup in the 'Type' box. Just copy and paste that code into the 'format' property.
 
 ![](https://github.com/ghiscoding/slickgrid-universal/assets/643976/236fed91-fdfd-4203-840f-2ea1e12b7da6)
 
