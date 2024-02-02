@@ -30,7 +30,7 @@ export default class Example {
   createExcelStruct() {
     const artistWorkbook = new ExcelBuilder().createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
-    const stylesheet = artistWorkbook.getStyleSheet();
+    // const stylesheet = artistWorkbook.getStyleSheet();
 
     // TODO: createDifferentialStyle() is causing issue, however the same code works fine with createFormat()
     // const boldDXF = stylesheet.createDifferentialStyle({
