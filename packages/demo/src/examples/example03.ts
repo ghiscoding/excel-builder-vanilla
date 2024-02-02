@@ -32,18 +32,13 @@ export default class Example {
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
     const stylesheet = artistWorkbook.getStyleSheet();
 
-    const boldDXF = stylesheet.createDifferentialStyle({
-      // font: {
-      //   italic: true,
-      // },
-      fill: { degree: 20 },
+    // TODO: createDifferentialStyle() is causing issue, however the same code works fine with createFormat()
+    // const boldDXF = stylesheet.createDifferentialStyle({
+    const boldDXF = artistWorkbook.getStyleSheet().createFormat({
+      font: {
+        italic: true,
+      },
     });
-    // const boldDXF = artistWorkbook.getStyleSheet().createFormat({
-    //   font: {
-    //     italic: true,
-    //   },
-    // });
-    console.log('boldDXF', boldDXF);
 
     albumList.setRowInstructions(1, {
       height: 30,

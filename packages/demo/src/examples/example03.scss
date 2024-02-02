@@ -10,4 +10,7 @@
   tbody tr:nth-child(1) {
     height: 80px;
   }
+  tbody tr:first-child {
+    font-style: italic;
+  }
 }
