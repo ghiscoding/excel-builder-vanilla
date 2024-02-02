@@ -10,6 +10,10 @@
 
 We also have a new [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) for displaying all available options/methods. You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
 
+## Documentation
+
+📘 [Documentation](https://ghiscoding.gitbook.io/excel-builder-vanilla/) website powered by GitBook
+
 ## Description
 
 Excel-Builder-Vanilla is a fork of the popular [excel-builder](https://github.com/stephenliberty/excel-builder.js) library (thanks to @stephenliberty for this great lib). This fork was based on its latest known version. The main difference from the original lib is that we migrated the project to TypeScript and dropped the `Q` and `Lodash` dependencies and we now use native code and this mean there is only 1 external dependency left which is JSZip.
