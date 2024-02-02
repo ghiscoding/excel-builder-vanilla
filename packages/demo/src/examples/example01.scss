@@ -1,0 +1,10 @@
+.example01 {
+  tr {
+    th {
+      font-weight: normal;
+    }
+    td:last-child {
+      text-align: right;
+    }
+  }
+}

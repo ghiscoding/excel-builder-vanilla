@@ -1,0 +1,30 @@
+.example11 {
+  .fa.fa-caret-square-o-down {
+    font-size: 20px;
+  }
+  tr {
+    th {
+      font-weight: normal;
+      background-color: #000;
+      color: #fff;
+      border-bottom: 1.2px solid #fff;
+      span.fa {
+        float: right;
+      }
+    }
+    td {
+      background-color: #4472c4;
+      color: #fff;
+      border: 1px solid transparent;
+    }
+    td:nth-last-child(-n + 3) {
+      text-align: right;
+    }
+  }
+  tbody {
+    tr:last-child td {
+      background-color: #203764;
+      border-top: 1.2px solid #fff;
+    }
+  }
+}

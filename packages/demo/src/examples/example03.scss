@@ -1,0 +1,13 @@
+.example03 {
+  tr {
+    th {
+      font-weight: normal;
+    }
+    td:last-child {
+      text-align: right;
+    }
+  }
+  tbody tr:nth-child(1) {
+    height: 80px;
+  }
+}

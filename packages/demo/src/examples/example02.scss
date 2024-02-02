@@ -1,0 +1,22 @@
+.example02 {
+  thead {
+    tr {
+      th:nth-child(1) {
+        width: 60%;
+      }
+      th:nth-child(2) {
+        color: rgb(143, 143, 143);
+        font-style: italic;
+      }
+    }
+  }
+
+  tr {
+    th {
+      font-weight: normal;
+    }
+    td:last-child {
+      text-align: right;
+    }
+  }
+}

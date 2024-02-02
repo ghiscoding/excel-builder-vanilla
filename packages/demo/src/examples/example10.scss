@@ -1,0 +1,23 @@
+.example10 {
+  .fa.fa-caret-square-o-down {
+    font-size: 20px;
+  }
+  tr {
+    th {
+      font-weight: normal;
+      span.fa {
+        float: right;
+        margin-right: 5px;
+      }
+    }
+    td:last-child {
+      text-align: right;
+    }
+  }
+  tr {
+    th,
+    td {
+      font-style: italic;
+    }
+  }
+}
