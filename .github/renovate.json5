@@ -1,9 +1,0 @@
-{
-  extends: ['config:base', 'group:allNonMajor'],
-  labels: ['dependencies'],
-  dependencyDashboard: false,
-  pin: false,
-  rangeStrategy: 'bump',
-  packageRules: [],
-  schedule: ['every 2 weeks on Friday'],
-}
