@@ -44,16 +44,16 @@
     "roll-new-release": "pnpm build && pnpm new-version && pnpm new-publish",
     "serve:demo": "pnpm -r --stream --filter=\"{packages/demo/**}\" dev"
   },
-  "packageManager": "pnpm@8.14.1",
+  "packageManager": "pnpm@8.15.1",
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",
     "@lerna-lite/cli": "^3.2.1",
     "@lerna-lite/publish": "^3.2.1",
     "@lerna-lite/watch": "^3.2.1",
-    "@types/node": "^20.11.8",
+    "@types/node": "^20.11.16",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "cross-env": "^7.0.3",
-    "npm-run-all2": "^6.1.1",
+    "npm-run-all2": "^6.1.2",
     "pnpm": "^8.15.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
