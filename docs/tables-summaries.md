@@ -27,12 +27,12 @@ const originalData = [
 const artistWorkbook = new ExcelBuilder().createWorkbook();
 const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
-albumTable.styleInfo.themeStyle = 'TableStyleDark2'; //This is a predefined table style
+albumTable.styleInfo.themeStyle = 'TableStyleDark2'; // This is a predefined table style
 albumTable.setReferenceRange([1, 1], [3, originalData.length]);
 albumTable.totalsRowCount = 1;
 
-//Table columns are required, even if headerRowCount is zero. The name of the column also must match the
-//data in the column cell that is the header - keep this in mind for localization
+// Table columns are required, even if headerRowCount is zero. The name of the column also must match the
+// data in the column cell that is the header - keep this in mind for localization
 albumTable.setTableColumns([
   { name: 'Artist', totalsRowLabel: 'Highest Price' },
   { name: 'Album', totalsRowLabel: 'test' },
