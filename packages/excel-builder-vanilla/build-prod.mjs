@@ -25,6 +25,7 @@ function runBuild(options) {
     ...{
       color: true,
       entryPoints: ['./src/index.ts'],
+      external: ['jszip'],
       bundle: true,
       minify: true,
       target: 'es2021',
