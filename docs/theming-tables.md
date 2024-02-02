@@ -1,6 +1,6 @@
 ## Theming Tables
 
-Every once in a while you need a table theme that isn't available from the custom themes.
+Every once in a while you need a table theme that isn't available from the Custom Themes.
 
 ```ts
 import { ExcelBuilder, Table } from 'excel-builder-vanilla';
@@ -36,10 +36,10 @@ stylesheet.createTableStyle({
 
 const albumTable = new Table();
 albumTable.styleInfo.themeStyle = 'SlightlyOffColorBlue';
-albumTable.setReferenceRange([1, 1], [3, originalData.length]); //X/Y position where the table starts and stops.
+albumTable.setReferenceRange([1, 1], [3, originalData.length]); // X,Y position where the table starts and stops.
 
-//Table columns are required, even if headerRowCount is zero. The name of the column also must match the
-//data in the column cell that is the header - keep this in mind for localization
+// Table columns are required, even if headerRowCount is zero. The name of the column also must match the
+// data in the column cell that is the header - keep this in mind for localization
 albumTable.setTableColumns(['Artist', 'Album', 'Price']);
 
 albumList.setData(originalData);
