@@ -1,4 +1,12 @@
 .example12 {
+  .table.header {
+    tr th:last-child {
+      font-size: 18px;
+      text-decoration: underline;
+      text-align: right;
+    }
+  }
+
   tr {
     th {
       font-weight: normal;

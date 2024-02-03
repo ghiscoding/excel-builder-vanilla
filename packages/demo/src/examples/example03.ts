@@ -37,11 +37,12 @@ export default class Example {
     const boldDXF = artistWorkbook.getStyleSheet().createFormat({
       font: {
         italic: true,
+        underline: true,
       },
     });
 
     albumList.setRowInstructions(1, {
-      height: 30,
+      height: 40,
       style: boldDXF.id,
     });
     albumList.setData(this.originalData);

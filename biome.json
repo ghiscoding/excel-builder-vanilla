@@ -31,7 +31,7 @@
     },
     "formatter": {
       "arrowParentheses": "asNeeded",
-      "quoteProperties": "preserve",
+      "quoteProperties": "asNeeded",
       "semicolons": "always",
       "trailingComma": "all",
       "indentStyle": "space",

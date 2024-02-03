@@ -1,12 +1,12 @@
 import { ExcelBuilder } from 'excel-builder-vanilla';
 
-import { buildHtmlTable, downloader } from './demoUtils';
+import { downloader } from './demoUtils';
 import './example02.scss';
 
 export default class Example {
   exportBtnElm!: HTMLButtonElement;
   originalData = [
-    ['Artist', 'Album (hidden column)', 'Price'],
+    ['Artist', 'Album', 'Price'],
     ['Buckethead', 'Albino Slug', 8.99],
     ['Buckethead', 'Electric Tears', 13.99],
     ['Buckethead', 'Colma', 11.34],
@@ -16,9 +16,6 @@ export default class Example {
   ];
 
   mount() {
-    const tableContainerElm = document.querySelector('.table-container') as HTMLDivElement;
-    tableContainerElm.appendChild(buildHtmlTable(this.originalData));
-
     this.exportBtnElm = document.querySelector('#export') as HTMLButtonElement;
     this.exportBtnElm.addEventListener('click', this.createExcelStruct.bind(this));
   }

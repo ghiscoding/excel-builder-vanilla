@@ -1,7 +1,7 @@
-import { each, isString, uniqueId } from 'lodash';
 import { Util } from './Util';
-import { XMLDOM } from './XMLDOM';
-import { ExcelColumn, ExcelSortState } from '../interfaces';
+import type { XMLDOM } from './XMLDOM';
+import type { ExcelColumn, ExcelSortState } from '../interfaces';
+import { isString, uniqueId } from '../lodash-utils';
 
 /**
  * @module Excel/Table
@@ -47,7 +47,7 @@ export class Table {
   }
 
   setTableColumns(columns: Array<ExcelColumn | string>) {
-    each(columns, column => {
+    columns.forEach(column => {
       this.addTableColumn(column);
     });
   }

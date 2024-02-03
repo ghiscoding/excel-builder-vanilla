@@ -66,10 +66,11 @@ export interface ExcelFontStyle {
   italic?: boolean;
   outline?: boolean;
   size?: number;
+  shadow?: boolean;
   strike?: boolean;
   subscript?: boolean;
   superscript?: boolean;
-  underline?: 'single' | 'double' | 'singleAccounting' | 'doubleAccounting';
+  underline?: boolean | 'single' | 'double' | 'singleAccounting' | 'doubleAccounting';
 }
 
 export interface ExcelSortState {

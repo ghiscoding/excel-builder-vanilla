@@ -1,5 +1,4 @@
-import { uniqueId } from 'lodash';
-
+import { uniqueId } from '../lodash-utils';
 import { Util } from './Util';
 
 /**
@@ -43,7 +42,7 @@ export class SharedStrings {
 
     while (l--) {
       const clone = template.cloneNode(true);
-      clone.firstChild.firstChild.nodeValue = strings[l];
+      clone.firstChild!.firstChild!.nodeValue = strings[l];
       sharedStringTable.appendChild(clone);
     }
 

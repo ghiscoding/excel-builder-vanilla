@@ -17,7 +17,7 @@
       color: #fff;
       border: 1px solid transparent;
     }
-    td:nth-last-child(-n + 3) {
+    td:last-child {
       text-align: right;
     }
   }

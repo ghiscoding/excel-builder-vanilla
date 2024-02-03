@@ -1,10 +1,10 @@
 /**
  * @module Excel/StyleSheet
  */
-import { defaults, each, indexOf, isNaN as _IsNaN, isObject, isString, isUndefined, filter, keys, pick, uniqueId } from 'lodash';
 import { Util } from './Util';
-import { XMLDOM } from './XMLDOM';
-import { ExcelFontStyle, ExcelStyleInstruction } from '../interfaces';
+import type { XMLDOM } from './XMLDOM';
+import type { ExcelFontStyle, ExcelStyleInstruction } from '../interfaces';
+import { isObject, isString, pick, uniqueId } from '../lodash-utils';
 
 export class StyleSheet {
   id = uniqueId('StyleSheet');
@@ -105,7 +105,7 @@ export class StyleSheet {
     if (styleInstructions.font && isObject(styleInstructions.font)) {
       style.fontId = this.createFontStyle(styleInstructions.font).id;
     } else if (styleInstructions.font) {
-      if (_IsNaN(parseInt(styleInstructions.font, 10))) {
+      if (Number.isNaN(parseInt(styleInstructions.font, 10))) {
         throw new Error('Passing a non-numeric font id is not supported');
       }
       style.fontId = styleInstructions.font;
@@ -114,7 +114,7 @@ export class StyleSheet {
     if (styleInstructions.format && isString(styleInstructions.format)) {
       style.numFmtId = this.createNumberFormatter(styleInstructions.format).id;
     } else if (styleInstructions.format) {
-      if (_IsNaN(parseInt(styleInstructions.format, 10))) {
+      if (Number.isNaN(parseInt(styleInstructions.format, 10))) {
         throw new Error('Invalid number formatter id');
       }
       style.numFmtId = styleInstructions.format;
@@ -123,7 +123,7 @@ export class StyleSheet {
     if (styleInstructions.border && isObject(styleInstructions.border)) {
       style.borderId = this.createBorderFormatter(styleInstructions.border).id;
     } else if (styleInstructions.border) {
-      if (_IsNaN(parseInt(styleInstructions.border, 10))) {
+      if (Number.isNaN(parseInt(styleInstructions.border, 10))) {
         throw new Error('Passing a non-numeric border id is not supported');
       }
       style.borderId = styleInstructions.border;
@@ -132,15 +132,14 @@ export class StyleSheet {
     if (styleInstructions.fill && isObject(styleInstructions.fill)) {
       style.fillId = this.createFill(styleInstructions.fill).id;
     } else if (styleInstructions.fill) {
-      if (_IsNaN(parseInt(styleInstructions.fill, 10))) {
+      if (Number.isNaN(parseInt(styleInstructions.fill, 10))) {
         throw new Error('Passing a non-numeric fill id is not supported');
       }
       style.fillId = styleInstructions.fill;
     }
 
     if (styleInstructions.alignment && isObject(styleInstructions.alignment)) {
-      style.alignment = pick(
-        styleInstructions.alignment,
+      style.alignment = pick(styleInstructions.alignment, [
         'horizontal',
         'justifyLastLine',
         'readingOrder',
@@ -149,7 +148,7 @@ export class StyleSheet {
         'textRotation',
         'vertical',
         'wrapText',
-      );
+      ]);
     }
 
     this.masterCellFormats.push(style);
@@ -165,13 +164,16 @@ export class StyleSheet {
       style.font = styleInstructions.font;
     }
     if (styleInstructions.border && isObject(styleInstructions.border)) {
-      style.border = defaults(styleInstructions.border, {
-        top: {},
-        left: {},
-        right: {},
-        bottom: {},
-        diagonal: {},
-      });
+      style.border = Object.assign(
+        {
+          top: {},
+          left: {},
+          right: {},
+          bottom: {},
+          diagonal: {},
+        },
+        styleInstructions.border,
+      );
     }
     if (styleInstructions.fill && isObject(styleInstructions.fill)) {
       style.fill = styleInstructions.fill;
@@ -239,7 +241,7 @@ export class StyleSheet {
    * Color is a future goal - at the moment it's looking a bit complicated
    * @param {Object} instructions
    */
-  createFontStyle(instructions: any) {
+  createFontStyle(instructions: ExcelFontStyle) {
     const fontId = this.fonts.length;
     const fontStyle: any = {
       id: fontId,
@@ -257,7 +259,10 @@ export class StyleSheet {
       fontStyle.vertAlign = 'subscript';
     }
     if (instructions.underline) {
-      if (indexOf(['double', 'singleAccounting', 'doubleAccounting'], instructions.underline) !== -1) {
+      if (
+        typeof instructions.underline === 'string' &&
+        ['double', 'singleAccounting', 'doubleAccounting'].includes(instructions.underline)
+      ) {
         fontStyle.underline = instructions.underline;
       } else {
         fontStyle.underline = true;
@@ -322,13 +327,13 @@ export class StyleSheet {
       return colorEl;
     }
 
-    if (!isUndefined(color.tint)) {
+    if (color.tint !== undefined) {
       colorEl.setAttribute('tint', color.tint);
     }
-    if (!isUndefined(color.auto)) {
+    if (color.auto !== undefined) {
       colorEl.setAttribute('auto', String(!!color.auto));
     }
-    if (!isUndefined(color.theme)) {
+    if (color.theme !== undefined) {
       colorEl.setAttribute('theme', color.theme);
     }
 
@@ -370,13 +375,8 @@ export class StyleSheet {
       'quotePrefix',
       'xfId',
     ];
-    // TODO: this filter could be simplified to a one liner after validation
-    const attributes: any = filter(keys(styleInstructions), (key: string) => {
-      if (indexOf(allowed, key) !== -1) {
-        return true;
-      }
-      return false;
-    });
+
+    const attributes: any = Object.keys(styleInstructions).filter(key => allowed.indexOf(key) !== -1);
     if (styleInstructions.alignment) {
       const alignmentData = styleInstructions.alignment;
       xf.appendChild(this.exportAlignment(doc, alignmentData));
@@ -412,7 +412,7 @@ export class StyleSheet {
 
   exportAlignment(doc: XMLDOM, alignmentData: any) {
     const alignment = doc.createElement('alignment');
-    const someKeys: any = keys(alignmentData);
+    const someKeys = Object.keys(alignmentData);
     for (let i = 0, l = someKeys.length; i < l; i++) {
       alignment.setAttribute(someKeys[i], alignmentData[someKeys[i]]);
     }
@@ -599,7 +599,7 @@ export class StyleSheet {
       delete style.id; // Remove internal id
       const record = Util.createElement(doc, 'cellStyle');
       cellStyles.appendChild(record);
-      const attributes = keys(style);
+      const attributes = Object.keys(style);
       let a = attributes.length;
       while (a--) {
         record.setAttribute(attributes[a], style[attributes[a]]);
@@ -653,13 +653,13 @@ export class StyleSheet {
     return tableStyles;
   }
 
-  exportTableStyle(doc: XMLDOM, style: any) {
+  exportTableStyle(doc: XMLDOM, style: { name: string; wholeTable?: number; headerRow?: number }) {
     const tableStyle = doc.createElement('tableStyle');
     tableStyle.setAttribute('name', style.name);
     tableStyle.setAttribute('pivot', String(0));
     let i = 0;
 
-    each(style, (value: any, key: string) => {
+    Object.entries(style).forEach(([key, value]) => {
       if (key === 'name') {
         return;
       }

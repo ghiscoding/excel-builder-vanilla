@@ -1,6 +1,5 @@
 // @ts-ignore
 import JSZip from 'jszip/dist/jszip.min.js';
-import { defaults } from 'lodash';
 
 import { Table } from './Excel/Table';
 import { Worksheet } from './Excel/Worksheet';
@@ -14,7 +13,6 @@ export { Table, Workbook, Worksheet };
  * @name Excel
  * @public
  * @author Stephen Liberty
- * @requires lodash
  * @requires Excel/Workbook
  * @requires JSZIP
  * @exports excel-builder
@@ -48,11 +46,7 @@ export class ExcelBuilder {
           zip.file(finalPath, content, { base64: true, binary: true });
         }
       }
-      return zip.generateAsync(
-        defaults(options || {}, {
-          type: 'base64',
-        }),
-      );
+      return zip.generateAsync(Object.assign({}, { type: 'base64' }, options));
     });
   }
 }

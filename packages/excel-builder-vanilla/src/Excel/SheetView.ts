@@ -1,6 +1,6 @@
 import { Util } from './Util';
 import { Pane } from './Pane';
-import { XMLDOM } from './XMLDOM';
+import type { XMLDOM } from './XMLDOM';
 
 /**
  * @module Excel/SheetView

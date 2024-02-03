@@ -1,13 +1,12 @@
-import { extend, isArray, isObject, isString, keys, reduce, uniqueId } from 'lodash';
-
-import { Util } from './Util';
 import { RelationshipManager } from './RelationshipManager';
 import { SheetView } from './SheetView';
-import { Table } from './Table';
-import { SharedStrings } from './SharedStrings';
-import { Drawings } from './Drawings';
-import { XMLDOM } from './XMLDOM';
-import { ExcelStyleInstruction } from '../interfaces';
+import type { Table } from './Table';
+import type { SharedStrings } from './SharedStrings';
+import type { Drawings } from './Drawings';
+import type { XMLDOM } from './XMLDOM';
+import type { ExcelStyleInstruction } from '../interfaces';
+import { isObject, isString, uniqueId } from '../lodash-utils';
+import { Util } from './Util';
 
 type ColumnFormat = 'bestFit' | 'collapsed' | 'customWidth' | 'hidden' | 'max' | 'min' | 'outlineLevel' | 'phonetic' | 'style' | 'width';
 
@@ -97,7 +96,7 @@ export class Worksheet {
   importData(data: any) {
     this.relations.importData(data.relations);
     delete data.relations;
-    extend(this, data);
+    Object.assign(this, data);
   }
 
   setSharedStringCollection(stringCollection: SharedStrings) {
@@ -127,7 +126,7 @@ export class Worksheet {
    * @param {Array} headers [left, center, right]
    */
   setHeader(headers: [left: any, center: any, right: any]) {
-    if (!isArray(headers)) {
+    if (!Array.isArray(headers)) {
       throw 'Invalid argument type - setHeader expects an array of three instructions';
     }
     this._headers = headers;
@@ -142,7 +141,7 @@ export class Worksheet {
    * @param {Array} footers [left, center, right]
    */
   setFooter(footers: [left: any, center: any, right: any]) {
-    if (!isArray(footers)) {
+    if (!Array.isArray(footers)) {
       throw 'Invalid argument type - setFooter expects an array of three instructions';
     }
     this._footers = footers;
@@ -176,7 +175,7 @@ export class Worksheet {
     if (isString(data)) {
       return '&"-,Regular"'.concat(data);
     }
-    if (isObject(data) && !isArray(data)) {
+    if (isObject(data) && !Array.isArray(data)) {
       let string = '';
       if ((data as CharType).font || (data as CharType).bold) {
         const weighting = (data as CharType).bold ? 'Bold' : 'Regular';
@@ -196,8 +195,8 @@ export class Worksheet {
       return string;
     }
 
-    if (isArray(data)) {
-      return reduce(data, (m, v) => m.concat(this.compilePageDetailPiece(v)), '');
+    if (Array.isArray(data)) {
+      return data.reduce((m, v) => m.concat(this.compilePageDetailPiece(v)), '');
     }
   }
 
@@ -294,7 +293,7 @@ export class Worksheet {
         }
       }
     }
-    return keys(strings);
+    return Object.keys(strings);
   }
 
   toXML() {

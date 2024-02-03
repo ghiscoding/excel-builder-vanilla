@@ -1,7 +1,17 @@
-import { escape as htmlEscape } from 'lodash';
+import { htmlEscape } from '../lodash-utils';
+
+type XMLNodeOption = {
+  attributes?: {
+    [key: string]: any;
+  };
+  children?: XMLNode[];
+  nodeName: string;
+  nodeValue?: string;
+  type?: string;
+};
 
 export class XMLDOM {
-  documentElement: any;
+  documentElement: XMLNode;
 
   constructor(ns: string | null, rootNodeName: string) {
     this.documentElement = this.createElement(rootNodeName);
@@ -55,14 +65,14 @@ class TextNode {
   }
 }
 
-class XMLNode {
+export class XMLNode {
   nodeName = '';
-  children: any[];
-  nodeValue: any;
-  attributes: any;
-  firstChild: any;
+  children: XMLNode[];
+  nodeValue: string;
+  attributes: { [key: string]: any };
+  firstChild?: XMLNode;
 
-  constructor(config: any) {
+  constructor(config: XMLNodeOption) {
     this.nodeName = config.nodeName;
     this.children = [];
     this.nodeValue = config.nodeValue || '';
