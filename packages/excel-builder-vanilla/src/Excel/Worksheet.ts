@@ -1,6 +1,6 @@
 import { extend, isArray, isObject, isString, keys, reduce, uniqueId } from 'lodash';
 
-import { Util } from './util';
+import { Util } from './Util';
 import { RelationshipManager } from './RelationshipManager';
 import { SheetView } from './SheetView';
 import { Table } from './Table';

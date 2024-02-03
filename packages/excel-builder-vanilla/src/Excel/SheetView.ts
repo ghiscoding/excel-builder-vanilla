@@ -1,4 +1,4 @@
-import { Util } from './util';
+import { Util } from './Util';
 import { Pane } from './Pane';
 import { XMLDOM } from './XMLDOM';
 

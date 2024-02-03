@@ -1,5 +1,5 @@
 import { each, uniqueId } from 'lodash';
-import { Util } from './util';
+import { Util } from './Util';
 import { Paths } from './Paths';
 
 /**

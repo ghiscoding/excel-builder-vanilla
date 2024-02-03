@@ -1,5 +1,5 @@
 import { uniqueId } from 'lodash';
-import { Util } from './util';
+import { Util } from './Util';
 import { RelationshipManager } from './RelationshipManager';
 
 /**

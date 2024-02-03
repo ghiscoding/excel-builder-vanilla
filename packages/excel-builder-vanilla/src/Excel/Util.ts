@@ -2,7 +2,7 @@ import { forEach, isPlainObject } from 'lodash';
 import { XMLDOM } from './XMLDOM';
 
 /**
- * @module Excel/util
+ * @module Excel/Util
  */
 
 export class Util {

@@ -6,7 +6,7 @@ import { SharedStrings } from './SharedStrings';
 import { RelationshipManager } from './RelationshipManager';
 import { Paths } from './Paths';
 import { Table } from './Table';
-import { Util } from './util';
+import { Util } from './Util';
 import { XMLDOM } from './XMLDOM';
 import { Drawings } from './Drawings';
 

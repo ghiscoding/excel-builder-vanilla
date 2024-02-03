@@ -1,6 +1,6 @@
 import { uniqueId } from 'lodash';
 
-import { Util } from './util';
+import { Util } from './Util';
 
 /**
  * @module Excel/SharedStrings

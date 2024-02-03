@@ -2,7 +2,7 @@
  * @module Excel/StyleSheet
  */
 import { defaults, each, indexOf, isNaN as _IsNaN, isObject, isString, isUndefined, filter, keys, pick, uniqueId } from 'lodash';
-import { Util } from './util';
+import { Util } from './Util';
 import { XMLDOM } from './XMLDOM';
 import { ExcelFontStyle, ExcelStyleInstruction } from '../interfaces';
 

@@ -1,4 +1,4 @@
-import { Util } from '../util';
+import { Util } from '../Util';
 import { Drawing } from './Drawing';
 import { XMLDOM } from '../XMLDOM';
 import { uniqueId } from '../../lodash-utils';
