@@ -8,7 +8,7 @@ import { SharedStrings } from './Excel/SharedStrings';
 import { SheetView } from './Excel/SheetView';
 import { StyleSheet } from './Excel/StyleSheet';
 import { Table } from './Excel/Table';
-import { Util } from './Excel/util';
+import { Util } from './Excel/Util';
 import { Workbook } from './Excel/Workbook';
 import { Worksheet } from './Excel/Worksheet';
 import { XMLDOM } from './Excel/XMLDOM';

@@ -1,4 +1,4 @@
-import { Util } from './util';
+import { Util } from './Util';
 import type { XMLDOM } from './XMLDOM';
 import type { ExcelColumn, ExcelSortState } from '../interfaces';
 import { isString, uniqueId } from '../lodash-utils';

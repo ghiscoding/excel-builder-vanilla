@@ -2,7 +2,7 @@ import { isPlainObject } from '../lodash-utils';
 import { XMLDOM, XMLNode } from './XMLDOM';
 
 /**
- * @module Excel/util
+ * @module Excel/Util
  */
 
 export class Util {

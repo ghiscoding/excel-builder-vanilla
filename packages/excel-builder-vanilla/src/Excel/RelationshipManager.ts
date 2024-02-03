@@ -1,4 +1,4 @@
-import { Util } from './util';
+import { Util } from './Util';
 import { Paths } from './Paths';
 import { uniqueId } from '../lodash-utils';
 

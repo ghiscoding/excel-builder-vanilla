@@ -1,4 +1,4 @@
-import { Util } from './util';
+import { Util } from './Util';
 import { RelationshipManager } from './RelationshipManager';
 import { uniqueId } from '../lodash-utils';
 

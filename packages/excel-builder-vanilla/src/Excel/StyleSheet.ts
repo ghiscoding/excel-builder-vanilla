@@ -1,7 +1,7 @@
 /**
  * @module Excel/StyleSheet
  */
-import { Util } from './util';
+import { Util } from './Util';
 import type { XMLDOM } from './XMLDOM';
 import type { ExcelFontStyle, ExcelStyleInstruction } from '../interfaces';
 import { isObject, isString, pick, uniqueId } from '../lodash-utils';

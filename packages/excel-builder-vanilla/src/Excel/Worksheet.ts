@@ -6,7 +6,7 @@ import type { Drawings } from './Drawings';
 import type { XMLDOM } from './XMLDOM';
 import type { ExcelStyleInstruction } from '../interfaces';
 import { isObject, isString, uniqueId } from '../lodash-utils';
-import { Util } from './util';
+import { Util } from './Util';
 
 type ColumnFormat = 'bestFit' | 'collapsed' | 'customWidth' | 'hidden' | 'max' | 'min' | 'outlineLevel' | 'phonetic' | 'style' | 'width';
 
