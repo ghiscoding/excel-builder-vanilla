@@ -1,7 +1,7 @@
 {
   "name": "excel-builder-vanilla-root",
+  "description": "An easy way of building Excel files with javascript",
   "private": true,
-  "version": "0.0.0",
   "keywords": [
     "excel",
     "javascript",

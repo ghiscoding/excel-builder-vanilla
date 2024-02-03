@@ -1,6 +1,32 @@
 {
   "name": "excel-builder-vanilla",
-  "version": "3.0.0",
+  "version": "2.1.8",
+  "description": "An easy way of building Excel files with javascript",
+  "keywords": [
+    "excel",
+    "javascript",
+    "xlsx",
+    "spreadsheet"
+  ],
+  "author": "Stephen Liberty",
+  "contributors": [
+    {
+      "name": "Ghislain B."
+    }
+  ],
+  "homepage": "https://github.com/ghiscoding/excel-builder-vanilla",
+  "bugs": {
+    "url": "https://github.com/ghiscoding/excel-builder-vanilla/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ghiscoding/excel-builder-vanilla.git",
+    "directory": "packages/excel-builder-vanilla"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/cjs/excel-builder.cjs",
   "module": "./dist/esm/excel-builder.js",
   "types": "index.d.ts",
@@ -20,29 +46,6 @@
     },
     "./dist/browser/*": "./dist/browser/*",
     "./package.json": "./package.json"
-  },
-  "author": {
-    "name": "zhixin wen",
-    "email": "wenzhixin2010@gmail.com",
-    "url": "http://wenzhixin.net.cn/"
-  },
-  "contributors": [
-    {
-      "name": "Ghislain B."
-    }
-  ],
-  "homepage": "https://github.com/ghiscoding/excel-builder-vanilla",
-  "bugs": {
-    "url": "https://github.com/ghiscoding/excel-builder-vanilla/issues"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ghiscoding/excel-builder-vanilla.git",
-    "directory": "packages/excel-builder-vanilla"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "scripts": {
     "clean": "rimraf dist",
