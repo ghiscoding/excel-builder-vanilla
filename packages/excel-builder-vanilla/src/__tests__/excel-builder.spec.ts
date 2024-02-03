@@ -15,7 +15,6 @@ describe('Excel-Builder-Vanilla', () => {
   ];
 
   test('basic grid', () => {
-    // const artistWorkbook = new Workbook();
     const artistWorkbook = new ExcelBuilder().createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
     albumList.setData(originalData);
@@ -262,7 +261,6 @@ describe('Excel-Builder-Vanilla', () => {
   });
 
   test('Currency Format via createFormat()', () => {
-    // const artistWorkbook = new Workbook();
     const artistWorkbook = new ExcelBuilder().createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
     const currency = artistWorkbook.getStyleSheet().createFormat({
@@ -322,7 +320,6 @@ describe('Excel-Builder-Vanilla', () => {
   });
 
   test('Alignment via createFormat()', () => {
-    // const artistWorkbook = new Workbook();
     const artistWorkbook = new ExcelBuilder().createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
     const centerAlign = artistWorkbook.getStyleSheet().createFormat({
@@ -393,7 +390,6 @@ describe('Excel-Builder-Vanilla', () => {
   });
 
   test('Background Fillers createFormat()', () => {
-    // const artistWorkbook = new Workbook();
     const artistWorkbook = new ExcelBuilder().createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
     const stylesheet = artistWorkbook.getStyleSheet();
@@ -493,7 +489,6 @@ describe('Excel-Builder-Vanilla', () => {
   });
 
   test('Formulas', () => {
-    // const artistWorkbook = new Workbook();
     const artistWorkbook = new ExcelBuilder().createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
