@@ -42,7 +42,7 @@ export default class Example {
     });
 
     albumList.setRowInstructions(1, {
-      height: 30,
+      height: 40,
       style: boldDXF.id,
     });
     albumList.setData(this.originalData);
