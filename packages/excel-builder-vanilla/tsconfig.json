@@ -2,6 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
+    "declarationDir": "dist/types",
     "rootDir": "src",
     "outDir": "dist/esm",
     "target": "ES2021",

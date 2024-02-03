@@ -67,8 +67,29 @@ jobs:
       - name: Biome Check
         run: pnpm biome:check
 
+      - name: Cache TypeScript and Vitest
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/*/lib
+            packages/*/tsconfig.tsbuildinfo
+            node_modules/.vitest
+          key: vitest-${{ matrix.platform }}-${{ matrix.node }}-${{ github.run_id }}
+          restore-keys: vitest-${{ matrix.platform }}-${{ matrix.node }}-
+
       - name: Build Library
         run: pnpm build:lib
+
+      - name: Run Vitest unit tests
+        if: |
+          !contains(github.event.head_commit.message, 'chore(release)')
+        run: pnpm test:coverage
+
+      - name: Upload test coverage to Codecov
+        uses: codecov/codecov-action@v4
+        if: |
+          contains(matrix.node, 20) &&
+          !contains(github.event.head_commit.message, 'chore(release)')
 
       - name: Build Website (GitHub demo site)
         run: pnpm build:demo

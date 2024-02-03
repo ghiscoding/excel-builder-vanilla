@@ -18,6 +18,17 @@
       "sourceMaps": true,
       "trace": false,
       "url": "http://localhost:3000"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Vitest - Debug Current Test File",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "args": ["run", "${relativeFile}", "--pool", "forks", "--no-watch"],
+      "smartStep": true,
+      "console": "integratedTerminal"
     }
   ]
 }
