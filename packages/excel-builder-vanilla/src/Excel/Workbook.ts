@@ -1,5 +1,3 @@
-import { defaults, each, extend, uniqueId } from 'lodash';
-
 import { StyleSheet } from './StyleSheet';
 import { Worksheet } from './Worksheet';
 import { SharedStrings } from './SharedStrings';
@@ -9,6 +7,7 @@ import { Table } from './Table';
 import { Util } from './util';
 import { XMLDOM } from './XMLDOM';
 import { Drawings } from './Drawings';
+import { uniqueId } from '../lodash-utils';
 
 /**
  * @module Excel/Workbook
@@ -39,10 +38,7 @@ export class Workbook {
   }
 
   createWorksheet(config?: any) {
-    config = config || {};
-    defaults(config, {
-      name: 'Sheet '.concat(String(this.worksheets.length + 1)),
-    });
+    config = Object.assign({}, { name: 'Sheet '.concat(String(this.worksheets.length + 1)) }, config);
     return new Worksheet(config);
   }
 
@@ -311,8 +307,8 @@ export class Workbook {
     }
   }
 
-  _prepareFilesForPackaging(files: any) {
-    extend(files, {
+  _prepareFilesForPackaging(files: { [path: string]: XMLDOM | string }) {
+    Object.assign(files, {
       '/[Content_Types].xml': this.createContentTypes(),
       '/_rels/.rels': this.createWorkbookRelationship(),
       '/xl/styles.xml': this.styleSheet.toXML(),
@@ -321,19 +317,19 @@ export class Workbook {
       '/xl/_rels/workbook.xml.rels': this.relations.toXML(),
     });
 
-    each(files, (value, key) => {
+    for (const [key, value] of Object.entries(files)) {
       if (key.indexOf('.xml') !== -1 || key.indexOf('.rels') !== -1) {
         if (value instanceof XMLDOM) {
           files[key] = value.toString();
         } else {
-          files[key] = value.xml || new window.XMLSerializer().serializeToString(value);
+          files[key] = (value as any).xml || new window.XMLSerializer().serializeToString(value as any);
         }
-        let content = files[key].replace(/xmlns=""/g, '');
+        let content = (files[key] as string).replace(/xmlns=""/g, '');
         content = content.replace(/NS[\d]+:/g, '');
         content = content.replace(/xmlns:NS[\d]+=""/g, '');
         files[key] = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n${content}`;
       }
-    });
+    }
   }
 
   generateFiles(): Promise<{ [path: string]: string }> {

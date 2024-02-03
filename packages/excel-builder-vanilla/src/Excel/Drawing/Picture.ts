@@ -13,7 +13,6 @@ export class Picture extends Drawing {
 
   constructor() {
     super();
-    console.log('Drawing', Drawing);
     // Picture.prototype = new Drawing();
     this.id = uniqueId('Picture');
     this.pictureId = Util.uniqueId('Picture');

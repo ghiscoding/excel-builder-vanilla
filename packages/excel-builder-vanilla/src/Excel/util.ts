@@ -1,5 +1,5 @@
-import { forEach, isPlainObject } from 'lodash';
-import { XMLDOM } from './XMLDOM';
+import { isPlainObject } from '../lodash-utils';
+import { XMLDOM, XMLNode } from './XMLDOM';
 
 /**
  * @module Excel/util
@@ -62,8 +62,8 @@ export class Util {
    * @param {XMLDoc} doc
    * @param {Object} attrs
    */
-  static setAttributesOnDoc(doc: any, attrs: any) {
-    forEach(attrs, (v, k) => {
+  static setAttributesOnDoc(doc: XMLNode, attrs: { [key: string]: any }) {
+    for (let [k, v] of Object.entries(attrs)) {
       if (isPlainObject(v)) {
         if (v.v !== null && v.v !== undefined) {
           switch (v.type) {
@@ -78,7 +78,7 @@ export class Util {
       if (v !== null && v !== undefined) {
         doc.setAttribute(k, v);
       }
-    });
+    }
   }
 
   static LETTER_REFS: any = {};

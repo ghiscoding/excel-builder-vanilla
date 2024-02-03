@@ -4,7 +4,7 @@
  * https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.pane%28v=office.14%29.aspx
  */
 
-import { XMLDOM } from './XMLDOM';
+import type { XMLDOM } from './XMLDOM';
 
 export class Pane {
   /*

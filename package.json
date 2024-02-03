@@ -32,7 +32,7 @@
     "predev": "pnpm run -r dev:init",
     "dev": "run-p dev:watch build:watch --npm-path pnpm",
     "dev:watch": "pnpm -r --parallel --stream dev",
-    "build:watch": "lerna watch --no-bail --file-delimiter=\",\" --glob=\"src/**/*.{ts,scss}\" -- cross-env-shell pnpm run -r --filter $LERNA_PACKAGE_NAME build:watch --files=$LERNA_FILE_CHANGES",
+    "build:watch": "lerna watch --no-bail --file-delimiter=\",\" --glob=\"src/**/*.ts\" -- cross-env-shell pnpm run -r --filter $LERNA_PACKAGE_NAME build:watch --files=$LERNA_FILE_CHANGES",
     "dev:demo": "pnpm -r --stream --filter=\"{packages/demo/**}\" dev",
     "dev:lib": "pnpm -r --stream --filter=\"{packages/excel-builder-vanilla/**}\" dev",
     "biome:check": "biome format ./packages",

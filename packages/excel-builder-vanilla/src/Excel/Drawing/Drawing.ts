@@ -1,9 +1,8 @@
-import { uniqueId } from 'lodash';
-
 import { AbsoluteAnchor } from './AbsoluteAnchor';
 import { OneCellAnchor } from './OneCellAnchor';
 import { TwoCellAnchor } from './TwoCellAnchor';
 import { Chart } from './Chart';
+import { uniqueId } from '../../lodash-utils';
 // import { Picture } from './Picture';
 
 /**

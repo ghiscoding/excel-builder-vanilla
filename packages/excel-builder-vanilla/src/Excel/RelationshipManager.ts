@@ -1,16 +1,23 @@
-import { each, uniqueId } from 'lodash';
 import { Util } from './util';
 import { Paths } from './Paths';
+import { uniqueId } from '../lodash-utils';
 
 /**
  * @module Excel/RelationshipManager
  */
 export class RelationshipManager {
-  relations: any = {};
+  relations: {
+    [id: string]: {
+      id: string;
+      schema: string;
+      object: any;
+      data?: { id: number; schema: string; object: any };
+    };
+  } = {};
   lastId = 1;
 
   constructor() {
-    uniqueId('rId'); //priming
+    uniqueId('rId'); // priming
   }
 
   importData(data: any) {
@@ -25,16 +32,16 @@ export class RelationshipManager {
     };
   }
 
-  addRelation(object: any, type: keyof typeof Util.schemas) {
+  addRelation(object: { id: string }, type: keyof typeof Util.schemas) {
     this.relations[object.id] = {
       id: uniqueId('rId'),
       schema: Util.schemas[type],
-      object: object,
+      object,
     };
     return this.relations[object.id].id;
   }
 
-  getRelationshipId(object: any) {
+  getRelationshipId(object: { id: string }) {
     return this.relations[object.id] ? this.relations[object.id].id : null;
   }
 
@@ -42,7 +49,7 @@ export class RelationshipManager {
     const doc = Util.createXmlDoc(Util.schemas.relationshipPackage, 'Relationships');
     const relationships = doc.documentElement;
 
-    each(this.relations, (data, id) => {
+    for (const [id, data] of Object.entries(this.relations)) {
       const relationship = Util.createElement(doc, 'Relationship', [
         ['Id', data.id],
         ['Type', data.schema],
@@ -52,7 +59,7 @@ export class RelationshipManager {
         relationship.setAttribute('TargetMode', data.object.targetMode);
       }
       relationships.appendChild(relationship);
-    });
+    }
     return doc;
   }
 }

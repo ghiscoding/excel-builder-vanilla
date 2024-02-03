@@ -37,6 +37,7 @@ export default class Example {
     const boldDXF = artistWorkbook.getStyleSheet().createFormat({
       font: {
         italic: true,
+        underline: true,
       },
     });
 

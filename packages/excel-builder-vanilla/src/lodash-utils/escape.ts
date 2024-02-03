@@ -7,10 +7,6 @@ const htmlEscapes: { [char: string]: string } = {
   "'": '&#39;',
 };
 
-/** Used to match HTML entities and HTML characters. */
-const reUnescapedHtml = /[&<>"']/g;
-const reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
-
 /**
  * Converts the characters "&", "<", ">", '"', and "'" in `string` to their
  * corresponding HTML entities.
@@ -38,6 +34,9 @@ const reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
  * escape('fred, barney, & pebbles')
  * // => 'fred, barney, &amp; pebbles'
  */
-export function htmlEscape(str: string) {
-  return str && reHasUnescapedHtml.test(str) ? str.replace(reUnescapedHtml, chr => htmlEscapes[chr]) : str || '';
-}
+export const htmlEscape = (str: string) => {
+  if (typeof str !== 'string') {
+    str = `${str}`;
+  }
+  return str.replace(/[&<>"']/g, m => htmlEscapes[m]);
+};
