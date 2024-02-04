@@ -23,6 +23,10 @@
     "type": "git",
     "url": "https://github.com/ghiscoding/excel-builder-vanilla.git"
   },
+  "funding": {
+    "type": "ko_fi",
+    "url": "https://ko-fi.com/ghiscoding"
+  },
   "scripts": {
     "clean": "rimraf --glob */dist */tsconfig.tsbuildinfo",
     "prebuild": "pnpm run clean && pnpm run biome:write",
