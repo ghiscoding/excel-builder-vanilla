@@ -1,7 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import 'font-awesome/css/font-awesome.css';
-import DOMPurify from 'dompurify';
 
 import { exampleRouting, navbarRouting } from './app-routing';
 import mainHtml from './main.html?raw';
@@ -32,9 +31,7 @@ class Main {
 
   async init() {
     const location = window.location;
-    document.querySelector<HTMLDivElement>('#app')!.innerHTML = DOMPurify.sanitize(mainHtml, {
-      RETURN_TRUSTED_TYPE: true,
-    }) as unknown as string;
+    document.querySelector<HTMLDivElement>('#app')!.innerHTML = mainHtml;
 
     let route = location.hash.replace(this.stateBangChar, '');
     if (!route || route === '/' || route === '#') {
@@ -132,9 +129,7 @@ class Main {
     if (foundRouter) {
       this.currentRouter = foundRouter;
       // const html = await import(/*@vite-ignore*/ `${foundRouter.view}?raw`).default;
-      document.querySelector('.panel-wm-content')!.innerHTML = DOMPurify.sanitize(pageLayoutGlobs[foundRouter.view], {
-        RETURN_TRUSTED_TYPE: true,
-      }) as unknown as string;
+      document.querySelector('.panel-wm-content')!.innerHTML = pageLayoutGlobs[foundRouter.view];
       const vm = new foundRouter.viewModel() as ViewModel;
       this.currentModel = vm;
       (window as any)[foundRouter.name] = vm.mount?.();

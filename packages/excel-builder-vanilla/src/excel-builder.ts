@@ -1,13 +1,8 @@
 // @ts-ignore
 import JSZip from 'jszip/dist/jszip.min.js';
 
-import { Table } from './Excel/Table';
-import { Worksheet } from './Excel/Worksheet';
 import { Workbook } from './Excel/Workbook';
 // import { WorkbookWorker } from './Worker';
-
-// TODO: probably better to export index.ts instead
-export { Table, Workbook, Worksheet };
 
 /**
  * @name Excel

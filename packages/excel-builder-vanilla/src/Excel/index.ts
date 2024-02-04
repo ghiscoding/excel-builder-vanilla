@@ -11,3 +11,4 @@ export * from './Table';
 export * from './Util';
 export * from './Workbook';
 export * from './Worksheet';
+export * from './XMLDOM';

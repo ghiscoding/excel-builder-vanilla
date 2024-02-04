@@ -2,9 +2,9 @@
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
-    "declarationDir": "dist/types",
+    "baseUrl": "./",
     "rootDir": "src",
-    "outDir": "dist/esm",
+    "outDir": "dist",
     "target": "ES2021",
     "useDefineForClassFields": true,
     "module": "ESNext",
@@ -21,7 +21,10 @@
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true
+    "strict": true,
+    "paths": {
+      "jszip": ["node_modules/jszip/dist/jszip.min.js"]
+    }
   },
   "exclude": ["node_modules", "**/*.spec.ts"],
   "include": ["src/**/*", "index.d.ts"]

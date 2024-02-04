@@ -2,17 +2,127 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-    <title>SlickGrid example 1: Basic grid</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <title>Standalone example 1: Basic Grid</title>
   </head>
+
   <body>
-    Hello World
+    <h2>Excel-Builder-Vanilla</h2>
+    <h5>Standalone JS (IIFE)</h5>
 
+    <div>
+      <div class="mb-2">
+        <button class="btn btn-success btn-sm" id="export"><i class="fa fa-download"></i> Excel Export</button>
+      </div>
+
+      <div class="row">
+        <div class="table-container col-sm-8">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Artist</th>
+                <th scope="col">Album (hidden column)</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Buckethead</td>
+                <td>Albino Slug</td>
+                <td>8.99</td>
+              </tr>
+              <tr>
+                <td>Buckethead</td>
+                <td>Electric Tears</td>
+                <td>13.99</td>
+              </tr>
+              <tr>
+                <td>Buckethead</td>
+                <td>Colma</td>
+                <td>11.34</td>
+              </tr>
+              <tr>
+                <td>Crystal Method</td>
+                <td>Vegas</td>
+                <td>10.54</td>
+              </tr>
+              <tr>
+                <td>Crystal Method</td>
+                <td>Tweekend</td>
+                <td>10.64</td>
+              </tr>
+              <tr>
+                <td>Crystal Method</td>
+                <td>Divided By Night</td>
+                <td>8.99</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-
-    <script src="../../../excel-builder-vanilla/dist/browser/excel-builder.js"></script>
+    <script src="../../../excel-builder-vanilla/dist/excel-builder.iife.js"></script>
 
     <script>
-      console.log(window.ExcelBuilder);
+      function downloader(options) {
+        // when using IE/Edge, then use different download call
+        if (typeof navigator.msSaveOrOpenBlob === 'function') {
+          navigator.msSaveOrOpenBlob(options.blob, options.filename);
+        } else {
+          // this trick will generate a temp <a /> tag
+          // the code will then trigger a hidden click for it to start downloading
+          const link = document.createElement('a');
+          const url = URL.createObjectURL(options.blob);
+
+          if (link && document) {
+            link.textContent = 'download';
+            link.href = url;
+            link.setAttribute('download', options.filename);
+
+            // set the visibility to hidden so there is no effect on your web-layout
+            link.style.visibility = 'hidden';
+
+            // this part will append the anchor tag, trigger a click (for download to start) and finally remove the tag once completed
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        }
+      }
+
+      function exportExcel() {
+        const originalData = [
+          ['Artist', 'Album', 'Price'],
+          ['Buckethead', 'Albino Slug', 8.99],
+          ['Buckethead', 'Electric Tears', 13.99],
+          ['Buckethead', 'Colma', 11.34],
+          ['Crystal Method', 'Vegas', 10.54],
+          ['Crystal Method', 'Tweekend', 10.64],
+          ['Crystal Method', 'Divided By Night', 8.99],
+        ];
+        const artistWorkbook = new window.ExcelBuilder.Workbook();
+        const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
+        albumList.setData(originalData);
+        artistWorkbook.addWorksheet(albumList);
+
+        new window.ExcelBuilder.ExcelBuilder().createFile(artistWorkbook, { type: 'blob' }).then((excelBlob) => {
+          const downloadOptions = {
+            filename: 'Artist WB.xlsx',
+            format: 'xlsx',
+          };
+
+          // start downloading but add the Blob property only on the start download not on the event itself
+          downloader({ ...downloadOptions, blob: excelBlob, data: albumList.data });
+        });
+      }
+
+      document.querySelector('button#export').addEventListener('click', () => {
+        exportExcel();
+      });
     </script>
   </body>
 </html>
