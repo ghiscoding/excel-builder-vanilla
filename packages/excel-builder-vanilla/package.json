@@ -50,6 +50,7 @@
     "clean": "rimraf dist",
     "dev": "vite build --watch",
     "dev:init": "pnpm clean && vite build",
+    "build:lib": "pnpm clean && vite build",
     "build:watch": "vite build --watch"
   },
   "dependencies": {
