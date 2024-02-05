@@ -1,6 +1,4 @@
 tsconfig.json
 tsconfig.tsbuildinfo
 node_modules
-build-prod.mjs
-build-watch.mjs
 CHANGELOG.md

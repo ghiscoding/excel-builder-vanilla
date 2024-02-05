@@ -29,7 +29,6 @@ export default class Example {
   }
 
   createExcelStruct() {
-    // const artistWorkbook = new ExcelBuilder().createWorkbook();
     const artistWorkbook = new Workbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
     albumList.setData(this.originalData);

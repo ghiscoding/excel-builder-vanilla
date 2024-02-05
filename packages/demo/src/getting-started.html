@@ -28,25 +28,30 @@
 
     <div style="background: #f7f7f7; padding: 10px">
       <pre>
-&lt;!-- Latest compiled and minified CSS --&gt;
-&lt;link href=&quot;<span style="color:#880000">https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/styles/css/excel-builder.css</span>&quot; rel=&quot;<span style="color:#880000">stylesheet</span>&quot;&gt;
+&lt;!-- (IIFE Standalone Script <span style="color:#d63384">type=&quot;module&quot;</span>) Latest compiled and minified JavaScript --&gt;
+&lt;script type=&quot;module&quot; src=&quot;<span style="color:#880000">https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.iife.js</span>&quot;&gt;&lt;/script&gt;
 
-&lt;!-- (ESM requires <span style="color:#d63384">type=&quot;module&quot;</span>) Latest compiled and minified JavaScript --&gt;
-&lt;script type=&quot;module&quot; src=&quot;<span style="color:#880000">https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/browser/excel-builder.js</span>&quot;&gt;&lt;/script&gt;
-
-&lt;!-- (CJS requires <span style="color:#d63384">.cjs</span> extension) Latest compiled and minified JavaScript --&gt;
-&lt;script src=&quot;<span style="color:#880000">https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/browser/excel-builder.cjs</span>&quot;&gt;&lt;/script&gt;</pre>
+&lt;!-- (UMD Files <span style="color:#d63384">.cjs</span> extension) Latest compiled and minified JavaScript --&gt;
+&lt;script src=&quot;<span style="color:#880000">https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.umd.js</span>&quot;&gt;&lt;/script&gt;</pre>
     </div>
 
     <quote>
-      <b>Note:</b> the <code>dist/browser</code> location is the only one providing the <code>ExcelBuilder</code> on the
+      <b>Note:</b> the <code>excel-builder.iife.js</code> is the only one providing the <code>ExcelBuilder</code> on the
       <code>window</code> object.
+    </quote>
+    <br />
+    <br />
+    <quote>
+      You can find a Standalone Script (IIFE) example at the location
+      <a href="https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/demo/src/examples/example-standalone.html"
+        >examples/example-standalone.html</a
+      >
     </quote>
   </section>
 
   <section>
     <h5>NPM</h5>
-    <p>Install and manage Multiple Select's CSS, JavaScript using NPM.</p>
+    <p>Install and manage Excel-Builder-Vanilla JavaScript using NPM.</p>
 
     <div style="background: #f7f7f7; padding: 10px">
       <pre>$ npm install excel-builder-vanilla</pre>
@@ -67,18 +72,4 @@ excelBuilder('.excel-builder', {/*...*/});
 </pre
     >
   </div>
-
-  <section>
-    <h5>Code Sample</h5>
-    <div class="col-sm-10 col-lg-8">
-      <iframe
-        style="height: 100%; width: 60%; position: absolute"
-        src="data:text/html;charset=utf-8,
-        <head><base target='_blank' /></head>
-        <body><script src='https://gist.github.com/ghiscoding/786008e40a13d64a1cf813aff8a3d8dc.js'></script>
-        </body>"
-      >
-      </iframe>
-    </div>
-  </section>
 </div>

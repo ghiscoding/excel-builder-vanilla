@@ -24,6 +24,9 @@ dist-ssr
 # Environment variables
 .env
 
+# builds
+tsconfig.tsbuildinfo
+
 # misc
 /coverage
 
