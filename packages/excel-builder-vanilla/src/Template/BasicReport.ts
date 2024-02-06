@@ -1,5 +1,5 @@
-import { Workbook } from '../Excel/Workbook';
 import { Table } from '../Excel/Table';
+import { Workbook } from '../Excel/Workbook';
 
 export class Template {
   data: any;

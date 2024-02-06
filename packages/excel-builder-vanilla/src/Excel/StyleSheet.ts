@@ -1,11 +1,11 @@
+import type { ExcelFontStyle, ExcelStyleInstruction } from '../interfaces';
+import { isObject, isString, pick, uniqueId } from '../utilities';
+import { Util } from './Util';
+import type { XMLDOM } from './XMLDOM';
+
 /**
  * @module Excel/StyleSheet
  */
-import { Util } from './Util';
-import type { XMLDOM } from './XMLDOM';
-import type { ExcelFontStyle, ExcelStyleInstruction } from '../interfaces';
-import { isObject, isString, pick, uniqueId } from '../utilities';
-
 export class StyleSheet {
   id = uniqueId('StyleSheet');
   cellStyles = [

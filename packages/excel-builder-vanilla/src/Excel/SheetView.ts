@@ -1,5 +1,5 @@
-import { Util } from './Util';
 import { Pane } from './Pane';
+import { Util } from './Util';
 import type { XMLDOM } from './XMLDOM';
 
 /**

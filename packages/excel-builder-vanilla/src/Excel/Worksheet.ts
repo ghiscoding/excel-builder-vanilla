@@ -1,12 +1,12 @@
-import { RelationshipManager } from './RelationshipManager';
-import { SheetView } from './SheetView';
-import type { Table } from './Table';
-import type { SharedStrings } from './SharedStrings';
-import type { Drawings } from './Drawings';
-import type { XMLDOM } from './XMLDOM';
 import type { ExcelStyleInstruction } from '../interfaces';
 import { isObject, isString, uniqueId } from '../utilities';
+import type { Drawings } from './Drawings';
+import { RelationshipManager } from './RelationshipManager';
+import type { SharedStrings } from './SharedStrings';
+import { SheetView } from './SheetView';
+import type { Table } from './Table';
 import { Util } from './Util';
+import type { XMLDOM } from './XMLDOM';
 
 type ColumnFormat = 'bestFit' | 'collapsed' | 'customWidth' | 'hidden' | 'max' | 'min' | 'outlineLevel' | 'phonetic' | 'style' | 'width';
 

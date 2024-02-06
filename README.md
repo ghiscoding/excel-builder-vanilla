@@ -76,7 +76,9 @@ If you wish to contribute to the project, please follow these steps:
 Before submitting a PR (pull request), please make sure that you followed these steps for your PR to succeed:
 
 1. make sure that you already ran `pnpm install`
-2. run the Biome code formatting npm script (or use step 3)
-   - `pnpm run biome:write`
-3. run a full Build (this will also run Biome format, so you could skip step 2)
+2. run the Biome lint npm script (or use step 4)
+   - `pnpm run biome:lint:write`
+3. run the Biome code formatting npm script (or use step 4)
+   - `pnpm run biome:format:write`
+4. run a full Build (this will also run Biome format, so you could skip step 2)
    - `pnpm run build`
