@@ -3,28 +3,14 @@
   "organizeImports": {
     "enabled": true
   },
-
-  "linter": {
+  "formatter": {
     "enabled": true,
-    "rules": {
-      "recommended": true,
-      "complexity": {
-        "noForEach": "off",
-        "noStaticOnlyClass": "off"
-      },
-      "performance": {
-        "noDelete": "off"
-      },
-      "suspicious": {
-        "noExplicitAny": "off",
-        "noPrototypeBuiltins": "off"
-      },
-      "style": {
-        "noNonNullAssertion": "off",
-        "noParameterAssign": "off",
-        "useExponentiationOperator": "off"
-      }
-    }
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "formatWithErrors": true,
+    "lineWidth": 140,
+    "indentStyle": "space",
+    "ignore": ["dist/**", "node_modules/**", ".cache"]
   },
   "javascript": {
     "parser": {
@@ -47,18 +33,32 @@
       "allowComments": true
     }
   },
+  "linter": {
+    "enabled": true,
+    "ignore": ["dist/**", "node_modules/**", ".cache"],
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noForEach": "off",
+        "noStaticOnlyClass": "off"
+      },
+      "performance": {
+        "noDelete": "off"
+      },
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noPrototypeBuiltins": "off"
+      },
+      "style": {
+        "noNonNullAssertion": "off",
+        "noParameterAssign": "off",
+        "useExponentiationOperator": "off"
+      }
+    }
+  },
   "vcs": {
     "clientKind": "git",
     "enabled": false,
     "root": "./"
-  },
-  "formatter": {
-    "enabled": true,
-    "indentWidth": 2,
-    "lineEnding": "lf",
-    "formatWithErrors": true,
-    "lineWidth": 140,
-    "indentStyle": "space",
-    "ignore": ["dist/**", "node_modules/**", ".cache"]
   }
 }

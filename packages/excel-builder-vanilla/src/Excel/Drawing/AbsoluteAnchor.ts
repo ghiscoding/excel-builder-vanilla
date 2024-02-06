@@ -1,5 +1,5 @@
-import { XMLDOM } from '../XMLDOM';
 import { Util } from '../Util';
+import { XMLDOM } from '../XMLDOM';
 
 /**
  *

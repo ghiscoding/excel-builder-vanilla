@@ -1,5 +1,5 @@
-import { Drawings } from './Excel/Drawings';
 import { Drawing } from './Excel/Drawing/Drawing';
+import { Drawings } from './Excel/Drawings';
 import { Pane } from './Excel/Pane';
 import { Paths } from './Excel/Paths';
 import { Positioning } from './Excel/Positioning';
@@ -12,8 +12,8 @@ import { Util } from './Excel/Util';
 import { Workbook } from './Excel/Workbook';
 import { Worksheet } from './Excel/Worksheet';
 import { XMLDOM } from './Excel/XMLDOM';
-import { ExcelBuilder as Builder } from './excel-builder';
 import { Template } from './Template';
+import { ExcelBuilder as Builder } from './excel-builder';
 
 try {
   if (typeof window !== 'undefined') {

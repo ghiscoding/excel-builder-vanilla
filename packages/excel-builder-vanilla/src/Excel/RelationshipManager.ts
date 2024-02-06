@@ -1,6 +1,6 @@
-import { Util } from './Util';
-import { Paths } from './Paths';
 import { uniqueId } from '../utilities';
+import { Paths } from './Paths';
+import { Util } from './Util';
 
 /**
  * @module Excel/RelationshipManager

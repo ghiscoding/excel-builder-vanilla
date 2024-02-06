@@ -1,4 +1,3 @@
-import GettingStarted from './getting-started';
 import Example01 from './examples/example01';
 import Example02 from './examples/example02';
 import Example03 from './examples/example03';
@@ -11,6 +10,7 @@ import Example09 from './examples/example09';
 import Example10 from './examples/example10';
 import Example11 from './examples/example11';
 import Example12 from './examples/example12';
+import GettingStarted from './getting-started';
 
 export const navbarRouting = [
   { name: 'getting-started', view: '/src/getting-started.html', viewModel: GettingStarted, title: 'Getting Started' },

@@ -1,13 +1,13 @@
-import { StyleSheet } from './StyleSheet';
-import { Worksheet } from './Worksheet';
-import { SharedStrings } from './SharedStrings';
-import { RelationshipManager } from './RelationshipManager';
+import { uniqueId } from '../utilities';
+import { Drawings } from './Drawings';
 import { Paths } from './Paths';
+import { RelationshipManager } from './RelationshipManager';
+import { SharedStrings } from './SharedStrings';
+import { StyleSheet } from './StyleSheet';
 import { Table } from './Table';
 import { Util } from './Util';
+import { Worksheet } from './Worksheet';
 import { XMLDOM } from './XMLDOM';
-import { Drawings } from './Drawings';
-import { uniqueId } from '../utilities';
 
 /**
  * @module Excel/Workbook

@@ -4,7 +4,7 @@ on:
     branches: [main, next]
   pull_request:
     branches:
-      - '**'
+      - "**"
 
 permissions:
   checks: write
@@ -64,8 +64,11 @@ jobs:
 
       - run: pnpm --version
 
-      - name: Biome Check
-        run: pnpm biome:check
+      - name: Biome Lint Check
+        run: pnpm biome:lint:check
+
+      - name: Biome Format Check
+        run: pnpm biome:format:check
 
       - name: Cache TypeScript and Vitest
         uses: actions/cache@v4

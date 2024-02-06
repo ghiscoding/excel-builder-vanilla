@@ -1,7 +1,7 @@
-import { Util } from './Util';
-import type { XMLDOM } from './XMLDOM';
 import type { ExcelColumn, ExcelSortState } from '../interfaces';
 import { isString, uniqueId } from '../utilities';
+import { Util } from './Util';
+import type { XMLDOM } from './XMLDOM';
 
 /**
  * @module Excel/Table

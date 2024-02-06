@@ -1,8 +1,8 @@
+import { uniqueId } from '../../utilities';
 import { AbsoluteAnchor } from './AbsoluteAnchor';
+import { Chart } from './Chart';
 import { OneCellAnchor } from './OneCellAnchor';
 import { TwoCellAnchor } from './TwoCellAnchor';
-import { Chart } from './Chart';
-import { uniqueId } from '../../utilities';
 // import { Picture } from './Picture';
 
 /**
