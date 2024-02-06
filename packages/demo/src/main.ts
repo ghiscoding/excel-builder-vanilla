@@ -44,7 +44,7 @@ class Main {
 
     // on page load make route active, when changing route afterward that will be covered by each nav click events
     Array.from(document.querySelectorAll('.panel-wm-left a.nav-link,.navbar-nav a.nav-link')).forEach(link => {
-      if (route.includes(link.id)) {
+      if (link.id && route.includes(link.id)) {
         link.classList.add('active');
       }
     });
@@ -111,7 +111,7 @@ class Main {
     let foundRouter = navbarRouting.find(r => r.name === routeName);
 
     if (foundRouter?.name === 'examples') {
-      const exampleElm = document.querySelector('.nav-pills .nav-item a.nav-link');
+      const exampleElm = document.querySelector('.nav-pills .nav-item a.nav-link:not([href])');
       exampleElm?.classList.add('active');
     } else {
       for (const groupRoute of exampleRouting) {
@@ -125,8 +125,7 @@ class Main {
     if (this.currentModel) {
       this.unmountCurrentVM(this.currentModel, this.currentRouter);
     }
-
-    if (foundRouter) {
+    if (foundRouter?.view) {
       this.currentRouter = foundRouter;
       // const html = await import(/*@vite-ignore*/ `${foundRouter.view}?raw`).default;
       document.querySelector('.panel-wm-content')!.innerHTML = pageLayoutGlobs[foundRouter.view];
@@ -154,11 +153,17 @@ class Main {
   }
 
   async clickEventListener(e: Event) {
+    // change active link to new route
+    const targetElm = e.target as HTMLElement;
+    const foundRouter = navbarRouting.find(r => r.name === targetElm.id);
+    if (foundRouter?.href) {
+      window.open(foundRouter.href, '_blank');
+      return;
+    }
+
     // remove any active links
     this.removeAllActiveLinks();
 
-    // change active link to new route
-    const targetElm = e.target as HTMLElement;
     targetElm.classList.toggle('active');
 
     this.loadRoute(targetElm.id);
@@ -168,7 +173,7 @@ class Main {
     document.querySelectorAll('.panel-wm-left a.nav-link,.navbar-nav a.nav-link').forEach(link => {
       link.classList.remove('active');
       if (unbindListeners) {
-        link.addEventListener('click', this.clickEventListener.bind(this) as EventListener);
+        link.removeEventListener('click', this.clickEventListener.bind(this) as EventListener);
       }
     });
   }

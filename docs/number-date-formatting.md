@@ -12,7 +12,7 @@ There you should see a list of different predefined formats - choose or create a
 
 Once you have the format how you'd like, click on the 'Custom' option. This will have the code that youhad selected/setup in the 'Type' box. Just copy and paste that code into the 'format' property.
 
-![](https://github.com/ghiscoding/slickgrid-universal/assets/643976/236fed91-fdfd-4203-840f-2ea1e12b7da6)
+![](https://github.com/ghiscoding/excel-builder-vanilla/assets/643976/1f3d1229-fb22-4b6b-b8fc-7bceac963d18)
 
 ```ts
 import { ExcelBuilder } from 'excel-builder-vanilla';

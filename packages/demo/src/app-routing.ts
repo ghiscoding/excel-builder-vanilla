@@ -15,9 +15,14 @@ import GettingStarted from './getting-started';
 export const navbarRouting = [
   { name: 'getting-started', view: '/src/getting-started.html', viewModel: GettingStarted, title: 'Getting Started' },
   { name: 'examples', view: '/src/examples/example01.html', viewModel: Example01, title: 'Examples' },
+  { name: 'documentation', href: 'https://ghiscoding.gitbook.io/excel-builder-vanilla/', title: 'Documentation' },
 ];
 
 export const exampleRouting = [
+  {
+    name: 'References',
+    routes: [{ name: 'documentation', href: 'https://ghiscoding.gitbook.io/excel-builder-vanilla/', title: 'Documentation' }],
+  },
   {
     name: 'Examples',
     routes: [
