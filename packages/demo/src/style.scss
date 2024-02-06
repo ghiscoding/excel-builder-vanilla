@@ -1,5 +1,8 @@
 @use 'sass:math';
 
+$navbar-height: 56px;
+$side-menu-width: 250px;
+
 :root {
   --bs-nav-link-font-size: 14px;
 }
@@ -33,9 +36,6 @@ h2 .links {
   color: #757575;
   margin-bottom: 1.2em;
 }
-
-$navbar-height: 60px;
-$side-menu-width: 250px;
 
 .bold {
   font-weight: bold;
