@@ -1,5 +1,5 @@
 import { ExcelBuilder, Table } from 'excel-builder-vanilla';
-import { MimeType, downloader } from './demoUtils';
+import { downloader } from './demoUtils';
 import './example10.scss';
 
 export default class Example {
@@ -59,7 +59,7 @@ export default class Example {
     albumList.addTable(albumTable);
     artistWorkbook.addTable(albumTable);
 
-    new ExcelBuilder().createFile(artistWorkbook, { type: 'blob', mimeType: MimeType.xlsx }).then(excelBlob => {
+    new ExcelBuilder().createFile(artistWorkbook).then(excelBlob => {
       const downloadOptions = {
         filename: 'Artist WB.xlsx',
         format: 'xlsx',
