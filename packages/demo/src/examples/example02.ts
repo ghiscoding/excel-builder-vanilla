@@ -34,7 +34,7 @@ export default class Example {
 
     artistWorkbook.addWorksheet(albumList);
 
-    new ExcelBuilder().createFile(artistWorkbook, { type: 'blob' }).then(excelBlob => {
+    new ExcelBuilder().createFile(artistWorkbook).then(excelBlob => {
       const downloadOptions = {
         filename: 'Artist WB.xlsx',
         format: 'xlsx',

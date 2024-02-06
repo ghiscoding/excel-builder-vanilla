@@ -2,12 +2,7 @@
   "name": "excel-builder-vanilla",
   "version": "2.1.8",
   "description": "An easy way of building Excel files with javascript",
-  "keywords": [
-    "excel",
-    "javascript",
-    "xlsx",
-    "spreadsheet"
-  ],
+  "keywords": ["excel", "javascript", "xlsx", "spreadsheet"],
   "author": "Stephen Liberty",
   "contributors": [
     {
@@ -32,9 +27,7 @@
   "types": "index.d.ts",
   "typesVersions": {
     ">=4.2": {
-      "*": [
-        "dist/*"
-      ]
+      "*": ["dist/*"]
     }
   },
   "exports": {
@@ -58,7 +51,7 @@
     "build:watch": "vite build --watch"
   },
   "dependencies": {
-    "jszip": "^3.10.1"
+    "fflate": "^0.8.1"
   },
   "devDependencies": {
     "typescript": "^5.3.3",

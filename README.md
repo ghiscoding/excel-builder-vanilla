@@ -19,7 +19,7 @@ We also have a new [**Live demo**](https://ghiscoding.github.io/excel-builder-va
 
 ## Description
 
-Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) library (thanks to @stephenliberty for this great lib). This fork was based on its latest known version. The main difference from the original lib is that we migrated the project to TypeScript and dropped the `Q` and `Lodash` dependencies and we now use native code and this mean there is only 1 external dependency left which is JSZip.
+Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) library (thanks to @stephenliberty for this great library). This fork was based on its latest known version. The main differences from the original project was to migrate the project to TypeScript, drop the `Q` and `Lodash` dependencies (we now use native code) and finally replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which supports Tree Shaking (ESM) and also offers much better performance.
 
 This lib allows you to build an Excel file dynamically.
 
@@ -43,7 +43,7 @@ npm install excel-builder-vanilla
 
 ### Used by
 
-This fork was created mostly to drop jQuery, and is used by a few other Open Source libraries that I also maintain:
+This fork was created mostly to support Tree Shaking (ESM) and update all its dependencies. It is used by a few other Open Source libraries that I also maintain:
 
 - [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid)
 - [Aurelia-Slickgrid](https://github.com/ghiscoding/aurelia-slickgrid)

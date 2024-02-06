@@ -12,7 +12,7 @@ export default defineConfig({
     },
     sourcemap: true,
     rollupOptions: {
-      external: ['jszip', 'jszip/dist/jszip.min.js'],
+      external: ['fflate'],
     },
   },
   plugins: [dts({ include: ['src'] })],
