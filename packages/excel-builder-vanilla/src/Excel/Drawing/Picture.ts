@@ -1,7 +1,7 @@
 import { Util } from '../Util';
 import { Drawing } from './Drawing';
 import { XMLDOM } from '../XMLDOM';
-import { uniqueId } from '../../lodash-utils';
+import { uniqueId } from '../../utilities';
 
 export class Picture extends Drawing {
   media: any = null;

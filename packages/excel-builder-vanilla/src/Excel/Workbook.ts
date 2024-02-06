@@ -7,7 +7,7 @@ import { Table } from './Table';
 import { Util } from './Util';
 import { XMLDOM } from './XMLDOM';
 import { Drawings } from './Drawings';
-import { uniqueId } from '../lodash-utils';
+import { uniqueId } from '../utilities';
 
 /**
  * @module Excel/Workbook

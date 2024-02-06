@@ -1,6 +1,6 @@
 import { Util } from './Util';
 import { RelationshipManager } from './RelationshipManager';
-import { uniqueId } from '../lodash-utils';
+import { uniqueId } from '../utilities';
 
 /**
  * @module Excel/Drawings

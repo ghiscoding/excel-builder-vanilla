@@ -2,7 +2,7 @@ import { AbsoluteAnchor } from './AbsoluteAnchor';
 import { OneCellAnchor } from './OneCellAnchor';
 import { TwoCellAnchor } from './TwoCellAnchor';
 import { Chart } from './Chart';
-import { uniqueId } from '../../lodash-utils';
+import { uniqueId } from '../../utilities';
 // import { Picture } from './Picture';
 
 /**

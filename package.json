@@ -35,6 +35,8 @@
     "build:lib": "pnpm -r --stream --filter=\"{packages/excel-builder-vanilla/**}\" build",
     "dev": "pnpm run -r dev:init && pnpm -r --parallel dev",
     "biome:check": "biome format ./packages",
+    "biome:lint": "biome lint ./packages",
+    "biome:lint:check": "biome check --apply ./packages",
     "biome:write": "biome format --write ./packages",
     "preview:version": "lerna version --dry-run",
     "preview:publish": "lerna publish from-package --dry-run",

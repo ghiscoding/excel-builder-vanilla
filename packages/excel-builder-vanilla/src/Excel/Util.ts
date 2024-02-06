@@ -1,4 +1,4 @@
-import { isPlainObject } from '../lodash-utils';
+import { isPlainObject } from '../utilities';
 import { XMLDOM, XMLNode } from './XMLDOM';
 
 /**

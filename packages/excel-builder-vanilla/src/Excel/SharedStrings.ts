@@ -1,4 +1,4 @@
-import { uniqueId } from '../lodash-utils';
+import { uniqueId } from '../utilities';
 import { Util } from './Util';
 
 /**

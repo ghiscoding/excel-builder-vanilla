@@ -1,4 +1,4 @@
-import { htmlEscape } from '../lodash-utils';
+import { htmlEscape } from '../utilities';
 
 type XMLNodeOption = {
   attributes?: {

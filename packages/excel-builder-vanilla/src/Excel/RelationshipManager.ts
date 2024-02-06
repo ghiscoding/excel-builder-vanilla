@@ -1,6 +1,6 @@
 import { Util } from './Util';
 import { Paths } from './Paths';
-import { uniqueId } from '../lodash-utils';
+import { uniqueId } from '../utilities';
 
 /**
  * @module Excel/RelationshipManager
