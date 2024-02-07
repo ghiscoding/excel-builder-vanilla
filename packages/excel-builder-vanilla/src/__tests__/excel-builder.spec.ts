@@ -66,7 +66,7 @@ describe('Excel-Builder-Vanilla', () => {
     artistWorkbook.addWorksheet(albumList);
 
     expect(artistWorkbook.getStyleSheet()).toEqual({
-      id: 'StyleSheet4',
+      id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
       cellStyles: [{ builtinId: '0', name: 'Normal', xfId: '0' }],
       defaultTableStyle: false,
@@ -85,7 +85,7 @@ describe('Excel-Builder-Vanilla', () => {
       _headers: [],
       _rowInstructions: {},
       _tables: [],
-      id: 'Worksheet4',
+      id: expect.stringContaining('Worksheet'),
       name: 'Artists',
       columnFormats: [],
       columns: [{ width: 30 }, { hidden: true, width: 20 }, { width: 10 }],
@@ -120,7 +120,7 @@ describe('Excel-Builder-Vanilla', () => {
     artistWorkbook.addWorksheet(albumList);
 
     expect(artistWorkbook.getStyleSheet()).toEqual({
-      id: 'StyleSheet6',
+      id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
       cellStyles: [{ builtinId: '0', name: 'Normal', xfId: '0' }],
       defaultTableStyle: false,
@@ -142,7 +142,7 @@ describe('Excel-Builder-Vanilla', () => {
       _headers: [],
       _rowInstructions: { '1': { height: 40, style: 1 } },
       _tables: [],
-      id: 'Worksheet6',
+      id: expect.stringContaining('Worksheet'),
       name: 'Artists',
       columnFormats: [],
       columns: [],
@@ -205,7 +205,7 @@ describe('Excel-Builder-Vanilla', () => {
     artistWorkbook.addWorksheet(albumList);
 
     expect(artistWorkbook.getStyleSheet()).toEqual({
-      id: 'StyleSheet8',
+      id: expect.stringContaining('StyleSheet'),
       borders: [
         { bottom: {}, diagonal: {}, left: {}, right: {}, top: {} },
         {
@@ -238,7 +238,7 @@ describe('Excel-Builder-Vanilla', () => {
       _headers: [],
       _rowInstructions: {},
       _tables: [],
-      id: 'Worksheet8',
+      id: expect.stringContaining('Worksheet'),
       name: 'Artists',
       columnFormats: [],
       columns: [{ width: 30 }, { width: 20 }, { width: 10 }],
@@ -279,7 +279,7 @@ describe('Excel-Builder-Vanilla', () => {
     artistWorkbook.addWorksheet(albumList);
 
     expect(artistWorkbook.getStyleSheet()).toEqual({
-      id: 'StyleSheet10',
+      id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
       cellStyles: [{ builtinId: '0', name: 'Normal', xfId: '0' }],
       defaultTableStyle: false,
@@ -301,7 +301,7 @@ describe('Excel-Builder-Vanilla', () => {
       _headers: [],
       _rowInstructions: {},
       _tables: [],
-      id: 'Worksheet10',
+      id: expect.stringContaining('Worksheet'),
       name: 'Album List',
       columnFormats: [],
       columns: [],
@@ -313,6 +313,64 @@ describe('Excel-Builder-Vanilla', () => {
         ['Crystal Method', 'Vegas', { metadata: { style: 1 }, value: 10.54 }],
         ['Crystal Method', 'Tweekend', { metadata: { style: 1 }, value: 10.64 }],
         ['Crystal Method', 'Divided By Night', { metadata: { style: 1 }, value: 8.99 }],
+      ],
+      mergedCells: [],
+      relations: { lastId: 1, relations: {} },
+    });
+  });
+
+  test('Date Format via createFormat()', () => {
+    const artistWorkbook = createWorkbook();
+    const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
+    const date = artistWorkbook.getStyleSheet().createSimpleFormatter('date');
+
+    const originalData = [
+      ['Artist', 'Album', 'Date Modified'],
+      ['Buckethead', 'Albino Slug', { value: new Date(2024, 1, 1), metadata: { type: 'date', style: date.id } }],
+      ['Buckethead', 'Electric Tears', { value: new Date(2024, 1, 2), metadata: { type: 'date', style: date.id } }],
+      ['Buckethead', 'Colma', { value: new Date(2024, 1, 3), metadata: { type: 'date', style: date.id } }],
+      ['Crystal Method', 'Vegas', { value: new Date(2024, 1, 4), metadata: { type: 'date', style: date.id } }],
+      ['Crystal Method', 'Tweekend', { value: new Date(2024, 1, 5), metadata: { type: 'date', style: date.id } }],
+      ['Crystal Method', 'Divided By Night', { value: new Date(2024, 1, 6), metadata: { type: 'date', style: date.id } }],
+    ];
+    albumList.setData(originalData);
+    artistWorkbook.addWorksheet(albumList);
+
+    expect(artistWorkbook.getStyleSheet()).toEqual({
+      id: expect.stringContaining('StyleSheet'),
+      borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
+      cellStyles: [{ builtinId: '0', name: 'Normal', xfId: '0' }],
+      defaultTableStyle: false,
+      differentialStyles: [{}],
+      fills: [{}, { bgColor: 'FF333333', fgColor: 'FF333333', patternType: 'gray125', type: 'pattern' }],
+      fonts: [{}],
+      masterCellFormats: [
+        { borderId: 0, fillId: 0, fontId: 0, numFmtId: 0, xfid: 0 },
+        { id: 1, numFmtId: 14 },
+      ],
+      masterCellStyles: [{ borderId: 0, fillId: 0, fontId: 0, numFmtId: 0 }],
+      numberFormatters: [],
+      tableStyles: [],
+    });
+    expect(artistWorkbook.worksheets.length).toBe(1);
+    expect(artistWorkbook.worksheets[0].exportData()).toEqual({
+      _footers: [],
+      _freezePane: {},
+      _headers: [],
+      _rowInstructions: {},
+      _tables: [],
+      id: expect.stringContaining('Worksheet'),
+      name: 'Album List',
+      columnFormats: [],
+      columns: [],
+      data: [
+        ['Artist', 'Album', 'Date Modified'],
+        ['Buckethead', 'Albino Slug', { metadata: { style: 1, type: 'date' }, value: new Date(2024, 1, 1) }],
+        ['Buckethead', 'Electric Tears', { metadata: { style: 1, type: 'date' }, value: new Date(2024, 1, 2) }],
+        ['Buckethead', 'Colma', { metadata: { style: 1, type: 'date' }, value: new Date(2024, 1, 3) }],
+        ['Crystal Method', 'Vegas', { metadata: { style: 1, type: 'date' }, value: new Date(2024, 1, 4) }],
+        ['Crystal Method', 'Tweekend', { metadata: { style: 1, type: 'date' }, value: new Date(2024, 1, 5) }],
+        ['Crystal Method', 'Divided By Night', { metadata: { style: 1, type: 'date' }, value: new Date(2024, 1, 6) }],
       ],
       mergedCells: [],
       relations: { lastId: 1, relations: {} },
@@ -345,7 +403,7 @@ describe('Excel-Builder-Vanilla', () => {
     artistWorkbook.addWorksheet(albumList);
 
     expect(artistWorkbook.getStyleSheet()).toEqual({
-      id: 'StyleSheet12',
+      id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
       cellStyles: [{ builtinId: '0', name: 'Normal', xfId: '0' }],
       defaultTableStyle: false,
@@ -367,7 +425,7 @@ describe('Excel-Builder-Vanilla', () => {
       _headers: [],
       _rowInstructions: {},
       _tables: [],
-      id: 'Worksheet12',
+      id: expect.stringContaining('Worksheet'),
       name: 'Album List',
       columnFormats: [],
       columns: [{ width: 30 }, { width: 25 }, { width: 12 }],
@@ -438,7 +496,7 @@ describe('Excel-Builder-Vanilla', () => {
     artistWorkbook.addWorksheet(albumList);
 
     expect(artistWorkbook.getStyleSheet()).toEqual({
-      id: 'StyleSheet14',
+      id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
       cellStyles: [{ builtinId: '0', name: 'Normal', xfId: '0' }],
       defaultTableStyle: false,
@@ -466,7 +524,7 @@ describe('Excel-Builder-Vanilla', () => {
       _headers: [],
       _rowInstructions: {},
       _tables: [],
-      id: 'Worksheet14',
+      id: expect.stringContaining('Worksheet'),
       name: 'Album List',
       columnFormats: [],
       columns: [{ width: 30 }, { width: 20 }, { width: 10 }],
@@ -507,7 +565,7 @@ describe('Excel-Builder-Vanilla', () => {
     artistWorkbook.addWorksheet(albumList);
 
     expect(artistWorkbook.getStyleSheet()).toEqual({
-      id: 'StyleSheet16',
+      id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
       cellStyles: [{ builtinId: '0', name: 'Normal', xfId: '0' }],
       defaultTableStyle: false,
@@ -526,7 +584,7 @@ describe('Excel-Builder-Vanilla', () => {
       _headers: [],
       _rowInstructions: {},
       _tables: [],
-      id: 'Worksheet16',
+      id: expect.stringContaining('Worksheet'),
       name: 'Album List',
       columnFormats: [],
       columns: [{ width: 30 }, { width: 20 }, { width: 10 }],
@@ -566,7 +624,7 @@ describe('Excel-Builder-Vanilla', () => {
     artistWorkbook.addTable(albumTable);
 
     expect(artistWorkbook.getStyleSheet()).toEqual({
-      id: 'StyleSheet18',
+      id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
       cellStyles: [{ builtinId: '0', name: 'Normal', xfId: '0' }],
       defaultTableStyle: false,
@@ -584,7 +642,7 @@ describe('Excel-Builder-Vanilla', () => {
       _freezePane: {},
       _headers: [],
       _rowInstructions: {},
-      id: 'Worksheet18',
+      id: 'Worksheet20',
       name: 'Album List',
       _tables: [
         {
@@ -643,7 +701,7 @@ describe('Excel-Builder-Vanilla', () => {
         lastId: 1,
         relations: {
           Table1: {
-            id: 'rId55',
+            id: expect.stringContaining('rId'),
             object: {
               autoFilter: null,
               dataCellStyle: null,
@@ -708,7 +766,7 @@ describe('Excel-Builder-Vanilla', () => {
     artistWorkbook.addTable(albumTable);
 
     expect(artistWorkbook.getStyleSheet()).toEqual({
-      id: 'StyleSheet20',
+      id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
       cellStyles: [{ builtinId: '0', name: 'Normal', xfId: '0' }],
       defaultTableStyle: false,
@@ -761,7 +819,7 @@ describe('Excel-Builder-Vanilla', () => {
           totalsRowDxfId: null,
         },
       ],
-      id: 'Worksheet20',
+      id: 'Worksheet22',
       name: 'Album List',
       columnFormats: [],
       columns: [],
@@ -780,7 +838,7 @@ describe('Excel-Builder-Vanilla', () => {
         lastId: 1,
         relations: {
           Table2: {
-            id: 'rId62',
+            id: expect.stringContaining('rId'),
             object: {
               autoFilter: null,
               dataCellStyle: null,
@@ -847,7 +905,7 @@ describe('Excel-Builder-Vanilla', () => {
     artistWorkbook.addWorksheet(albumList);
 
     expect(artistWorkbook.getStyleSheet()).toEqual({
-      id: 'StyleSheet22',
+      id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
       cellStyles: [{ builtinId: '0', name: 'Normal', xfId: '0' }],
       defaultTableStyle: false,
@@ -870,7 +928,7 @@ describe('Excel-Builder-Vanilla', () => {
       _footers: ['Date of print: &D &T', '&A', 'Page &P of &N'],
       _rowInstructions: {},
       _tables: [],
-      id: 'Worksheet22',
+      id: expect.stringContaining('Worksheet'),
       name: 'Album List',
       columnFormats: [],
       columns: [],
