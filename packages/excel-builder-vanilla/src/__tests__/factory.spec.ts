@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, test, vi } from 'vitest';
 import { strFromU8, zip } from 'fflate';
+import { beforeEach, describe, expect, it, test, vi } from 'vitest';
 
 import { createExcelFile, createWorkbook } from '../factory';
 
