@@ -19,19 +19,22 @@ We also have a new [**Live demo**](https://ghiscoding.github.io/excel-builder-va
 
 ## Description
 
-Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) library (thanks to @stephenliberty for this great library). This fork was based on its latest known version. The main differences from the original project was to migrate the project to TypeScript, drop the `Q` and `Lodash` dependencies (we now use native code) and finally replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which supports Tree Shaking (ESM) and also offers much better performance.
+Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). This fork was based on its latest known version and the main goal was to modernize the project. We migrated the project to TypeScript, dropped the `Q` and `Lodash` dependencies (we now use native code) and finally replaced `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build with Tree Shaking and also offers better performance.
 
-This lib allows you to build an Excel file dynamically.
+This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capability.
 
 To get started take a look at the [Live demo](https://ghiscoding.github.io/excel-builder-vanilla/) for all available options and methods that the library offers.
-
-The [Live demo](https://ghiscoding.github.io/excel-builder-vanilla/) website
 
 ## Installation
 
 ```sh
 npm install excel-builder-vanilla
 ```
+
+The project offers 3 different bundle, choose the best for your use case
+1. ESM: to `import from` (prefered)
+2. CJS: CommonJS to support old Node `require()`
+3. IIFE: standalone `<script>` with `ExcelBuilder` available on the `window` object
 
 ## Changelog
 
@@ -60,7 +63,7 @@ This fork was created mostly to support Tree Shaking (ESM) and update all its de
 
 If you wish to contribute to the project, please follow these steps:
 
-**Note**: this project uses [pnpm workspaces](https://pnpm.io/workspaces), you can install pnpm by following their [installation](https://pnpm.io/installation) or simply run `npx pnpm` to run any of the pnpm scripts shown below:
+**Note**: this project uses [pnpm workspaces](https://pnpm.io/workspaces), you can install pnpm by following their [installation](https://pnpm.io/installation) or via `corepack enable` to run any of the pnpm scripts shown below:
 
 1. clone the lib:
    - `git clone https://github.com/ghiscoding/excel-builder-vanilla`

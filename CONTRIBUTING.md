@@ -4,7 +4,7 @@ We'd love for you to contribute and to make this project even better than it is 
 
 Before accepting any Pull Request, we need to make sure that you followed the step shown below.
 
-_When we mention `VSCode`, we mean `Visual Studio Code` editor which can be downloaded [here](https://code.visualstudio.com)_
+**Note**: this project uses [pnpm workspaces](https://pnpm.io/workspaces), you can install pnpm by following their [installation](https://pnpm.io/installation) or via `corepack enable` to run any of the pnpm scripts shown below:
 
 ### Steps
 
