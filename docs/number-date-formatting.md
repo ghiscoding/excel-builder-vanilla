@@ -24,6 +24,9 @@ const currency = artistWorkbook.getStyleSheet().createFormat({
   format: '$#,##0.00',
 });
 
+// you can get the Date format directly form Excel-Builder
+const date = artistWorkbook.getStyleSheet().createSimpleFormatter('date');
+
 const originalData = [
   ['Artist', 'Album', 'Price'],
   ['Buckethead', 'Albino Slug', { value: 8.99, metadata: { style: currency.id } }],

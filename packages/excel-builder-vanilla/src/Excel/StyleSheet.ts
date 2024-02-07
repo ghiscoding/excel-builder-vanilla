@@ -58,7 +58,7 @@ export class StyleSheet {
 
   createSimpleFormatter(type: string) {
     const sid = this.masterCellFormats.length;
-    const style: any = {
+    const style: { [id: string]: number } = {
       id: sid,
     };
     switch (type) {
