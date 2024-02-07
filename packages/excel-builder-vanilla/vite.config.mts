@@ -9,9 +9,19 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      formats: ['es', 'umd', 'iife'],
+      formats: ['es', 'cjs', 'iife'],
       name: 'ExcelBuilder',
-      fileName: format => `excel-builder.${format}.js`,
+      // fileName: format => (format === 'es' ? 'excel-builder.js' : `excel-builder.${format}.js`),
+      fileName: format => {
+        switch (format) {
+          case 'es':
+            return 'excel-builder.js';
+          case 'cjs':
+            return 'excel-builder.cjs';
+          default:
+            return `excel-builder.${format}.js`;
+        }
+      },
     },
     sourcemap: true,
     rollupOptions: {

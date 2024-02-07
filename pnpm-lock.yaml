@@ -60,6 +60,9 @@ importers:
         specifier: ^4.7.0
         version: 4.7.0
     devDependencies:
+      fflate:
+        specifier: 0.8.0
+        version: 0.8.0
       sass:
         specifier: ^1.70.0
         version: 1.70.0
@@ -2223,6 +2226,10 @@ packages:
     dependencies:
       node-domexception: 1.0.0
       web-streams-polyfill: 3.3.2
+    dev: true
+
+  /fflate@0.8.0:
+    resolution: {integrity: sha512-FAdS4qMuFjsJj6XHbBaZeXOgaypXp8iw/Tpyuq/w3XA41jjLHT8NPA+n7czH/DDhdncq0nAyDZmPeWXh2qmdIg==}
     dev: true
 
   /fflate@0.8.1:

@@ -22,8 +22,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "./dist/excel-builder.umd.js",
-  "module": "./dist/excel-builder.es.js",
+  "main": "./dist/excel-builder.cjs",
+  "module": "./dist/excel-builder.js",
   "types": "index.d.ts",
   "typesVersions": {
     ">=4.2": {
@@ -33,9 +33,9 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "node": "./dist/excel-builder.umd.js",
-      "require": "./dist/excel-builder.umd.js",
-      "default": "./dist/excel-builder.es.js"
+      "node": "./dist/excel-builder.cjs",
+      "require": "./dist/excel-builder.cjs",
+      "default": "./dist/excel-builder.js"
     },
     "./package.json": "./package.json"
   },

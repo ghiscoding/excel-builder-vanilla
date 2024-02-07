@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "build:watch": "vite build --watch",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "standalone:require": "node ./src/examples/example-standalone-require.cjs"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
@@ -15,6 +16,7 @@
     "font-awesome": "^4.7.0"
   },
   "devDependencies": {
+    "fflate": "0.8.0",
     "sass": "^1.70.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.12"
