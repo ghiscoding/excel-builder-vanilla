@@ -1,4 +1,5 @@
-import { ExcelBuilder, Table } from 'excel-builder-vanilla';
+import { Table, createExcelFile, createWorkbook } from 'excel-builder-vanilla';
+
 import { downloader } from './demoUtils';
 import './example11.scss';
 
@@ -7,15 +8,15 @@ export default class Example {
 
   mount() {
     this.exportBtnElm = document.querySelector('#export') as HTMLButtonElement;
-    this.exportBtnElm.addEventListener('click', this.createExcelStruct.bind(this));
+    this.exportBtnElm.addEventListener('click', this.startProcess.bind(this));
   }
 
   unmount() {
     // remove event listeners to avoid DOM leaks
-    this.exportBtnElm.removeEventListener('click', this.createExcelStruct.bind(this));
+    this.exportBtnElm.removeEventListener('click', this.startProcess.bind(this));
   }
 
-  createExcelStruct() {
+  startProcess() {
     const albumTable = new Table();
 
     const originalData = [
@@ -29,7 +30,7 @@ export default class Example {
       ['Highest Price', 'test', { value: `SUBTOTAL(104,${albumTable.name}[Price])`, metadata: { type: 'formula' } }],
     ];
 
-    const artistWorkbook = new ExcelBuilder().createWorkbook();
+    const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
     albumTable.styleInfo.themeStyle = 'TableStyleDark2'; //This is a predefined table style
@@ -50,7 +51,7 @@ export default class Example {
     albumList.addTable(albumTable);
     artistWorkbook.addTable(albumTable);
 
-    new ExcelBuilder().createFile(artistWorkbook).then(excelBlob => {
+    createExcelFile(artistWorkbook).then(excelBlob => {
       const downloadOptions = {
         filename: 'Artist WB.xlsx',
         format: 'xlsx',

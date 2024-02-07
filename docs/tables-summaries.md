@@ -24,7 +24,7 @@ const originalData = [
   ['Highest Price', 'test', { value: 'SUBTOTAL(104,' + albumTable.name + '[Price])', metadata: { type: 'formula' } }],
 ];
 
-const artistWorkbook = new ExcelBuilder().createWorkbook();
+const artistWorkbook = createWorkbook();
 const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
 albumTable.styleInfo.themeStyle = 'TableStyleDark2'; // This is a predefined table style
@@ -44,6 +44,6 @@ artistWorkbook.addWorksheet(albumList);
 
 albumList.addTable(albumTable);
 artistWorkbook.addTable(albumTable);
-const data = new ExcelBuilder().createFile(artistWorkbook);
+const data = createExcelFile(artistWorkbook);
 downloader('Artist WB.xlsx', data);
 ```

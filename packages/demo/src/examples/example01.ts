@@ -1,4 +1,4 @@
-import { ExcelBuilder, Workbook } from 'excel-builder-vanilla';
+import { Workbook, createExcelFile } from 'excel-builder-vanilla';
 
 import { buildHtmlTable, downloader } from './demoUtils';
 import './example01.scss';
@@ -20,21 +20,21 @@ export default class Example {
     tableContainerElm.appendChild(buildHtmlTable(this.originalData));
 
     this.exportBtnElm = document.querySelector('#export') as HTMLButtonElement;
-    this.exportBtnElm.addEventListener('click', this.createExcelStruct.bind(this));
+    this.exportBtnElm.addEventListener('click', this.startProcess.bind(this));
   }
 
   unmount() {
     // remove event listeners to avoid DOM leaks
-    this.exportBtnElm.removeEventListener('click', this.createExcelStruct.bind(this));
+    this.exportBtnElm.removeEventListener('click', this.startProcess.bind(this));
   }
 
-  createExcelStruct() {
+  startProcess() {
     const artistWorkbook = new Workbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
     albumList.setData(this.originalData);
     artistWorkbook.addWorksheet(albumList);
 
-    new ExcelBuilder().createFile(artistWorkbook).then(excelBlob => {
+    createExcelFile(artistWorkbook).then(excelBlob => {
       const downloadOptions = {
         filename: 'Artist WB.xlsx',
         format: 'xlsx',

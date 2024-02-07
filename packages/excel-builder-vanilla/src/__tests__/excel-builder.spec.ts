@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { Table, Workbook } from '../Excel';
-import { ExcelBuilder } from '../excel-builder';
+import { createWorkbook } from '../factory';
 
 describe('Excel-Builder-Vanilla', () => {
   const originalData = [
@@ -15,7 +15,7 @@ describe('Excel-Builder-Vanilla', () => {
   ];
 
   test('basic grid', () => {
-    const artistWorkbook = new ExcelBuilder().createWorkbook();
+    const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
     albumList.setData(originalData);
     artistWorkbook.addWorksheet(albumList);
@@ -261,7 +261,7 @@ describe('Excel-Builder-Vanilla', () => {
   });
 
   test('Currency Format via createFormat()', () => {
-    const artistWorkbook = new ExcelBuilder().createWorkbook();
+    const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
     const currency = artistWorkbook.getStyleSheet().createFormat({
       format: '$#,##0.00',
@@ -320,7 +320,7 @@ describe('Excel-Builder-Vanilla', () => {
   });
 
   test('Alignment via createFormat()', () => {
-    const artistWorkbook = new ExcelBuilder().createWorkbook();
+    const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
     const centerAlign = artistWorkbook.getStyleSheet().createFormat({
       alignment: {
@@ -390,7 +390,7 @@ describe('Excel-Builder-Vanilla', () => {
   });
 
   test('Background Fillers createFormat()', () => {
-    const artistWorkbook = new ExcelBuilder().createWorkbook();
+    const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
     const stylesheet = artistWorkbook.getStyleSheet();
 
@@ -489,7 +489,7 @@ describe('Excel-Builder-Vanilla', () => {
   });
 
   test('Formulas', () => {
-    const artistWorkbook = new ExcelBuilder().createWorkbook();
+    const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
     const originalData = [
@@ -545,7 +545,7 @@ describe('Excel-Builder-Vanilla', () => {
   });
 
   test('Tables Themes', () => {
-    const artistWorkbook = new ExcelBuilder().createWorkbook();
+    const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
     const stylesheet = artistWorkbook.getStyleSheet();
     const boldDXF = stylesheet.createDifferentialStyle({ font: { italic: true } });
@@ -690,7 +690,7 @@ describe('Excel-Builder-Vanilla', () => {
       ['Crystal Method', 'Divided By Night', 8.99],
       ['Highest Price', 'test', { value: `SUBTOTAL(104,${albumTable.name}[Price])`, metadata: { type: 'formula' } }],
     ];
-    const artistWorkbook = new ExcelBuilder().createWorkbook();
+    const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
     albumTable.styleInfo.themeStyle = 'TableStyleDark2'; //This is a predefined table style
@@ -832,7 +832,7 @@ describe('Excel-Builder-Vanilla', () => {
       ['Crystal Method', 'Divided By Night', 8.99],
     ];
 
-    const artistWorkbook = new ExcelBuilder().createWorkbook();
+    const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
     albumList.setData(originalData);
