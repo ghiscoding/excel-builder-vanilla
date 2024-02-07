@@ -23,12 +23,12 @@ export default class Example {
       format: '$#,##0.00',
     });
 
-    // you can get the Date format directly form Excel-Builder
-    const date = artistWorkbook.getStyleSheet().createSimpleFormatter('date');
-
     // or by using
     // const currencyFormat = artistWorkbook.getStyleSheet().createNumberFormatter('$#,##0.00');
     // const currency = artistWorkbook.getStyleSheet().createFormat({format: currencyFormat.id});
+
+    // you can get the Date format directly form Excel-Builder
+    const date = artistWorkbook.getStyleSheet().createSimpleFormatter('date');
 
     const originalData = [
       ['Artist', 'Album', 'Price', 'Date Modified'],
