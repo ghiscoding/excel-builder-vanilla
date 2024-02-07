@@ -1,4 +1,4 @@
-import type { ExcelColumn, ExcelSortState } from '../interfaces';
+import type { ExcelSortState, ExcelTableColumn } from '../interfaces';
 import { isString, uniqueId } from '../utilities';
 import { Util } from './Util';
 import type { XMLDOM } from './XMLDOM';
@@ -46,7 +46,7 @@ export class Table {
     this.ref = [start, end];
   }
 
-  setTableColumns(columns: Array<ExcelColumn | string>) {
+  setTableColumns(columns: Array<ExcelTableColumn | string>) {
     columns.forEach(column => {
       this.addTableColumn(column);
     });
@@ -68,7 +68,7 @@ export class Table {
    * totalFormula
    * totalFormulaIsArrayType (boolean)
    */
-  addTableColumn(column: ExcelColumn | string) {
+  addTableColumn(column: ExcelTableColumn | string) {
     if (isString(column)) {
       column = {
         name: column,

@@ -3,4 +3,6 @@
  * path information from/to.
  * @module Excel/Paths
  */
-export const Paths: any = {};
+export const Paths: {
+  [path: string]: string;
+} = {};

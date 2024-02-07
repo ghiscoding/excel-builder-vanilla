@@ -1,4 +1,4 @@
-import type { ExcelStyleInstruction } from '../interfaces';
+import type { ExcelColumn, ExcelColumnFormat, ExcelColumnMetadata, ExcelMargin, ExcelStyleInstruction } from '../interfaces';
 import { isObject, isString, uniqueId } from '../utilities';
 import type { Drawings } from './Drawings';
 import { RelationshipManager } from './RelationshipManager';
@@ -6,9 +6,7 @@ import type { SharedStrings } from './SharedStrings';
 import { SheetView } from './SheetView';
 import type { Table } from './Table';
 import { Util } from './Util';
-import type { XMLDOM } from './XMLDOM';
-
-type ColumnFormat = 'bestFit' | 'collapsed' | 'customWidth' | 'hidden' | 'max' | 'min' | 'outlineLevel' | 'phonetic' | 'style' | 'width';
+import type { XMLDOM, XMLNode } from './XMLDOM';
 
 interface CharType {
   font?: string;
@@ -29,19 +27,19 @@ export class Worksheet {
   id = uniqueId('Worksheet');
   _timezoneOffset: number;
   relations: any = null;
-  columnFormats: ColumnFormat[] = [];
-  data: any[] = [];
-  mergedCells: any[] = [];
-  columns: any[] = [];
+  columnFormats: ExcelColumnFormat[] = [];
+  data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][] = [];
+  mergedCells: string[][][] = [];
+  columns: ExcelColumn[] = [];
   sheetProtection: any = false;
   _headers: [left?: any, center?: any, right?: any] = [];
   _footers: [left?: any, center?: any, right?: any] = [];
   _tables: Table[] = [];
   _drawings: Array<Table | Drawings> = [];
   _orientation?: string;
-  _margin: any;
+  _margin?: ExcelMargin;
   _rowInstructions: any = {};
-  _freezePane: any = {};
+  _freezePane: { xSplit?: number; ySplit?: number; cell?: number } = {};
   sharedStrings: SharedStrings | null = null;
 
   hyperlinks = [];
@@ -276,9 +274,9 @@ export class Worksheet {
       maxX = cellCount > maxX ? cellCount : maxX;
       for (let c = 0; c < cellCount; c++) {
         let cellValue = dataRow[c];
-        const metadata = cellValue?.metadata || {};
+        const metadata = (cellValue as ExcelColumnMetadata)?.metadata || {};
         if (cellValue && typeof cellValue === 'object') {
-          cellValue = cellValue.value;
+          cellValue = (cellValue as ExcelColumnMetadata).value;
         }
 
         if (!metadata.type) {
@@ -287,8 +285,8 @@ export class Worksheet {
           }
         }
         if (metadata.type === 'text' || !metadata.type) {
-          if (typeof strings[cellValue] === 'undefined') {
-            strings[cellValue] = true;
+          if (typeof strings[cellValue as string] === 'undefined') {
+            strings[cellValue as string] = true;
           }
         }
       }
@@ -322,10 +320,10 @@ export class Worksheet {
         columns[c] = columns[c] || {};
         let cellValue = dataRow[c];
         let cell: any;
-        const metadata = cellValue?.metadata || {};
+        const metadata = (cellValue as ExcelColumnMetadata)?.metadata || {};
 
         if (cellValue && typeof cellValue === 'object') {
-          cellValue = cellValue.value;
+          cellValue = (cellValue as ExcelColumnMetadata).value;
         }
 
         if (!metadata.type) {
@@ -344,21 +342,21 @@ export class Worksheet {
             if (cellValue instanceof Date) {
               cellValue = cellValue.getTime();
             }
-            cell.firstChild.firstChild.nodeValue = 25569.0 + (cellValue - this._timezoneOffset) / (60 * 60 * 24 * 1000);
+            cell.firstChild.firstChild.nodeValue = 25569.0 + ((cellValue as number) - this._timezoneOffset) / (60 * 60 * 24 * 1000);
             break;
           case 'formula':
             cell = cellCache.formula.cloneNode(true);
-            cell.firstChild.firstChild.nodeValue = cellValue;
+            cell.firstChild.firstChild.nodeValue = cellValue as string;
             break;
           // biome-ignore lint: original implementation
           case 'text':
           /*falls through*/
           default: {
             let id: number | undefined;
-            if (typeof this.sharedStrings?.strings[cellValue] !== 'undefined') {
-              id = this.sharedStrings.strings[cellValue];
+            if (typeof this.sharedStrings?.strings[cellValue as string] !== 'undefined') {
+              id = this.sharedStrings.strings[cellValue as string];
             } else {
-              id = this.sharedStrings?.addString(cellValue);
+              id = this.sharedStrings?.addString(cellValue as string);
             }
             cell = cellCache.string.cloneNode(true);
             cell.firstChild.firstChild.nodeValue = id;
@@ -525,7 +523,7 @@ export class Worksheet {
    * @param {XML Node} worksheet
    * @returns {undefined}
    */
-  exportPageSettings(doc: XMLDOM, worksheet: any) {
+  exportPageSettings(doc: XMLDOM, worksheet: XMLNode) {
     if (this._margin) {
       let defaultVal = 0.7;
       const left = this._margin.left ? this._margin.left : defaultVal;
@@ -578,14 +576,7 @@ export class Worksheet {
    *
    * @returns {undefined}
    */
-  setPageMargin(input: {
-    top: number;
-    bottom: number;
-    left: number;
-    right: number;
-    header: number;
-    footer: number;
-  }) {
+  setPageMargin(input: ExcelMargin) {
     this._margin = input;
   }
 
@@ -594,7 +585,7 @@ export class Worksheet {
    *
    * @param {Array} columns
    */
-  setColumns(columns: any) {
+  setColumns(columns: ExcelColumn[]) {
     this.columns = columns;
   }
 
@@ -604,7 +595,7 @@ export class Worksheet {
    * @param {Array} data Two dimensional array - [ [A1, A2], [B1, B2] ]
    * @see <a href='/cookbook/addingDataToAWorksheet.html'>Adding data to a worksheet</a>
    */
-  setData(data: [...any[]]) {
+  setData(data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][]) {
     this.data = data;
   }
 
@@ -644,7 +635,7 @@ export class Worksheet {
    * width
    * @param {Array} columnFormats
    */
-  setColumnFormats(columnFormats: ColumnFormat[]) {
+  setColumnFormats(columnFormats: ExcelColumnFormat[]) {
     this.columnFormats = columnFormats;
   }
 }
