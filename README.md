@@ -39,7 +39,7 @@ npm install excel-builder-vanilla
 
 ## LICENSE
 
-[MIT License](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/LICENSE)
+[MIT License](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/LICENSE.md)
 
 ### Used by
 
