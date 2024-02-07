@@ -17,7 +17,7 @@ Once you have the format how you'd like, click on the 'Custom' option. This will
 ```ts
 import { ExcelBuilder } from 'excel-builder-vanilla';
 
-const artistWorkbook = new ExcelBuilder().createWorkbook();
+const artistWorkbook = createWorkbook();
 const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
 const currency = artistWorkbook.getStyleSheet().createFormat({
@@ -37,7 +37,7 @@ const originalData = [
 albumList.setData(originalData);
 artistWorkbook.addWorksheet(albumList);
 
-const data = new ExcelBuilder().createFile(artistWorkbook);
+const data = createExcelFile(artistWorkbook);
 downloader('Artist WB.xlsx', data);
 ```
 

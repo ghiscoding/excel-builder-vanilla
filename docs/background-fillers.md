@@ -13,7 +13,7 @@ A gradient fill requires a `degree` (or if no degree, a `left`, `right`, `top` a
 ```ts
 import { ExcelBuilder } from 'excel-builder-vanilla';
 
-const artistWorkbook = new ExcelBuilder().createWorkbook();
+const artistWorkbook = createWorkbook();
 const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 const stylesheet = artistWorkbook.getStyleSheet();
 
@@ -61,6 +61,6 @@ albumList.setColumns([{ width: 30 }, { width: 20 }, { width: 10 }]);
 
 artistWorkbook.addWorksheet(albumList);
 
-const data = new ExcelBuilder().createFile(artistWorkbook);
+const data = createExcelFile(artistWorkbook);
 downloader('Artist WB.xlsx', data);
 ```

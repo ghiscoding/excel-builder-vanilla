@@ -5,9 +5,9 @@ Creating a workbook can be done one of two ways, depending on how you include th
 #### Factory Style
 
 ```ts
-import { ExcelBuilder } from 'excel-builder-vanilla';
+import { createWorkbook } from 'excel-builder-vanilla';
 
-const workbook = new ExcelBuilder().createWorkbook();
+const workbook = createWorkbook();
 ```
 
 #### Constructor Style

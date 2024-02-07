@@ -1,4 +1,5 @@
-import { ExcelBuilder } from 'excel-builder-vanilla';
+import { createExcelFile, createWorkbook } from 'excel-builder-vanilla';
+
 import { downloader } from './demoUtils';
 import './example05.scss';
 
@@ -16,16 +17,16 @@ export default class Example {
 
   mount() {
     this.exportBtnElm = document.querySelector('#export') as HTMLButtonElement;
-    this.exportBtnElm.addEventListener('click', this.createExcelStruct.bind(this));
+    this.exportBtnElm.addEventListener('click', this.startProcess.bind(this));
   }
 
   unmount() {
     // remove event listeners to avoid DOM leaks
-    this.exportBtnElm.removeEventListener('click', this.createExcelStruct.bind(this));
+    this.exportBtnElm.removeEventListener('click', this.startProcess.bind(this));
   }
 
-  createExcelStruct() {
-    const artistWorkbook = new ExcelBuilder().createWorkbook();
+  startProcess() {
+    const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
     const currency = artistWorkbook.getStyleSheet().createFormat({
       format: '$#,##0.00',
@@ -48,7 +49,7 @@ export default class Example {
     albumList.setData(originalData);
     artistWorkbook.addWorksheet(albumList);
 
-    new ExcelBuilder().createFile(artistWorkbook).then(excelBlob => {
+    createExcelFile(artistWorkbook).then(excelBlob => {
       const downloadOptions = {
         filename: 'Artist WB.xlsx',
         format: 'xlsx',

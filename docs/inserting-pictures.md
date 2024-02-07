@@ -12,7 +12,7 @@ OpenXML Drawings have an odd (understandable, but still odd) positioning system.
 import { Drawings, ExcelBuilder, Picture, Positioning } from 'excel-builder-vanilla';
 import strawberry from './images/strawberry.jpg.base64';
 
-const fruitWorkbook = new ExcelBuilder().createWorkbook();
+const fruitWorkbook = createWorkbook();
 const berryList = fruitWorkbook.createWorksheet({ name: 'Berry List' });
 const stylesheet = fruitWorkbook.getStyleSheet();
 
@@ -62,6 +62,6 @@ fruitWorkbook.addDrawings(drawings);
 fruitWorkbook.addWorksheet(berryList);
 
 console.log(fruitWorkbook.generateFiles());
-const data = new ExcelBuilder().createFile(fruitWorkbook);
+const data = createExcelFile(fruitWorkbook);
 downloader('Fruit WB.xlsx', data);
 ```

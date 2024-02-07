@@ -15,13 +15,13 @@ const originalData = [
   ['Crystal Method', 'Divided By Night', 8.99],
 ];
 
-const artistWorkbook = new ExcelBuilder().createWorkbook();
+const artistWorkbook = createWorkbook();
 const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
 albumList.setData(originalData); // <-- Here's the important part
 
 artistWorkbook.addWorksheet(albumList);
 
-const data = new ExcelBuilder().createFile(artistWorkbook);
+const data = createExcelFile(artistWorkbook);
 downloader('Artist WB.xlsx', data);
 ```

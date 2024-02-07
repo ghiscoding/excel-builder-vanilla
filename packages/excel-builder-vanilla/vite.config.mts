@@ -23,6 +23,7 @@ export default defineConfig({
         }
       },
     },
+    emptyOutDir: false,
     sourcemap: true,
     rollupOptions: {
       external: ['fflate'],

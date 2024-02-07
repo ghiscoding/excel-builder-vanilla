@@ -9,7 +9,7 @@ Vertical alignment types can be found [here](http://www.datypic.com/sc/ooxml/t-s
 ```ts
 import { ExcelBuilder } from 'excel-builder-vanilla';
 
-const artistWorkbook = new ExcelBuilder().createWorkbook();
+const artistWorkbook = createWorkbook();
 const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
 const centerAlign = artistWorkbook.getStyleSheet().createFormat({
@@ -37,6 +37,6 @@ albumList.setColumns([{ width: 30 }, { width: 30 }, { width: 30 }]);
 
 artistWorkbook.addWorksheet(albumList);
 
-const data = new ExcelBuilder().createFile(artistWorkbook);
+const data = createExcelFile(artistWorkbook);
 downloader('Artist WB.xlsx', data);
 ```

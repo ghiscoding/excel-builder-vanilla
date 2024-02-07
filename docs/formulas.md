@@ -5,7 +5,7 @@ Formulas are the bread and butter of excel. Thankfully they're also ridiculously
 ```ts
 import { ExcelBuilder } from 'excel-builder-vanilla';
 
-const artistWorkbook = new ExcelBuilder().createWorkbook();
+const artistWorkbook = createWorkbook();
 const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
 const originalData = [
@@ -23,7 +23,7 @@ albumList.setColumns([{ width: 30 }, { width: 20 }, { width: 10 }]);
 
 artistWorkbook.addWorksheet(albumList);
 
-const data = new ExcelBuilder().createFile(artistWorkbook);
+const data = createExcelFile(artistWorkbook);
 downloader('Artist WB.xlsx', data);
 ```
 

@@ -109,7 +109,7 @@
         albumList.setData(originalData);
         artistWorkbook.addWorksheet(albumList);
 
-        new window.ExcelBuilder.ExcelBuilder().createFile(artistWorkbook, { type: 'blob' }).then((excelBlob) => {
+        new window.ExcelBuilder.createExcelFile(artistWorkbook, { type: 'blob' }).then((excelBlob) => {
           const downloadOptions = {
             filename: 'Artist WB.xlsx',
             format: 'xlsx',

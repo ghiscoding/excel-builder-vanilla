@@ -15,7 +15,7 @@ const originalData = [
   ['Crystal Method', 'Divided By Night', 8.99],
 ];
 
-const artistWorkbook = new ExcelBuilder().createWorkbook();
+const artistWorkbook = createWorkbook();
 const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
 const stylesheet = artistWorkbook.getStyleSheet();
@@ -47,6 +47,6 @@ artistWorkbook.addWorksheet(albumList);
 
 albumList.addTable(albumTable);
 artistWorkbook.addTable(albumTable);
-const data = new ExcelBuilder().createFile(artistWorkbook);
+const data = createExcelFile(artistWorkbook);
 downloader('Artist WB.xlsx', data);
 ```
