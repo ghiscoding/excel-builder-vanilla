@@ -605,8 +605,8 @@ export class Worksheet {
    * @param cell1 - A1, A2...
    * @param cell2 - A2, A3...
    */
-  mergeCells(cell1: string | string[], cell2: string | string[]) {
-    this.mergedCells.push([cell1, cell2] as string[]);
+  mergeCells(cell1: string, cell2: string) {
+    this.mergedCells.push([cell1, cell2]);
   }
 
   /**

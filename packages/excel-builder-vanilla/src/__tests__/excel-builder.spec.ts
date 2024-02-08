@@ -90,6 +90,13 @@ describe('Excel-Builder-Vanilla', () => {
     albumList.setColumns([{ width: 30 }, { width: 20, hidden: true }, { width: 10 }]);
     artistWorkbook.addWorksheet(albumList);
 
+    const xml = artistWorkbook.worksheets[0].toXML();
+    expect(xml.documentElement.attributes).toEqual({
+      xmlns: 'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+      'xmlns:r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+      'xmlns:mc': 'http://schemas.openxmlformats.org/markup-compatibility/2006',
+    });
+    expect(xml.documentElement.children.length).toBe(5);
     expect(artistWorkbook.getStyleSheet()).toEqual({
       id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
