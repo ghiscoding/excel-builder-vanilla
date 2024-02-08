@@ -4,15 +4,6 @@ import './example02.scss';
 
 export default class Example {
   exportBtnElm!: HTMLButtonElement;
-  originalData = [
-    ['Artist', 'Album', 'Price'],
-    ['Buckethead', 'Albino Slug', 8.99],
-    ['Buckethead', 'Electric Tears', 13.99],
-    ['Buckethead', 'Colma', 11.34],
-    ['Crystal Method', 'Vegas', 10.54],
-    ['Crystal Method', 'Tweekend', 10.64],
-    ['Crystal Method', 'Divided By Night', 8.99],
-  ];
 
   mount() {
     this.exportBtnElm = document.querySelector('#export') as HTMLButtonElement;
@@ -27,8 +18,32 @@ export default class Example {
   startProcess() {
     const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
+    albumList.mergeCells('A1', 'C1');
 
-    albumList.setData(this.originalData);
+    const stylesheet = artistWorkbook.getStyleSheet();
+    const header = stylesheet.createFormat({
+      alignment: {
+        horizontal: 'center',
+      },
+      font: {
+        bold: true,
+        color: 'FF2b995d',
+        size: 13,
+      },
+    });
+
+    const originalData = [
+      [{ value: 'Merged Header', metadata: { style: header.id } }],
+      ['Artist', 'Album', 'Price'],
+      ['Buckethead', 'Albino Slug', 8.99],
+      ['Buckethead', 'Electric Tears', 13.99],
+      ['Buckethead', 'Colma', 11.34],
+      ['Crystal Method', 'Vegas', 10.54],
+      ['Crystal Method', 'Tweekend', 10.64],
+      ['Crystal Method', 'Divided By Night', 8.99],
+    ];
+
+    albumList.setData(originalData);
     albumList.setColumns([{ width: 30 }, { width: 20, hidden: true }, { width: 10 }]);
 
     artistWorkbook.addWorksheet(albumList);

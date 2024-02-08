@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { Table, Workbook } from '../Excel';
+import { Table, Workbook, XMLDOM } from '../Excel';
 import { createWorkbook } from '../factory';
 
 describe('Excel-Builder-Vanilla', () => {
@@ -61,10 +61,42 @@ describe('Excel-Builder-Vanilla', () => {
   test('Columns Sizing with setColumns()', () => {
     const artistWorkbook = new Workbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
+    albumList.mergeCells('A1', 'C1');
+
+    const stylesheet = artistWorkbook.getStyleSheet();
+    const header = stylesheet.createFormat({
+      alignment: {
+        horizontal: 'center',
+      },
+      font: {
+        bold: true,
+        color: 'FF2b995d',
+        size: 13,
+      },
+    });
+
+    const originalData = [
+      [{ value: 'Merged Header', metadata: { style: header.id } }],
+      ['Artist', 'Album', 'Price'],
+      ['Buckethead', 'Albino Slug', 8.99],
+      ['Buckethead', 'Electric Tears', 13.99],
+      ['Buckethead', 'Colma', 11.34],
+      ['Crystal Method', 'Vegas', 10.54],
+      ['Crystal Method', 'Tweekend', 10.64],
+      ['Crystal Method', 'Divided By Night', 8.99],
+    ];
+
     albumList.setData(originalData);
     albumList.setColumns([{ width: 30 }, { width: 20, hidden: true }, { width: 10 }]);
     artistWorkbook.addWorksheet(albumList);
 
+    const wsXML = artistWorkbook.worksheets[0].toXML();
+    expect(wsXML.documentElement.attributes).toEqual({
+      xmlns: 'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+      'xmlns:r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+      'xmlns:mc': 'http://schemas.openxmlformats.org/markup-compatibility/2006',
+    });
+    expect(wsXML.documentElement.children.length).toBe(5);
     expect(artistWorkbook.getStyleSheet()).toEqual({
       id: expect.stringContaining('StyleSheet'),
       borders: [{ bottom: {}, diagonal: {}, left: {}, right: {}, top: {} }],
@@ -72,8 +104,11 @@ describe('Excel-Builder-Vanilla', () => {
       defaultTableStyle: false,
       differentialStyles: [{}],
       fills: [{}, { bgColor: 'FF333333', fgColor: 'FF333333', patternType: 'gray125', type: 'pattern' }],
-      fonts: [{}],
-      masterCellFormats: [{ borderId: 0, fillId: 0, fontId: 0, numFmtId: 0, xfid: 0 }],
+      fonts: [{}, { id: 1, bold: true, color: 'FF2b995d', size: 13 }],
+      masterCellFormats: [
+        { borderId: 0, fillId: 0, fontId: 0, numFmtId: 0, xfid: 0 },
+        { id: 1, alignment: { horizontal: 'center' }, fontId: 1 },
+      ],
       masterCellStyles: [{ borderId: 0, fillId: 0, fontId: 0, numFmtId: 0 }],
       numberFormatters: [],
       tableStyles: [],
@@ -90,6 +125,7 @@ describe('Excel-Builder-Vanilla', () => {
       columnFormats: [],
       columns: [{ width: 30 }, { hidden: true, width: 20 }, { width: 10 }],
       data: [
+        [{ value: 'Merged Header', metadata: { style: 1 } }],
         ['Artist', 'Album', 'Price'],
         ['Buckethead', 'Albino Slug', 8.99],
         ['Buckethead', 'Electric Tears', 13.99],
@@ -98,7 +134,7 @@ describe('Excel-Builder-Vanilla', () => {
         ['Crystal Method', 'Tweekend', 10.64],
         ['Crystal Method', 'Divided By Night', 8.99],
       ],
-      mergedCells: [],
+      mergedCells: [['A1', 'C1']],
       relations: { lastId: 1, relations: {} },
     });
   });
@@ -375,6 +411,21 @@ describe('Excel-Builder-Vanilla', () => {
       mergedCells: [],
       relations: { lastId: 1, relations: {} },
     });
+
+    const wbXML = artistWorkbook.toXML();
+    const wsXML = artistWorkbook.worksheets[0].toXML();
+
+    expect(wbXML.documentElement.children.length).toBe(2);
+    expect(wbXML.documentElement.attributes).toEqual({
+      xmlns: 'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+      'xmlns:r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+    });
+    expect(wsXML.documentElement.children.length).toBe(4);
+    expect(wsXML.documentElement.attributes).toEqual({
+      xmlns: 'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+      'xmlns:r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+      'xmlns:mc': 'http://schemas.openxmlformats.org/markup-compatibility/2006',
+    });
   });
 
   test('Alignment via createFormat()', () => {
@@ -599,6 +650,21 @@ describe('Excel-Builder-Vanilla', () => {
       ],
       mergedCells: [],
       relations: { lastId: 1, relations: {} },
+    });
+
+    const wbXML = artistWorkbook.toXML();
+    const wsXML = artistWorkbook.worksheets[0].toXML();
+
+    expect(wbXML.documentElement.children.length).toBe(2);
+    expect(wbXML.documentElement.attributes).toEqual({
+      xmlns: 'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+      'xmlns:r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+    });
+    expect(wsXML.documentElement.children.length).toBe(4);
+    expect(wsXML.documentElement.attributes).toEqual({
+      xmlns: 'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+      'xmlns:r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+      'xmlns:mc': 'http://schemas.openxmlformats.org/markup-compatibility/2006',
     });
   });
 
@@ -944,5 +1010,45 @@ describe('Excel-Builder-Vanilla', () => {
       mergedCells: [],
       relations: { lastId: 1, relations: {} },
     });
+
+    const wbXML = artistWorkbook.toXML();
+    const wsXML = artistWorkbook.worksheets[0].toXML();
+
+    expect(wbXML.documentElement.children.length).toBe(2);
+    expect(wbXML.documentElement.attributes).toEqual({
+      xmlns: 'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+      'xmlns:r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+    });
+    expect(wsXML.documentElement.children.length).toBe(5);
+    expect(wsXML.documentElement.attributes).toEqual({
+      xmlns: 'http://schemas.openxmlformats.org/spreadsheetml/2006/main',
+      'xmlns:r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
+      'xmlns:mc': 'http://schemas.openxmlformats.org/markup-compatibility/2006',
+    });
+  });
+
+  test('Margins', () => {
+    const originalData = [
+      ['Artist', 'Album', 'Price'],
+      ['Buckethead', 'Albino Slug', 8.99],
+      ['Buckethead', 'Electric Tears', 13.99],
+      ['Buckethead', 'Colma', 11.34],
+      ['Crystal Method', 'Vegas', 10.54],
+      ['Crystal Method', 'Tweekend', 10.64],
+      ['Crystal Method', 'Divided By Night', 8.99],
+    ];
+
+    const artistWorkbook = createWorkbook();
+    const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
+
+    albumList.setData(originalData);
+    artistWorkbook.addWorksheet(albumList);
+    //
+    artistWorkbook.worksheets[0].setPageMargin({ bottom: 120, footer: 21, header: 22, left: 0, right: 33, top: 8 });
+    const wsXML = artistWorkbook.worksheets[0].toXML();
+
+    const xmlNode = new XMLDOM('something', 'root');
+    artistWorkbook.worksheets[0].exportPageSettings(xmlNode, wsXML.documentElement.firstChild!);
+    expect(artistWorkbook.worksheets[0]._margin).toEqual({ bottom: 120, footer: 21, header: 22, left: 0, right: 33, top: 8 });
   });
 });

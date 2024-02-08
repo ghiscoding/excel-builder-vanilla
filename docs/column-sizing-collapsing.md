@@ -9,7 +9,24 @@ The method you're looking for is 'setColumns', which takes in an array of column
 ```ts
 import { ExcelBuilder } from 'excel-builder-vanilla';
 
+const artistWorkbook = createWorkbook();
+const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
+albumList.mergeCells('A1', 'C1');
+
+const stylesheet = artistWorkbook.getStyleSheet();
+const header = stylesheet.createFormat({
+  alignment: {
+    horizontal: 'center',
+  },
+  font: {
+    bold: true,
+    color: 'FF2b995d',
+    size: 13,
+  },
+});
+
 const originalData = [
+  [{ value: 'Centered Header', metadata: { style: header.id } }],
   ['Artist', 'Album', 'Price'],
   ['Buckethead', 'Albino Slug', 8.99],
   ['Buckethead', 'Electric Tears', 13.99],
@@ -18,9 +35,6 @@ const originalData = [
   ['Crystal Method', 'Tweekend', 10.64],
   ['Crystal Method', 'Divided By Night', 8.99],
 ];
-
-const artistWorkbook = createWorkbook();
-const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
 
 albumList.setData(originalData);
 albumList.setColumns([{ width: 30 }, { width: 20, hidden: true }, { width: 10 }]);

@@ -29,7 +29,7 @@ export class Worksheet {
   relations: any = null;
   columnFormats: ExcelColumnFormat[] = [];
   data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][] = [];
-  mergedCells: string[][][] = [];
+  mergedCells: string[][] = [];
   columns: ExcelColumn[] = [];
   sheetProtection: any = false;
   _headers: [left?: any, center?: any, right?: any] = [];
@@ -605,7 +605,7 @@ export class Worksheet {
    * @param cell1 - A1, A2...
    * @param cell2 - A2, A3...
    */
-  mergeCells(cell1: string[], cell2: string[]) {
+  mergeCells(cell1: string, cell2: string) {
     this.mergedCells.push([cell1, cell2]);
   }
 
