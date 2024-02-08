@@ -1,9 +1,7 @@
-import { strFromU8, zip } from 'fflate';
-import { beforeEach, describe, expect, it, test, vi } from 'vitest';
+import { strFromU8 } from 'fflate';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createExcelFile, createWorkbook } from '../factory';
-
-// vi.mock('fflate');
+import { createExcelFile, createWorkbook, downloadExcelFile } from '../factory';
 
 describe('ExcelExportService', () => {
   let mockExcelBlob: Blob;
@@ -11,8 +9,7 @@ describe('ExcelExportService', () => {
 
   describe('with Translater Service', () => {
     beforeEach(() => {
-      // (navigator as any).__defineGetter__('appName', () => 'Netscape');
-      // (navigator as any).msSaveOrOpenBlob = undefined as any;
+      (navigator as any).__defineGetter__('appName', () => 'Netscape');
       mockExcelBlob = new Blob(['', ''], { type: 'text/xlsx;charset=utf-8;' });
       uint = new Uint8Array([21, 31]);
     });
@@ -35,6 +32,28 @@ describe('ExcelExportService', () => {
         expect(file).toBeTruthy();
         expect(file instanceof Uint8Array).toBeTruthy();
         expect(output).includes('workbook.xml');
+      });
+    });
+
+    describe('downloadExcelFile() method', () => {
+      it('should be able to download Excel file via browser', async () => {
+        const createUrlSpy = vi.spyOn(URL, 'createObjectURL');
+        const revokeUrlSpy = vi.spyOn(URL, 'createObjectURL');
+        const anchorSpy = vi.spyOn(document, 'createElement');
+
+        const workbook = createWorkbook();
+        await downloadExcelFile(workbook, 'export.xlsx');
+
+        expect(anchorSpy).toHaveBeenCalled();
+        expect(createUrlSpy).toHaveBeenCalled();
+        expect(revokeUrlSpy).toHaveBeenCalled();
+      });
+
+      it('throws when trying different downloadType other than browser', async () => {
+        const workbook = createWorkbook();
+        const promise = downloadExcelFile(workbook, 'export.xlsx', 'node');
+
+        await expect(promise).rejects.toThrow();
       });
     });
   });

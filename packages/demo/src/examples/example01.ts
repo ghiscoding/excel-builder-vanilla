@@ -1,6 +1,6 @@
-import { Workbook, createExcelFile } from 'excel-builder-vanilla';
+import { Workbook, downloadExcelFile } from 'excel-builder-vanilla';
 
-import { buildHtmlTable, downloader } from './demoUtils';
+import { buildHtmlTable } from './demoUtils';
 import './example01.scss';
 
 export default class Example {
@@ -34,14 +34,6 @@ export default class Example {
     albumList.setData(this.originalData);
     artistWorkbook.addWorksheet(albumList);
 
-    createExcelFile(artistWorkbook).then(excelBlob => {
-      const downloadOptions = {
-        filename: 'Artist WB.xlsx',
-        format: 'xlsx',
-      };
-
-      // start downloading but add the Blob property only on the start download not on the event itself
-      downloader({ ...downloadOptions, blob: excelBlob, data: albumList.data });
-    });
+    downloadExcelFile(artistWorkbook, 'Artist WB.xlsx');
   }
 }
