@@ -28,15 +28,15 @@
 
     <div style="background: #f7f7f7; padding: 10px">
       <pre>
-&lt;!-- (IIFE Standalone Script <span style="color:#d63384">type=&quot;module&quot;</span>) Latest compiled and minified JavaScript --&gt;
+&lt;!-- (IIFE Standalone Script) Latest compiled and minified JavaScript --&gt;
 &lt;script type=&quot;module&quot; src=&quot;<span style="color:#880000">https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.iife.js</span>&quot;&gt;&lt;/script&gt;
 
-&lt;!-- (UMD Files <span style="color:#d63384">.cjs</span> extension) Latest compiled and minified JavaScript --&gt;
-&lt;script src=&quot;<span style="color:#880000">https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.umd.js</span>&quot;&gt;&lt;/script&gt;</pre>
+&lt;!-- (CJS Files <span style="color:#d63384">.cjs</span> extension) Latest compiled and minified JavaScript --&gt;
+&lt;script src=&quot;<span style="color:#880000">https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.cjs</span>&quot;&gt;&lt;/script&gt;</pre>
     </div>
 
     <quote>
-      <b>Note:</b> the <code>excel-builder.iife.js</code> is the only one providing the <code>ExcelBuilder</code> on the
+      <b>Note:</b> the <code>excel-builder.iife.js</code> is the only dist bundle providing the <code>ExcelBuilder</code> on the
       <code>window</code> object.
     </quote>
     <br />
@@ -63,12 +63,15 @@
   <div style="background: #f7f7f7; padding: 10px">
     <pre>
 // CommonJS
-const { excelBuilder } = require('excel-builder-vanilla');
-excelBuilder('.excel-builder', {/*...*/});
+const { createWorkbook, Workbook } = require('excel-builder-vanilla');
 
 // ESM
-import { excelBuilder } from 'excel-builder-vanilla';
-excelBuilder('.excel-builder', {/*...*/});
-    </pre>
+import { createWorkbook } from 'excel-builder-vanilla';
+
+// use it
+const artistWorkbook = createWorkbook(); // or new Workbook();
+const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
+albumList.setData(this.originalData);
+</pre>
   </div>
 </div>
