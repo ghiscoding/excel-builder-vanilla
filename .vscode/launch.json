@@ -5,19 +5,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Edge",
-      "request": "launch",
-      "type": "msedge",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}"
-    },
-    {
       "name": "Vite - Edge Debugger",
-      "type": "msedge",
       "request": "launch",
+      "type": "msedge",
       "sourceMaps": true,
-      "trace": false,
-      "url": "http://localhost:3000"
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/packages/demo",
+      "pathMapping": {
+        "/@fs/": ""
+      }
     },
     {
       "type": "node",
