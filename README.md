@@ -9,21 +9,29 @@
 [![npm](https://img.shields.io/npm/v/excel-builder-vanilla.svg?logo=npm&logoColor=fff&label=npm)](https://www.npmjs.com/package/excel-builder-vanilla)
 [![Actions Status](https://github.com/ghiscoding/excel-builder-vanilla/actions/workflows/main.yml/badge.svg)](https://github.com/ghiscoding/excel-builder-vanilla/actions)
 
-## Live Demo
-
-We also have a new [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) for displaying all available options/methods. You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
-
 ## Documentation
 
 📘 [Documentation](https://ghiscoding.gitbook.io/excel-builder-vanilla/) website powered by GitBook
 
 ## Description
 
-Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). This fork was based on its latest known version and the main goal was to modernize the project. We migrated the project to TypeScript, dropped the `Q` and `Lodash` dependencies (we now use native code) and finally replaced `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build with Tree Shaking and also offers better performance.
+This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities.
 
-This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capability.
+## Live Demo
 
-To get started take a look at the [Live demo](https://ghiscoding.github.io/excel-builder-vanilla/) for all available options and methods that the library offers.
+Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers.<br>
+You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
+
+## Project History
+Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal in creating this fork was to modernize the project by removing dependencies that are no longer necessary and replace JSZip by `fflate` which provides an ESM build giving us Tree Shaking. Also, the other goal was to provide an ESM bundle to slowly get away from CommonJS (CJS bundle is offered but we strongly suggest you migrate to the ESM approach)
+
+The modernization steps:
+- migrate to TypeScript (giving us Types `d.ts`)
+- drop `Q` dependency (we simply use native `Promise`)
+- drop `Lodash` dependency (we now use native JS code)
+- replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build offers better performance.
+
+This modernization should also provide a huge decrease in the final build size and possibly offer better performance 🚀
 
 ## Installation
 
@@ -31,10 +39,21 @@ To get started take a look at the [Live demo](https://ghiscoding.github.io/excel
 npm install excel-builder-vanilla
 ```
 
-The project offers 3 different bundle, choose the best for your use case
+The project offers 3 different bundle types, choose the best for your use case
 1. ESM: to `import from` (prefered)
-2. CJS: CommonJS to support old Node `require()`
-3. IIFE: standalone `<script>` with `ExcelBuilder` available on the `window` object
+2. CJS: CommonJS to support old Node `require()`... might be removed in the future
+3. IIFE: standalone script with `ExcelBuilder` available on the `window` object
+  
+```ts
+// ESM - npm install
+import { createWorksheet } from 'excel-builder-vanilla';
+
+// CJS - npm install
+const { createWorksheet } = require('excel-builder-vanilla');
+
+// IIFE - CDN
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.cjs"></script>
+```
 
 ## Changelog
 
