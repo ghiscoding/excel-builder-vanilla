@@ -5,7 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Vite - Edge Debugger",
+      "name": "Chrome Debugger",
+      "request": "launch",
+      "type": "chrome",
+      "sourceMaps": true,
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/packages/demo",
+      "pathMapping": {
+        "/@fs/": ""
+      }
+    },
+    {
+      "name": "MS Edge Debugger",
       "request": "launch",
       "type": "msedge",
       "sourceMaps": true,
