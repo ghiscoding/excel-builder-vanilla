@@ -27,6 +27,11 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       external: ['fflate'],
+      output: {
+        globals: {
+          fflate: 'fflate',
+        },
+      },
     },
   },
   plugins: [
