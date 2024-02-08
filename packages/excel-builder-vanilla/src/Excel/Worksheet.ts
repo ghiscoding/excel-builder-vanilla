@@ -29,7 +29,7 @@ export class Worksheet {
   relations: any = null;
   columnFormats: ExcelColumnFormat[] = [];
   data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][] = [];
-  mergedCells: string[][][] = [];
+  mergedCells: string[][] = [];
   columns: ExcelColumn[] = [];
   sheetProtection: any = false;
   _headers: [left?: any, center?: any, right?: any] = [];
@@ -443,7 +443,8 @@ export class Worksheet {
       const mergeCells = doc.createElement('mergeCells');
       for (i = 0, l = this.mergedCells.length; i < l; i++) {
         const mergeCell = doc.createElement('mergeCell');
-        mergeCell.setAttribute('ref', `${this.mergedCells[i][0]}:${this.mergedCells[i][1]}`);
+        const mergingCells = `${this.mergedCells[i][0]}:${this.mergedCells[i][1]}`;
+        mergeCell.setAttribute('ref', mergingCells);
         mergeCells.appendChild(mergeCell);
       }
       worksheet.appendChild(mergeCells);
@@ -605,7 +606,7 @@ export class Worksheet {
    * @param cell1 - A1, A2...
    * @param cell2 - A2, A3...
    */
-  mergeCells(cell1: string[], cell2: string[]) {
+  mergeCells(cell1: string, cell2: string) {
     this.mergedCells.push([cell1, cell2]);
   }
 

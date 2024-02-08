@@ -29,5 +29,13 @@ export default defineConfig({
       external: ['fflate'],
     },
   },
-  plugins: [dts({ include: ['src'] })],
+  plugins: [
+    dts({
+      include: ['src'],
+      compilerOptions: {
+        declaration: true,
+        declarationMap: true,
+      },
+    }),
+  ],
 });
