@@ -443,8 +443,7 @@ export class Worksheet {
       const mergeCells = doc.createElement('mergeCells');
       for (i = 0, l = this.mergedCells.length; i < l; i++) {
         const mergeCell = doc.createElement('mergeCell');
-        const mergingCells = `${this.mergedCells[i][0]}:${this.mergedCells[i][1]}`;
-        mergeCell.setAttribute('ref', mergingCells);
+        mergeCell.setAttribute('ref', `${this.mergedCells[i][0]}:${this.mergedCells[i][1]}`);
         mergeCells.appendChild(mergeCell);
       }
       worksheet.appendChild(mergeCells);
@@ -606,8 +605,8 @@ export class Worksheet {
    * @param cell1 - A1, A2...
    * @param cell2 - A2, A3...
    */
-  mergeCells(cell1: string, cell2: string) {
-    this.mergedCells.push([cell1, cell2]);
+  mergeCells(cell1: string | string[], cell2: string | string[]) {
+    this.mergedCells.push([cell1, cell2] as string[]);
   }
 
   /**
