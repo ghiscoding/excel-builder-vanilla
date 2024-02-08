@@ -34,7 +34,7 @@ export class Picture extends Drawing {
     Object.assign(this.fill, config);
   }
 
-  getMediaType() {
+  getMediaType(): keyof typeof Util.schemas {
     return 'image';
   }
 

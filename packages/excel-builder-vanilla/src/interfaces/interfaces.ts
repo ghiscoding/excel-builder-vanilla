@@ -14,7 +14,8 @@ export interface ExcelAlignmentStyle {
   vertical?: 'bottom' | 'distributed' | 'center' | 'justify' | 'top';
   wrapText?: boolean;
 }
-export type ExcelBorderLine =
+
+export type ExcelBorderLineStyle =
   | 'continuous'
   | 'dash'
   | 'dashDot'
@@ -26,17 +27,40 @@ export type ExcelBorderLine =
   | 'slantDashDot'
   | 'thin'
   | 'thick';
+
 export interface ExcelBorderStyle {
-  bottom?: { color?: ExcelColorStyle; style?: ExcelBorderLine };
-  top?: { color?: ExcelColorStyle; style?: ExcelBorderLine };
-  left?: { color?: ExcelColorStyle; style?: ExcelBorderLine };
-  right?: { color?: ExcelColorStyle; style?: ExcelBorderLine };
+  bottom?: { color?: ExcelColorStyle; style?: ExcelBorderLineStyle };
+  top?: { color?: ExcelColorStyle; style?: ExcelBorderLineStyle };
+  left?: { color?: ExcelColorStyle; style?: ExcelBorderLineStyle };
+  right?: { color?: ExcelColorStyle; style?: ExcelBorderLineStyle };
   diagonal?: any;
   outline?: boolean;
   diagonalUp?: boolean;
   diagonalDown?: boolean;
 }
+
 export interface ExcelColumn {
+  bestFit?: boolean;
+  customWidth?: number;
+  hidden?: boolean;
+  min?: number;
+  max?: number;
+  width?: number;
+}
+
+export type ExcelColumnFormat =
+  | 'bestFit'
+  | 'collapsed'
+  | 'customWidth'
+  | 'hidden'
+  | 'max'
+  | 'min'
+  | 'outlineLevel'
+  | 'phonetic'
+  | 'style'
+  | 'width';
+
+export interface ExcelTableColumn {
   name: string;
   dataCellStyle?: any;
   dataDxfId?: number;
@@ -46,11 +70,12 @@ export interface ExcelColumn {
   totalsRowDxfId?: number;
   totalsRowFunction?: any;
   totalsRowLabel?: string;
-  columnFormula?: any;
+  columnFormula?: string;
   columnFormulaIsArrayType?: boolean;
-  totalFormula?: any;
+  totalFormula?: string;
   totalFormulaIsArrayType?: boolean;
 }
+
 export interface ExcelFillStyle {
   type?: 'gradient' | 'pattern';
   patternType?: string;
@@ -59,6 +84,7 @@ export interface ExcelFillStyle {
   start?: ExcelColorStyle;
   end?: { pureAt?: number; color?: ExcelColorStyle };
 }
+
 export interface ExcelFontStyle {
   bold?: boolean;
   color?: ExcelColorStyle;
@@ -73,12 +99,44 @@ export interface ExcelFontStyle {
   underline?: boolean | 'single' | 'double' | 'singleAccounting' | 'doubleAccounting';
 }
 
+type ExcelMetadataType =
+  | 'general'
+  | 'number'
+  | 'currency'
+  | 'accounting'
+  | 'date'
+  | 'time'
+  | 'percentage'
+  | 'formula'
+  | 'fraction'
+  | 'scientific'
+  | 'text'
+  | 'special'
+  | 'custom';
+
+export interface ExcelColumnMetadata {
+  value: any;
+  metadata?: {
+    type?: string;
+    style?: number;
+  };
+}
+
+export interface ExcelMargin {
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+  header: number;
+  footer: number;
+}
+
 export interface ExcelSortState {
   caseSensitive?: boolean;
   dataRange?: any;
   /* assumes true */
   columnSort?: boolean;
-  sortDirection?: any;
+  sortDirection?: 'ascending' | 'descending';
   /* defaults to dataRange */
   sortRange?: any;
 }

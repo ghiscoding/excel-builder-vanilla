@@ -20,7 +20,7 @@ export class Pane {
   ySplit: number | null = null;
   activePane = 'bottomRight';
   topLeftCell: number | string | null = null;
-  _freezePane: any;
+  _freezePane!: { xSplit: number; ySplit: number; cell: number };
 
   freezePane(column: number, row: number, cell: number) {
     this._freezePane = { xSplit: column, ySplit: row, cell };

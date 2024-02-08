@@ -9,7 +9,7 @@ import type { XMLDOM } from './XMLDOM';
  */
 export class SheetView {
   pane: Pane;
-  showZeros = null; //Default
+  showZeros = null; // Default
   defaultGridColor = null;
   colorId = null;
   rightToLeft = null;
@@ -21,7 +21,7 @@ export class SheetView {
   showWhiteSpace = null;
   tabSelected = null;
   topLeftCell = null;
-  viewType = null; //http://www.datypic.com/sc/ooxml/t-ssml_ST_SheetViewType.html
+  viewType = null; // http://www.datypic.com/sc/ooxml/t-ssml_ST_SheetViewType.html
   windowProtection = null;
   zoomScale = null;
   zoomScaleNormal = null;

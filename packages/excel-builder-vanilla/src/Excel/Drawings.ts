@@ -1,4 +1,6 @@
 import { uniqueId } from '../utilities';
+import type { Drawing } from './Drawing/Drawing';
+import type { Picture } from './Drawing/Picture';
 import { RelationshipManager } from './RelationshipManager';
 import { Util } from './Util';
 
@@ -7,7 +9,7 @@ import { Util } from './Util';
  */
 
 export class Drawings {
-  drawings: any[] = [];
+  drawings: (Drawing | Picture)[] = [];
   relations = new RelationshipManager();
   id = uniqueId('Drawings');
 
@@ -17,7 +19,7 @@ export class Drawings {
    * @param {Drawing} drawing
    * @returns {undefined}
    */
-  addDrawing(drawing: any) {
+  addDrawing(drawing: Drawing) {
     this.drawings.push(drawing);
   }
 
@@ -33,12 +35,12 @@ export class Drawings {
     drawings.setAttribute('xmlns:xdr', Util.schemas.spreadsheetDrawing);
 
     for (let i = 0, l = this.drawings.length; i < l; i++) {
-      let rId = this.relations.getRelationshipId(this.drawings[i].getMediaData());
+      let rId = this.relations.getRelationshipId((this.drawings[i] as Picture).getMediaData());
       if (!rId) {
-        rId = this.relations.addRelation(this.drawings[i].getMediaData(), this.drawings[i].getMediaType()); //chart
+        rId = this.relations.addRelation((this.drawings[i] as Picture).getMediaData(), (this.drawings[i] as Picture).getMediaType()); //chart
       }
-      this.drawings[i].setRelationshipId(rId);
-      drawings.appendChild(this.drawings[i].toXML(doc));
+      (this.drawings[i] as Picture).setRelationshipId(rId);
+      drawings.appendChild((this.drawings[i] as Picture).toXML(doc));
     }
     return doc;
   }
