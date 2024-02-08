@@ -7,7 +7,7 @@
     "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["es2021", "dom"],
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

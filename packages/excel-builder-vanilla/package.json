@@ -55,7 +55,7 @@
     "fflate": "^0.8.1"
   },
   "devDependencies": {
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.0-beta",
     "vite": "^5.0.12",
     "vite-plugin-dts": "^3.7.2"
   }
