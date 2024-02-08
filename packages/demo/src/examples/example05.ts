@@ -1,6 +1,5 @@
-import { createExcelFile, createWorkbook } from 'excel-builder-vanilla';
+import { createWorkbook, downloadExcelFile } from 'excel-builder-vanilla';
 
-import { downloader } from './demoUtils';
 import './example05.scss';
 
 export default class Example {
@@ -74,14 +73,6 @@ export default class Example {
     albumList.setColumns([{ width: 15 }, { width: 15 }, { width: 15 }, { width: 15 }]);
     artistWorkbook.addWorksheet(albumList);
 
-    createExcelFile(artistWorkbook).then(excelBlob => {
-      const downloadOptions = {
-        filename: 'Artist WB.xlsx',
-        format: 'xlsx',
-      };
-
-      // start downloading but add the Blob property only on the start download not on the event itself
-      downloader({ ...downloadOptions, blob: excelBlob, data: albumList.data });
-    });
+    downloadExcelFile(artistWorkbook, 'Artist WB.xlsx');
   }
 }

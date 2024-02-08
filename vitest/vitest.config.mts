@@ -7,10 +7,8 @@ export default defineConfig({
     deps: {
       interopDefault: false,
     },
-    environment: 'node',
-    dangerouslyIgnoreUnhandledErrors: true, // useNx often fails and it's probably going to be removed in next major
-    testTimeout: 60000,
-    setupFiles: [],
+    environment: 'happy-dom',
+    setupFiles: ['./vitest/vitest-pretest.ts'],
     watch: false,
     coverage: {
       include: ['packages/excel-builder-vanilla/**/*.ts'],
