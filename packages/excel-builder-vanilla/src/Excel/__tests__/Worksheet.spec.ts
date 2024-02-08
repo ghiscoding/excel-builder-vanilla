@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Worksheet } from '../Worksheet';
+import { XMLDOM, XMLNode } from '../XMLDOM';
 
 describe('Excel/Worksheet', () => {
   describe('compilePageDetailPiece', () => {
@@ -36,6 +37,29 @@ describe('Excel/Worksheet', () => {
       const text = Worksheet.prototype.compilePageDetailPiece(io);
       const expected = '&"Arial,Regular"Hello there&"-,Regular" - on &"-,Regular"&U5/7/9';
       expect(text).toEqual(expected);
+    });
+  });
+
+  describe('setPageMargin() method', () => {
+    it('should call exportPageSettings() and expect updated margins', () => {
+      const ws = new Worksheet({ name: 'worksheet1' });
+
+      ws.setPageMargin({ bottom: 120, footer: 21, header: 22, left: 0, right: 33, top: 8 });
+
+      const xmlDom = new XMLDOM('something', 'root');
+      const xmlNode = new XMLNode({ nodeName: 'some name' });
+      ws.exportPageSettings(xmlDom, xmlNode);
+      expect(ws._margin).toEqual({ bottom: 120, footer: 21, header: 22, left: 0, right: 33, top: 8 });
+    });
+  });
+
+  describe('Orientation', () => {
+    it('should call setPageOrientation() and expect updated margins', () => {
+      const ws = new Worksheet({ name: 'worksheet1' });
+
+      ws.setPageOrientation('landscape');
+
+      expect(ws._orientation).toBe('landscape');
     });
   });
 });

@@ -2,6 +2,10 @@ import { Pane } from './Pane';
 import { Util } from './Util';
 import type { XMLDOM } from './XMLDOM';
 
+interface SheetViewOption {
+  pane?: Pane;
+}
+
 /**
  * @module Excel/SheetView
  * https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheetview%28v=office.14%29.aspx
@@ -28,7 +32,7 @@ export class SheetView {
   zoomScalePageLayoutView = null;
   zoomScaleSheetLayoutView = null;
 
-  constructor(config?: any) {
+  constructor(config?: SheetViewOption) {
     const conf = config || {};
     this.pane = conf.pane || new Pane();
   }
@@ -40,7 +44,7 @@ export class SheetView {
    * @param cell - 'A1'
    * @deprecated
    */
-  freezePane(column: number, row: number, cell: number | string) {
+  freezePane(column: number, row: number, cell: string) {
     this.pane.state = 'frozen';
     this.pane.xSplit = column;
     this.pane.ySplit = row;

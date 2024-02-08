@@ -16,6 +16,11 @@ interface CharType {
   underline?: boolean;
 }
 
+interface WorksheetOption {
+  name?: string;
+  sheetView?: SheetView;
+}
+
 /**
  * This module represents an excel worksheet in its basic form - no tables, charts, etc. Its purpose is
  * to hold data, the data's link to how it should be styled, and any links to other outside resources.
@@ -39,7 +44,7 @@ export class Worksheet {
   _orientation?: string;
   _margin?: ExcelMargin;
   _rowInstructions: any = {};
-  _freezePane: { xSplit?: number; ySplit?: number; cell?: number } = {};
+  _freezePane: { xSplit?: number; ySplit?: number; cell?: string } = {};
   sharedStrings: SharedStrings | null = null;
 
   hyperlinks = [];
@@ -47,7 +52,7 @@ export class Worksheet {
 
   showZeros: any = null;
 
-  constructor(config: any) {
+  constructor(config: WorksheetOption) {
     this._timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
     this.sheetView = config.sheetView || new SheetView();
 
@@ -555,10 +560,10 @@ export class Worksheet {
    *
    * Can be one of 'portrait' or 'landscape'.
    *
-   * @param {String} orientation
+   * @param {'default' | 'portrait' | 'landscape'} orientation
    * @returns {undefined}
    */
-  setPageOrientation(orientation: string) {
+  setPageOrientation(orientation: 'default' | 'portrait' | 'landscape') {
     this._orientation = orientation;
   }
 
@@ -610,13 +615,13 @@ export class Worksheet {
   }
 
   /**
-   * Added froze pane
+   * Added frozen pane
    * @param column - column number: 0, 1, 2 ...
    * @param row - row number: 0, 1, 2 ...
    * @param cell - 'A1'
    * @deprecated
    */
-  freezePane(column: number, row: number, cell: number) {
+  freezePane(column: number, row: number, cell: string) {
     this.sheetView.freezePane(column, row, cell);
   }
 
