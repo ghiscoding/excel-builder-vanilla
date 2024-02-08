@@ -1,8 +1,12 @@
 # Excel-Builder-Vanilla
 
+## Documentation
+
+📘 [Documentation](https://ghiscoding.gitbook.io/excel-builder-vanilla/) website powered by GitBook
+
 ## Live Demo
 
-Available [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) for displaying all available options/methods.
+Available [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) which displays all available options/methods.
 
 ## Installation
 
@@ -10,10 +14,21 @@ Available [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) f
 npm install excel-builder-vanilla
 ```
 
-The project offers 3 different bundle, choose the best for your use case
+The project offers 3 different bundle types, choose the best for your use case
 1. ESM: to `import from` (prefered)
-2. CJS: CommonJS to support old Node `require()`
-3. IIFE: standalone `<script>` with `ExcelBuilder` available on the `window` object
+2. CJS: CommonJS to support old Node `require()`... might be removed in the future
+3. IIFE: standalone script with `ExcelBuilder` available on the `window` object
+  
+```ts
+// ESM - npm install
+import { createWorksheet } from 'excel-builder-vanilla';
+
+// CJS - npm install
+const { createWorksheet } = require('excel-builder-vanilla');
+
+// IIFE - CDN
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.cjs"></script>
+```
 
 ## Changelog
 
