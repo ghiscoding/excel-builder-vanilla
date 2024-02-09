@@ -16,9 +16,9 @@
     "font-awesome": "^4.7.0"
   },
   "devDependencies": {
-    "fflate": "0.8.0",
+    "fflate": "0.8.2",
     "sass": "^1.70.0",
     "typescript": "^5.4.0-beta",
-    "vite": "^5.0.12"
+    "vite": "^5.1.0"
   }
 }
