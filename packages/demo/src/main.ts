@@ -6,7 +6,7 @@ import { exampleRouting, navbarRouting } from './app-routing';
 import mainHtml from './main.html?raw';
 import './style.scss';
 
-const pageLayoutGlobs = import.meta.glob('/src/./**/*.html', { as: 'raw', eager: true });
+const pageLayoutGlobs = import.meta.glob('/src/./**/*.html', { query: '?raw', eager: true, import: 'default' });
 
 interface ViewRouter {
   name: string;
@@ -128,7 +128,7 @@ class Main {
     if (foundRouter?.view) {
       this.currentRouter = foundRouter;
       // const html = await import(/*@vite-ignore*/ `${foundRouter.view}?raw`).default;
-      document.querySelector('.panel-wm-content')!.innerHTML = pageLayoutGlobs[foundRouter.view];
+      document.querySelector('.panel-wm-content')!.innerHTML = pageLayoutGlobs[foundRouter.view] as string;
       const vm = new foundRouter.viewModel() as ViewModel;
       this.currentModel = vm;
       (window as any)[foundRouter.name] = vm.mount?.();
