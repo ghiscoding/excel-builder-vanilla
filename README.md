@@ -30,6 +30,8 @@ The modernization steps:
 - drop `Q` dependency (we simply use native `Promise`)
 - drop `Lodash` dependency (we now use native JS code)
 - replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build offers better performance.
+- bump version to `v3.0.0` with a `major` release (_the original project version was in the `2.x` range._)
+  - note: the changelog did not exists before `v3.0.0`
 
 This modernization is providing a huge decrease in the final build size and is offering better performance 🚀
 
