@@ -7,4 +7,7 @@ export default defineConfig({
     cors: true,
     host: 'localhost',
   },
+  optimizeDeps: {
+    exclude: ['excel-builder-vanilla'],
+  },
 });
