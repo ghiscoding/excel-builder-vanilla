@@ -12,16 +12,21 @@ export function createWorkbook() {
 }
 
 /**
- * Turns a workbook into a downloadable file.
+ * Turns a workbook into a downloadable file, you can between a 'Blob' or 'Uint8Array',
+ * and if nothing is provided then 'Blob' will be the default
  * @param {Excel/Workbook} workbook - The workbook that is being converted
- * @param {'Uint8Array' | 'Blob'} outputType - defaults to 'Blob'
- * @param {Object} options - fflate options to modify how the zip is created.
+ * @param {'Uint8Array' | 'Blob'} [outputType='Blob'] - defaults to 'Blob'
+ * @param {Object} [options]
+ *   - `fileFormat` defaults to "xlsx"
+ *   - `mimeType`: a mime type can be provided by the user or auto-detect the mime when undefined (by file extension .xls/.xlsx)
+ *      (user can pass an empty string to completely cancel the mime type altogether)
+ *   - `zipOptions` to specify any `fflate` options to modify how the zip is created.
  * @returns {Promise}
  */
 export function createExcelFile<T extends 'Blob' | 'Uint8Array' = 'Blob'>(
   workbook: Workbook,
   outputType?: T,
-  options?: ZipOptions,
+  options?: { fileFormat?: 'xls' | 'xlsx'; mimeType?: string; zipOptions?: ZipOptions },
 ): Promise<InferOutputByType<T>> {
   const zipObj: { [name: string]: Uint8Array } = {};
 
@@ -31,26 +36,23 @@ export function createExcelFile<T extends 'Blob' | 'Uint8Array' = 'Blob'>(
         zipObj[path.substr(1)] = strToU8(content);
       }
 
-      switch (outputType) {
-        case 'Uint8Array':
-          return zip(zipObj, options || {}, (err, data) => {
-            if (err) {
-              reject(err);
-              return;
-            }
-            resolve(data as InferOutputByType<T>);
-          });
-        // biome-ignore lint: prefering to be explicit
-        case 'Blob':
-        default:
-          return zip(zipObj, options || {}, (err, data) => {
-            if (err) {
-              reject(err);
-              return;
-            }
-            resolve(new Blob([data], { type: 'base64' }) as InferOutputByType<T>);
-          });
-      }
+      return zip(zipObj, options?.zipOptions || {}, (err, data) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+
+        if (outputType === 'Uint8Array') {
+          resolve(data as InferOutputByType<T>);
+        } else {
+          const format = options?.fileFormat ?? 'xlsx';
+          let mimeType = options?.mimeType;
+          if (mimeType === undefined) {
+            mimeType = format === 'xls' ? 'application/vnd.ms-excel' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+          }
+          resolve(new Blob([data], { type: mimeType }) as InferOutputByType<T>);
+        }
+      });
     });
   });
 }
@@ -58,45 +60,59 @@ export function createExcelFile<T extends 'Blob' | 'Uint8Array' = 'Blob'>(
 /**
  * Download Excel file, currently only supports a "browser" as `downloadType`
  * but it could be expended in the future to also other type of platform like NodeJS for example.
- * @param options
+ * @param {Workbook} workbook
+ * @param {String} filename - filename (must also include file extension, xls/xlsx)
+ * @param {Object} [options]
+ *   - `downloadType`: download type (browser/node), currently only a "browser" download as a Blob
+ *   - `mimeType`: a mime type can be provided by the user or auto-detect the mime when undefined (by file extension .xls/.xlsx)
+ *      (user can pass an empty string to completely cancel the mime type altogether)
+ *   - `zipOptions` to specify any `fflate` options to modify how the zip is created.
  */
-export function downloadExcelFile(workbook: Workbook, filename: string, downloadType: 'browser' | 'node' = 'browser') {
+export function downloadExcelFile(
+  workbook: Workbook,
+  filename: string,
+  options?: { downloadType?: 'browser' | 'node'; mimeType?: string; zipOptions?: ZipOptions },
+) {
+  if (options?.downloadType === 'node') {
+    throw new Error(
+      '[Excel-Builder-Vanilla] Please note that `downloadExcelFile()` is currently only supporting the "browser" download type at the moment.',
+    );
+  }
+
   // start downloading but add the Blob property only on the download start instead of the event itself
   // Note: we call the Promise with `.then()` for perf reason since `fflate.zip` can use Web Worker but `fflate.zipAsync` cannot
-  return createExcelFile(workbook).then(excelBlob => {
-    downloadFile(filename, excelBlob, downloadType);
+  const fileFormat = filename.match(/.*\.xls$/) ? 'xls' : 'xlsx';
+  return createExcelFile(workbook, 'Blob', { ...options, fileFormat }).then(excelBlob => {
+    downloadFileToBrowser(filename, excelBlob);
   });
 }
 
 /**
  * Download Excel file, currently only supports a "browser" as `downloadType`,
  * but it could probably be expended to support other platform in the future like NodeJS for example.
- * @param options
+ * @param {String} filename - filename (must also include file extension, xls/xlsx)
+ * @param {Blob} data - compressed data object
  */
-function downloadFile(filename: string, data: Blob, downloadType: 'browser' | 'node' = 'browser') {
-  if (downloadType === 'browser') {
-    // this trick will generate a temp <a /> tag
-    // the code will then trigger a hidden click for it to start downloading
-    const link = document.createElement('a');
-    const url = URL.createObjectURL(data);
+function downloadFileToBrowser(filename: string, data: Blob) {
+  // this trick will generate a temp <a /> tag
+  // the code will then trigger a hidden click for it to start downloading
+  const link = document.createElement('a');
+  const url = URL.createObjectURL(data);
 
-    if (link && document) {
-      link.textContent = 'download';
-      link.href = url;
-      link.setAttribute('download', filename);
+  if (link && document) {
+    link.textContent = 'download';
+    link.href = url;
+    link.setAttribute('download', filename);
 
-      // set the visibility to hidden so there is no effect on your web-layout
-      link.style.visibility = 'hidden';
+    // set the visibility to hidden so there is no effect on your web-layout
+    link.style.visibility = 'hidden';
 
-      // this part will append the anchor tag, trigger a click (for download to start) and finally remove the tag once completed
-      document.body.appendChild(link);
-      link.click();
+    // this part will append the anchor tag, trigger a click (for download to start) and finally remove the tag once completed
+    document.body.appendChild(link);
+    link.click();
 
-      // we're done, let's delete the temp DOM element & revoke the URL object
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }
-  } else {
-    throw new Error('[Excel-Builder-Vanilla] the `downloadExcelFile()` is only supporting the "browser" download type at the moment.');
+    // we're done, let's delete the temp DOM element & revoke the URL object
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   }
 }

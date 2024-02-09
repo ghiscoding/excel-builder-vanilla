@@ -15,11 +15,30 @@ describe('ExcelExportService', () => {
     });
 
     describe('createExcelFile() method', () => {
-      it('should return a Blob instance when calling the method without any type', async () => {
+      it('should return a Blob instance with .xlsx default mime type when calling the method without any type', async () => {
         const workbook = createWorkbook();
         const file = await createExcelFile(workbook);
 
         expect(file).toBeTruthy();
+        expect(file.type).toBe('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        expect(file instanceof Blob).toBeTruthy();
+      });
+
+      it('should return a Blob instance with .xls default mime type when calling the method without any type', async () => {
+        const workbook = createWorkbook();
+        const file = await createExcelFile(workbook, 'Blob', { fileFormat: 'xls' });
+
+        expect(file).toBeTruthy();
+        expect(file.type).toBe('application/vnd.ms-excel');
+        expect(file instanceof Blob).toBeTruthy();
+      });
+
+      it('should return a Blob instance without any mime type when the option mime type is an empty string', async () => {
+        const workbook = createWorkbook();
+        const file = await createExcelFile(workbook, 'Blob', { fileFormat: 'xls', mimeType: '' });
+
+        expect(file).toBeTruthy();
+        expect(file.type).toBe('');
         expect(file instanceof Blob).toBeTruthy();
       });
 
@@ -51,9 +70,7 @@ describe('ExcelExportService', () => {
 
       it('throws when trying different downloadType other than browser', async () => {
         const workbook = createWorkbook();
-        const promise = downloadExcelFile(workbook, 'export.xlsx', 'node');
-
-        await expect(promise).rejects.toThrow();
+        expect(() => downloadExcelFile(workbook, 'export.xlsx', { downloadType: 'node' })).toThrow();
       });
     });
   });
