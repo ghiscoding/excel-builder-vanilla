@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { Table, Workbook, XMLDOM } from '../Excel';
+import { Table, Workbook } from '../Excel';
 import { createWorkbook } from '../factory';
 
 describe('Excel-Builder-Vanilla', () => {
