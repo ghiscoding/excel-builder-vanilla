@@ -18,7 +18,7 @@ The project offers 3 different bundle types, choose the best for your use case
 1. ESM: to `import from` (prefered)
 2. CJS: CommonJS to support old Node `require()`... might be removed in the future
 3. IIFE: standalone script with `ExcelBuilder` available on the `window` object
-  
+
 ```ts
 // ESM - npm install
 import { createWorksheet } from 'excel-builder-vanilla';
@@ -27,7 +27,7 @@ import { createWorksheet } from 'excel-builder-vanilla';
 const { createWorksheet } = require('excel-builder-vanilla');
 
 // IIFE - CDN
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.cjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.iife.js"></script>
 ```
 
 ## Changelog
