@@ -37,6 +37,7 @@ export function createExcelFile<T extends 'Blob' | 'Uint8Array' = 'Blob'>(
       }
 
       return zip(zipObj, options?.zipOptions || {}, (err, data) => {
+        /* v8 ignore if */
         if (err) {
           reject(err);
           return;
