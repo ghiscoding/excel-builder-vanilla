@@ -29,9 +29,9 @@ The modernization steps:
 - migrate to TypeScript (giving us Types `d.ts`)
 - drop `Q` dependency (we simply use native `Promise`)
 - drop `Lodash` dependency (we now use native JS code)
-- replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build offers better performance.
-- bump version to `v3.0.0` with a `major` release (_the original project version was in the `2.x` range._)
-  - note: the changelog did not exists before `v3.0.0`
+- replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build offers and better performance.
+- bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
+  - note that the changelog did not exists before `v3.0.0`
 
 This modernization is providing a huge decrease in the final build size and is offering better performance 🚀
 
@@ -43,7 +43,7 @@ npm install excel-builder-vanilla
 
 The project offers 3 different bundle types, choose the best for your use case
 1. ESM: to `import from` (prefered)
-2. CJS: CommonJS to support old Node `require()`... might be removed in the future
+2. CJS: CommonJS to support old Node `require()` - will possibly be removed in the future
 3. IIFE: standalone script with `ExcelBuilder` available on the `window` object
 
 ```ts
@@ -55,6 +55,9 @@ const { createWorksheet } = require('excel-builder-vanilla');
 
 // IIFE - CDN
 <script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.iife.js"></script>
+<script>
+  const worksheet = ExcelBuilder.createWorksheet();
+</script>
 ```
 
 ## Changelog
@@ -67,7 +70,7 @@ const { createWorksheet } = require('excel-builder-vanilla');
 
 ### Used by
 
-This fork was created mostly to support Tree Shaking (ESM) and update all its dependencies. It is used by a few other Open Source libraries that I also maintain:
+This fork was created mostly to support Tree Shaking (ESM), provide TS Types and update all its dependencies. It is used by a few other Open Source libraries that I also maintain:
 
 - [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid)
 - [Aurelia-Slickgrid](https://github.com/ghiscoding/aurelia-slickgrid)
@@ -88,7 +91,7 @@ If you wish to contribute to the project, please follow these steps:
 
 1. clone the lib:
    - `git clone https://github.com/ghiscoding/excel-builder-vanilla`
-2. install with **pnpm** from the root:
+2. install it with **pnpm** from the project root:
    - `pnpm install` OR `npx pnpm install`
 3. run a full TypeScript build
    - `pnpm run build` OR `npx pnpm run build`
@@ -97,12 +100,21 @@ If you wish to contribute to the project, please follow these steps:
 
 #### Pull Request Contribution
 
-Before submitting a PR (pull request), please make sure that you followed these steps for your PR to succeed:
+Before submitting a PR (pull request), please make sure that you followed these steps for a better chance of a successfull PR:
 
-1. make sure that you already ran `pnpm install`
+1. make sure that you have already executed `pnpm install`
 2. run the Biome lint npm script (or use step 4)
    - `pnpm run biome:lint:write`
 3. run the Biome code formatting npm script (or use step 4)
    - `pnpm run biome:format:write`
-4. run a full Build (this will also run Biome format, so you could skip step 2)
+4. run a full Build (this will also run Biome lint/format, so you could skip step 2)
    - `pnpm run build`
+
+## Sponsors
+
+<div>
+  <img class="circle avatar-user" src="https://avatars.githubusercontent.com/u/48218815?s=52&amp;v=4" width="40" height="40" alt="@kevinburkett" />
+  <a href="/kevinburkett" class="Link">
+    <span class="wb-break-word ml-2">kevinburkett</span>
+  </a>
+</div>
