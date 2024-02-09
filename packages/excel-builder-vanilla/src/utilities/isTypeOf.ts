@@ -12,6 +12,7 @@ export function isPlainObject(value: unknown) {
     return false;
   }
 
+  /* v8 ignore next 4 */
   const proto = Object.getPrototypeOf(value);
   if (proto === null) {
     return true;
