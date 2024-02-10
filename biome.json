@@ -10,7 +10,7 @@
     "formatWithErrors": true,
     "lineWidth": 140,
     "indentStyle": "space",
-    "ignore": ["dist/**", "node_modules/**", ".cache"]
+    "ignore": [".cache", "dist/**", "**/*.json", "node_modules/**"]
   },
   "javascript": {
     "parser": {
@@ -35,7 +35,7 @@
   },
   "linter": {
     "enabled": true,
-    "ignore": ["dist/**", "node_modules/**", ".cache"],
+    "ignore": [".cache", "dist/**", "**/*.json", "node_modules/**"],
     "rules": {
       "recommended": true,
       "complexity": {
