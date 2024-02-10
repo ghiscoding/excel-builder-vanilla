@@ -42,7 +42,7 @@ export class SharedStrings {
 
     while (l--) {
       const clone = template.cloneNode(true);
-      if (strings[l]?.match(/\s+/)) {
+      if (typeof strings[l] === 'string' && strings[l].match(/\s+/)) {
         clone.firstChild!.setAttribute('xml:space', 'preserve');
       }
       clone.firstChild!.firstChild!.nodeValue = strings[l];
