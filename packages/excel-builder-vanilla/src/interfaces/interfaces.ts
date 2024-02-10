@@ -114,12 +114,14 @@ type ExcelMetadataType =
   | 'special'
   | 'custom';
 
+export interface ExcelMetadata {
+  type?: string;
+  style?: number;
+}
+
 export interface ExcelColumnMetadata {
   value: any;
-  metadata?: {
-    type?: string;
-    style?: number;
-  };
+  metadata?: ExcelMetadata;
 }
 
 export interface ExcelMargin {
