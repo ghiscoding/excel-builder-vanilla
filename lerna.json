@@ -18,5 +18,5 @@
     }
   },
   "changelogPreset": "conventional-changelog-conventionalcommits",
-  "packages": ["packages/*"]
+  "packages": ["packages/excel-builder-vanilla"]
 }
