@@ -2,3 +2,5 @@ tsconfig.json
 tsconfig.tsbuildinfo
 node_modules
 CHANGELOG.md
+vite.config.mts
+__tests__
