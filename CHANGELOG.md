@@ -4,6 +4,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.1](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.0...v3.0.1) (2024-02-11)
+
+### Bug Fixes
+
+* add missing ExcelMetadata interface ([8a32a73](https://github.com/ghiscoding/excel-builder-vanilla/commit/8a32a73ea002c5139c0cb002f59728c3c48dd15f)) - by @ghiscoding
+* add tests folder to npm publish ignore ([006e9f8](https://github.com/ghiscoding/excel-builder-vanilla/commit/006e9f8f8fd859e70e6f8a4d904e0572b01e45ea)) - by @ghiscoding
+* check input type before calling string match on it ([9361aa6](https://github.com/ghiscoding/excel-builder-vanilla/commit/9361aa653c67af863d9ce2e75b2ec51027a094c8)) - by @ghiscoding
+
 ## 3.0.0 (2024-02-10)
 
 ### ⚠ BREAKING CHANGES
