@@ -22,6 +22,14 @@ This lib allows you to build and write an Excel file dynamically, it does **not*
 Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers.<br>
 You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
 
+## Changelog
+
+[CHANGELOG](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/excel-builder-vanilla/CHANGELOG.md)
+
+## LICENSE
+
+[MIT License](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/LICENSE.md)
+
 ## Project History
 Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal in creating this fork was to modernize the project by removing dependencies that are no longer necessary and replace JSZip by `fflate` which provides an ESM build giving us Tree Shaking. Also, the other goal was to provide an ESM bundle to slowly get away from CommonJS (CJS bundle is offered but we strongly suggest you migrate to the ESM approach)
 
@@ -59,14 +67,6 @@ const { createWorksheet } = require('excel-builder-vanilla');
   const worksheet = ExcelBuilder.createWorksheet();
 </script>
 ```
-
-## Changelog
-
-[CHANGELOG](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/excel-builder-vanilla/CHANGELOG.md)
-
-## LICENSE
-
-[MIT License](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/LICENSE.md)
 
 ### CSP (Content Security Policy)
 Please note that because we use `fflate` (which compresses the data before sending it to the browser), it has great performance because of its use of Web Workers. However, for that reason you might need to adjust your CSP rules to avoid any CSP errors by adding `worker-src 'self' blob:;`
