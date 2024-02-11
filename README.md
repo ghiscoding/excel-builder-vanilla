@@ -68,6 +68,14 @@ const { createWorksheet } = require('excel-builder-vanilla');
 
 [MIT License](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/LICENSE.md)
 
+### CSP (Content Security Policy)
+Please note that because we use `fflate` (which compresses the data before sending it to the browser), it has great performance because of its use of Web Workers. However, for that reason you might need to adjust your CSP rules to avoid any CSP errors by adding `worker-src 'self' blob:;`
+
+```html
+<meta http-equiv="Content-Security-Policy"
+  content="default-src 'self'; ...other rules...  worker-src 'self' blob:;" />
+```
+
 ### Used by
 
 This fork was created mostly to support Tree Shaking (ESM), provide TS Types and update all its dependencies. It is used by a few other Open Source libraries that I also maintain:
