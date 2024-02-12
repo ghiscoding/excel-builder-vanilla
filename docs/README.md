@@ -52,6 +52,9 @@ Here's the tricky part. There are a couple different ways of doing this, so pick
 - Create a very simple and inexpensive web service to 'echo' back anything you send it. It still takes the pain away from creating the entire file in the backend with all the data fetching, translations and etc. However it also will work for all browses. You could also look into a simple Google App Engine setup.
 - Combining some of these approaches seems like a noteworthy goal.. perhaps a script in the future to do so?
 
+### References
+The project builds an Excel file by following the SpreadsheetML document API (see Ms [API](https://learn.microsoft.com/en-us/office/open-xml/spreadsheet/structure-of-a-spreadsheetml-document?tabs=cs)) and for more detailed info on how to put all the pieces of the puzzle together then take a look this article [How To Create an Excel Spreadsheet with Pure JavaScript](https://www.shaunpoore.com/excel-spreadsheet-pure-javascript/)
+
 ### License
 
 MIT License
