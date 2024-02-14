@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:watch": "vite build --watch",
     "preview": "vite preview",
     "standalone:require": "node ./src/examples/example-standalone-require.cjs"
   },

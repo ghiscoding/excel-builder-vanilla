@@ -99,20 +99,20 @@ export interface ExcelFontStyle {
   underline?: boolean | 'single' | 'double' | 'singleAccounting' | 'doubleAccounting';
 }
 
-type ExcelMetadataType =
-  | 'general'
-  | 'number'
-  | 'currency'
-  | 'accounting'
-  | 'date'
-  | 'time'
-  | 'percentage'
-  | 'formula'
-  | 'fraction'
-  | 'scientific'
-  | 'text'
-  | 'special'
-  | 'custom';
+// type ExcelMetadataType =
+//   | 'general'
+//   | 'number'
+//   | 'currency'
+//   | 'accounting'
+//   | 'date'
+//   | 'time'
+//   | 'percentage'
+//   | 'formula'
+//   | 'fraction'
+//   | 'scientific'
+//   | 'text'
+//   | 'special'
+//   | 'custom';
 
 export interface ExcelMetadata {
   type?: string;
