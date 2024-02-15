@@ -63,7 +63,7 @@ import { createWorksheet } from 'excel-builder-vanilla';
 const { createWorksheet } = require('excel-builder-vanilla');
 
 // IIFE - CDN
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.1/dist/excel-builder.iife.js"></script>
 <script>
   const worksheet = ExcelBuilder.createWorksheet(); // or window.ExcelBuilder.createWorksheet();
 </script>
