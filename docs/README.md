@@ -1,4 +1,4 @@
-## Excel-Builder-Vanilla (forked from `Excel-Builder.js`)
+## Excel-Builder-Vanilla (forked from [`excel-builder.js`](https://github.com/stephenliberty/excel-builder.js))
 
 Excel Builder (abbreviated as 'EB' for the sake of typing) is a relatively simple way of creating Office 2007 Excel files in JavaScript (readable by office 2000/XP/2003 if the support pack has been installed).
 
