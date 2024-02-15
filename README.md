@@ -11,11 +11,11 @@
 
 ## Documentation
 
-📘 [Documentation](https://ghiscoding.gitbook.io/excel-builder-vanilla/) website powered by GitBook
+📘 [Documentation](https://ghiscoding.gitbook.io/excel-builder-vanilla/) website powered by GitBook (_previous project docs pulled from [web archive](http://web.archive.org/web/20160907052007/http://excelbuilderjs.com)_)
 
 ## Description
 
-This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities.
+This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making it super lightweight.
 
 ## Live Demo
 
@@ -37,7 +37,7 @@ The modernization steps:
 - migrate to TypeScript (giving us TS Types `d.ts`)
 - drop `Q` dependency (we simply use native `Promise`)
 - drop `Lodash` dependency (we now use native JS code)
-- replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build offers and better performance.
+- replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build and offers better performance.
 - bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
   - note that the changelog did not exists before `v3.0.0`
 
@@ -50,12 +50,12 @@ npm install excel-builder-vanilla
 ```
 
 The project offers 3 different bundle types, choose the best for your use case
-1. ESM: to `import from` (prefered)
-2. CJS: CommonJS to support old Node `require()` - will possibly be removed in the future
+1. ESM: to `import from` (preferred)
+2. CJS: CommonJS to support old NodeJS `require()` - will probably be removed in the future
 3. IIFE: standalone script with `ExcelBuilder` available on the `window` object
 
 ```ts
-// ESM - npm install
+// ESM (preferred) - npm install
 import { createWorksheet } from 'excel-builder-vanilla';
 
 // CJS - npm install
@@ -64,21 +64,23 @@ const { createWorksheet } = require('excel-builder-vanilla');
 // IIFE - CDN
 <script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.0/dist/excel-builder.iife.js"></script>
 <script>
-  const worksheet = ExcelBuilder.createWorksheet();
+  const worksheet = ExcelBuilder.createWorksheet(); // or window.ExcelBuilder.createWorksheet();
 </script>
 ```
 
 ### CSP (Content Security Policy)
-Please note that because we use `fflate` (which compresses the data before sending it to the browser), it is giving us great performance because of its use of Web Workers. However, for that reason if you have CSP defined, you might need to adjust your CSP rules to avoid any CSP errors by adding `worker-src 'self' blob:;`
+Please note that since we use `fflate` (which creates and compresses the Excel file before sending it to the browser), you might get some CSP errors because of its use of Web Workers. For that reason, you might need to adjust your CSP rules to include the following CSP rule `worker-src 'self' blob:;`
 
 ```html
 <meta http-equiv="Content-Security-Policy"
-  content="default-src 'self'; ...other rules...  worker-src 'self' blob:;" />
+  content="default-src 'self';
+  // ...other rules
+  worker-src 'self' blob:;" />
 ```
 
 ### Used by
 
-This fork was created mostly to support Tree Shaking (ESM), provide TS Types and update all its dependencies. It is used by a few other Open Source libraries that I also maintain:
+This fork was created mostly to support Tree Shaking (ESM), provide TS Types and update all its dependencies. It is used by a few other Open Source libraries that I also maintain and requires Excel export:
 
 - [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid)
 - [Aurelia-Slickgrid](https://github.com/ghiscoding/aurelia-slickgrid)
