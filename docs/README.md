@@ -7,7 +7,22 @@ Starting work on an updated version with more "modern" api's and nodejs support,
 ### Download
 
 ```ts
+// install
 npm install excel-builder-vanilla
+
+// ESM (preferred)
+import { createWorksheet } from 'excel-builder-vanilla';
+
+// or CJS
+const { createWorksheet } = require('excel-builder-vanilla');
+```
+
+or from CDN with standalone script (IIFE)
+```html
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.1/dist/excel-builder.iife.js"></script>
+<script>
+  const worksheet = ExcelBuilder.createWorksheet(); // or window.ExcelBuilder.createWorksheet();
+</script>
 ```
 
 ### Features Supported
