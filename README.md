@@ -11,7 +11,7 @@
 
 ## Documentation
 
-📘 [Documentation](https://ghiscoding.gitbook.io/excel-builder-vanilla/) website powered by GitBook (_previous project docs pulled from [web archive](http://web.archive.org/web/20160907052007/http://excelbuilderjs.com)_)
+📘 [Documentation](https://ghiscoding.gitbook.io/excel-builder-vanilla/) website powered by GitBook (_previous project docs were pulled from [web archive](http://web.archive.org/web/20160907052007/http://excelbuilderjs.com)_)
 
 ## Description
 
@@ -40,6 +40,7 @@ The modernization steps:
 - replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build and offers better performance.
 - bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
   - note that the changelog did not exists before `v3.0.0`
+- **in summary** we dropped 2 out of 3 dependencies and switched to a compression library offering better perf **and** tree shaking
 
 This modernization is providing a huge decrease in the final build size and is offering better performance 🚀
 
@@ -49,10 +50,10 @@ This modernization is providing a huge decrease in the final build size and is o
 npm install excel-builder-vanilla
 ```
 
-The project offers 3 different bundle types, choose the best for your use case
-1. ESM: to `import from` (preferred)
-2. CJS: CommonJS to support old NodeJS `require()` - will probably be removed in the future
-3. IIFE: standalone script with `ExcelBuilder` available on the `window` object
+The project offers 3 different bundle types, choose the best one depending on your use case
+1. **ESM**: to `import from` (*preferred)
+2. **CJS**: CommonJS to support old NodeJS `require()` - will probably be removed in the future
+3. **IIFE**: standalone script with `ExcelBuilder` available on the `window` object
 
 ```ts
 // ESM (preferred) - npm install
@@ -69,7 +70,7 @@ const { createWorksheet } = require('excel-builder-vanilla');
 ```
 
 ### CSP (Content Security Policy)
-Please note that since we use `fflate` (which creates and compresses the Excel file before sending it to the browser), you might get some CSP errors because of its use of Web Workers. For that reason, you might need to adjust your CSP rules to include the following CSP rule `worker-src 'self' blob:;`
+Please note that since we use `fflate` (which creates and compresses the Excel file before sending it to the browser), you might get some CSP errors because of its use of Web Workers. For that reason, you might need to adjust your CSP rules by adding `worker-src 'self' blob:;`
 
 ```html
 <meta http-equiv="Content-Security-Policy"
@@ -97,7 +98,7 @@ This fork was created mostly to support Tree Shaking (ESM), provide TS Types and
 
 If you wish to contribute to the project, please follow these steps:
 
-**Note**: this project uses [pnpm workspaces](https://pnpm.io/workspaces), you can install pnpm by following their [installation](https://pnpm.io/installation) or via `corepack enable` to run any of the pnpm scripts shown below:
+**Note**: this project uses [pnpm workspaces](https://pnpm.io/workspaces), you can install pnpm by following their [installation](https://pnpm.io/installation) or use NodeJS `corepack enable` to run any of the pnpm scripts shown below:
 
 1. clone the lib:
    - `git clone https://github.com/ghiscoding/excel-builder-vanilla`
@@ -113,9 +114,9 @@ If you wish to contribute to the project, please follow these steps:
 Before submitting a PR (pull request), please make sure that you followed these steps for a better chance of a successfull PR:
 
 1. make sure that you have already executed `pnpm install`
-2. run the Biome lint npm script (or use step 4)
+2. run the Biome lint npm script (or simply use step 4)
    - `pnpm run biome:lint:write`
-3. run the Biome code formatting npm script (or use step 4)
+3. run the Biome code formatting npm script (or simply use step 4)
    - `pnpm run biome:format:write`
 4. run a full Build (this will also run Biome lint/format, so you could skip step 2)
    - `pnpm run build`
