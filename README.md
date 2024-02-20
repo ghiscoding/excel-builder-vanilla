@@ -4,6 +4,7 @@
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 [![Vitest](https://img.shields.io/badge/tested%20with-vitest-fcc72b.svg?logo=vitest)](https://vitest.dev/)
 [![codecov](https://codecov.io/gh/ghiscoding/excel-builder-vanilla/branch/main/graph/badge.svg)](https://codecov.io/gh/ghiscoding/excel-builder-vanilla)
+
 [![NPM downloads](https://img.shields.io/npm/dy/excel-builder-vanilla)](https://npmjs.org/package/excel-builder-vanilla)
 [![npm](https://img.shields.io/npm/v/excel-builder-vanilla.svg?logo=npm&logoColor=fff&label=npm)](https://www.npmjs.com/package/excel-builder-vanilla)
 [![Actions Status](https://github.com/ghiscoding/excel-builder-vanilla/actions/workflows/main.yml/badge.svg)](https://github.com/ghiscoding/excel-builder-vanilla/actions)
@@ -14,7 +15,7 @@
 
 ## Description
 
-This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making it super lightweight.
+This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making the library super lightweight.
 
 ## Live Demo
 
@@ -39,7 +40,8 @@ The modernization steps:
 - replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build and offers better performance.
 - bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
   - note that the changelog did not exists before `v3.0.0`
-- **in summary** we dropped 2 out of 3 dependencies and switched to a compression library offering better perf **and** tree shaking
+- **in summary** we dropped 2 of 3 dependencies and switched to a compression library offering better perf **and** tree shaking
+  - the library now only has 1 dependency, [fflate](https://github.com/101arrowz/fflate)
 
 This modernization is providing a huge decrease in the final build size and is offering better performance 🚀
 
@@ -50,7 +52,7 @@ npm install excel-builder-vanilla
 ```
 
 The project offers 3 different bundle types, choose the best one depending on your use case
-1. **ESM**: to `import from` (*preferred)
+1. **ESM**: to `import from` (_**preferred**_)
 2. **CJS**: CommonJS to support old NodeJS `require()` - will probably be removed in the future
 3. **IIFE**: standalone script with `ExcelBuilder` available on the `window` object
 
@@ -74,13 +76,13 @@ Please note that since we use `fflate` (which creates and compresses the Excel f
 ```html
 <meta http-equiv="Content-Security-Policy"
   content="default-src 'self';
-  // ...other rules
+   // other rules...
   worker-src 'self' blob:;" />
 ```
 
 ### Used by
 
-This fork was created mostly to support Tree Shaking (ESM), provide TS Types and update all its dependencies. It is used by a few other Open Source libraries that I also maintain and requires Excel export:
+This fork was created mostly to support Tree Shaking (ESM), slowly going away from CJS, provide TS Types and update all project dependencies. It is used by a few other Open Source libraries that I also maintain and requires Excel export:
 
 - [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid)
 - [Aurelia-Slickgrid](https://github.com/ghiscoding/aurelia-slickgrid)
