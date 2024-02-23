@@ -24,12 +24,7 @@
   },
   "main": "./dist/excel-builder.cjs",
   "module": "./dist/excel-builder.js",
-  "types": "index.d.ts",
-  "typesVersions": {
-    ">=4.2": {
-      "*": ["dist/*"]
-    }
-  },
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
