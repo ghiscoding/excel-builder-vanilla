@@ -49,8 +49,8 @@
     "fflate": "^0.8.2"
   },
   "devDependencies": {
-    "typescript": "^5.4.0-dev.20240220",
-    "vite": "^5.1.3",
-    "vite-plugin-dts": "^3.7.2"
+    "typescript": "^5.4.2",
+    "vite": "^5.1.5",
+    "vite-plugin-dts": "^3.7.3"
   }
 }
