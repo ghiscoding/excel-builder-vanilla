@@ -1,5 +1,5 @@
 import { Util } from '../Util';
-import { XMLDOM } from '../XMLDOM';
+import type { XMLDOM } from '../XMLDOM';
 
 /**
  *

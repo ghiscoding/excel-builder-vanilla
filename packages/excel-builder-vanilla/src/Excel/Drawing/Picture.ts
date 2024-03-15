@@ -1,6 +1,6 @@
 import { uniqueId } from '../../utilities';
 import { Util } from '../Util';
-import { XMLDOM } from '../XMLDOM';
+import type { XMLDOM } from '../XMLDOM';
 import { Drawing } from './Drawing';
 
 export class Picture extends Drawing {

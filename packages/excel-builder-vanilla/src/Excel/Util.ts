@@ -1,5 +1,5 @@
 import { isPlainObject } from '../utilities';
-import { XMLDOM, XMLNode } from './XMLDOM';
+import { XMLDOM, type XMLNode } from './XMLDOM';
 
 /**
  * @module Excel/Util

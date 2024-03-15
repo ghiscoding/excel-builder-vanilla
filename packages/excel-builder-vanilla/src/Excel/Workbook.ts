@@ -1,10 +1,10 @@
 import { uniqueId } from '../utilities';
-import { Drawings } from './Drawings';
+import type { Drawings } from './Drawings';
 import { Paths } from './Paths';
 import { RelationshipManager } from './RelationshipManager';
 import { SharedStrings } from './SharedStrings';
 import { StyleSheet } from './StyleSheet';
-import { Table } from './Table';
+import type { Table } from './Table';
 import { Util } from './Util';
 import { Worksheet } from './Worksheet';
 import { XMLDOM } from './XMLDOM';

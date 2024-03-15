@@ -105,7 +105,7 @@ export class StyleSheet {
     if (styleInstructions.font && isObject(styleInstructions.font)) {
       style.fontId = this.createFontStyle(styleInstructions.font).id;
     } else if (styleInstructions.font) {
-      if (Number.isNaN(parseInt(styleInstructions.font, 10))) {
+      if (Number.isNaN(Number.parseInt(styleInstructions.font, 10))) {
         throw new Error('Passing a non-numeric font id is not supported');
       }
       style.fontId = styleInstructions.font;
@@ -114,7 +114,7 @@ export class StyleSheet {
     if (styleInstructions.format && isString(styleInstructions.format)) {
       style.numFmtId = this.createNumberFormatter(styleInstructions.format).id;
     } else if (styleInstructions.format) {
-      if (Number.isNaN(parseInt(styleInstructions.format, 10))) {
+      if (Number.isNaN(Number.parseInt(styleInstructions.format, 10))) {
         throw new Error('Invalid number formatter id');
       }
       style.numFmtId = styleInstructions.format;
@@ -123,7 +123,7 @@ export class StyleSheet {
     if (styleInstructions.border && isObject(styleInstructions.border)) {
       style.borderId = this.createBorderFormatter(styleInstructions.border).id;
     } else if (styleInstructions.border) {
-      if (Number.isNaN(parseInt(styleInstructions.border, 10))) {
+      if (Number.isNaN(Number.parseInt(styleInstructions.border, 10))) {
         throw new Error('Passing a non-numeric border id is not supported');
       }
       style.borderId = styleInstructions.border;
@@ -132,7 +132,7 @@ export class StyleSheet {
     if (styleInstructions.fill && isObject(styleInstructions.fill)) {
       style.fillId = this.createFill(styleInstructions.fill).id;
     } else if (styleInstructions.fill) {
-      if (Number.isNaN(parseInt(styleInstructions.fill, 10))) {
+      if (Number.isNaN(Number.parseInt(styleInstructions.fill, 10))) {
         throw new Error('Passing a non-numeric fill id is not supported');
       }
       style.fillId = styleInstructions.fill;
