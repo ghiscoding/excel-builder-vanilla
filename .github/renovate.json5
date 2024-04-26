@@ -4,6 +4,11 @@
   dependencyDashboard: false,
   pin: false,
   rangeStrategy: 'bump',
-  packageRules: [],
+  packageRules: [
+    {
+      packageNames: ['pnpm'],
+      allowedVersions: '<9.0.0',
+    },
+  ],
   schedule: ['every 2 weeks on Friday'],
 }
