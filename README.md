@@ -4,10 +4,11 @@
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 [![Vitest](https://img.shields.io/badge/tested%20with-vitest-fcc72b.svg?logo=vitest)](https://vitest.dev/)
 [![codecov](https://codecov.io/gh/ghiscoding/excel-builder-vanilla/branch/main/graph/badge.svg)](https://codecov.io/gh/ghiscoding/excel-builder-vanilla)
+[![Actions Status](https://github.com/ghiscoding/excel-builder-vanilla/actions/workflows/main.yml/badge.svg)](https://github.com/ghiscoding/excel-builder-vanilla/actions)
 
 [![NPM downloads](https://img.shields.io/npm/dy/excel-builder-vanilla)](https://npmjs.org/package/excel-builder-vanilla)
 [![npm](https://img.shields.io/npm/v/excel-builder-vanilla.svg?logo=npm&logoColor=fff&label=npm)](https://www.npmjs.com/package/excel-builder-vanilla)
-[![Actions Status](https://github.com/ghiscoding/excel-builder-vanilla/actions/workflows/main.yml/badge.svg)](https://github.com/ghiscoding/excel-builder-vanilla/actions)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/excel-builder-vanilla?color=success&label=gzip)](https://bundlephobia.com/result?p=excel-builder-vanilla)
 
 ## Documentation
 
