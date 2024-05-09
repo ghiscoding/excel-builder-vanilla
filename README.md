@@ -41,10 +41,12 @@ The modernization steps:
 - replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build and offers better performance.
 - bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
   - note that the changelog did not exists prior to `v3.0.0`
-- **in summary** we dropped 2 of 3 dependencies and switched to a compression library offering better perf **and** tree shaking
-  - the library now only has 1 dependency, [fflate](https://github.com/101arrowz/fflate)
 
-This modernization is providing a huge decrease in the final build size and is offering better performance 🚀
+The project now requires only 1 dependency which is [fflate](https://github.com/101arrowz/fflate).
+
+### Summary
+
+This modernization is providing a huge decrease in the final build size, with now only 1 dependency, and is offering better performance 🚀
 
 ## Installation
 
