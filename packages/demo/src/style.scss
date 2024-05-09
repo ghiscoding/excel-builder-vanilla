@@ -15,7 +15,6 @@ h2 .links {
 }
 
 .template-body {
-  padding: 0 1rem !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
@@ -119,8 +118,8 @@ h2 .links {
   }
 
   .panel-wm-content {
-    padding-left: ($side-menu-width + 5px);
-    padding-right: 15px;
+    margin-left: $side-menu-width;
+    padding: 0 1rem;
     min-height: calc(100vh - #{$navbar-height});
   }
 

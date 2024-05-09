@@ -40,7 +40,7 @@ The modernization steps:
 - drop `Lodash` dependency (we now use native JS code)
 - replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build and offers better performance.
 - bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
-  - note that the changelog did not exists before `v3.0.0`
+  - note that the changelog did not exists prior to `v3.0.0`
 - **in summary** we dropped 2 of 3 dependencies and switched to a compression library offering better perf **and** tree shaking
   - the library now only has 1 dependency, [fflate](https://github.com/101arrowz/fflate)
 
