@@ -87,7 +87,7 @@ Please note that since we use `fflate` (which creates and compresses the Excel f
 
 ### Used by
 
-This fork was created mostly to support Tree Shaking (ESM), slowly going away from CJS, provide TS Types and update all project dependencies. It is used by a few other Open Source libraries that I also maintain and requires Excel export:
+This fork was created mostly to support Tree Shaking (ESM), get away from CJS, provide TS Types and update all project dependencies. It is used by a few other Open Source libraries that I also maintain and requires Excel export:
 
 - [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid)
 - [Aurelia-Slickgrid](https://github.com/ghiscoding/aurelia-slickgrid)
