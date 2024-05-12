@@ -54,7 +54,7 @@
     "@lerna-lite/publish": "^3.3.3",
     "@types/node": "^20.12.11",
     "@vitest/coverage-v8": "^1.6.0",
-    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
     "cross-env": "^7.0.3",
     "happy-dom": "^14.10.1",
     "pnpm": "^8.15.8",
