@@ -47,19 +47,19 @@
     "test": "vitest --watch --pool forks --config ./vitest/vitest.config.mts",
     "test:coverage": "vitest --coverage --pool forks --config ./vitest/vitest.config.mts"
   },
-  "packageManager": "pnpm@8.15.7",
+  "packageManager": "pnpm@8.15.8",
   "devDependencies": {
-    "@biomejs/biome": "^1.7.1",
+    "@biomejs/biome": "^1.7.3",
     "@lerna-lite/cli": "^3.3.3",
     "@lerna-lite/publish": "^3.3.3",
-    "@types/node": "^20.12.7",
-    "@vitest/coverage-v8": "^1.5.2",
+    "@types/node": "^20.12.11",
+    "@vitest/coverage-v8": "^1.6.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "cross-env": "^7.0.3",
-    "happy-dom": "^14.7.1",
-    "pnpm": "^8.15.7",
-    "rimraf": "^5.0.5",
+    "happy-dom": "^14.10.1",
+    "pnpm": "^8.15.8",
+    "rimraf": "^5.0.7",
     "typescript": "^5.4.5",
-    "vitest": "^1.5.2"
+    "vitest": "^1.6.0"
   }
 }
