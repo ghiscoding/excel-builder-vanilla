@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.2](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.1...v3.0.2) (2024-08-29)
+
+### Features
+
+* create `@excel-builder-vanilla/types` package for types only ([8d6841c](https://github.com/ghiscoding/excel-builder-vanilla/commit/8d6841cce1c940399aa2958b6e77cb4dd855ee40)) - by @ghiscoding
+
 ## [3.0.1](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.0...v3.0.1) (2024-02-11)
 
 ### Bug Fixes
