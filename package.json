@@ -35,7 +35,7 @@
     "build:lib": "pnpm -r --stream --filter \"./packages/excel-builder-vanilla/**\" build",
     "dev": "pnpm -r dev:init && pnpm -r --parallel dev",
     "biome:lint:check": "biome lint ./packages",
-    "biome:lint:write": "biome check --apply ./packages",
+    "biome:lint:write": "biome lint --write ./packages",
     "biome:format:check": "biome format ./packages",
     "biome:format:write": "biome format --write ./packages",
     "preview:version": "lerna version --dry-run",
@@ -47,19 +47,19 @@
     "test": "vitest --watch --pool forks --config ./vitest/vitest.config.mts",
     "test:coverage": "vitest --coverage --pool forks --config ./vitest/vitest.config.mts"
   },
-  "packageManager": "pnpm@8.15.7",
+  "packageManager": "pnpm@8.15.9",
   "devDependencies": {
-    "@biomejs/biome": "^1.7.1",
-    "@lerna-lite/cli": "^3.3.3",
-    "@lerna-lite/publish": "^3.3.3",
-    "@types/node": "^20.12.7",
-    "@vitest/coverage-v8": "^1.5.2",
+    "@biomejs/biome": "^1.8.3",
+    "@lerna-lite/cli": "^3.8.0",
+    "@lerna-lite/publish": "^3.8.0",
+    "@types/node": "^20.14.15",
+    "@vitest/coverage-v8": "^2.0.5",
     "conventional-changelog-conventionalcommits": "^7.0.2",
     "cross-env": "^7.0.3",
-    "happy-dom": "^14.7.1",
-    "pnpm": "^8.15.7",
-    "rimraf": "^5.0.5",
-    "typescript": "^5.4.5",
-    "vitest": "^1.5.2"
+    "happy-dom": "^14.12.3",
+    "pnpm": "^8.15.9",
+    "rimraf": "^5.0.10",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
   }
 }

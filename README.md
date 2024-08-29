@@ -32,11 +32,11 @@ You can also take a look at the "[Used by](#used-by)" section below to see real 
 [MIT License](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/LICENSE.md)
 
 ## Project History
-Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal in creating this fork was to modernize the project by removing dependencies that are no longer necessary and replace `JSZip` by `fflate` which provides an ESM build giving us Tree Shaking. The other goal was also to provide an ESM bundle to slowly get away from CommonJS (CJS bundle is still offered but we strongly suggest you migrate to the ESM approach)
+Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal of creating this fork was to modernize the project by removing old dependencies that are no longer necessary and also replace `JSZip` by `fflate` which provides an ESM build and is indirectly giving us better Tree Shaking. The other goal was also to provide an ESM build to eventually get away from CommonJS (CJS bundle is still offered but we strongly suggest that you migrate to the ESM approach)
 
 The modernization steps:
-- migrate to TypeScript (giving us TS Types `d.ts`)
-- drop `Q` dependency (we simply use native `Promise`)
+- migrate to TypeScript (which is giving us TS Types `d.ts`)
+- drop `Q` dependency (we now simply use native `Promise`)
 - drop `Lodash` dependency (we now use native JS code)
 - replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build and offers better performance.
 - bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
@@ -46,7 +46,7 @@ The project now requires only 1 dependency which is [fflate](https://github.com/
 
 ### Summary
 
-This modernization is providing a huge decrease in the final build size, with now only 1 dependency, and is offering better performance 🚀
+This modernization is providing a huge decrease in the final build size, with only 1 dependency, and also offers better performance 🚀
 
 ## Installation
 
@@ -56,10 +56,10 @@ This modernization is providing a huge decrease in the final build size, with no
 npm install excel-builder-vanilla
 ```
 
-The project offers 3 different bundle types, choose the best one depending on your use case
+The project offers 3 different build types, choose the best one depending on your use case
 1. **ESM**: to `import from` (_**preferred**_)
-2. **CJS**: CommonJS to support old NodeJS `require()` - will probably be removed in the future
-3. **IIFE**: standalone script with `ExcelBuilder` available on the `window` object
+2. **CJS**: CommonJS to support old NodeJS `require()` - will probably be dropped in the future
+3. **IIFE**: standalone script which provides `ExcelBuilder` on the `window` object
 
 ```ts
 // ESM (preferred) - npm install
@@ -87,7 +87,7 @@ Please note that since we use `fflate` (which creates and compresses the Excel f
 
 ### Used by
 
-This fork was created mostly to support Tree Shaking (ESM), slowly going away from CJS, provide TS Types and update all project dependencies. It is used by a few other Open Source libraries that I also maintain and requires Excel export:
+This fork was created mostly to support Tree Shaking (ESM), to get away from CJS, to provide TS Types and finally to update all project dependencies. It is used by a few other Open Source libraries that I also maintain and require Excel export:
 
 - [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid)
 - [Aurelia-Slickgrid](https://github.com/ghiscoding/aurelia-slickgrid)
@@ -102,7 +102,7 @@ This fork was created mostly to support Tree Shaking (ESM), slowly going away fr
 
 ### Development / Contributions
 
-If you wish to contribute to the project, please follow these steps:
+If you wish to contribute to the project, please follow the steps below:
 
 **Note**: this project uses [pnpm workspaces](https://pnpm.io/workspaces), you can install pnpm by following their [installation](https://pnpm.io/installation) or use NodeJS `corepack enable` to run any of the pnpm scripts shown below:
 

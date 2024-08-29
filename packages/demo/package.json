@@ -16,8 +16,8 @@
   },
   "devDependencies": {
     "fflate": "0.8.2",
-    "sass": "^1.75.0",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.10"
+    "sass": "^1.77.8",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.1"
   }
 }
