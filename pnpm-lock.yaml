@@ -89,7 +89,7 @@ importers:
         specifier: ^3.9.0
         version: 3.9.0(@types/node@20.12.7)(typescript@5.4.5)(vite@5.2.10)
 
-  packages/types:
+  packages/excel-builder-vanilla-types:
     dependencies:
       fflate:
         specifier: ^0.8.2
