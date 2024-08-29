@@ -2,7 +2,12 @@
   "name": "excel-builder-vanilla",
   "version": "3.0.1",
   "description": "An easy way of building Excel files with javascript",
-  "keywords": ["excel", "javascript", "xlsx", "spreadsheet"],
+  "keywords": [
+    "excel",
+    "javascript",
+    "xlsx",
+    "spreadsheet"
+  ],
   "author": "Stephen Liberty",
   "contributors": [
     {
@@ -40,17 +45,19 @@
     "url": "https://ko-fi.com/ghiscoding"
   },
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist ../excel-builder-vanilla-types/dist",
     "dev:init": "vite build",
     "dev": "vite build --watch",
-    "build": "pnpm clean && vite build"
+    "build": "pnpm clean && vite build",
+    "postbuild": "node copy-types.mjs"
   },
   "dependencies": {
     "fflate": "^0.8.2"
   },
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "typescript": "^5.5.4",
-    "vite": "^5.4.1",
-    "vite-plugin-dts": "^3.9.1"
+    "vite": "^5.4.2",
+    "vite-plugin-dts": "^4.0.3"
   }
 }

@@ -1,0 +1,41 @@
+{
+  "name": "@excel-builder-vanilla/types",
+  "version": "3.0.0",
+  "description": "excel-builder-vanilla types",
+  "author": "Stephen Liberty",
+  "contributors": [
+    {
+      "name": "Ghislain B."
+    }
+  ],
+  "homepage": "https://github.com/ghiscoding/excel-builder-vanilla",
+  "bugs": {
+    "url": "https://github.com/ghiscoding/excel-builder-vanilla/issues"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ghiscoding/excel-builder-vanilla.git",
+    "directory": "packages/excel-builder-vanilla-types"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/excel-builder.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/excel-builder.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "funding": {
+    "type": "ko_fi",
+    "url": "https://ko-fi.com/ghiscoding"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2"
+  }
+}
