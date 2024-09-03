@@ -27,18 +27,17 @@
   "publishConfig": {
     "access": "public"
   },
+  "main": "./dist/excel-builder.cjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/excel-builder.js",
-      "require": "./dist/excel-builder.cjs",
-      "node": "./dist/excel-builder.cjs"
+      "require": "./dist/excel-builder.cjs"
     },
     "./package.json": "./package.json"
   },
   "module": "./dist/excel-builder.js",
-  "main": "./dist/excel-builder.cjs",
   "sideEffects": false,
   "funding": {
     "type": "ko_fi",
