@@ -12,7 +12,13 @@ export default defineConfig({
     watch: false,
     coverage: {
       include: ['packages/excel-builder-vanilla/**/*.ts'],
-      exclude: [...configDefaults.exclude, '**/interfaces/**', '**/*.d.ts', '**/index.ts'],
+      exclude: [
+        ...configDefaults.exclude,
+        '**/__tests__/**',
+        '**/interfaces/**',
+        '**/*.d.ts',
+        '**/index.ts'
+      ],
       provider: 'v8',
     },
   },
