@@ -1032,7 +1032,7 @@ describe('Excel-Builder-Vanilla', () => {
     const berryList = fruitWorkbook.createWorksheet({ name: 'Berry List' });
     const picRef1 = fruitWorkbook.addMedia('image', 'file1.jpeg', new Blob());
     const picRef2 = fruitWorkbook.addMedia('image', 'file2.gif', new Blob());
-    const picRef3 = fruitWorkbook.addMedia('image', 'file3.png', new Blob(), 'image/png');
+    const picRef3 = fruitWorkbook.addMedia('image', 'file3.png', new Blob());
     const picRef4 = fruitWorkbook.addMedia('image', 'file4.txt', new Blob());
 
     expect(picRef1.contentType).toBe('image/jpeg');
