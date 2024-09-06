@@ -1030,7 +1030,15 @@ describe('Excel-Builder-Vanilla', () => {
   test('Drawings', async () => {
     const fruitWorkbook = createWorkbook();
     const berryList = fruitWorkbook.createWorksheet({ name: 'Berry List' });
-    const picRef = fruitWorkbook.addMedia('image', 'text.txt', new Blob());
+    const picRef1 = fruitWorkbook.addMedia('image', 'file1.jpeg', new Blob());
+    const picRef2 = fruitWorkbook.addMedia('image', 'file2.gif', new Blob());
+    const picRef3 = fruitWorkbook.addMedia('image', 'file3.png', new Blob(), 'image/png');
+    const picRef4 = fruitWorkbook.addMedia('image', 'file4.txt', new Blob());
+
+    expect(picRef1.contentType).toBe('image/jpeg');
+    expect(picRef2.contentType).toBe('image/gif');
+    expect(picRef3.contentType).toBe('image/png');
+    expect(picRef4.contentType).toBe(null);
 
     const drawings = new Drawings();
     const strawberryPicture1 = new Picture();
@@ -1045,7 +1053,7 @@ describe('Excel-Builder-Vanilla', () => {
       },
     });
 
-    strawberryPicture1.setMedia(picRef);
+    strawberryPicture1.setMedia(picRef1);
     drawings.addDrawing(strawberryPicture1);
 
     const strawberryPicture2 = new Picture();
@@ -1056,7 +1064,7 @@ describe('Excel-Builder-Vanilla', () => {
       height: Positioning.pixelsToEMUs(300),
     });
 
-    strawberryPicture2.setMedia(picRef);
+    strawberryPicture2.setMedia(picRef1);
     drawings.addDrawing(strawberryPicture2);
 
     const strawberryPicture3 = new Picture();
@@ -1067,7 +1075,7 @@ describe('Excel-Builder-Vanilla', () => {
       height: Positioning.pixelsToEMUs(300),
     });
 
-    strawberryPicture3.setMedia(picRef);
+    strawberryPicture3.setMedia(picRef1);
     drawings.addDrawing(strawberryPicture3);
 
     berryList.addDrawings(drawings);
