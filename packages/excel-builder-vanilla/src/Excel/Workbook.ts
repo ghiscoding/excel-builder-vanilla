@@ -240,27 +240,26 @@ export class Workbook {
     const definedNames = Util.createElement(doc, 'definedNames');
     let ctr = 0;
     for (const name in this.printTitles) {
-      if (!this.printTitles.hasOwn(name)) {
-        continue;
-      }
-      const entry = this.printTitles[name];
-      const definedName = doc.createElement('definedName');
-      definedName.setAttribute('name', '_xlnm.Print_Titles');
-      definedName.setAttribute('localSheetId', ctr++);
+      if (name in this.printTitles) {
+        const entry = this.printTitles[name];
+        const definedName = doc.createElement('definedName');
+        definedName.setAttribute('name', '_xlnm.Print_Titles');
+        definedName.setAttribute('localSheetId', ctr++);
 
-      let value = '';
-      if (entry.top) {
-        value += `${name}!$1:$${entry.top}`;
-        if (entry.left) {
-          value += ',';
+        let value = '';
+        if (entry.top) {
+          value += `${name}!$1:$${entry.top}`;
+          if (entry.left) {
+            value += ',';
+          }
         }
-      }
-      if (entry.left) {
-        value += `${name}!$A:$${entry.left}`;
-      }
+        if (entry.left) {
+          value += `${name}!$A:$${entry.left}`;
+        }
 
-      definedName.appendChild(doc.createTextNode(value));
-      definedNames.appendChild(definedName);
+        definedName.appendChild(doc.createTextNode(value));
+        definedNames.appendChild(definedName);
+      }
     }
     wb.appendChild(definedNames);
 
