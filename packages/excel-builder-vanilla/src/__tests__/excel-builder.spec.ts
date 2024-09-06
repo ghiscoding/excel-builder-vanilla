@@ -1087,5 +1087,12 @@ describe('Excel-Builder-Vanilla', () => {
 
     expect(file).toBeTruthy();
     expect(dwgs[0].drawings.length).toBe(3);
+
+    // print titles offset of 2 => left B and top 2
+    fruitWorkbook.setPrintTitleLeft('sheet1', 2);
+    fruitWorkbook.setPrintTitleTop('sheet1', 2);
+
+    const titles = fruitWorkbook.printTitles;
+    expect(titles).toEqual({ sheet1: { left: 'B', top: 2 } });
   });
 });
