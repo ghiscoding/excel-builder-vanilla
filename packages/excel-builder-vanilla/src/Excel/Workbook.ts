@@ -89,7 +89,7 @@ export class Workbook {
     this.printTitles[inSheet].left = String.fromCharCode(64 + inRowCount);
   }
 
-  addMedia(_type: string, fileName: string, fileData: any, contentType: any) {
+  addMedia(_type: string, fileName: string, fileData: any, contentType?: string | null) {
     const fileNamePieces = fileName.split('.');
     const extension = fileNamePieces[fileNamePieces.length - 1];
     if (!contentType) {
@@ -148,12 +148,12 @@ export class Workbook {
 
     const extensions: any = {};
     for (const filename in this.media) {
-      if (this.media.hasOwn(filename)) {
+      if (filename in this.media) {
         extensions[this.media[filename].extension] = this.media[filename].contentType;
       }
     }
     for (const extension in extensions) {
-      if (extensions.hasOwn(extension)) {
+      if (extension in extensions) {
         types.appendChild(
           Util.createElement(doc, 'Default', [
             ['Extension', extension],
@@ -293,7 +293,7 @@ export class Workbook {
     }
 
     for (const fileName in this.media) {
-      if (this.media.hasOwn(fileName)) {
+      if (fileName in this.media) {
         const media = this.media[fileName];
         files[`/xl/media/${fileName}`] = media.data;
         Paths[fileName] = `/xl/media/${fileName}`;
