@@ -4,6 +4,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.6](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.5...v3.0.6) (2024-09-06)
+
+### Bug Fixes
+
+* use `prop in` instead of `.hasOwn(prop)` ([0051d83](https://github.com/ghiscoding/excel-builder-vanilla/commit/0051d833170151e96d90aea0763642c44de51cb0)) - by @ghiscoding
+* use `prop in` instead of `.hasOwn(prop)` & add Drawings tests ([35a4c63](https://github.com/ghiscoding/excel-builder-vanilla/commit/35a4c63a1abc6ff5f1ee86827fcff272d7f63352)) - by @ghiscoding
+
 ## [3.0.5](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.4...v3.0.5) (2024-09-03)
 
 ### Bug Fixes
