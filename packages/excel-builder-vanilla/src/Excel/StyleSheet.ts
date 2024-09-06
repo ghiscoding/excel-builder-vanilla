@@ -677,7 +677,7 @@ export class StyleSheet {
     const node = doc.createElement('protection');
     // eslint-disable-next-line no-restricted-syntax
     for (const k in protectionData) {
-      if (protectionData.hasOwn(k)) {
+      if (k in protectionData) {
         node.setAttribute(k, protectionData[k]);
       }
     }

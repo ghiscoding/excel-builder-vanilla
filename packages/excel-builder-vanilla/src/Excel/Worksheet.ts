@@ -111,9 +111,9 @@ export class Worksheet {
     this.relations.addRelation(table, 'table');
   }
 
-  addDrawings(table: Table) {
-    this._drawings.push(table);
-    this.relations.addRelation(table, 'drawingRelationship');
+  addDrawings(drawings: Drawings) {
+    this._drawings.push(drawings);
+    this.relations.addRelation(drawings, 'drawingRelationship');
   }
 
   setRowInstructions(rowIndex: number, instructions: ExcelStyleInstruction) {
