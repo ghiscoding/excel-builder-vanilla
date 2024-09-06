@@ -1094,5 +1094,8 @@ describe('Excel-Builder-Vanilla', () => {
 
     const titles = fruitWorkbook.printTitles;
     expect(titles).toEqual({ sheet1: { left: 'B', top: 2 } });
+
+    const wsXML = fruitWorkbook.toXML();
+    expect(wsXML.documentElement.children.length).toBe(2);
   });
 });
