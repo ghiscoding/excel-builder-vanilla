@@ -1,5 +1,6 @@
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { writeFileSync } from 'node:fs';
 import { defineConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 
@@ -11,11 +12,10 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       formats: ['es', 'cjs', 'iife'],
       name: 'ExcelBuilder',
-      // fileName: format => (format === 'es' ? 'excel-builder.js' : `excel-builder.${format}.js`),
       fileName: format => {
         switch (format) {
           case 'es':
-            return 'excel-builder.js';
+            return 'excel-builder.mjs';
           case 'cjs':
             return 'excel-builder.cjs';
           default:
@@ -40,6 +40,22 @@ export default defineConfig({
       compilerOptions: {
         declaration: true,
         declarationMap: true,
+      },
+      beforeWriteFile: (filePath, content) => {
+        let safeContent = content;
+        if (filePath.endsWith('dist/index.d.ts')) {
+          if (!safeContent) {
+            safeContent = 'export {};';
+          }
+
+          const ctsFile = filePath.replace('d.ts', 'd.cts');
+          writeFileSync(ctsFile, safeContent);
+        }
+
+        return {
+          filePath,
+          content: safeContent,
+        };
       },
     }),
   ],

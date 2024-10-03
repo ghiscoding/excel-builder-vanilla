@@ -21,12 +21,15 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "./dist/excel-builder.js",
+  "type": "module",
+  "main": "./dist/excel-builder.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/excel-builder.js"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/excel-builder.mjs"
+      }
     },
     "./package.json": "./package.json"
   },

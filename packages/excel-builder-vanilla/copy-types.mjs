@@ -10,7 +10,7 @@ copyfiles([source, destination], {}, err => {
   } else {
     // all good, next step, create JS entry file
     const content = `'use strict';`;
-    writeFile(`${destination}/dist/excel-builder.js`, content, err => {
+    writeFile(`${destination}/dist/excel-builder.mjs`, content, err => {
       if (err) {
         console.error(err);
       }
