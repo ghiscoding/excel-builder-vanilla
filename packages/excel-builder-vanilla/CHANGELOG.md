@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.8](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.7...v3.0.8) (2024-10-03)
+
+### Bug Fixes
+
+* improve hybrid exports CJS/ESM ([4e5502d](https://github.com/ghiscoding/excel-builder-vanilla/commit/4e5502dae1a837db779457e32d0c436374afab23)) - by @ghiscoding
+
 ## [3.0.6](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.5...v3.0.6) (2024-09-06)
 
 ### Bug Fixes
