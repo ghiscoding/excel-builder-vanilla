@@ -30,6 +30,6 @@ export declare class AbsoluteAnchor {
      * @returns {undefined}
      */
     setDimensions(width: number, height: number): void;
-    toXML(xmlDoc: XMLDOM, content: any): import('../XMLDOM').XMLNode;
+    toXML(xmlDoc: XMLDOM, content: any): import('..').XMLNode;
 }
 //# sourceMappingURL=AbsoluteAnchor.d.ts.map

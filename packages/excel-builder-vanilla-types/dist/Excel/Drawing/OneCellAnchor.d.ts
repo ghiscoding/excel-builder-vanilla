@@ -18,6 +18,6 @@ export declare class OneCellAnchor {
     constructor(config: any);
     setPos(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
     setDimensions(width: number, height: number): void;
-    toXML(xmlDoc: XMLDOM, content: any): import('../XMLDOM').XMLNode;
+    toXML(xmlDoc: XMLDOM, content: any): import('..').XMLNode;
 }
 //# sourceMappingURL=OneCellAnchor.d.ts.map

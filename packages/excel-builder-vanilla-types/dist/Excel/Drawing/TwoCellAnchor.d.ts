@@ -5,6 +5,6 @@ export declare class TwoCellAnchor {
     constructor(config: any);
     setFrom(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
     setTo(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
-    toXML(xmlDoc: XMLDOM, content: any): import('../XMLDOM').XMLNode;
+    toXML(xmlDoc: XMLDOM, content: any): import('..').XMLNode;
 }
 //# sourceMappingURL=TwoCellAnchor.d.ts.map
