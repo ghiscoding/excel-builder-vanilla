@@ -9,6 +9,7 @@ export default defineConfig(options => [
     sourcemap: true,
     clean: true,
     dts: !options.watch,
+    minify: !options.watch,
     outExtension: ({ format }) => ({ js: format === 'cjs' ? '.cjs' : '.mjs' }),
   },
   // common js for node and other backend runtimes
@@ -19,6 +20,7 @@ export default defineConfig(options => [
     sourcemap: true,
     clean: true,
     dts: !options.watch,
+    minify: true,
     outExtension: ({ format }) => ({
       js: format === 'cjs' ? '.cjs' : '.mjs',
     }),
@@ -34,6 +36,7 @@ export default defineConfig(options => [
     splitting: false,
     sourcemap: true,
     clean: true,
+    minify: true,
     outExtension: ({ format }) => ({
       js: '.iife.js',
     }),
