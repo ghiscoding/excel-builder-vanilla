@@ -21,7 +21,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ghiscoding/excel-builder-vanilla.git",
+    "url": "git+https://github.com/ghiscoding/excel-builder-vanilla.git",
     "directory": "packages/excel-builder-vanilla"
   },
   "publishConfig": {

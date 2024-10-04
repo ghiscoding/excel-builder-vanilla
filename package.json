@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ghiscoding/excel-builder-vanilla.git"
+    "url": "git+https://github.com/ghiscoding/excel-builder-vanilla.git"
   },
   "funding": {
     "type": "ko_fi",
