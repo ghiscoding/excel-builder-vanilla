@@ -57,7 +57,7 @@
   },
   "scripts": {
     "clean": "rimraf dist ../excel-builder-vanilla-types/dist",
-    "dev:init": "tsup",
+    "dev:init": "tsup && pnpm copy:types",
     "dev": "tsup --watch --onSuccess \"pnpm build:types:map\"",
     "build": "pnpm clean && tsup && pnpm copy:types",
     "build:types:map": "tsc --emitDeclarationOnly --incremental --declarationMap --outDir dist",
