@@ -15,9 +15,9 @@ export default defineConfig({
       fileName: format => {
         switch (format) {
           case 'es':
-            return 'excel-builder.mjs';
+            return 'index.mjs';
           case 'cjs':
-            return 'excel-builder.cjs';
+            return 'index.cjs';
           default:
             return `excel-builder.${format}.js`;
         }
@@ -37,10 +37,11 @@ export default defineConfig({
   plugins: [
     dts({
       include: ['src'],
-      compilerOptions: {
-        declaration: true,
-        declarationMap: true,
-      },
+      insertTypesEntry: true,
+      // compilerOptions: {
+      //   declaration: true,
+      //   declarationMap: true,
+      // },
       beforeWriteFile: (filePath, content) => {
         let safeContent = content;
         if (filePath.endsWith('dist/index.d.ts')) {
