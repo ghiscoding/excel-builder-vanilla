@@ -10,7 +10,12 @@
     "formatWithErrors": true,
     "lineWidth": 140,
     "indentStyle": "space",
-    "ignore": [".cache", "dist/**", "**/*.json", "node_modules/**"]
+    "ignore": [
+      ".cache",
+      "dist/**",
+      "**/*.json",
+      "node_modules/**"
+    ]
   },
   "javascript": {
     "parser": {
@@ -34,7 +39,12 @@
   },
   "linter": {
     "enabled": true,
-    "ignore": [".cache", "dist/**", "**/*.json", "node_modules/**"],
+    "ignore": [
+      ".cache",
+      "dist/**",
+      "**/*.json",
+      "node_modules/**"
+    ],
     "rules": {
       "recommended": true,
       "complexity": {
@@ -42,6 +52,7 @@
         "noStaticOnlyClass": "off"
       },
       "performance": {
+        "noBarrelFile": "off",
         "noDelete": "off"
       },
       "suspicious": {

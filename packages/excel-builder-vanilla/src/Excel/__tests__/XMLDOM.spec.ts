@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { XMLDOM } from '../XMLDOM';
 
 describe('basic DOM simulator for web workers', () => {

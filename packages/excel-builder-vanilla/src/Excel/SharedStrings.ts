@@ -1,4 +1,4 @@
-import { uniqueId } from '../utilities';
+import { uniqueId } from '../utilities/uniqueId';
 import { Util } from './Util';
 
 /**

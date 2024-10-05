@@ -1,5 +1,7 @@
 import type { ExcelFontStyle, ExcelStyleInstruction } from '../interfaces';
-import { isObject, isString, pick, uniqueId } from '../utilities';
+import { isObject, isString } from '../utilities/isTypeOf';
+import { pick } from '../utilities/pick';
+import { uniqueId } from '../utilities/uniqueId';
 import { Util } from './Util';
 import type { XMLDOM } from './XMLDOM';
 

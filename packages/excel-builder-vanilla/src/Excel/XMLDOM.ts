@@ -1,4 +1,4 @@
-import { htmlEscape } from '../utilities';
+import { htmlEscape } from '../utilities/escape';
 
 type XMLNodeOption = {
   attributes?: {

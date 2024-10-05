@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup';
 export default defineConfig(options => [
   // for bundlers like vite, rollup, esbuild, webpack etc
   {
-    entry: ['src/**.ts'],
+    entry: ['src/index.ts'],
     format: ['esm'],
     splitting: false,
     sourcemap: true,

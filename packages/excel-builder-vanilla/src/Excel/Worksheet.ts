@@ -1,5 +1,6 @@
 import type { ExcelColumn, ExcelColumnFormat, ExcelColumnMetadata, ExcelMargin, ExcelStyleInstruction } from '../interfaces';
-import { isObject, isString, uniqueId } from '../utilities';
+import { isObject, isString } from '../utilities/isTypeOf';
+import { uniqueId } from '../utilities/uniqueId';
 import type { Drawings } from './Drawings';
 import { RelationshipManager } from './RelationshipManager';
 import type { SharedStrings } from './SharedStrings';

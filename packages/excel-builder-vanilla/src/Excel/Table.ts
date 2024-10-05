@@ -1,5 +1,6 @@
 import type { ExcelSortState, ExcelTableColumn } from '../interfaces';
-import { isString, uniqueId } from '../utilities';
+import { isString } from '../utilities/isTypeOf';
+import { uniqueId } from '../utilities/uniqueId';
 import { Util } from './Util';
 import type { XMLDOM } from './XMLDOM';
 

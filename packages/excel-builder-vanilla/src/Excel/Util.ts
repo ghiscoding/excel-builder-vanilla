@@ -1,4 +1,4 @@
-import { isPlainObject } from '../utilities';
+import { isPlainObject } from '../utilities/isTypeOf';
 import { XMLDOM, type XMLNode } from './XMLDOM';
 
 /**
