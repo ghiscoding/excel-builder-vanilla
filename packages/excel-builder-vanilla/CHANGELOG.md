@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.10](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.9...v3.0.10) (2024-10-05)
+
+### Bug Fixes
+
+* avoid barrel files, keep only 1 entry file ([c9f34a0](https://github.com/ghiscoding/excel-builder-vanilla/commit/c9f34a092dec3db3dc446f5b4a0f0db1dcec9522)) - by @ghiscoding
+
 ## [3.0.9](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.8...v3.0.9) (2024-10-04)
 
 ### Bug Fixes
