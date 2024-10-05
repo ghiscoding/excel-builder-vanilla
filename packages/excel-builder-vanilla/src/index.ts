@@ -18,6 +18,7 @@ export { Workbook } from './Excel/Workbook';
 export { Worksheet } from './Excel/Worksheet';
 export { XMLDOM, XMLNode } from './Excel/XMLDOM';
 export { createExcelFile, createWorkbook, downloadExcelFile } from './factory';
+export * from './interfaces';
 export { htmlEscape } from './utilities/escape';
 export { isObject, isPlainObject, isString } from './utilities/isTypeOf';
 export { pick } from './utilities/pick';

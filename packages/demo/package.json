@@ -9,6 +9,7 @@
     "standalone:require": "node ./src/examples/example-standalone-require.cjs"
   },
   "dependencies": {
+    "@excel-builder-vanilla/types": "workspace:*",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "excel-builder-vanilla": "workspace:*",

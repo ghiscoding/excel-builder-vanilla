@@ -1,4 +1,5 @@
 import { Workbook, downloadExcelFile } from 'excel-builder-vanilla';
+// import type { ExcelStyleInstruction } from '@excel-builder-vanilla/types';
 
 import './example01.scss';
 

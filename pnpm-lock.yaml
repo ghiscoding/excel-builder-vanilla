@@ -47,6 +47,9 @@ importers:
 
   packages/demo:
     dependencies:
+      '@excel-builder-vanilla/types':
+        specifier: workspace:*
+        version: link:../excel-builder-vanilla-types
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
