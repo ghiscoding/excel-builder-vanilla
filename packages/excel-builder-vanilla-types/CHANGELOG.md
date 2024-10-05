@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.11](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.10...v3.0.11) (2024-10-05)
+
+### Bug Fixes
+
+* add missing interfaces export ([fb67ae6](https://github.com/ghiscoding/excel-builder-vanilla/commit/fb67ae6de79ce2f7ae37afcf680b81e195b37eb5)) - by @ghiscoding
+
 ## [3.0.10](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.9...v3.0.10) (2024-10-05)
 
 ### Bug Fixes
