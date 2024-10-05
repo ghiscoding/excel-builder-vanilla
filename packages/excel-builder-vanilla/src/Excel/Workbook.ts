@@ -1,4 +1,4 @@
-import { uniqueId } from '../utilities';
+import { uniqueId } from '../utilities/uniqueId';
 import type { Drawings } from './Drawings';
 import { Paths } from './Paths';
 import { RelationshipManager } from './RelationshipManager';

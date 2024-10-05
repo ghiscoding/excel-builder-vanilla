@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { Util } from '../Util';
 
 describe('utility functions', () => {

@@ -1,4 +1,4 @@
-import { uniqueId } from '../utilities';
+import { uniqueId } from '../utilities/uniqueId';
 import { Paths } from './Paths';
 import { Util } from './Util';
 

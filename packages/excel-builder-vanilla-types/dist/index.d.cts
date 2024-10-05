@@ -1075,4 +1075,4 @@ declare function pick(object: any, keys: string[]): any;
  */
 declare function uniqueId(prefix?: string): string;
 
-export { AbsoluteAnchor, Chart, Drawing, Drawings, type ExcelAlignmentStyle, type ExcelBorderLineStyle, type ExcelBorderStyle, type ExcelColorStyle, type ExcelColumn, type ExcelColumnFormat, type ExcelColumnMetadata, type ExcelFillStyle, type ExcelFontStyle, type ExcelMargin, type ExcelMetadata, type ExcelSortState, type ExcelStyleInstruction, type ExcelTableColumn, OneCellAnchor, Pane, Paths, Picture, Positioning, RelationshipManager, SharedStrings, SheetView, StyleSheet, Table, TwoCellAnchor, Util, Workbook, Worksheet, XMLDOM, XMLNode, createExcelFile, createWorkbook, downloadExcelFile, htmlEscape, isObject, isPlainObject, isString, pick, uniqueId };
+export { AbsoluteAnchor, Chart, Drawing, Drawings, OneCellAnchor, Pane, Paths, Picture, Positioning, RelationshipManager, SharedStrings, SheetView, StyleSheet, Table, TwoCellAnchor, Util, Workbook, Worksheet, XMLDOM, XMLNode, createExcelFile, createWorkbook, downloadExcelFile, htmlEscape, isObject, isPlainObject, isString, pick, uniqueId };

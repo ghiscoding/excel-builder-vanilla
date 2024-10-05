@@ -1,4 +1,4 @@
-import { uniqueId } from '../../utilities';
+import { uniqueId } from '../../utilities/uniqueId';
 import { AbsoluteAnchor } from './AbsoluteAnchor';
 import { Chart } from './Chart';
 import { OneCellAnchor } from './OneCellAnchor';

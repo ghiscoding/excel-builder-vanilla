@@ -1,4 +1,4 @@
-import { uniqueId } from '../../utilities';
+import { uniqueId } from '../../utilities/uniqueId';
 import { Util } from '../Util';
 import type { XMLDOM } from '../XMLDOM';
 import { Drawing } from './Drawing';

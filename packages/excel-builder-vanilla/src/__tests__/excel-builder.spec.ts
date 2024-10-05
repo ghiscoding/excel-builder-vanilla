@@ -1,7 +1,11 @@
 import { describe, expect, test } from 'vitest';
 
-import { Drawings, Picture, Positioning, Table, Workbook } from '../Excel';
 import { createWorkbook } from '../factory';
+import { Workbook } from '../Excel/Workbook';
+import { Table } from '../Excel/Table';
+import { Drawings } from '../Excel/Drawings';
+import { Positioning } from '../Excel/Positioning';
+import { Picture } from '../Excel/Drawing/Picture';
 
 describe('Excel-Builder-Vanilla', () => {
   const originalData = [

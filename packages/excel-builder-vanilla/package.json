@@ -30,8 +30,6 @@
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
-  "browser": "dist/excel-builder-vanilla.iife.js",
-  "unpkg": "dist/excel-builder-vanilla.iife.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -42,10 +40,6 @@
       "require": {
         "types": "./dist/index.d.cts",
         "default": "./dist/index.cjs"
-      },
-      "browser": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/excel-builder-vanilla.iife.js"
       }
     },
     "./package.json": "./package.json"
