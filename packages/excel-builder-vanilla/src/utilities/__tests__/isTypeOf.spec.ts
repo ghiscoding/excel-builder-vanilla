@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { isObject, isPlainObject, isString } from '../isTypeOf';
+
+import { isObject, isPlainObject, isString } from '../isTypeOf.js';
 
 describe('isObject() method', () => {
   it('should return truthy when input is a valid object', () => {

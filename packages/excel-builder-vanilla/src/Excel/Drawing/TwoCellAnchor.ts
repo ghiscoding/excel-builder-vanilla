@@ -1,5 +1,5 @@
-import { Util } from '../Util';
-import type { XMLDOM } from '../XMLDOM';
+import { Util } from '../Util.js';
+import type { XMLDOM } from '../XMLDOM.js';
 
 export class TwoCellAnchor {
   from: any = { xOff: 0, yOff: 0 };

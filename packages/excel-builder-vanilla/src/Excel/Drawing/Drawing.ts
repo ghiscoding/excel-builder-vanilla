@@ -1,9 +1,9 @@
-import { uniqueId } from '../../utilities/uniqueId';
-import { AbsoluteAnchor } from './AbsoluteAnchor';
-import { Chart } from './Chart';
-import { OneCellAnchor } from './OneCellAnchor';
-import { TwoCellAnchor } from './TwoCellAnchor';
-// import { Picture } from './Picture';
+import { uniqueId } from '../../utilities/uniqueId.js';
+import { AbsoluteAnchor } from './AbsoluteAnchor.js';
+import { Chart } from './Chart.js';
+import { OneCellAnchor } from './OneCellAnchor.js';
+import { TwoCellAnchor } from './TwoCellAnchor.js';
+// import { Picture } from './Picture.js';
 
 /**
  * This is mostly a global spot where all of the relationship managers can get and set

@@ -1,9 +1,9 @@
-import type { ExcelFontStyle, ExcelStyleInstruction } from '../interfaces';
-import { isObject, isString } from '../utilities/isTypeOf';
-import { pick } from '../utilities/pick';
-import { uniqueId } from '../utilities/uniqueId';
-import { Util } from './Util';
-import type { XMLDOM } from './XMLDOM';
+import type { ExcelFontStyle, ExcelStyleInstruction } from '../interfaces.js';
+import { isObject, isString } from '../utilities/isTypeOf.js';
+import { pick } from '../utilities/pick.js';
+import { uniqueId } from '../utilities/uniqueId.js';
+import { Util } from './Util.js';
+import type { XMLDOM } from './XMLDOM.js';
 
 /**
  * @module Excel/StyleSheet

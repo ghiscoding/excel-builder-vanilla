@@ -1,6 +1,6 @@
-import { uniqueId } from '../utilities/uniqueId';
-import { Paths } from './Paths';
-import { Util } from './Util';
+import { uniqueId } from '../utilities/uniqueId.js';
+import { Paths } from './Paths.js';
+import { Util } from './Util.js';
 
 /**
  * @module Excel/RelationshipManager

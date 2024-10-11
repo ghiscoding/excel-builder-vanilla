@@ -1,6 +1,6 @@
 import { type ZipOptions, strToU8, zip } from 'fflate';
 
-import { Workbook } from './Excel/Workbook';
+import { Workbook } from './Excel/Workbook.js';
 
 type InferOutputByType<T extends 'Blob' | 'Uint8Array'> = T extends 'Blob' ? Blob : T extends 'Uint8Array' ? Uint8Array : any;
 

@@ -1,8 +1,8 @@
-import { uniqueId } from '../utilities/uniqueId';
-import type { Drawing } from './Drawing/Drawing';
-import type { Picture } from './Drawing/Picture';
-import { RelationshipManager } from './RelationshipManager';
-import { Util } from './Util';
+import { uniqueId } from '../utilities/uniqueId.js';
+import type { Drawing } from './Drawing/Drawing.js';
+import type { Picture } from './Drawing/Picture.js';
+import { RelationshipManager } from './RelationshipManager.js';
+import { Util } from './Util.js';
 
 /**
  * @module Excel/Drawings

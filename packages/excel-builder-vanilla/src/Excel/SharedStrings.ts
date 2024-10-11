@@ -1,5 +1,5 @@
-import { uniqueId } from '../utilities/uniqueId';
-import { Util } from './Util';
+import { uniqueId } from '../utilities/uniqueId.js';
+import { Util } from './Util.js';
 
 /**
  * @module Excel/SharedStrings

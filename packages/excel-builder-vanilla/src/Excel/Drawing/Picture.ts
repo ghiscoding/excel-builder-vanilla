@@ -1,7 +1,7 @@
-import { uniqueId } from '../../utilities/uniqueId';
-import { Util } from '../Util';
-import type { XMLDOM } from '../XMLDOM';
-import { Drawing } from './Drawing';
+import { uniqueId } from '../../utilities/uniqueId.js';
+import { Util } from '../Util.js';
+import type { XMLDOM } from '../XMLDOM.js';
+import { Drawing } from './Drawing.js';
 
 export class Picture extends Drawing {
   media: any = null;

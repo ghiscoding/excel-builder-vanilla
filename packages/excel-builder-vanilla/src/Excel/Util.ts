@@ -1,5 +1,5 @@
-import { isPlainObject } from '../utilities/isTypeOf';
-import { XMLDOM, type XMLNode } from './XMLDOM';
+import { isPlainObject } from '../utilities/isTypeOf.js';
+import { XMLDOM, type XMLNode } from './XMLDOM.js';
 
 /**
  * @module Excel/Util

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { Worksheet } from '../Worksheet';
-import { XMLDOM, XMLNode } from '../XMLDOM';
+import { Worksheet } from '../Worksheet.js';
+import { XMLDOM, XMLNode } from '../XMLDOM.js';
 
 describe('Excel/Worksheet', () => {
   describe('compilePageDetailPiece', () => {
