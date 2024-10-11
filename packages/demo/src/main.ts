@@ -2,7 +2,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.css';
 
-import { exampleRouting, navbarRouting } from './app-routing';
+import { exampleRouting, navbarRouting } from './app-routing.js';
 import mainHtml from './main.html?raw';
 import './style.scss';
 
