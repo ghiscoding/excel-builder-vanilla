@@ -1,13 +1,13 @@
-import type { ExcelColumn, ExcelColumnFormat, ExcelColumnMetadata, ExcelMargin, ExcelStyleInstruction } from '../interfaces';
-import { isObject, isString } from '../utilities/isTypeOf';
-import { uniqueId } from '../utilities/uniqueId';
-import type { Drawings } from './Drawings';
-import { RelationshipManager } from './RelationshipManager';
-import type { SharedStrings } from './SharedStrings';
-import { SheetView } from './SheetView';
-import type { Table } from './Table';
-import { Util } from './Util';
-import type { XMLDOM, XMLNode } from './XMLDOM';
+import type { ExcelColumn, ExcelColumnFormat, ExcelColumnMetadata, ExcelMargin, ExcelStyleInstruction } from '../interfaces.js';
+import { isObject, isString } from '../utilities/isTypeOf.js';
+import { uniqueId } from '../utilities/uniqueId.js';
+import type { Drawings } from './Drawings.js';
+import { RelationshipManager } from './RelationshipManager.js';
+import type { SharedStrings } from './SharedStrings.js';
+import { SheetView } from './SheetView.js';
+import type { Table } from './Table.js';
+import { Util } from './Util.js';
+import type { XMLDOM, XMLNode } from './XMLDOM.js';
 
 interface CharType {
   font?: string;

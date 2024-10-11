@@ -1,13 +1,13 @@
-import { uniqueId } from '../utilities/uniqueId';
-import type { Drawings } from './Drawings';
-import { Paths } from './Paths';
-import { RelationshipManager } from './RelationshipManager';
-import { SharedStrings } from './SharedStrings';
-import { StyleSheet } from './StyleSheet';
-import type { Table } from './Table';
-import { Util } from './Util';
-import { Worksheet } from './Worksheet';
-import { XMLDOM } from './XMLDOM';
+import { uniqueId } from '../utilities/uniqueId.js';
+import type { Drawings } from './Drawings.js';
+import { Paths } from './Paths.js';
+import { RelationshipManager } from './RelationshipManager.js';
+import { SharedStrings } from './SharedStrings.js';
+import { StyleSheet } from './StyleSheet.js';
+import type { Table } from './Table.js';
+import { Util } from './Util.js';
+import { Worksheet } from './Worksheet.js';
+import { XMLDOM } from './XMLDOM.js';
 
 /**
  * @module Excel/Workbook

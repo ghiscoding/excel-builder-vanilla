@@ -1,8 +1,8 @@
-import type { ExcelSortState, ExcelTableColumn } from '../interfaces';
-import { isString } from '../utilities/isTypeOf';
-import { uniqueId } from '../utilities/uniqueId';
-import { Util } from './Util';
-import type { XMLDOM } from './XMLDOM';
+import type { ExcelSortState, ExcelTableColumn } from '../interfaces.js';
+import { isString } from '../utilities/isTypeOf.js';
+import { uniqueId } from '../utilities/uniqueId.js';
+import { Util } from './Util.js';
+import type { XMLDOM } from './XMLDOM.js';
 
 /**
  * @module Excel/Table

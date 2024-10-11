@@ -1,8 +1,6 @@
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writeFileSync } from 'node:fs';
 import { defineConfig } from 'vite';
-import dts from 'vite-plugin-dts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -34,30 +32,4 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
-    dts({
-      include: ['src'],
-      insertTypesEntry: true,
-      // compilerOptions: {
-      //   declaration: true,
-      //   declarationMap: true,
-      // },
-      beforeWriteFile: (filePath, content) => {
-        let safeContent = content;
-        if (filePath.endsWith('dist/index.d.ts')) {
-          if (!safeContent) {
-            safeContent = 'export {};';
-          }
-
-          const ctsFile = filePath.replace('d.ts', 'd.cts');
-          writeFileSync(ctsFile, safeContent);
-        }
-
-        return {
-          filePath,
-          content: safeContent,
-        };
-      },
-    }),
-  ],
 });

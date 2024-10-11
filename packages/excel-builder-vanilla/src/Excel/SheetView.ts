@@ -1,6 +1,6 @@
-import { Pane } from './Pane';
-import { Util } from './Util';
-import type { XMLDOM } from './XMLDOM';
+import { Pane } from './Pane.js';
+import { Util } from './Util.js';
+import type { XMLDOM } from './XMLDOM.js';
 
 interface SheetViewOption {
   pane?: Pane;

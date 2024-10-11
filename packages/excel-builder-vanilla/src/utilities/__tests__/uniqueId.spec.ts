@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { uniqueId } from '../uniqueId';
+
+import { uniqueId } from '../uniqueId.js';
 
 describe('uniqueId() method', () => {
   it('should return number starting at 1 when no prefix provided', () => {
