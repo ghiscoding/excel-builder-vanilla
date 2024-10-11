@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.12](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.11...v3.0.12) (2024-10-11)
+
+### Bug Fixes
+
+* remove tsup, replace with Vite + dts-bundle-generator ([2f8431f](https://github.com/ghiscoding/excel-builder-vanilla/commit/2f8431f27d18d0eaddbf53bdb16f9b649cb9a414)) - by @ghiscoding
+
 ## [3.0.11](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.10...v3.0.11) (2024-10-05)
 
 ### Bug Fixes
