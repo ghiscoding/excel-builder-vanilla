@@ -46,6 +46,9 @@
       "node_modules/**"
     ],
     "rules": {
+      "correctness": {
+        "useImportExtensions": "error"
+      },
       "recommended": true,
       "complexity": {
         "noForEach": "off",

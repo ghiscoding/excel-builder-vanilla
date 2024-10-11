@@ -1,7 +1,7 @@
 import { strFromU8 } from 'fflate';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createExcelFile, createWorkbook, downloadExcelFile } from '../factory';
+import { createExcelFile, createWorkbook, downloadExcelFile } from '../factory.js';
 
 describe('ExcelExportService', () => {
   let mockExcelBlob: Blob;

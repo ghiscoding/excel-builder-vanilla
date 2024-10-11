@@ -1,16 +1,16 @@
-import Example01 from './examples/example01';
-import Example02 from './examples/example02';
-import Example03 from './examples/example03';
-import Example04 from './examples/example04';
-import Example05 from './examples/example05';
-import Example06 from './examples/example06';
-import Example07 from './examples/example07';
-import Example08 from './examples/example08';
-import Example09 from './examples/example09';
-import Example10 from './examples/example10';
-import Example11 from './examples/example11';
-import Example12 from './examples/example12';
-import GettingStarted from './getting-started';
+import Example01 from './examples/example01.js';
+import Example02 from './examples/example02.js';
+import Example03 from './examples/example03.js';
+import Example04 from './examples/example04.js';
+import Example05 from './examples/example05.js';
+import Example06 from './examples/example06.js';
+import Example07 from './examples/example07.js';
+import Example08 from './examples/example08.js';
+import Example09 from './examples/example09.js';
+import Example10 from './examples/example10.js';
+import Example11 from './examples/example11.js';
+import Example12 from './examples/example12.js';
+import GettingStarted from './getting-started.js';
 
 export const navbarRouting = [
   { name: 'getting-started', view: '/src/getting-started.html', viewModel: GettingStarted, title: 'Getting Started' },

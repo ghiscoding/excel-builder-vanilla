@@ -1,11 +1,11 @@
 import { describe, expect, test } from 'vitest';
 
-import { createWorkbook } from '../factory';
-import { Workbook } from '../Excel/Workbook';
-import { Table } from '../Excel/Table';
-import { Drawings } from '../Excel/Drawings';
-import { Positioning } from '../Excel/Positioning';
-import { Picture } from '../Excel/Drawing/Picture';
+import { createWorkbook } from '../factory.js';
+import { Workbook } from '../Excel/Workbook.js';
+import { Table } from '../Excel/Table.js';
+import { Drawings } from '../Excel/Drawings.js';
+import { Positioning } from '../Excel/Positioning.js';
+import { Picture } from '../Excel/Drawing/Picture.js';
 
 describe('Excel-Builder-Vanilla', () => {
   const originalData = [
