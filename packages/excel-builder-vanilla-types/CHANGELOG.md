@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.13](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.12...v3.0.13) (2024-10-13)
+
+### Bug Fixes
+
+* type package add back type module ([ce77971](https://github.com/ghiscoding/excel-builder-vanilla/commit/ce77971412e8978873d3e3ef19240a74480d9f0a)) - by @ghiscoding
+
 ## [3.0.12](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.11...v3.0.12) (2024-10-11)
 
 ### Bug Fixes
