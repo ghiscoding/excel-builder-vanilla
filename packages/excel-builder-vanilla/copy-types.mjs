@@ -9,7 +9,7 @@ copyfiles([source, destination], {}, err => {
     console.error(err);
   } else {
     // all good, next step, create JS entry file
-    writeFileSync(`${destination}/dist/excel-builder.cjs`, `'use strict';`);
-    writeFileSync(`${destination}/dist/excel-builder.mjs`, `'use strict';`);
+    writeFileSync(`${destination}/dist/index.cjs`, `'use strict';`);
+    writeFileSync(`${destination}/dist/index.mjs`, `'use strict';`);
   }
 });
