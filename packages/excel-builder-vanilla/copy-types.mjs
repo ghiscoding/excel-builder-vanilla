@@ -10,6 +10,6 @@ copyfiles([source, destination], {}, err => {
   } else {
     // all good, next step, create JS entry file
     writeFileSync(`${destination}/dist/excel-builder.cjs`, `'use strict';`);
-    writeFileSync(`${destination}/dist/excel-builder.mjs`, '');
+    writeFileSync(`${destination}/dist/excel-builder.mjs`, `'use strict';`);
   }
 });
