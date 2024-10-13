@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.0.14](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.13...v3.0.14) (2024-10-13)
+
+### Bug Fixes
+
+* run attw and use correct index file entries ([19c3e99](https://github.com/ghiscoding/excel-builder-vanilla/commit/19c3e99c2963a5dc5849ba2c395ae90f7cf89d03)) - by @ghiscoding
+
 ## [3.0.13](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.12...v3.0.13) (2024-10-13)
 
 **Note:** Version bump only for package excel-builder-vanilla

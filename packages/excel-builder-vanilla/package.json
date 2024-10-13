@@ -1,6 +1,6 @@
 {
   "name": "excel-builder-vanilla",
-  "version": "3.0.13",
+  "version": "3.0.14",
   "description": "An easy way of building Excel files with javascript",
   "keywords": [
     "excel",
