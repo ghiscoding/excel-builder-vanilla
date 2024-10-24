@@ -127,6 +127,13 @@ Before submitting a PR (pull request), please make sure that you followed these 
 4. run a full Build (this will also run Biome lint/format, so you could skip step 2)
    - `pnpm run build`
 
+### Packages
+
+| Package Name | NPM downloads | Size (gzip) | Changes | Description |
+| -------------| ------- | ----------- | ------- | ----------- |
+| [excel-builder-vanilla](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/excel-builder-vanilla) | [![NPM downloads](https://img.shields.io/npm/dm/excel-builder-vanilla)](https://npmjs.org/package/excel-builder-vanilla) | [![npm bundle size](https://img.shields.io/bundlephobia/minzip/excel-builder-vanilla?color=success&label=gzip)](https://bundlephobia.com/result?p=excel-builder-vanilla) | [changelog](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/excel-builder-vanilla/CHANGELOG.md) | `excel-builder-vanilla` library package |
+| [excel-builder-vanilla-types](https://github.com/ghiscoding/excel-builder/tree/main/packages/excel-builder-vanilla-types) | [![NPM downloads](https://img.shields.io/npm/dm/@excel-builder-vanilla/types)](https://npmjs.org/package/@excel-builder-vanilla/types) | [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@excel-builder-vanilla/types?color=success&label=gzip)](https://bundlephobia.com/result?p=@excel-builder-vanilla/types) | [changelog](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/excel-builder-vanilla-types/CHANGELOG.md) | `excel-builder-vanilla` dts types only package.
+
 ## Sponsors
 
 <div>
