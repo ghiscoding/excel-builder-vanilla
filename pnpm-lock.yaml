@@ -33,8 +33,8 @@ importers:
         specifier: ^15.7.4
         version: 15.7.4
       pnpm:
-        specifier: ^8.15.9
-        version: 8.15.9
+        specifier: ^9.12.2
+        version: 9.12.2
       rimraf:
         specifier: ^5.0.10
         version: 5.0.10
@@ -3528,9 +3528,9 @@ packages:
       find-up: 4.1.0
     dev: true
 
-  /pnpm@8.15.9:
-    resolution: {integrity: sha512-SZQ0ydj90aJ5Tr9FUrOyXApjOrzuW7Fee13pDzL0e1E6ypjNXP0AHDHw20VLw4BO3M1XhQHkyik6aBYWa72fgQ==}
-    engines: {node: '>=16.14'}
+  /pnpm@9.12.2:
+    resolution: {integrity: sha512-InIbOhH4FmGuHsaM4ae4eUJaHKW5kcl1sHSsIgsYfOVscI/l22n0yWLJiUUu7nbIKHf07oD0dM69Ye4TRhtiKA==}
+    engines: {node: '>=18.12'}
     hasBin: true
     dev: true
 
