@@ -1,6 +1,7 @@
 The MIT License
 
-Copyright (c) 2009-present Stephen Liberty
+Copyright (c) 2009-present Stephen Liberty and Ghislain B.
+https://github.com/ghiscoding/excel-builder-vanilla
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
