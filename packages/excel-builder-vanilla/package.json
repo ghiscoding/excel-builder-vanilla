@@ -66,6 +66,6 @@
     "copyfiles": "^2.4.1",
     "dts-bundle-generator": "^9.5.1",
     "typescript": "^5.6.3",
-    "vite": "^5.4.8"
+    "vite": "^6.0.0-beta.9"
   }
 }
