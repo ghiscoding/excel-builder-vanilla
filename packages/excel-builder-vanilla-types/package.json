@@ -38,6 +38,9 @@
     "./package.json": "./package.json"
   },
   "sideEffects": false,
+  "scripts": {
+    "are-type-wrong": "pnpx @arethetypeswrong/cli --pack ."
+  },
   "funding": {
     "type": "ko_fi",
     "url": "https://ko-fi.com/ghiscoding"
