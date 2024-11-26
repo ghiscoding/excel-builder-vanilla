@@ -11,11 +11,4 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['excel-builder-vanilla'],
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: 'modern-compiler',
-      },
-    },
-  },
 });
