@@ -18,7 +18,7 @@ importers:
         specifier: ^3.11.0
         version: 3.11.0(@types/node@22.10.10)(typescript@5.7.3)
       '@types/node':
-        specifier: ^22.10.9
+        specifier: ^22.10.10
         version: 22.10.10
       '@vitest/coverage-v8':
         specifier: ^3.0.4
