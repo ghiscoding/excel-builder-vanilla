@@ -11,5 +11,5 @@
       allowedVersions: '<6.0.0',
     },
   ],
-  schedule: ['every month'],
+  schedule: ['every 3 months'],
 }
