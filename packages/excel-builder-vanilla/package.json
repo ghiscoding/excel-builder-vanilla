@@ -63,8 +63,8 @@
     "fflate": "^0.8.2"
   },
   "devDependencies": {
-    "copyfiles": "^2.4.1",
     "dts-bundle-generator": "^9.5.1",
+    "native-copyfiles": "^0.2.1",
     "typescript": "^5.7.3",
     "vite": "^6.0.11"
   }
