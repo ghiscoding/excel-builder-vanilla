@@ -1,5 +1,5 @@
 import { writeFileSync } from 'node:fs';
-import copyfiles from 'copyfiles';
+import { copyfiles } from 'native-copyfiles';
 
 // copy all types (d.ts) files with same folder structures
 const source = 'dist/**/*.d.{cts,ts}';
