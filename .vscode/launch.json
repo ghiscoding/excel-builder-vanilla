@@ -30,7 +30,7 @@
       "autoAttachChildProcesses": true,
       "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
       "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
-      "args": ["run", "${relativeFile}", "--pool", "forks", "--no-watch", "--config", "./vitest/vitest.config.mts"],
+      "args": ["run", "${relativeFile}", "--no-watch", "--config", "./vitest/vitest.config.mts"],
       "smartStep": true,
       "console": "integratedTerminal"
     }
