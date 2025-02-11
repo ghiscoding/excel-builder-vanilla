@@ -16,7 +16,7 @@
 
 ## Description
 
-This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making the library super lightweight.
+This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making the library super lightweight for exporting to Excel.
 
 ## Live Demo
 
