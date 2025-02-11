@@ -33,7 +33,7 @@ importers:
         specifier: ^16.8.1
         version: 16.8.1
       pnpm:
-        specifier: ^9.15.5
+        specifier: ^9.10.0
         version: 9.15.5
       rimraf:
         specifier: ^5.0.10
