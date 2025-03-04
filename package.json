@@ -47,6 +47,10 @@
     "test": "vitest --watch --config ./vitest/vitest.config.mts",
     "test:coverage": "vitest --coverage --config ./vitest/vitest.config.mts"
   },
+  "engines": {
+    "node": "^20.0.0 || >=22.0.0",
+    "pnpm": "9.x"
+  },
   "packageManager": "pnpm@9.10.0",
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
