@@ -1,8 +1,6 @@
 ## Excel-Builder-Vanilla (forked from [`excel-builder.js`](https://github.com/stephenliberty/excel-builder.js))
 
-Excel Builder (abbreviated as 'EB' for the sake of typing) is a relatively simple way of creating Office 2007 Excel files in JavaScript (readable by office 2000/XP/2003 if the support pack has been installed).
-
-Starting work on an updated version with more "modern" api's and nodejs support, but this will take time (and therefor money). So, donations are appreciated, and opening up bounties on issues ( bounties received ) will help a lot. So will the couple of advertisements I put on the site.
+Excel Builder (abbreviated as 'EB' for the sake of typing) is a relatively simple way of creating Office 2007 Excel files in JavaScript.
 
 ### Download
 
@@ -36,14 +34,6 @@ or from CDN with standalone script (IIFE)
 - Setting page headers and footers
 - Formula support
 - Insertion of pictures
-
-### TODO (in order of priority)
-
-- Better code documentation, and add actual site documentation
-- General code cleanup
-- Should be able to create a custom theme
-- Tables are done, but Pivot tables need to be done
-- Charts
 
 ### Why on earth would you build an excel file in JavaScript?!?!
 
