@@ -56,6 +56,69 @@ export declare class XMLNode {
 /**
  *
  * @param {Object} config
+ * @param {Number} config.x The cell column number that the top left of the picture will start in
+ * @param {Number} config.y The cell row number that the top left of the picture will start in
+ * @param {Number} config.width Width in EMU's
+ * @param {Number} config.height Height in EMU's
+ * @constructor
+ */
+export declare class OneCellAnchor {
+	x: number | null;
+	y: number | null;
+	xOff: boolean | null;
+	yOff: boolean | null;
+	width: number | null;
+	height: number | null;
+	constructor(config: AnchorOption);
+	setPos(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
+	setDimensions(width: number, height: number): void;
+	toXML(xmlDoc: XMLDOM, content: any): XMLNode;
+}
+export declare class TwoCellAnchor {
+	from: any;
+	to: any;
+	constructor(config: DualAnchorOption);
+	setFrom(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
+	setTo(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
+	toXML(xmlDoc: XMLDOM, content: any): XMLNode;
+}
+export interface AnchorOption {
+	/** X offset in EMU's */
+	x: number;
+	/** Y offset in EMU's */
+	y: number;
+	xOff?: boolean;
+	yOff?: boolean;
+	/** Width in EMU's */
+	height: number;
+	/** Height in EMU's */
+	width: number;
+	drawing?: Drawing;
+}
+export interface DualAnchorOption {
+	to: AnchorOption;
+	from: AnchorOption;
+	drawing?: Drawing;
+}
+/**
+ * This is mostly a global spot where all of the relationship managers can get and set
+ * path information from/to.
+ * @module Excel/Drawing
+ */
+export declare class Drawing {
+	anchor: AbsoluteAnchor | OneCellAnchor | TwoCellAnchor;
+	id: string;
+	/**
+	 *
+	 * @param {String} type Can be 'absoluteAnchor', 'oneCellAnchor', or 'twoCellAnchor'.
+	 * @param {Object} config Shorthand - pass the created anchor coords that can normally be used to construct it.
+	 * @returns {Anchor}
+	 */
+	createAnchor(type: "absoluteAnchor" | "oneCellAnchor" | "twoCellAnchor", config: any): AbsoluteAnchor | OneCellAnchor | TwoCellAnchor;
+}
+/**
+ *
+ * @param {Object} config
  * @param {Number} config.x X offset in EMU's
  * @param {Number} config.y Y offset in EMU's
  * @param {Number} config.width Width in EMU's
@@ -67,7 +130,7 @@ export declare class AbsoluteAnchor {
 	y: number | null;
 	width: number | null;
 	height: number | null;
-	constructor(config: any);
+	constructor(config: AnchorOption);
 	/**
 	 * Sets the X and Y offsets.
 	 *
@@ -87,55 +150,6 @@ export declare class AbsoluteAnchor {
 	toXML(xmlDoc: XMLDOM, content: any): XMLNode;
 }
 export declare class Chart {
-}
-/**
- *
- * @param {Object} config
- * @param {Number} config.x The cell column number that the top left of the picture will start in
- * @param {Number} config.y The cell row number that the top left of the picture will start in
- * @param {Number} config.width Width in EMU's
- * @param {Number} config.height Height in EMU's
- * @constructor
- */
-export declare class OneCellAnchor {
-	x: number | null;
-	y: number | null;
-	xOff: boolean | null;
-	yOff: boolean | null;
-	width: number | null;
-	height: number | null;
-	constructor(config: any);
-	setPos(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
-	setDimensions(width: number, height: number): void;
-	toXML(xmlDoc: XMLDOM, content: any): XMLNode;
-}
-export declare class TwoCellAnchor {
-	from: any;
-	to: any;
-	constructor(config: any);
-	setFrom(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
-	setTo(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
-	toXML(xmlDoc: XMLDOM, content: any): XMLNode;
-}
-/**
- * This is mostly a global spot where all of the relationship managers can get and set
- * path information from/to.
- * @module Excel/Drawing
- */
-export declare class Drawing {
-	anchor: any;
-	id: string;
-	get AbsoluteAnchor(): typeof AbsoluteAnchor;
-	get Chart(): typeof Chart;
-	get OneCellAnchor(): typeof OneCellAnchor;
-	get TwoCellAnchor(): typeof TwoCellAnchor;
-	/**
-	 *
-	 * @param {String} type Can be 'absoluteAnchor', 'oneCellAnchor', or 'twoCellAnchor'.
-	 * @param {Object} config Shorthand - pass the created anchor coords that can normally be used to construct it.
-	 * @returns {Anchor}
-	 */
-	createAnchor(type: string, config: any): any;
 }
 /**
  * @module Excel/Util
@@ -206,55 +220,31 @@ export declare class Util {
 		hyperlink: string;
 	};
 }
-export declare class Picture extends Drawing {
-	media: any;
-	id: string;
-	pictureId: number;
-	fill: any;
-	mediaData: any;
-	description: string;
-	constructor();
-	setMedia(mediaRef: any): void;
-	setDescription(description: string): void;
-	setFillType(type: string): void;
-	setFillConfig(config: any): void;
-	getMediaType(): keyof typeof Util.schemas;
-	getMediaData(): any;
-	setRelationshipId(rId: string): void;
-	toXML(xmlDoc: XMLDOM): any;
-}
+export type Relation = {
+	[id: string]: {
+		id: string;
+		schema: string;
+		object: any;
+		data?: {
+			id: number;
+			schema: string;
+			object: any;
+		};
+	};
+};
 /**
  * @module Excel/RelationshipManager
  */
 export declare class RelationshipManager {
-	relations: {
-		[id: string]: {
-			id: string;
-			schema: string;
-			object: any;
-			data?: {
-				id: number;
-				schema: string;
-				object: any;
-			};
-		};
-	};
+	relations: Relation;
 	lastId: number;
 	constructor();
-	importData(data: any): void;
+	importData(data: {
+		relations: Relation;
+		lastId: number;
+	}): void;
 	exportData(): {
-		relations: {
-			[id: string]: {
-				id: string;
-				schema: string;
-				object: any;
-				data?: {
-					id: number;
-					schema: string;
-					object: any;
-				};
-			};
-		};
+		relations: Relation;
 		lastId: number;
 	};
 	addRelation(object: {
@@ -282,40 +272,6 @@ export declare class Drawings {
 	getCount(): number;
 	toXML(): XMLDOM;
 }
-export declare class Pane {
-	state: null | "split" | "frozen" | "frozenSplit";
-	xSplit: number | null;
-	ySplit: number | null;
-	activePane: string;
-	topLeftCell: number | string | null;
-	_freezePane: {
-		xSplit: number;
-		ySplit: number;
-		cell: string;
-	};
-	freezePane(column: number, row: number, cell: string): void;
-	exportXML(doc: XMLDOM): XMLNode;
-}
-/**
- * This is mostly a global spot where all of the relationship managers can get and set
- * path information from/to.
- * @module Excel/Paths
- */
-export declare const Paths: {
-	[path: string]: string;
-};
-/**
- * Converts pixel sizes to 'EMU's, which is what Open XML uses.
- *
- * @todo clean this up. Code borrowed from http://polymathprogrammer.com/2009/10/22/english-metric-units-and-open-xml/,
- * but not sure that it's going to be as accurate as it needs to be.
- *
- * @param int pixels
- * @returns int
- */
-export declare class Positioning {
-	static pixelsToEMUs(pixels: number): number;
-}
 /**
  * @module Excel/SharedStrings
  */
@@ -337,45 +293,6 @@ export declare class SharedStrings {
 		[key: string]: number;
 	};
 	toXML(): XMLDOM;
-}
-export interface SheetViewOption {
-	pane?: Pane;
-}
-/**
- * @module Excel/SheetView
- * https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheetview%28v=office.14%29.aspx
- *
- */
-export declare class SheetView {
-	pane: Pane;
-	showZeros: null;
-	defaultGridColor: null;
-	colorId: null;
-	rightToLeft: null;
-	showFormulas: null;
-	showGridLines: null;
-	showOutlineSymbols: null;
-	showRowColHeaders: null;
-	showRuler: null;
-	showWhiteSpace: null;
-	tabSelected: null;
-	topLeftCell: null;
-	viewType: null;
-	windowProtection: null;
-	zoomScale: null;
-	zoomScaleNormal: null;
-	zoomScalePageLayoutView: null;
-	zoomScaleSheetLayoutView: null;
-	constructor(config?: SheetViewOption);
-	/**
-	 * Added froze pane
-	 * @param column - column number: 0, 1, 2 ...
-	 * @param row - row number: 0, 1, 2 ...
-	 * @param cell - 'A1'
-	 * @deprecated
-	 */
-	freezePane(column: number, row: number, cell: string): void;
-	exportXML(doc: XMLDOM): XMLNode;
 }
 /**
  * Excel Color in ARGB format, for color aren't transparent just use "FF" as prefix.
@@ -687,6 +604,59 @@ export declare class Table {
 	exportTableStyleInfo(doc: XMLDOM): XMLNode;
 	addAutoFilter(startRef: any, endRef: any): void;
 }
+export declare class Pane {
+	state: null | "split" | "frozen" | "frozenSplit";
+	xSplit: number | null;
+	ySplit: number | null;
+	activePane: string;
+	topLeftCell: number | string | null;
+	_freezePane: {
+		xSplit: number;
+		ySplit: number;
+		cell: string;
+	};
+	freezePane(column: number, row: number, cell: string): void;
+	exportXML(doc: XMLDOM): XMLNode;
+}
+export interface SheetViewOption {
+	pane?: Pane;
+}
+/**
+ * @module Excel/SheetView
+ * https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheetview%28v=office.14%29.aspx
+ *
+ */
+export declare class SheetView {
+	pane: Pane;
+	showZeros: boolean | null;
+	defaultGridColor: string | null;
+	colorId: number | null;
+	rightToLeft: boolean | null;
+	showFormulas: boolean | null;
+	showGridLines: boolean | null;
+	showOutlineSymbols: boolean | null;
+	showRowColHeaders: boolean | null;
+	showRuler: boolean | null;
+	showWhiteSpace: boolean | null;
+	tabSelected: boolean | null;
+	topLeftCell: boolean | null;
+	viewType: null;
+	windowProtection: boolean | null;
+	zoomScale: boolean | null;
+	zoomScaleNormal: any;
+	zoomScalePageLayoutView: any;
+	zoomScaleSheetLayoutView: any;
+	constructor(config?: SheetViewOption);
+	/**
+	 * Added froze pane
+	 * @param column - column number: 0, 1, 2 ...
+	 * @param row - row number: 0, 1, 2 ...
+	 * @param cell - 'A1'
+	 * @deprecated
+	 */
+	freezePane(column: number, row: number, cell: string): void;
+	exportXML(doc: XMLDOM): XMLNode;
+}
 export interface CharType {
 	font?: string;
 	bold?: boolean;
@@ -941,6 +911,14 @@ export declare class Worksheet {
 	 */
 	setColumnFormats(columnFormats: ExcelColumnFormat[]): void;
 }
+export interface MediaMeta {
+	id: string;
+	data: string;
+	fileName: string;
+	contentType: string | null;
+	extension: string;
+	rId?: string;
+}
 /**
  * @module Excel/Workbook
  */
@@ -952,7 +930,9 @@ export declare class Workbook {
 	worksheets: Worksheet[];
 	tables: Table[];
 	drawings: Drawings[];
-	media: any;
+	media: {
+		[filename: string]: MediaMeta;
+	};
 	printTitles: any;
 	constructor();
 	initialize(): void;
@@ -976,7 +956,7 @@ export declare class Workbook {
 	 * @returns {undefined}
 	 */
 	setPrintTitleLeft(inSheet: string, inRowCount: number): void;
-	addMedia(_type: string, fileName: string, fileData: any, contentType?: string | null): any;
+	addMedia(_type: string, fileName: string, fileData: any, contentType?: string | null): MediaMeta;
 	addWorksheet(worksheet: Worksheet): void;
 	createContentTypes(): XMLDOM;
 	toXML(): XMLDOM;
@@ -988,6 +968,42 @@ export declare class Workbook {
 	generateFiles(): Promise<{
 		[path: string]: string;
 	}>;
+}
+export declare class Picture extends Drawing {
+	id: string;
+	pictureId: number;
+	fill: any;
+	mediaData: MediaMeta | null;
+	description: string;
+	constructor();
+	setMedia(mediaRef: MediaMeta): void;
+	setDescription(description: string): void;
+	setFillType(type: string): void;
+	setFillConfig(config: any): void;
+	getMediaType(): keyof typeof Util.schemas;
+	getMediaData(): MediaMeta;
+	setRelationshipId(rId: string): void;
+	toXML(xmlDoc: XMLDOM): XMLNode;
+}
+/**
+ * This is mostly a global spot where all of the relationship managers can get and set
+ * path information from/to.
+ * @module Excel/Paths
+ */
+export declare const Paths: {
+	[path: string]: string;
+};
+/**
+ * Converts pixel sizes to 'EMU's, which is what Open XML uses.
+ *
+ * @todo clean this up. Code borrowed from http://polymathprogrammer.com/2009/10/22/english-metric-units-and-open-xml/,
+ * but not sure that it's going to be as accurate as it needs to be.
+ *
+ * @param int pixels
+ * @returns int
+ */
+export declare class Positioning {
+	static pixelsToEMUs(pixels: number): number;
 }
 export type InferOutputByType<T extends "Blob" | "Uint8Array"> = T extends "Blob" ? Blob : T extends "Uint8Array" ? Uint8Array : any;
 /**
