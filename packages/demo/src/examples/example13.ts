@@ -38,7 +38,7 @@ export default class Example {
     albumTable.setReferenceRange([1, 1], [3, originalData.length]);
     albumTable.setTableColumns(['Artist', 'Album', 'Price']);
 
-    // worksheet.sheetView.showGridLines = false;
+    worksheet.sheetView.showGridLines = false;
     worksheet.setData(originalData);
     workbook.addWorksheet(worksheet);
 

@@ -2,25 +2,31 @@ import { uniqueId } from '../utilities/uniqueId.js';
 import { Paths } from './Paths.js';
 import { Util } from './Util.js';
 
+type Relation = {
+  [id: string]: {
+    id: string;
+    schema: string;
+    object: any;
+    data?: {
+      id: number;
+      schema: string;
+      object: any;
+    };
+  };
+};
+
 /**
  * @module Excel/RelationshipManager
  */
 export class RelationshipManager {
-  relations: {
-    [id: string]: {
-      id: string;
-      schema: string;
-      object: any;
-      data?: { id: number; schema: string; object: any };
-    };
-  } = {};
+  relations: Relation = {};
   lastId = 1;
 
   constructor() {
     uniqueId('rId'); // priming
   }
 
-  importData(data: any) {
+  importData(data: { relations: Relation; lastId: number }) {
     this.relations = data.relations;
     this.lastId = data.lastId;
   }

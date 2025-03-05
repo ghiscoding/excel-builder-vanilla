@@ -1,3 +1,4 @@
+import type { DualAnchorOption } from './Drawing.js';
 import { Util } from '../Util.js';
 import type { XMLDOM } from '../XMLDOM.js';
 
@@ -5,7 +6,7 @@ export class TwoCellAnchor {
   from: any = { xOff: 0, yOff: 0 };
   to: any = { xOff: 0, yOff: 0 };
 
-  constructor(config: any) {
+  constructor(config: DualAnchorOption) {
     if (config) {
       this.setFrom(config.from.x, config.from.y, config.to.xOff, config.to.yOff);
       this.setTo(config.to.x, config.to.y, config.to.xOff, config.to.yOff);
