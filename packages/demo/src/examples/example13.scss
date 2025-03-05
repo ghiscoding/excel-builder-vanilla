@@ -1,0 +1,30 @@
+.example13 {
+  .fa.fa-caret-square-o-down {
+    font-size: 20px;
+  }
+
+  tr {
+    th {
+      border: 1px solid transparent;
+      min-width: 60px;
+      span.fa {
+        float: right;
+      }
+    }
+    th.table-col {
+      background-color: #000;
+      color: #fff;
+    }
+    td {
+      border: 1px solid transparent;
+      &.table-cell {
+        background-color: #4472c4;
+        color: #fff;
+        border: 1px solid transparent;
+      }
+      &.text-right {
+        text-align: right;
+      }
+    }
+  }
+}

@@ -12,6 +12,19 @@ export function createWorkbook() {
 }
 
 /**
+ * Convert a `base64` string to a `Uint8Array`
+ * @param {String} - base64 string
+ * @returns {Uint8Array} - returns a Uint8Array output
+ */
+export function base64ToUint8Array(base64String: string) {
+  const base64url = base64String.replace(/-/g, '+').replace(/_/g, '/');
+  const missingPadding = '='.repeat((4 - (base64url.length % 4)) % 4);
+  const base64 = base64url + missingPadding;
+  const base64decoded = atob(base64);
+  return Uint8Array.from(base64decoded, char => char.charCodeAt(0));
+}
+
+/**
  * Turns a workbook into a downloadable file, you can between a 'Blob' or 'Uint8Array',
  * and if nothing is provided then 'Blob' will be the default
  * @param {Excel/Workbook} workbook - The workbook that is being converted
@@ -33,7 +46,12 @@ export function createExcelFile<T extends 'Blob' | 'Uint8Array' = 'Blob'>(
   return new Promise((resolve, reject) => {
     workbook.generateFiles().then(files => {
       for (const [path, content] of Object.entries(files)) {
-        zipObj[path.substr(1)] = strToU8(content);
+        const outPath = path.substr(1);
+        if (path.indexOf('.xml') !== -1 || path.indexOf('.rel') !== -1) {
+          zipObj[outPath] = strToU8(content); // regular cells except images
+        } else {
+          zipObj[outPath] = base64ToUint8Array(content); // images
+        }
       }
 
       return zip(zipObj, options?.zipOptions || {}, (err, data) => {

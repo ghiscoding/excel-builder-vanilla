@@ -1,0 +1,115 @@
+<div class="example14">
+  <div class="row">
+    <div class="col-md-12 title-desc">
+      <h2 class="bd-title">
+        Example 14: Pictures with one/two/absolute cell anchors
+        <span class="float-end links">
+          Code <span class="fa fa-link"></span>
+          <span class="small">
+            <a target="_blank" href="https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/demo/src/examples/example14.html"
+              >html</a
+            >
+            |
+            <a target="_blank" href="https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/demo/src/examples/example14.ts">ts</a>
+          </span>
+        </span>
+      </h2>
+      <div class="demo-subtitle">
+        You can insert pictures/images in Excel but it must be provided in <code>base64</code> format.
+        There are multiple type of anchors that you can use: <code>oneCellAnchor</code>/<code>twoCellAnchor</code>/<code>absoluteAnchor</code> cell anchors.
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <button id="export" class="btn btn-success btn-sm"><i class="fa fa-download"></i> Excel Export</button>
+  </div>
+
+  <div class="row">
+    <div class="table-container col-sm-8">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">A</th>
+            <th scope="col">B</th>
+            <th scope="col">C</th>
+            <th scope="col">D</th>
+            <th scope="col">E</th>
+            <th scope="col">F</th>
+            <th scope="col">G</th>
+            <th scope="col">H</th>
+            <th scope="col">I</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td colspan="3" rowspan="3"><img id="pic1" src="" height="150" width="150" /></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td></td>
+            <td colspan="4" rowspan="5"><img id="pic2" src="" height="250" width="250" /></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td></td>
+            <td colspan="4" rowspan="5"><img id="pic3" src="" height="250" width="250" /></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>11</td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>12</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@ OpenXML Drawings have an odd (understandable, but still odd) positioning system.
 
 ```ts
 import { Drawings, ExcelBuilder, Picture, Positioning } from 'excel-builder-vanilla';
-import strawberry from './images/strawberry.jpg.base64';
+import strawberryImageData from './images/strawberry.jpg?base64';
 
 const fruitWorkbook = createWorkbook();
 const berryList = fruitWorkbook.createWorksheet({ name: 'Berry List' });
@@ -61,7 +61,35 @@ berryList.addDrawings(drawings);
 fruitWorkbook.addDrawings(drawings);
 fruitWorkbook.addWorksheet(berryList);
 
-console.log(fruitWorkbook.generateFiles());
 const data = createExcelFile(fruitWorkbook);
 downloader('Fruit WB.xlsx', data);
+```
+
+### Vite `base64` loader plugin
+
+For loading an image as `base64` with ViteJS, you could do it easily with a Vite loader plugin.
+
+> The code below was pulled from this Stack Overflow [answer](https://stackoverflow.com/a/78012267/1212166)
+
+```ts
+import { readFileSync } from 'node:fs';
+import { defineConfig, type Plugin } from 'vite';
+
+const base64Loader: Plugin = {
+  name: 'base64-loader',
+  transform(_: any, id: string) {
+    const [path, query] = id.split('?');
+    if (query !== 'base64') return null;
+
+    const data = readFileSync(path);
+    const base64 = data.toString('base64');
+
+    return `export default '${base64}';`;
+  },
+};
+
+export default defineConfig({
+  // ...
+  plugins: [base64Loader],
+});
 ```

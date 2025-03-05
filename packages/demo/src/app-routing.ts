@@ -10,6 +10,8 @@ import Example09 from './examples/example09.js';
 import Example10 from './examples/example10.js';
 import Example11 from './examples/example11.js';
 import Example12 from './examples/example12.js';
+import Example13 from './examples/example13.js';
+import Example14 from './examples/example14.js';
 import GettingStarted from './getting-started.js';
 
 export const navbarRouting = [
@@ -38,6 +40,8 @@ export const exampleRouting = [
       { name: 'example10', view: '/src/examples/example10.html', viewModel: Example10, title: '10- Theming Tables' },
       { name: 'example11', view: '/src/examples/example11.html', viewModel: Example11, title: '11- Theming Summaries' },
       { name: 'example12', view: '/src/examples/example12.html', viewModel: Example12, title: '12- Worksheet Headers/Footers' },
+      { name: 'example13', view: '/src/examples/example13.html', viewModel: Example13, title: '13- Pictures with 2 anchors' },
+      { name: 'example14', view: '/src/examples/example14.html', viewModel: Example14, title: '14- Pictures with different anchors' },
     ],
   },
 ];
