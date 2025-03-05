@@ -13,24 +13,24 @@ interface SheetViewOption {
  */
 export class SheetView {
   pane: Pane;
-  showZeros = null; // Default
-  defaultGridColor = null;
-  colorId = null;
-  rightToLeft = null;
-  showFormulas = null;
-  showGridLines = null;
-  showOutlineSymbols = null;
-  showRowColHeaders = null;
-  showRuler = null;
-  showWhiteSpace = null;
-  tabSelected = null;
-  topLeftCell = null;
+  showZeros: boolean | null = null; // Default
+  defaultGridColor: string | null = null;
+  colorId: number | null = null;
+  rightToLeft: boolean | null = null;
+  showFormulas: boolean | null = null;
+  showGridLines: boolean | null = null;
+  showOutlineSymbols: boolean | null = null;
+  showRowColHeaders: boolean | null = null;
+  showRuler: boolean | null = null;
+  showWhiteSpace: boolean | null = null;
+  tabSelected: boolean | null = null;
+  topLeftCell: boolean | null = null;
   viewType = null; // http://www.datypic.com/sc/ooxml/t-ssml_ST_SheetViewType.html
-  windowProtection = null;
-  zoomScale = null;
-  zoomScaleNormal = null;
-  zoomScalePageLayoutView = null;
-  zoomScaleSheetLayoutView = null;
+  windowProtection: boolean | null = null;
+  zoomScale: boolean | null = null;
+  zoomScaleNormal: any = null;
+  zoomScalePageLayoutView: any = null;
+  zoomScaleSheetLayoutView: any = null;
 
   constructor(config?: SheetViewOption) {
     const conf = config || {};

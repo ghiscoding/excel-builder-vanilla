@@ -1,3 +1,4 @@
+import type { AnchorOption } from './Drawing.js';
 import { Util } from '../Util.js';
 import type { XMLDOM } from '../XMLDOM.js';
 
@@ -16,7 +17,7 @@ export class AbsoluteAnchor {
   width: number | null = null;
   height: number | null = null;
 
-  constructor(config: any) {
+  constructor(config: AnchorOption) {
     if (config) {
       this.setPos(config.x, config.y);
       this.setDimensions(config.width, config.height);
