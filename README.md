@@ -21,7 +21,7 @@ This lib allows you to build and write an Excel file dynamically, it does **not*
 ### Comparison to similar libraries
 
 Excel-buider-vanilla is at the minimum 6x times smaller compared to the most used libraries (we can compare via `Bundlephobia`), excel-builder-vanilla is 22Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 251Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The explanation is simple and relates to 2 major differences: 
-- excel-builder-vanilla is ESM and all other libraries are CJS only (CommonJS) increasing the download and install size
+- excel-builder-vanilla is ESM and all other libraries are CJS only (CommonJS) increasing their download size
 - excel-builder-vanilla only offers Excel export (writing) but without any reading capabilities
 
 ## Live Demo
