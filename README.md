@@ -18,9 +18,15 @@
 
 This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making the library super lightweight for exporting to Excel.
 
+### Comparison to similar libraries
+
+Excel-buider-vanilla is at the minimum 6x times smaller compared to the most used libraries (we can compare via `Bundlephobia`), excel-builder-vanilla is 22Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 251Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The explanation is simple and relates to 2 major differences: 
+- excel-builder-vanilla is ESM and all other libraries are CJS only (CommonJS) increasing the download and install size
+- excel-builder-vanilla only offers Excel export (writing) but without any reading capabilities
+
 ## Live Demo
 
-Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers.<br>
+Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers (the demo is WYSIWYG (what you is what you get, UI vs Export)).<br>
 You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
 
 ## Changelog
@@ -42,7 +48,7 @@ The modernization steps:
 - bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
   - note that the changelog did not exists prior to `v3.0.0`
 
-The project now requires only 1 dependency which is [fflate](https://github.com/101arrowz/fflate).
+The project now requires only 1 small dependency which is [fflate](https://github.com/101arrowz/fflate).
 
 ### Summary
 
@@ -81,7 +87,6 @@ Please note that since we use `fflate` (which creates and compresses the Excel f
 ```html
 <meta http-equiv="Content-Security-Policy"
   content="default-src 'self';
-   // other rules...
   worker-src 'self' blob:;" />
 ```
 
