@@ -8,9 +8,11 @@ Creating pictures in Excel is a bit complicated, mostly due to the many, many di
 
 OpenXML Drawings have an odd (understandable, but still odd) positioning system. Use the pixelsToEMUs method available in the Positioning.js to turn a pixel amount into EMU's, which is what is needed for any offset specification.
 
+> **Note** Please note that pictures **must be provided as `base64` format**, you can look on the internet on how to do that or if you're using ViteJS then look at the Vite loader plugin at the end of this document.
+
 ```ts
 import { Drawings, ExcelBuilder, Picture, Positioning } from 'excel-builder-vanilla';
-import strawberryImageData from './images/strawberry.jpg?base64';
+import strawberryImageData from './images/strawberry.jpg?base64'; // using an optional Vite loader plugin
 
 const fruitWorkbook = createWorkbook();
 const berryList = fruitWorkbook.createWorksheet({ name: 'Berry List' });
