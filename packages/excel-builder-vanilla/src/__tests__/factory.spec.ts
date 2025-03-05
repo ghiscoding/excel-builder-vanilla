@@ -1,7 +1,7 @@
 import { strFromU8 } from 'fflate';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createExcelFile, createWorkbook, downloadExcelFile } from '../factory.js';
+import { base64ToUint8Array, createExcelFile, createWorkbook, downloadExcelFile } from '../factory.js';
 
 describe('ExcelExportService', () => {
   let mockExcelBlob: Blob;
@@ -46,11 +46,27 @@ describe('ExcelExportService', () => {
         const workbook = createWorkbook();
         const file = await createExcelFile(workbook, 'Uint8Array');
         const output = strFromU8(file);
-        // const str = Buffer.from(file.buffer, 'base64').toString();
 
         expect(file).toBeTruthy();
         expect(file instanceof Uint8Array).toBeTruthy();
         expect(output).includes('workbook.xml');
+      });
+
+      it('should return an image as an Uint8Array instance when calling the method that includes an image', async () => {
+        const blueSquareBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
+
+        const workbook = createWorkbook();
+        vi.spyOn(workbook, 'generateFiles').mockResolvedValueOnce({
+          '/xl/drawings/drawing1.xml':
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<xdr:wsDr xmlns="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing"><xdr:twoCellAnchor><xdr:from><xdr:col>5</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>2</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from><xdr:to><xdr:col>7</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>8</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to><xdr:pic><xdr:nvPicPr><xdr:cNvPr descr="" name="logo.png" id="2"/><xdr:cNvPicPr><a:picLocks noChangeArrowheads="1" noChangeAspect="1"/></xdr:cNvPicPr></xdr:nvPicPr><xdr:blipFill><a:blip r:embed="rId10" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/><a:srcRect/><a:stretch><a:fillRect/></a:stretch></xdr:blipFill><xdr:spPr bwMode="auto"><a:xfrm/><a:prstGeom prst="rect"/></xdr:spPr></xdr:pic><xdr:clientData/></xdr:twoCellAnchor></xdr:wsDr>',
+          '/xl/media/logo.png': blueSquareBase64,
+        });
+        const fileUint = await createExcelFile(workbook, 'Uint8Array');
+        // const output = base64ToUint8Array(blueSquareBase64);
+
+        expect(fileUint).toBeTruthy();
+        expect(fileUint instanceof Uint8Array).toBeTruthy();
+        expect(fileUint.length).toBeGreaterThan(500);
       });
     });
 
