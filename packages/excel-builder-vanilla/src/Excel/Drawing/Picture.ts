@@ -1,14 +1,14 @@
+import { Drawing } from './Drawing.js';
 import { uniqueId } from '../../utilities/uniqueId.js';
 import { Util } from '../Util.js';
+import type { MediaMeta } from '../Workbook.js';
 import type { XMLDOM } from '../XMLDOM.js';
-import { Drawing } from './Drawing.js';
 
 export class Picture extends Drawing {
-  media: any = null;
   id = uniqueId('Picture');
   pictureId = Util.uniqueId('Picture');
   fill: any = {};
-  mediaData: any = null;
+  mediaData: MediaMeta | null = null;
   description = '';
 
   constructor() {
@@ -18,7 +18,7 @@ export class Picture extends Drawing {
     this.pictureId = Util.uniqueId('Picture');
   }
 
-  setMedia(mediaRef: any) {
+  setMedia(mediaRef: MediaMeta) {
     this.mediaData = mediaRef;
   }
 
@@ -39,11 +39,11 @@ export class Picture extends Drawing {
   }
 
   getMediaData() {
-    return this.mediaData;
+    return this.mediaData as MediaMeta;
   }
 
   setRelationshipId(rId: string) {
-    this.mediaData.rId = rId;
+    this.mediaData!.rId = rId;
   }
 
   toXML(xmlDoc: XMLDOM) {
@@ -53,7 +53,7 @@ export class Picture extends Drawing {
 
     const nameProperties = Util.createElement(xmlDoc, 'xdr:cNvPr', [
       ['id', this.pictureId],
-      ['name', this.mediaData.fileName],
+      ['name', this.mediaData!.fileName],
       ['descr', this.description || ''],
     ]);
     nonVisibleProperties.appendChild(nameProperties);
@@ -70,7 +70,7 @@ export class Picture extends Drawing {
     pictureFill.appendChild(
       Util.createElement(xmlDoc, 'a:blip', [
         ['xmlns:r', Util.schemas.relationships],
-        ['r:embed', this.mediaData.rId],
+        ['r:embed', this.mediaData!.rId],
       ]),
     );
     pictureFill.appendChild(Util.createElement(xmlDoc, 'a:srcRect'));

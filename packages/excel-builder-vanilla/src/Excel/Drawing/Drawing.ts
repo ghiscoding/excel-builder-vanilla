@@ -1,9 +1,28 @@
 import { uniqueId } from '../../utilities/uniqueId.js';
 import { AbsoluteAnchor } from './AbsoluteAnchor.js';
-import { Chart } from './Chart.js';
 import { OneCellAnchor } from './OneCellAnchor.js';
 import { TwoCellAnchor } from './TwoCellAnchor.js';
 // import { Picture } from './Picture.js';
+
+export interface AnchorOption {
+  /** X offset in EMU's */
+  x: number;
+  /** Y offset in EMU's */
+  y: number;
+  xOff?: boolean;
+  yOff?: boolean;
+  /** Width in EMU's */
+  height: number;
+  /** Height in EMU's */
+  width: number;
+  drawing?: Drawing;
+}
+
+export interface DualAnchorOption {
+  to: AnchorOption;
+  from: AnchorOption;
+  drawing?: Drawing;
+}
 
 /**
  * This is mostly a global spot where all of the relationship managers can get and set
@@ -11,24 +30,8 @@ import { TwoCellAnchor } from './TwoCellAnchor.js';
  * @module Excel/Drawing
  */
 export class Drawing {
-  anchor: any;
+  anchor!: AbsoluteAnchor | OneCellAnchor | TwoCellAnchor;
   id = uniqueId('Drawing');
-
-  get AbsoluteAnchor() {
-    return AbsoluteAnchor;
-  }
-  get Chart() {
-    return Chart;
-  }
-  get OneCellAnchor() {
-    return OneCellAnchor;
-  }
-  // get Picture() {
-  //   return Picture;
-  // }
-  get TwoCellAnchor() {
-    return TwoCellAnchor;
-  }
 
   /**
    *
@@ -36,18 +39,22 @@ export class Drawing {
    * @param {Object} config Shorthand - pass the created anchor coords that can normally be used to construct it.
    * @returns {Anchor}
    */
-  createAnchor(type: string, config: any) {
-    config = config || {};
+  // TODO: couldn't get function override working, but hopefully in the future
+  // createAnchor(type: 'absoluteAnchor', config: AnchorOption): AbsoluteAnchor;
+  // createAnchor(type: 'oneCellAnchor', config: AnchorOption): OneCellAnchor;
+  // createAnchor(type: 'twoCellAnchor', config: DualAnchorOption): TwoCellAnchor;
+  createAnchor(type: 'absoluteAnchor' | 'oneCellAnchor' | 'twoCellAnchor', config: any): AbsoluteAnchor | OneCellAnchor | TwoCellAnchor {
+    config ??= {} as AnchorOption | DualAnchorOption;
     config.drawing = this;
     switch (type) {
       case 'absoluteAnchor':
-        this.anchor = new AbsoluteAnchor(config);
+        this.anchor = new AbsoluteAnchor(config as AnchorOption);
         break;
       case 'oneCellAnchor':
-        this.anchor = new OneCellAnchor(config);
+        this.anchor = new OneCellAnchor(config as AnchorOption);
         break;
       case 'twoCellAnchor':
-        this.anchor = new TwoCellAnchor(config);
+        this.anchor = new TwoCellAnchor(config as DualAnchorOption);
         break;
     }
     return this.anchor;

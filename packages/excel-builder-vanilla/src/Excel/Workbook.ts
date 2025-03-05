@@ -9,6 +9,15 @@ import { Util } from './Util.js';
 import { Worksheet } from './Worksheet.js';
 import { XMLDOM } from './XMLDOM.js';
 
+export interface MediaMeta {
+  id: string;
+  data: string;
+  fileName: string;
+  contentType: string | null;
+  extension: string;
+  rId?: string;
+}
+
 /**
  * @module Excel/Workbook
  */
@@ -21,7 +30,7 @@ export class Workbook {
   worksheets: Worksheet[] = [];
   tables: Table[] = [];
   drawings: Drawings[] = [];
-  media: any = {};
+  media: { [filename: string]: MediaMeta } = {};
   printTitles: any;
 
   constructor() {
