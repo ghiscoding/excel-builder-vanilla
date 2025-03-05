@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.14...v3.1.0) (2025-03-05)
+
+### Features
+
+* support inserting pictures in Excel, closes [#83](https://github.com/ghiscoding/excel-builder-vanilla/issues/83) ([16745f6](https://github.com/ghiscoding/excel-builder-vanilla/commit/16745f688aff1801695d2ce324a70bb92c2e8212)) - by @ghiscoding
+
 ## [3.0.14](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.13...v3.0.14) (2024-10-13)
 
 ### Bug Fixes

@@ -4,6 +4,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.14...v3.1.0) (2025-03-05)
+
+**Note:** Version bump only for package @excel-builder-vanilla/types
+
 ## [3.0.14](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.13...v3.0.14) (2024-10-13)
 
 ### Bug Fixes
