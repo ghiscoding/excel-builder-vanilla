@@ -16,17 +16,17 @@
 
 ## Description
 
-This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making the library super lightweight for exporting to Excel.
+This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making the library super lightweight for its main goal of strictly exporting to Excel.
 
 ### Comparison to similar libraries
 
-Excel-buider-vanilla is at the minimum 6x times smaller compared to the most used libraries (we can compare via `Bundlephobia`), excel-builder-vanilla is 22Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The explanation is simple and relates to 2 major differences: 
+Excel-buider-vanilla is at the minimum 6x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 22Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is simple and relates to 2 major differences: 
 - excel-builder-vanilla is ESM and all other libraries are CJS only (CommonJS) increasing their download size
 - excel-builder-vanilla only offers Excel export (writing) but without any reading capabilities
 
 ## Live Demo
 
-Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers (the demo is WYSIWYG (what you is what you get, UI vs Export)).<br>
+Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers (all the demos are WYSIWYG (what you is what you'll get, UI vs Export)).<br>
 You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
 
 ## Changelog
