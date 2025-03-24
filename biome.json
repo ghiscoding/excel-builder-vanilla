@@ -1,7 +1,11 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "organizeImports": {
-    "enabled": true
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
   },
   "formatter": {
     "enabled": true,
@@ -10,11 +14,12 @@
     "formatWithErrors": true,
     "lineWidth": 140,
     "indentStyle": "space",
-    "ignore": [
-      ".cache",
-      "dist/**",
-      "**/*.json",
-      "node_modules/**"
+    "includes": [
+      "**",
+      "!**/.cache",
+      "!**/dist/**",
+      "!**/*.json",
+      "!**/node_modules/**"
     ]
   },
   "javascript": {
@@ -39,11 +44,12 @@
   },
   "linter": {
     "enabled": true,
-    "ignore": [
-      ".cache",
-      "dist/**",
-      "**/*.json",
-      "node_modules/**"
+    "includes": [
+      "**",
+      "!**/.cache",
+      "!**/dist/**",
+      "!**/*.json",
+      "!**/node_modules/**"
     ],
     "rules": {
       "correctness": {
@@ -65,7 +71,26 @@
       "style": {
         "noNonNullAssertion": "off",
         "noParameterAssign": "off",
-        "useExponentiationOperator": "off"
+        "useExponentiationOperator": "off",
+        "useLiteralEnumMembers": "error",
+        "noCommaOperator": "error",
+        "useNodejsImportProtocol": "error",
+        "useAsConstAssertion": "error",
+        "useNumericLiterals": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useConst": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "useTemplate": "error",
+        "useDefaultParameterLast": "error",
+        "noArguments": "error",
+        "useImportType": "error",
+        "useExportType": "error",
+        "noUselessElse": "error",
+        "useShorthandFunctionType": "error"
       }
     }
   },
