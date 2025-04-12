@@ -16,6 +16,13 @@ const base64Loader: Plugin = {
 
 export default defineConfig({
   base: './',
+  css: {
+    preprocessorOptions: {
+      scss: {
+        quietDeps: true,
+      },
+    },
+  },
   server: {
     port: 3000,
     cors: true,
