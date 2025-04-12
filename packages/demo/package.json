@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "standalone:require": "node ./src/examples/example-standalone-require.cjs"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@excel-builder-vanilla/types": "workspace:*",

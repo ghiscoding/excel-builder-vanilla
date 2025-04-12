@@ -8,14 +8,12 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
-      formats: ['es', 'cjs', 'iife'],
+      formats: ['es', 'iife'],
       name: 'ExcelBuilder',
       fileName: format => {
         switch (format) {
           case 'es':
-            return 'index.mjs';
-          case 'cjs':
-            return 'index.cjs';
+            return 'index.js';
           default:
             return `excel-builder.${format}.js`;
         }
