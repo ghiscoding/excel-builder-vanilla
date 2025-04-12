@@ -21,7 +21,7 @@ This lib allows you to build and write an Excel file dynamically, it does **not*
 ### Comparison to similar libraries
 
 Excel-buider-vanilla is at the minimum 6x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 22Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is simple and relates to 2 major differences: 
-- excel-builder-vanilla is ESM and all other libraries are CJS only (CommonJS) increasing their download size
+- excel-builder-vanilla is ESM-Only and all other libraries are only offering CJS (CommonJS) increasing their download/install size
 - excel-builder-vanilla only offers Excel export (writing) but without any reading capabilities
 
 ## Live Demo
@@ -38,7 +38,7 @@ You can also take a look at the "[Used by](#used-by)" section below to see real 
 [MIT License](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/LICENSE.md)
 
 ## Project History
-Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal of creating this fork was to modernize the project by removing old dependencies that are no longer necessary and also replace `JSZip` by `fflate` which provides an ESM build and is indirectly giving us better Tree Shaking. The other goal was also to provide an ESM build to eventually get away from CommonJS (CJS bundle is still offered but we strongly suggest that you migrate to the ESM approach)
+Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal of creating this fork was to modernize the project by removing old dependencies that are no longer necessary and also replace `JSZip` by `fflate` which provides an ESM build and is indirectly giving us better Tree Shaking. The other goal was also to provide an ESM build
 
 The modernization steps:
 - migrate to TypeScript (which is giving us TS Types `d.ts`)
@@ -64,15 +64,11 @@ npm install excel-builder-vanilla
 
 The project offers 3 different build types, choose the best one depending on your use case
 1. **ESM**: to `import from` (_**preferred**_)
-2. **CJS**: CommonJS to support old NodeJS `require()` - will probably be dropped in the future
-3. **IIFE**: standalone script which provides `ExcelBuilder` on the `window` object
+2. **IIFE**: standalone script which provides `ExcelBuilder` on the `window` object
 
 ```ts
 // ESM (preferred) - npm install
 import { createWorksheet } from 'excel-builder-vanilla';
-
-// CJS - npm install
-const { createWorksheet } = require('excel-builder-vanilla');
 
 // IIFE - CDN
 <script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.1/dist/excel-builder.iife.js"></script>
@@ -92,7 +88,7 @@ Please note that since we use `fflate` (which creates and compresses the Excel f
 
 ### Used by
 
-This fork was created mostly to support Tree Shaking (ESM), to get away from CJS, to provide TS Types and finally to update all project dependencies. It is used by a few other Open Source libraries that I also maintain and require Excel export:
+This fork was created mostly to support Tree Shaking (ESM), to provide TS Types and finally to update all project dependencies. It is used by a few other Open Source libraries that I also maintain and require Excel export:
 
 - [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid)
 - [Aurelia-Slickgrid](https://github.com/ghiscoding/aurelia-slickgrid)
