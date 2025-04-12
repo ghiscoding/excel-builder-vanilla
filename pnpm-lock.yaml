@@ -13,16 +13,16 @@ importers:
         version: 2.0.0-beta.1
       '@lerna-lite/cli':
         specifier: ^4.0.0
-        version: 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(typescript@5.8.2)
+        version: 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(typescript@5.8.3)
       '@lerna-lite/publish':
         specifier: ^4.0.0
-        version: 4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2)
+        version: 4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3)
       '@types/node':
-        specifier: ^22.13.9
-        version: 22.13.9
+        specifier: ^22.14.1
+        version: 22.14.1
       '@vitest/coverage-v8':
-        specifier: ^3.0.7
-        version: 3.0.7(vitest@3.0.7(@types/node@22.13.9)(happy-dom@17.2.2)(sass@1.85.1)(yaml@2.7.0))
+        specifier: ^3.1.1
+        version: 3.1.1(vitest@3.1.1(@types/node@22.14.1)(happy-dom@17.4.4)(sass@1.86.3)(yaml@2.7.0))
       conventional-changelog-conventionalcommits:
         specifier: ^8.0.0
         version: 8.0.0
@@ -30,8 +30,8 @@ importers:
         specifier: ^7.0.3
         version: 7.0.3
       happy-dom:
-        specifier: ^17.2.2
-        version: 17.2.2
+        specifier: ^17.4.4
+        version: 17.4.4
       pnpm:
         specifier: ^9.10.0
         version: 9.15.6
@@ -39,11 +39,11 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       typescript:
-        specifier: ^5.8.2
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vitest:
-        specifier: ^3.0.7
-        version: 3.0.7(@types/node@22.13.9)(happy-dom@17.2.2)(sass@1.85.1)(yaml@2.7.0)
+        specifier: ^3.1.1
+        version: 3.1.1(@types/node@22.14.1)(happy-dom@17.4.4)(sass@1.86.3)(yaml@2.7.0)
 
   packages/demo:
     dependencies:
@@ -54,8 +54,8 @@ importers:
         specifier: ^2.11.8
         version: 2.11.8
       bootstrap:
-        specifier: ^5.3.3
-        version: 5.3.3(@popperjs/core@2.11.8)
+        specifier: ^5.3.5
+        version: 5.3.5(@popperjs/core@2.11.8)
       excel-builder-vanilla:
         specifier: workspace:*
         version: link:../excel-builder-vanilla
@@ -67,14 +67,14 @@ importers:
         specifier: 0.8.2
         version: 0.8.2
       sass:
-        specifier: ^1.85.1
-        version: 1.85.1
+        specifier: ^1.86.3
+        version: 1.86.3
       typescript:
-        specifier: ^5.8.2
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vite:
-        specifier: ^6.2.0
-        version: 6.2.6(@types/node@22.13.9)(sass@1.85.1)(yaml@2.7.0)
+        specifier: ^6.2.6
+        version: 6.2.6(@types/node@22.14.1)(sass@1.86.3)(yaml@2.7.0)
 
   packages/excel-builder-vanilla:
     dependencies:
@@ -89,11 +89,11 @@ importers:
         specifier: ^0.3.2
         version: 0.3.2
       typescript:
-        specifier: ^5.8.2
-        version: 5.8.2
+        specifier: ^5.8.3
+        version: 5.8.3
       vite:
-        specifier: ^6.2.0
-        version: 6.2.6(@types/node@22.13.9)(sass@1.85.1)(yaml@2.7.0)
+        specifier: ^6.2.6
+        version: 6.2.6(@types/node@22.14.1)(sass@1.86.3)(yaml@2.7.0)
 
   packages/excel-builder-vanilla-types:
     dependencies:
@@ -830,8 +830,8 @@ packages:
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
 
-  '@types/node@22.13.9':
-    resolution: {integrity: sha512-acBjXdRJ3A6Pb3tqnw9HZmyR3Fiol3aGxRCK1x3d+6CDAMjl7I649wpSd+yNURCjbOUGu9tqtLKnTGxmK6CyGw==}
+  '@types/node@22.14.1':
+    resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -842,20 +842,20 @@ packages:
   '@types/semver@7.7.0':
     resolution: {integrity: sha512-k107IF4+Xr7UHjwDc7Cfd6PRQfbdkiRabXGRjo07b4WyPahFBZCZ1sE+BNxYIJPPg73UkfOsVOLwqVc/6ETrIA==}
 
-  '@vitest/coverage-v8@3.0.7':
-    resolution: {integrity: sha512-Av8WgBJLTrfLOer0uy3CxjlVuWK4CzcLBndW1Nm2vI+3hZ2ozHututkfc7Blu1u6waeQ7J8gzPK/AsBRnWA5mQ==}
+  '@vitest/coverage-v8@3.1.1':
+    resolution: {integrity: sha512-MgV6D2dhpD6Hp/uroUoAIvFqA8AuvXEFBC2eepG3WFc1pxTfdk1LEqqkWoWhjz+rytoqrnUUCdf6Lzco3iHkLQ==}
     peerDependencies:
-      '@vitest/browser': 3.0.7
-      vitest: 3.0.7
+      '@vitest/browser': 3.1.1
+      vitest: 3.1.1
     peerDependenciesMeta:
       '@vitest/browser':
         optional: true
 
-  '@vitest/expect@3.0.7':
-    resolution: {integrity: sha512-QP25f+YJhzPfHrHfYHtvRn+uvkCFCqFtW9CktfBxmB+25QqWsx7VB2As6f4GmwllHLDhXNHvqedwhvMmSnNmjw==}
+  '@vitest/expect@3.1.1':
+    resolution: {integrity: sha512-q/zjrW9lgynctNbwvFtQkGK9+vvHA5UzVi2V8APrp1C6fG6/MuYYkmlx4FubuqLycCeSdHD5aadWfua/Vr0EUA==}
 
-  '@vitest/mocker@3.0.7':
-    resolution: {integrity: sha512-qui+3BLz9Eonx4EAuR/i+QlCX6AUZ35taDQgwGkK/Tw6/WgwodSrjN1X2xf69IA/643ZX5zNKIn2svvtZDrs4w==}
+  '@vitest/mocker@3.1.1':
+    resolution: {integrity: sha512-bmpJJm7Y7i9BBELlLuuM1J1Q6EQ6K5Ye4wcyOpOMXMcePYKSIYlpcrCm4l/O6ja4VJA5G2aMJiuZkZdnxlC3SA==}
     peerDependencies:
       msw: ^2.4.9
       vite: ^5.0.0 || ^6.0.0
@@ -865,20 +865,20 @@ packages:
       vite:
         optional: true
 
-  '@vitest/pretty-format@3.0.7':
-    resolution: {integrity: sha512-CiRY0BViD/V8uwuEzz9Yapyao+M9M008/9oMOSQydwbwb+CMokEq3XVaF3XK/VWaOK0Jm9z7ENhybg70Gtxsmg==}
+  '@vitest/pretty-format@3.1.1':
+    resolution: {integrity: sha512-dg0CIzNx+hMMYfNmSqJlLSXEmnNhMswcn3sXO7Tpldr0LiGmg3eXdLLhwkv2ZqgHb/d5xg5F7ezNFRA1fA13yA==}
 
-  '@vitest/runner@3.0.7':
-    resolution: {integrity: sha512-WeEl38Z0S2ZcuRTeyYqaZtm4e26tq6ZFqh5y8YD9YxfWuu0OFiGFUbnxNynwLjNRHPsXyee2M9tV7YxOTPZl2g==}
+  '@vitest/runner@3.1.1':
+    resolution: {integrity: sha512-X/d46qzJuEDO8ueyjtKfxffiXraPRfmYasoC4i5+mlLEJ10UvPb0XH5M9C3gWuxd7BAQhpK42cJgJtq53YnWVA==}
 
-  '@vitest/snapshot@3.0.7':
-    resolution: {integrity: sha512-eqTUryJWQN0Rtf5yqCGTQWsCFOQe4eNz5Twsu21xYEcnFJtMU5XvmG0vgebhdLlrHQTSq5p8vWHJIeJQV8ovsA==}
+  '@vitest/snapshot@3.1.1':
+    resolution: {integrity: sha512-bByMwaVWe/+1WDf9exFxWWgAixelSdiwo2p33tpqIlM14vW7PRV5ppayVXtfycqze4Qhtwag5sVhX400MLBOOw==}
 
-  '@vitest/spy@3.0.7':
-    resolution: {integrity: sha512-4T4WcsibB0B6hrKdAZTM37ekuyFZt2cGbEGd2+L0P8ov15J1/HUsUaqkXEQPNAWr4BtPPe1gI+FYfMHhEKfR8w==}
+  '@vitest/spy@3.1.1':
+    resolution: {integrity: sha512-+EmrUOOXbKzLkTDwlsc/xrwOlPDXyVk3Z6P6K4oiCndxz7YLpp/0R0UsWVOKT0IXWjjBJuSMk6D27qipaupcvQ==}
 
-  '@vitest/utils@3.0.7':
-    resolution: {integrity: sha512-xePVpCRfooFX3rANQjwoditoXgWb1MaFbzmGuPP59MK6i13mrnDw/yEIyJudLeW6/38mCNcwCiJIGmpDPibAIg==}
+  '@vitest/utils@3.1.1':
+    resolution: {integrity: sha512-1XIjflyaU2k3HMArJ50bwSh3wKWPD6Q47wz/NUSmRV0zNywPc4w79ARjg/i/aNINHwA+mIALhUVqD9/aUvZNgg==}
 
   abbrev@3.0.0:
     resolution: {integrity: sha512-+/kfrslGQ7TNV2ecmQwMJj/B65g5KVq1/L3SGVZ3tCYGqlzFuFCGBZJtMP99wH3NpEUyAjn0zPdPUg0D+DwrOA==}
@@ -942,8 +942,8 @@ packages:
     resolution: {integrity: sha512-sdleLVfCjBtgO5cNjA2HVRvWBJAHs4zwenaCPMNJAJU0yNxpzj80IpjOIimkpkr+mhlA+how5poQtt53PygbHA==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  bootstrap@5.3.3:
-    resolution: {integrity: sha512-8HLCdWgyoMguSO9o+aH+iuZ+aht+mzW0u3HIMzVu7Srrpv7EBBxTnrFlSCskwdY1+EOFQSm7uMJhNQHkdPcmjg==}
+  bootstrap@5.3.5:
+    resolution: {integrity: sha512-ct1CHKtiobRimyGzmsSldEtM03E8fcEX4Tb3dGXz1V8faRwM50+vfHwTzOxB3IlKO7m+9vTH3s/3C6T2EAPeTA==}
     peerDependencies:
       '@popperjs/core': ^2.11.8
 
@@ -1236,8 +1236,8 @@ packages:
     resolution: {integrity: sha512-VyhnebXciFV2DESc+p6B+y0LjSm0krU4OgJN44qFAhBY0TJ+1V61tYD2+wHusZ6F9n5K+vl8k0sTy7PEfV4qpg==}
     engines: {node: '>=16.17'}
 
-  expect-type@1.1.0:
-    resolution: {integrity: sha512-bFi65yM+xZgk+u/KRIpekdSYkTB5W1pEf0Lt8Q8Msh7b+eQ7LXVtIB1Bkm4fvclDEL1b2CZkMhv2mOeF8tMdkA==}
+  expect-type@1.2.1:
+    resolution: {integrity: sha512-/kP8CAwxzLVEeFrMm4kMmy4CCDlpipyA7MYLVrdJIkV0fYF0UaigQHRsxHiuY/GEea+bh4KSv3TIlgr+2UL6bw==}
     engines: {node: '>=12.0.0'}
 
   exponential-backoff@3.1.2:
@@ -1347,8 +1347,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@17.2.2:
-    resolution: {integrity: sha512-3I1/CrNi780sdOhuhUnFtgTWhloSc3quSZwsylI41jycx8o97M6Y4aQAu0phSexGusT7+59BxATh4L4xiY0HcA==}
+  happy-dom@17.4.4:
+    resolution: {integrity: sha512-/Pb0ctk3HTZ5xEL3BZ0hK1AqDSAUuRQitOmROPHhfUYEWpmTImwfD8vFDGADmMAX0JYgbcgxWoLFKtsWhcpuVA==}
     engines: {node: '>=18.0.0'}
 
   has-flag@4.0.0:
@@ -1967,8 +1967,8 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  sass@1.85.1:
-    resolution: {integrity: sha512-Uk8WpxM5v+0cMR0XjX9KfRIacmSG86RH4DCCZjLU2rFh5tyutt9siAXJ7G+YfxQ99Q6wrRMbMlVl6KqUms71ag==}
+  sass@1.86.3:
+    resolution: {integrity: sha512-iGtg8kus4GrsGLRDLRBRHY9dNVA78ZaS7xr01cWnS7PEMQyFtTqBiyCrfpTYTZXRWM94akzckYjh8oADfFNTzw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -2053,8 +2053,8 @@ packages:
   stackback@0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
 
-  std-env@3.8.0:
-    resolution: {integrity: sha512-Bc3YwwCB+OzldMxOXJIIvC6cPRWr/LxOp48CdQTOkPyk/t4JWWJbrilwBd7RJzKV8QW7tJkcgAmeuLLJugl5/w==}
+  std-env@3.9.0:
+    resolution: {integrity: sha512-UGvjygr6F6tpH7o2qyqR6QYpwraIjKSdtzyBdyytFOHmPZY917kwdwLG0RbOjWOnKmnm3PeHjaoLLMie7kPLQw==}
 
   string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
@@ -2154,8 +2154,8 @@ packages:
     resolution: {integrity: sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A==}
     engines: {node: '>=16'}
 
-  typescript@5.8.2:
-    resolution: {integrity: sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==}
+  typescript@5.8.3:
+    resolution: {integrity: sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2164,8 +2164,8 @@ packages:
     engines: {node: '>=0.8.0'}
     hasBin: true
 
-  undici-types@6.20.0:
-    resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
   unicorn-magic@0.1.0:
     resolution: {integrity: sha512-lRfVq8fE8gz6QMBuDM6a+LO3IAzTi05H6gCVaUpir2E1Rwpo4ZUog45KpNXKC/Mn3Yb9UDuHumeFTo9iV/D9FQ==}
@@ -2204,8 +2204,8 @@ packages:
     resolution: {integrity: sha512-d7KLgL1LD3U3fgnvWEY1cQXoO/q6EQ1BSz48Sa149V/5zVTAbgmZIpyI8TRi6U9/JNyeYLlTKsEMPtLC27RFUg==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  vite-node@3.0.7:
-    resolution: {integrity: sha512-2fX0QwX4GkkkpULXdT1Pf4q0tC1i1lFOyseKoonavXUNlQ77KpW2XqBGGNIm/J4Ows4KxgGJzDguYVPKwG/n5A==}
+  vite-node@3.1.1:
+    resolution: {integrity: sha512-V+IxPAE2FvXpTCHXyNem0M+gWm6J7eRyWPR6vYoG/Gl+IscNOjXzztUhimQgTxaAoUoj40Qqimaa0NLIOOAH4w==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
 
@@ -2249,16 +2249,16 @@ packages:
       yaml:
         optional: true
 
-  vitest@3.0.7:
-    resolution: {integrity: sha512-IP7gPK3LS3Fvn44x30X1dM9vtawm0aesAa2yBIZ9vQf+qB69NXC5776+Qmcr7ohUXIQuLhk7xQR0aSUIDPqavg==}
+  vitest@3.1.1:
+    resolution: {integrity: sha512-kiZc/IYmKICeBAZr9DQ5rT7/6bD9G7uqQEki4fxazi1jdVl2mWGzedtBs5s6llz59yQhVb7FFY2MbHzHCnT79Q==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
       '@edge-runtime/vm': '*'
       '@types/debug': ^4.1.12
       '@types/node': ^18.0.0 || ^20.0.0 || >=22.0.0
-      '@vitest/browser': 3.0.7
-      '@vitest/ui': 3.0.7
+      '@vitest/browser': 3.1.1
+      '@vitest/ui': 3.1.1
       happy-dom: '*'
       jsdom: '*'
     peerDependenciesMeta:
@@ -2528,10 +2528,10 @@ snapshots:
 
   '@hutson/parse-repository-url@5.0.0': {}
 
-  '@inquirer/core@10.1.9(@types/node@22.13.9)':
+  '@inquirer/core@10.1.9(@types/node@22.14.1)':
     dependencies:
       '@inquirer/figures': 1.0.11
-      '@inquirer/type': 3.0.5(@types/node@22.13.9)
+      '@inquirer/type': 3.0.5(@types/node@22.14.1)
       ansi-escapes: 4.3.2
       cli-width: 4.1.0
       mute-stream: 2.0.0
@@ -2539,38 +2539,38 @@ snapshots:
       wrap-ansi: 6.2.0
       yoctocolors-cjs: 2.1.2
     optionalDependencies:
-      '@types/node': 22.13.9
+      '@types/node': 22.14.1
 
-  '@inquirer/expand@4.0.11(@types/node@22.13.9)':
+  '@inquirer/expand@4.0.11(@types/node@22.14.1)':
     dependencies:
-      '@inquirer/core': 10.1.9(@types/node@22.13.9)
-      '@inquirer/type': 3.0.5(@types/node@22.13.9)
+      '@inquirer/core': 10.1.9(@types/node@22.14.1)
+      '@inquirer/type': 3.0.5(@types/node@22.14.1)
       yoctocolors-cjs: 2.1.2
     optionalDependencies:
-      '@types/node': 22.13.9
+      '@types/node': 22.14.1
 
   '@inquirer/figures@1.0.11': {}
 
-  '@inquirer/input@4.1.8(@types/node@22.13.9)':
+  '@inquirer/input@4.1.8(@types/node@22.14.1)':
     dependencies:
-      '@inquirer/core': 10.1.9(@types/node@22.13.9)
-      '@inquirer/type': 3.0.5(@types/node@22.13.9)
+      '@inquirer/core': 10.1.9(@types/node@22.14.1)
+      '@inquirer/type': 3.0.5(@types/node@22.14.1)
     optionalDependencies:
-      '@types/node': 22.13.9
+      '@types/node': 22.14.1
 
-  '@inquirer/select@4.1.0(@types/node@22.13.9)':
+  '@inquirer/select@4.1.0(@types/node@22.14.1)':
     dependencies:
-      '@inquirer/core': 10.1.9(@types/node@22.13.9)
+      '@inquirer/core': 10.1.9(@types/node@22.14.1)
       '@inquirer/figures': 1.0.11
-      '@inquirer/type': 3.0.5(@types/node@22.13.9)
+      '@inquirer/type': 3.0.5(@types/node@22.14.1)
       ansi-escapes: 4.3.2
       yoctocolors-cjs: 2.1.2
     optionalDependencies:
-      '@types/node': 22.13.9
+      '@types/node': 22.14.1
 
-  '@inquirer/type@3.0.5(@types/node@22.13.9)':
+  '@inquirer/type@3.0.5(@types/node@22.14.1)':
     optionalDependencies:
-      '@types/node': 22.13.9
+      '@types/node': 22.14.1
 
   '@isaacs/cliui@8.0.2':
     dependencies:
@@ -2606,10 +2606,10 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@lerna-lite/cli@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(typescript@5.8.2)':
+  '@lerna-lite/cli@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(typescript@5.8.3)':
     dependencies:
-      '@lerna-lite/core': 4.0.0(@types/node@22.13.9)(typescript@5.8.2)
-      '@lerna-lite/init': 4.0.0(@types/node@22.13.9)(typescript@5.8.2)
+      '@lerna-lite/core': 4.0.0(@types/node@22.14.1)(typescript@5.8.3)
+      '@lerna-lite/init': 4.0.0(@types/node@22.14.1)(typescript@5.8.3)
       '@lerna-lite/npmlog': 4.0.0
       dedent: 1.5.3
       dotenv: 16.4.7
@@ -2617,24 +2617,24 @@ snapshots:
       load-json-file: 7.0.1
       yargs: 17.7.2
     optionalDependencies:
-      '@lerna-lite/publish': 4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2)
-      '@lerna-lite/version': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2)
+      '@lerna-lite/publish': 4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3)
+      '@lerna-lite/version': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
       - supports-color
       - typescript
 
-  '@lerna-lite/core@4.0.0(@types/node@22.13.9)(typescript@5.8.2)':
+  '@lerna-lite/core@4.0.0(@types/node@22.14.1)(typescript@5.8.3)':
     dependencies:
-      '@inquirer/expand': 4.0.11(@types/node@22.13.9)
-      '@inquirer/input': 4.1.8(@types/node@22.13.9)
-      '@inquirer/select': 4.1.0(@types/node@22.13.9)
+      '@inquirer/expand': 4.0.11(@types/node@22.14.1)
+      '@inquirer/input': 4.1.8(@types/node@22.14.1)
+      '@inquirer/select': 4.1.0(@types/node@22.14.1)
       '@lerna-lite/npmlog': 4.0.0
       '@npmcli/run-script': 9.1.0
       clone-deep: 4.0.1
       config-chain: 1.1.13
-      cosmiconfig: 9.0.0(typescript@5.8.2)
+      cosmiconfig: 9.0.0(typescript@5.8.3)
       dedent: 1.5.3
       execa: 8.0.1
       fs-extra: 11.3.0
@@ -2663,9 +2663,9 @@ snapshots:
       - supports-color
       - typescript
 
-  '@lerna-lite/init@4.0.0(@types/node@22.13.9)(typescript@5.8.2)':
+  '@lerna-lite/init@4.0.0(@types/node@22.14.1)(typescript@5.8.3)':
     dependencies:
-      '@lerna-lite/core': 4.0.0(@types/node@22.13.9)(typescript@5.8.2)
+      '@lerna-lite/core': 4.0.0(@types/node@22.14.1)(typescript@5.8.3)
       fs-extra: 11.3.0
       p-map: 7.0.3
       write-json-file: 6.0.0
@@ -2686,12 +2686,12 @@ snapshots:
       string-width: 7.2.0
       wide-align: 1.1.5
 
-  '@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2)':
+  '@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3)':
     dependencies:
-      '@lerna-lite/cli': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(typescript@5.8.2)
-      '@lerna-lite/core': 4.0.0(@types/node@22.13.9)(typescript@5.8.2)
+      '@lerna-lite/cli': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(typescript@5.8.3)
+      '@lerna-lite/core': 4.0.0(@types/node@22.14.1)(typescript@5.8.3)
       '@lerna-lite/npmlog': 4.0.0
-      '@lerna-lite/version': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2)
+      '@lerna-lite/version': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3)
       '@npmcli/arborist': 9.0.1
       '@npmcli/package-json': 6.1.1
       byte-size: 9.0.1
@@ -2725,10 +2725,10 @@ snapshots:
       - supports-color
       - typescript
 
-  '@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2)':
+  '@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3)':
     dependencies:
-      '@lerna-lite/cli': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(conventional-commits-filter@5.0.0)(typescript@5.8.2))(@types/node@22.13.9)(typescript@5.8.2)
-      '@lerna-lite/core': 4.0.0(@types/node@22.13.9)(typescript@5.8.2)
+      '@lerna-lite/cli': 4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@lerna-lite/version@4.0.0(@lerna-lite/publish@4.0.0(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(conventional-commits-filter@5.0.0)(typescript@5.8.3))(@types/node@22.14.1)(typescript@5.8.3)
+      '@lerna-lite/core': 4.0.0(@types/node@22.14.1)(typescript@5.8.3)
       '@lerna-lite/npmlog': 4.0.0
       '@octokit/plugin-enterprise-rest': 6.0.1
       '@octokit/rest': 21.1.1
@@ -3125,9 +3125,9 @@ snapshots:
 
   '@types/estree@1.0.7': {}
 
-  '@types/node@22.13.9':
+  '@types/node@22.14.1':
     dependencies:
-      undici-types: 6.20.0
+      undici-types: 6.21.0
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -3135,7 +3135,7 @@ snapshots:
 
   '@types/semver@7.7.0': {}
 
-  '@vitest/coverage-v8@3.0.7(vitest@3.0.7(@types/node@22.13.9)(happy-dom@17.2.2)(sass@1.85.1)(yaml@2.7.0))':
+  '@vitest/coverage-v8@3.1.1(vitest@3.1.1(@types/node@22.14.1)(happy-dom@17.4.4)(sass@1.86.3)(yaml@2.7.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@bcoe/v8-coverage': 1.0.2
@@ -3146,50 +3146,50 @@ snapshots:
       istanbul-reports: 3.1.7
       magic-string: 0.30.17
       magicast: 0.3.5
-      std-env: 3.8.0
+      std-env: 3.9.0
       test-exclude: 7.0.1
       tinyrainbow: 2.0.0
-      vitest: 3.0.7(@types/node@22.13.9)(happy-dom@17.2.2)(sass@1.85.1)(yaml@2.7.0)
+      vitest: 3.1.1(@types/node@22.14.1)(happy-dom@17.4.4)(sass@1.86.3)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/expect@3.0.7':
+  '@vitest/expect@3.1.1':
     dependencies:
-      '@vitest/spy': 3.0.7
-      '@vitest/utils': 3.0.7
+      '@vitest/spy': 3.1.1
+      '@vitest/utils': 3.1.1
       chai: 5.2.0
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.0.7(vite@6.2.6(@types/node@22.13.9)(sass@1.85.1)(yaml@2.7.0))':
+  '@vitest/mocker@3.1.1(vite@6.2.6(@types/node@22.14.1)(sass@1.86.3)(yaml@2.7.0))':
     dependencies:
-      '@vitest/spy': 3.0.7
+      '@vitest/spy': 3.1.1
       estree-walker: 3.0.3
       magic-string: 0.30.17
     optionalDependencies:
-      vite: 6.2.6(@types/node@22.13.9)(sass@1.85.1)(yaml@2.7.0)
+      vite: 6.2.6(@types/node@22.14.1)(sass@1.86.3)(yaml@2.7.0)
 
-  '@vitest/pretty-format@3.0.7':
+  '@vitest/pretty-format@3.1.1':
     dependencies:
       tinyrainbow: 2.0.0
 
-  '@vitest/runner@3.0.7':
+  '@vitest/runner@3.1.1':
     dependencies:
-      '@vitest/utils': 3.0.7
+      '@vitest/utils': 3.1.1
       pathe: 2.0.3
 
-  '@vitest/snapshot@3.0.7':
+  '@vitest/snapshot@3.1.1':
     dependencies:
-      '@vitest/pretty-format': 3.0.7
+      '@vitest/pretty-format': 3.1.1
       magic-string: 0.30.17
       pathe: 2.0.3
 
-  '@vitest/spy@3.0.7':
+  '@vitest/spy@3.1.1':
     dependencies:
       tinyspy: 3.0.2
 
-  '@vitest/utils@3.0.7':
+  '@vitest/utils@3.1.1':
     dependencies:
-      '@vitest/pretty-format': 3.0.7
+      '@vitest/pretty-format': 3.1.1
       loupe: 3.1.3
       tinyrainbow: 2.0.0
 
@@ -3237,7 +3237,7 @@ snapshots:
       read-cmd-shim: 5.0.0
       write-file-atomic: 6.0.0
 
-  bootstrap@5.3.3(@popperjs/core@2.11.8):
+  bootstrap@5.3.5(@popperjs/core@2.11.8):
     dependencies:
       '@popperjs/core': 2.11.8
 
@@ -3414,14 +3414,14 @@ snapshots:
       conventional-commits-parser: 6.1.0
       meow: 13.2.0
 
-  cosmiconfig@9.0.0(typescript@5.8.2):
+  cosmiconfig@9.0.0(typescript@5.8.3):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.0
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.8.2
+      typescript: 5.8.3
 
   cross-env@7.0.3:
     dependencies:
@@ -3462,7 +3462,7 @@ snapshots:
 
   dts-bundle-generator@9.5.1:
     dependencies:
-      typescript: 5.8.2
+      typescript: 5.8.3
       yargs: 17.7.2
 
   duplexer@0.1.2: {}
@@ -3538,7 +3538,7 @@ snapshots:
       signal-exit: 4.1.0
       strip-final-newline: 3.0.0
 
-  expect-type@1.1.0: {}
+  expect-type@1.2.1: {}
 
   exponential-backoff@3.1.2: {}
 
@@ -3655,7 +3655,7 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.19.3
 
-  happy-dom@17.2.2:
+  happy-dom@17.4.4:
     dependencies:
       webidl-conversions: 7.0.0
       whatwg-mimetype: 3.0.0
@@ -4290,7 +4290,7 @@ snapshots:
   safer-buffer@2.1.2:
     optional: true
 
-  sass@1.85.1:
+  sass@1.86.3:
     dependencies:
       chokidar: 4.0.3
       immutable: 5.0.3
@@ -4374,7 +4374,7 @@ snapshots:
 
   stackback@0.0.2: {}
 
-  std-env@3.8.0: {}
+  std-env@3.9.0: {}
 
   string-width@4.2.3:
     dependencies:
@@ -4478,12 +4478,12 @@ snapshots:
 
   type-fest@4.35.0: {}
 
-  typescript@5.8.2: {}
+  typescript@5.8.3: {}
 
   uglify-js@3.19.3:
     optional: true
 
-  undici-types@6.20.0: {}
+  undici-types@6.21.0: {}
 
   unicorn-magic@0.1.0: {}
 
@@ -4512,13 +4512,13 @@ snapshots:
 
   validate-npm-package-name@6.0.0: {}
 
-  vite-node@3.0.7(@types/node@22.13.9)(sass@1.85.1)(yaml@2.7.0):
+  vite-node@3.1.1(@types/node@22.14.1)(sass@1.86.3)(yaml@2.7.0):
     dependencies:
       cac: 6.7.14
       debug: 4.4.0
       es-module-lexer: 1.6.0
       pathe: 2.0.3
-      vite: 6.2.6(@types/node@22.13.9)(sass@1.85.1)(yaml@2.7.0)
+      vite: 6.2.6(@types/node@22.14.1)(sass@1.86.3)(yaml@2.7.0)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -4533,42 +4533,42 @@ snapshots:
       - tsx
       - yaml
 
-  vite@6.2.6(@types/node@22.13.9)(sass@1.85.1)(yaml@2.7.0):
+  vite@6.2.6(@types/node@22.14.1)(sass@1.86.3)(yaml@2.7.0):
     dependencies:
       esbuild: 0.25.2
       postcss: 8.5.3
       rollup: 4.39.0
     optionalDependencies:
-      '@types/node': 22.13.9
+      '@types/node': 22.14.1
       fsevents: 2.3.3
-      sass: 1.85.1
+      sass: 1.86.3
       yaml: 2.7.0
 
-  vitest@3.0.7(@types/node@22.13.9)(happy-dom@17.2.2)(sass@1.85.1)(yaml@2.7.0):
+  vitest@3.1.1(@types/node@22.14.1)(happy-dom@17.4.4)(sass@1.86.3)(yaml@2.7.0):
     dependencies:
-      '@vitest/expect': 3.0.7
-      '@vitest/mocker': 3.0.7(vite@6.2.6(@types/node@22.13.9)(sass@1.85.1)(yaml@2.7.0))
-      '@vitest/pretty-format': 3.0.7
-      '@vitest/runner': 3.0.7
-      '@vitest/snapshot': 3.0.7
-      '@vitest/spy': 3.0.7
-      '@vitest/utils': 3.0.7
+      '@vitest/expect': 3.1.1
+      '@vitest/mocker': 3.1.1(vite@6.2.6(@types/node@22.14.1)(sass@1.86.3)(yaml@2.7.0))
+      '@vitest/pretty-format': 3.1.1
+      '@vitest/runner': 3.1.1
+      '@vitest/snapshot': 3.1.1
+      '@vitest/spy': 3.1.1
+      '@vitest/utils': 3.1.1
       chai: 5.2.0
       debug: 4.4.0
-      expect-type: 1.1.0
+      expect-type: 1.2.1
       magic-string: 0.30.17
       pathe: 2.0.3
-      std-env: 3.8.0
+      std-env: 3.9.0
       tinybench: 2.9.0
       tinyexec: 0.3.2
       tinypool: 1.0.2
       tinyrainbow: 2.0.0
-      vite: 6.2.6(@types/node@22.13.9)(sass@1.85.1)(yaml@2.7.0)
-      vite-node: 3.0.7(@types/node@22.13.9)(sass@1.85.1)(yaml@2.7.0)
+      vite: 6.2.6(@types/node@22.14.1)(sass@1.86.3)(yaml@2.7.0)
+      vite-node: 3.1.1(@types/node@22.14.1)(sass@1.86.3)(yaml@2.7.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 22.13.9
-      happy-dom: 17.2.2
+      '@types/node': 22.14.1
+      happy-dom: 17.4.4
     transitivePeerDependencies:
       - jiti
       - less
