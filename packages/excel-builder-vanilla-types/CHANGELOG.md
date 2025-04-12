@@ -4,6 +4,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.1.0...v4.0.0) (2025-04-12)
+
+### ⚠ BREAKING CHANGES
+
+* build as ESM-Only, drop CJS
+
+### Features
+
+* build as ESM-Only, drop CJS ([ee22a7b](https://github.com/ghiscoding/excel-builder-vanilla/commit/ee22a7bfa6f3cec1c324aca85dd97b2fb2aef027)) - by @ghiscoding
+
 ## [3.1.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v3.0.14...v3.1.0) (2025-03-05)
 
 **Note:** Version bump only for package @excel-builder-vanilla/types
