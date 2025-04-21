@@ -9,6 +9,6 @@ copyfiles([source, destination], { stat: true }, err => {
     console.error(err);
   } else {
     // all good, next step, create JS entry file
-    writeFileSync(`${destination}/dist/index.mjs`, `'use strict';`);
+    writeFileSync(`${destination}/dist/index.js`, `'use strict';`);
   }
 });
