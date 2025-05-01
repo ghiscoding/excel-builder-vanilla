@@ -29,9 +29,6 @@ importers:
       happy-dom:
         specifier: ^17.4.4
         version: 17.4.4
-      pnpm:
-        specifier: ^9.10.0
-        version: 9.15.6
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
@@ -1872,11 +1869,6 @@ packages:
   pkg-dir@4.2.0:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
-
-  pnpm@9.15.6:
-    resolution: {integrity: sha512-E5yrBo/fC3USaBeaxfkJtb5yr7SnXFE9GQXRUb78iXe1k9PPhnHtg9TWY3xclLmP+84QgSXeSlonoxIzYBqZ3g==}
-    engines: {node: '>=18.12'}
-    hasBin: true
 
   postcss-selector-parser@6.1.2:
     resolution: {integrity: sha512-Q8qQfPiZ+THO/3ZrOrO0cJJKfpYCagtMUkXbnEfmgUjwXg6z/WBeOyS9APBBPCTSiDV+s4SwQGu8yFsiMRIudg==}
@@ -4190,8 +4182,6 @@ snapshots:
   pkg-dir@4.2.0:
     dependencies:
       find-up: 4.1.0
-
-  pnpm@9.15.6: {}
 
   postcss-selector-parser@6.1.2:
     dependencies:
