@@ -29,6 +29,25 @@ import { createWorksheet } from 'excel-builder-vanilla';
 </script>
 ```
 
+### Basic Usage
+
+```ts
+import { Workbook, downloadExcelFile } from 'excel-builder-vanilla';
+
+const originalData = [
+  ['Artist', 'Album', 'Price'],
+  ['Buckethead', 'Albino Slug', 8.99],
+  ['Buckethead', 'Electric Tears', 13.99],
+  ['Buckethead', 'Colma', 11.34],
+];
+const artistWorkbook = new Workbook();
+const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
+albumList.setData(originalData);
+artistWorkbook.addWorksheet(albumList);
+
+downloadExcelFile(artistWorkbook, 'Artist WB.xlsx');
+```
+
 ## Changelog
 
 [CHANGELOG](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/excel-builder-vanilla/CHANGELOG.md)
