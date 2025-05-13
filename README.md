@@ -29,6 +29,25 @@ Excel-buider-vanilla is at the minimum 8x times smaller than the most popular li
 Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers (all the demos are WYSIWYG (what you is what you'll get, UI vs Export)).<br>
 You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
 
+### Basic Usage
+
+```ts
+import { Workbook, downloadExcelFile } from 'excel-builder-vanilla';
+
+const originalData = [
+  ['Artist', 'Album', 'Price'],
+  ['Buckethead', 'Albino Slug', 8.99],
+  ['Buckethead', 'Electric Tears', 13.99],
+  ['Buckethead', 'Colma', 11.34],
+];
+const artistWorkbook = new Workbook();
+const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
+albumList.setData(originalData);
+artistWorkbook.addWorksheet(albumList);
+
+downloadExcelFile(artistWorkbook, 'Artist WB.xlsx');
+```
+
 ## Changelog
 
 [CHANGELOG](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/excel-builder-vanilla/CHANGELOG.md)
