@@ -1,17 +1,12 @@
 import { strFromU8 } from 'fflate';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { base64ToUint8Array, createExcelFile, createWorkbook, downloadExcelFile } from '../factory.js';
+import { createExcelFile, createWorkbook, downloadExcelFile } from '../factory.js';
 
 describe('ExcelExportService', () => {
-  let mockExcelBlob: Blob;
-  let uint: Uint8Array;
-
   describe('with Translater Service', () => {
     beforeEach(() => {
       (navigator as any).__defineGetter__('appName', () => 'Netscape');
-      mockExcelBlob = new Blob(['', ''], { type: 'text/xlsx;charset=utf-8;' });
-      uint = new Uint8Array([21, 31]);
     });
 
     describe('createExcelFile() method', () => {

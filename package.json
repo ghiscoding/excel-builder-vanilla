@@ -53,7 +53,7 @@
   },
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
-    "@biomejs/biome": "^2.0.0-beta.2",
+    "@biomejs/biome": "^2.0.0-beta.4",
     "@lerna-lite/cli": "^4.1.1",
     "@lerna-lite/publish": "^4.1.1",
     "@types/node": "^22.15.3",
