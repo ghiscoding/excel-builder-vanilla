@@ -20,58 +20,18 @@ This lib allows you to build and write an Excel file dynamically, it does **not*
 
 ### Comparison to similar libraries
 
-Excel-buider-vanilla is at the minimum 8x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 16.5Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates these 2 major differences: 
-- excel-builder-vanilla is ESM-Only (tree shakable) and all other libraries are only offering CJS (CommonJS) increasing their download/install size (not tree shakable)
-- excel-builder-vanilla only offers Excel export (writing) but without any reading capabilities
+Excel-buider-vanilla is at the minimum 8x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 16.5Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates to these 2 major differences: 
+- excel-builder-vanilla is ESM-Only (tree shakable) and all other libraries are just offering CJS (CommonJS) increasing their download/install size (not tree shakable)
+- excel-builder-vanilla only offers Excel export (writer) but without any reading capabilities
 
 ## Live Demo
 
 Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers (all the demos are WYSIWYG (what you is what you'll get, UI vs Export)).<br>
 You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
 
-### Basic Usage
-
-```ts
-import { Workbook, downloadExcelFile } from 'excel-builder-vanilla';
-
-const originalData = [
-  ['Artist', 'Album', 'Price'],
-  ['Buckethead', 'Albino Slug', 8.99],
-  ['Buckethead', 'Electric Tears', 13.99],
-  ['Buckethead', 'Colma', 11.34],
-];
-const artistWorkbook = new Workbook();
-const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
-albumList.setData(originalData);
-artistWorkbook.addWorksheet(albumList);
-
-downloadExcelFile(artistWorkbook, 'Artist WB.xlsx');
-```
-
-## Changelog
-
-[CHANGELOG](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/excel-builder-vanilla/CHANGELOG.md)
-
-## LICENSE
+## License
 
 [MIT License](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/LICENSE.md)
-
-## Project History
-Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal of creating this fork was to modernize the project by removing old dependencies that are no longer necessary and also replace `JSZip` by `fflate` which provides an ESM build and is indirectly giving us better Tree Shaking. The other goal was also to provide an ESM build
-
-The modernization steps:
-- migrate to TypeScript (which is giving us TS Types `d.ts`)
-- drop `Q` dependency (we now simply use native `Promise`)
-- drop `Lodash` dependency (we now use native JS code)
-- replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build and offers better performance.
-- bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
-  - note that the changelog did not exists prior to `v3.0.0`
-
-The project now requires only 1 small dependency which is [fflate](https://github.com/101arrowz/fflate).
-
-### Summary
-
-This modernization is providing a huge decrease in the final build size, with only 1 dependency, and also offers better performance 🚀
 
 ## Installation
 
@@ -104,6 +64,42 @@ Please note that since we use `fflate` (which creates and compresses the Excel f
   content="default-src 'self';
   worker-src 'self' blob:;" />
 ```
+
+### Basic Usage
+
+```ts
+import { Workbook, downloadExcelFile } from 'excel-builder-vanilla';
+
+const originalData = [
+  ['Artist', 'Album', 'Price'],
+  ['Buckethead', 'Albino Slug', 8.99],
+  ['Buckethead', 'Electric Tears', 13.99],
+  ['Buckethead', 'Colma', 11.34],
+];
+const artistWorkbook = new Workbook();
+const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
+albumList.setData(originalData);
+artistWorkbook.addWorksheet(albumList);
+
+downloadExcelFile(artistWorkbook, 'Artist WB.xlsx');
+```
+
+## Project History
+Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal of creating this fork was to modernize the project by removing old dependencies that are no longer necessary and also replace `JSZip` by `fflate` which provides an ESM build and is indirectly giving us better Tree Shaking. The other goal was also to provide an ESM build
+
+The modernization steps:
+- migrate to TypeScript (which is giving us TS Types `d.ts`)
+- drop `Q` dependency (we now simply use native `Promise`)
+- drop `Lodash` dependency (we now use native JS code)
+- replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build and offers better performance.
+- bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
+  - note that the changelog did not exists prior to `v3.0.0`
+
+The project now requires only 1 small dependency which is [fflate](https://github.com/101arrowz/fflate).
+
+### Summary
+
+This modernization is providing a huge decrease in the final build size, with only 1 dependency, and also offers better performance 🚀
 
 ### Used by
 
