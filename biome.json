@@ -19,13 +19,7 @@
     "formatWithErrors": true,
     "lineWidth": 140,
     "indentStyle": "space",
-    "includes": [
-      "**",
-      "!**/.cache",
-      "!**/dist/**",
-      "!**/*.json",
-      "!**/node_modules/**"
-    ]
+    "includes": ["**", "!**/.cache", "!**/dist/**", "!**/*.json", "!**/node_modules/**"]
   },
   "javascript": {
     "parser": {
@@ -49,13 +43,7 @@
   },
   "linter": {
     "enabled": true,
-    "includes": [
-      "**",
-      "!**/.cache",
-      "!**/dist/**",
-      "!**/*.json",
-      "!**/node_modules/**"
-    ],
+    "includes": ["**", "!**/.cache", "!**/dist/**", "!**/*.json", "!**/node_modules/**"],
     "rules": {
       "correctness": {
         "useImportExtensions": "error"
@@ -76,7 +64,16 @@
       "style": {
         "noNonNullAssertion": "off",
         "noParameterAssign": "off",
-        "useExponentiationOperator": "off"
+        "useExponentiationOperator": "off",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       }
     }
   },

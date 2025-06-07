@@ -1,5 +1,6 @@
 {
   "name": "excel-builder-vanilla-demo",
+  "version": "4.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,15 +11,14 @@
   "dependencies": {
     "@excel-builder-vanilla/types": "workspace:*",
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.5",
+    "bootstrap": "^5.3.6",
     "excel-builder-vanilla": "workspace:*",
     "font-awesome": "^4.7.0"
   },
   "devDependencies": {
-    "fflate": "0.8.2",
-    "sass": "^1.87.0",
-    "typescript": "^5.8.3",
-    "vite": "^6.3.4"
-  },
-  "version": "4.0.1"
+    "fflate": "catalog:",
+    "sass": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
 }

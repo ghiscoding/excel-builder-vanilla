@@ -53,12 +53,12 @@
     "copy:types": "node copy-types.mjs"
   },
   "dependencies": {
-    "fflate": "^0.8.2"
+    "fflate": "catalog:"
   },
   "devDependencies": {
     "dts-bundle-generator": "^9.5.1",
-    "native-copyfiles": "^0.3.2",
-    "typescript": "^5.8.3",
-    "vite": "^6.3.4"
+    "native-copyfiles": "^1.2.0",
+    "typescript": "catalog:",
+    "vite": "catalog:"
   }
 }
