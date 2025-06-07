@@ -68,7 +68,7 @@ describe('ExcelExportService', () => {
     describe('downloadExcelFile() method', () => {
       it('should be able to download Excel file via browser', async () => {
         const createUrlSpy = vi.spyOn(URL, 'createObjectURL');
-        const revokeUrlSpy = vi.spyOn(URL, 'createObjectURL');
+        const revokeUrlSpy = vi.spyOn(URL, 'revokeObjectURL');
         const anchorSpy = vi.spyOn(document, 'createElement');
 
         const workbook = createWorkbook();
