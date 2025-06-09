@@ -2,6 +2,8 @@
 
 Excel Builder (abbreviated as 'EB' for the sake of typing) is a relatively simple way of creating Office 2007 Excel files in JavaScript.
 
+> This project was originally created by Stephen Liberty, `excel-builder-vanilla` is a fork of the original [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project that Stephen created. Thanks to him for his work on this great library.
+
 ### Download
 
 ```ts
