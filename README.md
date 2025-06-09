@@ -50,7 +50,7 @@ The project offers 3 different build types, choose the best one depending on you
 import { createWorksheet } from 'excel-builder-vanilla';
 
 // IIFE - CDN
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.1/dist/excel-builder.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.0.1/dist/excel-builder.iife.js"></script>
 <script>
   const worksheet = ExcelBuilder.createWorksheet(); // or window.ExcelBuilder.createWorksheet();
 </script>
@@ -94,6 +94,7 @@ The modernization steps:
 - replace `JSZip` dependency with [`fflate`](https://github.com/101arrowz/fflate) which has an ESM build and offers better performance.
 - bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
   - note that the changelog did not exists prior to `v3.0.0`
+- v4.x is now ESM-Only
 
 The project now requires only 1 small dependency which is [fflate](https://github.com/101arrowz/fflate).
 
