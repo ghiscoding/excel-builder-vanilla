@@ -18,6 +18,10 @@
 
 This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making the library super lightweight for its main goal of strictly exporting to Excel.
 
+### Creator
+
+This project was originally created by Stephen Liberty, `excel-builder-vanilla` is a fork of the original [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project that Stephen created. Thanks to him for this great library.
+
 ### Comparison to similar libraries
 
 Excel-buider-vanilla is at the minimum 8x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 16.5Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates to these 2 major differences: 
