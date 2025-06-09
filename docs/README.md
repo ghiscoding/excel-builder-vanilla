@@ -51,9 +51,10 @@ Heck, if you've been in the development business for more than 5 years, you prob
 
 Here's the tricky part. There are a couple different ways of doing this, so pick the one that is least painful.
 
-- Use the Downloadify project - this is what I'll be using in my demos
+- Use the Downloadify project
 - Use the newer browser's API's to create a Blob and save it. Google always helps here..
 - Chrome has a non-standard attribute called 'download' on anchor tags. Assign a data-uri representing the file you want downloaded to the href and then specify the file name in the 'download' attribute. When the user clicks on the link, it will download the file just like normal.
+  - this is what I'll be using in my demos
 - Create a very simple and inexpensive web service to 'echo' back anything you send it. It still takes the pain away from creating the entire file in the backend with all the data fetching, translations and etc. However it also will work for all browses. You could also look into a simple Google App Engine setup.
 - Combining some of these approaches seems like a noteworthy goal.. perhaps a script in the future to do so?
 
