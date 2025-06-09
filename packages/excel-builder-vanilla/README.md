@@ -23,7 +23,7 @@ The project offers 3 different bundle types, choose the best for your use case
 import { createWorksheet } from 'excel-builder-vanilla';
 
 // IIFE - CDN
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.1/dist/excel-builder.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.0.1/dist/excel-builder.iife.js"></script>
 <script>
   const worksheet = ExcelBuilder.createWorksheet();
 </script>
