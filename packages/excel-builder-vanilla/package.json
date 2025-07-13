@@ -45,7 +45,7 @@
   },
   "scripts": {
     "are-type-wrong": "pnpx @arethetypeswrong/cli --pack .",
-    "clean": "rimraf dist ../excel-builder-vanilla-types/dist",
+    "clean": "remove dist ../excel-builder-vanilla-types/dist",
     "dev:init": "vite build",
     "dev": "vite build --watch",
     "build": "pnpm clean && vite build && pnpm build:dts && pnpm copy:types",
@@ -58,6 +58,7 @@
   "devDependencies": {
     "dts-bundle-generator": "^9.5.1",
     "native-copyfiles": "^1.3.4",
+    "remove-glob": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"
   }
