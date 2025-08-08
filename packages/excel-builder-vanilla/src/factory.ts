@@ -69,7 +69,7 @@ export function createExcelFile<T extends 'Blob' | 'Uint8Array' = 'Blob'>(
           if (mimeType === undefined) {
             mimeType = format === 'xls' ? 'application/vnd.ms-excel' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
           }
-          resolve(new Blob([data as unknown as ArrayBuffer], { type: mimeType }) as InferOutputByType<T>);
+          resolve(new Blob([data as BlobPart], { type: mimeType }) as InferOutputByType<T>);
         }
       });
     });
