@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "stream:excel": "node ./examples/example15-node-streaming.mjs"
   },
   "dependencies": {
     "@excel-builder-vanilla/types": "workspace:*",

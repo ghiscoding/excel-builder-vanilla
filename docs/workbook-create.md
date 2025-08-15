@@ -21,3 +21,20 @@ const workbook = new Workbook();
 This will eventually require you to include the 'excel-builder' module so you can export the workbook, so it's more verbose. However, this is also the best option for creating templates and the like.
 
 Workbooks with no worksheet (i.e. data) will build, but Excel will throw an error while attempting to open it.
+
+---
+
+## NodeJS Usage Example
+
+You can use excel-builder-vanilla in NodeJS to generate and save Excel files directly to disk:
+
+```js
+import fs from 'node:fs';
+import { createWorkbook, createExcelFile } from 'excel-builder-vanilla';
+
+const workbook = createWorkbook();
+// ... add worksheets and data
+
+const buffer = createExcelFile(workbook);
+fs.writeFileSync('output.xlsx', buffer);
+```

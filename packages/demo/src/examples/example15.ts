@@ -1,4 +1,6 @@
-import { createExcelFileStream, createWorkbook } from 'excel-builder-vanilla';
+import { createExcelFileStream, createWorkbook, type ExcelColumnMetadata } from 'excel-builder-vanilla';
+
+const ROWS = 100_000;
 
 export default class Example {
   exportBtnElm!: HTMLButtonElement;
@@ -15,15 +17,38 @@ export default class Example {
   }
 
   async startProcess() {
-    const ROWS = 100_000;
-    const originalData: (number | string | boolean | Date | null)[][] = [['Artist', 'Album', 'Price']];
+    const originalData: (number | string | boolean | Date | null | ExcelColumnMetadata)[][] = [
+      ['Artist', 'Album', { value: 'Price', metadata: {} }],
+    ];
     for (let i = 0; i < ROWS; i++) {
-      originalData.push([`Artist ${i}`, `Album ${i}`, Math.round(Math.random() * 10000) / 100]);
+      const price = Math.round(Math.random() * 10000) / 100;
+      originalData.push([`Artist ${i}`, `Album ${i}`, { value: price, metadata: {} }]);
     }
 
     const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
+    // Apply currency format for Price column
+    const stylesheet = artistWorkbook.getStyleSheet();
+    const currencyFormat = stylesheet.createFormat({ format: '$#,##0.00' });
+    // Update header to use currency style
+    const headerCell = originalData[0][2];
+    if (typeof headerCell === 'object' && headerCell !== null && 'metadata' in headerCell && headerCell.metadata) {
+      headerCell.metadata.style = currencyFormat.id;
+    }
+    // Update all rows to use currency style for Price
+    for (let i = 1; i < originalData.length; i++) {
+      const cell = originalData[i][2];
+      if (typeof cell === 'object' && cell !== null && 'metadata' in cell && cell.metadata) {
+        cell.metadata.style = currencyFormat.id;
+      }
+    }
     albumList.setData(originalData);
+    albumList.setHeader([
+      'This will be on the left',
+      ['In the middle ', { text: 'I shall be', bold: true }],
+      { text: 'Right, underlined and size of 16', font: 16, underline: true },
+    ]);
+    albumList.setFooter(['Date of print: &D &T', '&A', 'Page &P of &N']);
     artistWorkbook.addWorksheet(albumList);
 
     // Streaming export
@@ -31,24 +56,11 @@ export default class Example {
     const chunks: Uint8Array[] = [];
     let processed = 0;
 
-    if (typeof window !== 'undefined' && stream && typeof stream.getReader === 'function') {
-      // Browser: ReadableStream
-      const reader = stream.getReader();
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        chunks.push(value);
-        processed += value.length;
-        const rowsExported = Math.floor(processed / (chunks.length > 0 ? chunks[0].length : 1)) * 1000;
-        this.progressElm.textContent = `Exported ~${rowsExported} / ${ROWS} rows...`;
-      }
-    } else {
-      // Node/fallback: async generator
-      for await (const chunk of stream) {
-        chunks.push(chunk);
-        processed += 1000;
-        this.progressElm.textContent = `Exported ${Math.min(processed, ROWS)} / ${ROWS} rows...`;
-      }
+    // Use async iterator for both browser and Node
+    for await (const chunk of stream as AsyncIterable<Uint8Array>) {
+      chunks.push(chunk);
+      processed += 1000;
+      this.progressElm.textContent = `Exported ${Math.min(processed, ROWS)} / ${ROWS} rows...`;
     }
 
     // Combine chunks and trigger download

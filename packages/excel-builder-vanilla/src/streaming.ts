@@ -7,6 +7,8 @@ export interface ExcelFileStreamOptions {
   outputType?: 'Uint8Array' | 'Blob' | 'stream';
   fileFormat?: 'xlsx' | 'xls';
   mimeType?: string;
+  zipOptions?: import('fflate').ZipOptions;
+  downloadType?: 'browser' | 'node';
 }
 
 /**
@@ -29,31 +31,10 @@ export function createExcelFileStream(workbook: Workbook, options?: ExcelFileStr
  * Browser: returns a ReadableStream of zipped Excel file chunks.
  */
 function browserExcelStream(workbook: Workbook, options?: ExcelFileStreamOptions) {
-  const chunkSize = options?.chunkSize ?? 1000;
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
+      // Use workbook.generateFiles() to get all required files
       const files = await workbook.generateFiles();
-      for (let i = 0; i < workbook.worksheets.length; i++) {
-        const worksheet = workbook.worksheets[i];
-        let worksheetXml = '';
-        worksheetXml += worksheet.getWorksheetXmlHeader();
-        let rowIndex = 0;
-        const totalRows = worksheet.data.length;
-        while (rowIndex < totalRows) {
-          const rowsChunk = worksheet.data.slice(rowIndex, rowIndex + chunkSize);
-          worksheetXml += worksheet.serializeRows(rowsChunk, rowIndex);
-          rowIndex += chunkSize;
-          await new Promise(r => setTimeout(r, 0));
-        }
-        worksheetXml += '</sheetData>';
-        worksheetXml += worksheet.getWorksheetXmlFooter();
-        worksheetXml += '</worksheet>';
-        // Ensure footer does NOT include </worksheet> tag, only append it once here
-        // If getWorksheetXmlFooter() includes </worksheet>, remove it from that method
-        const wsPath = `/xl/worksheets/sheet${i + 1}.xml`;
-        files[wsPath] = worksheetXml;
-      }
-      // Convert files to Uint8Array
       const zipObj: { [name: string]: Uint8Array } = {};
       for (const [path, content] of Object.entries(files)) {
         const outPath = path.startsWith('/') ? path.substr(1) : path;
@@ -64,7 +45,7 @@ function browserExcelStream(workbook: Workbook, options?: ExcelFileStreamOptions
         }
       }
       // Synchronous zip for browser, split into chunks
-      const zipped: Uint8Array = zipSync(zipObj);
+      const zipped: Uint8Array = zipSync(zipObj, options?.zipOptions || {});
       const chunkByteSize = 64 * 1024; // 64KB per chunk
       let offset = 0;
       while (offset < zipped.length) {
@@ -83,29 +64,7 @@ function browserExcelStream(workbook: Workbook, options?: ExcelFileStreamOptions
  * NodeJS: returns an async generator yielding zipped Excel file chunks.
  */
 async function* nodeExcelStream(workbook: Workbook, options?: ExcelFileStreamOptions) {
-  const chunkSize = options?.chunkSize ?? 1000;
   const files = await workbook.generateFiles();
-  for (let i = 0; i < workbook.worksheets.length; i++) {
-    const worksheet = workbook.worksheets[i];
-    let worksheetXml = '';
-    worksheetXml += worksheet.getWorksheetXmlHeader();
-    let rowIndex = 0;
-    const totalRows = worksheet.data.length;
-    while (rowIndex < totalRows) {
-      const rowsChunk = worksheet.data.slice(rowIndex, rowIndex + chunkSize);
-      worksheetXml += worksheet.serializeRows(rowsChunk, rowIndex);
-      rowIndex += chunkSize;
-      await new Promise(r => setTimeout(r, 0));
-    }
-    worksheetXml += '</sheetData>';
-    worksheetXml += worksheet.getWorksheetXmlFooter();
-    worksheetXml += '</worksheet>';
-    // Ensure footer does NOT include </worksheet> tag, only append it once here
-    // If getWorksheetXmlFooter() includes </worksheet>, remove it from that method
-    const wsPath = `/xl/worksheets/sheet${i + 1}.xml`;
-    files[wsPath] = worksheetXml;
-  }
-  // Convert files to Uint8Array
   const zipObj: { [name: string]: Uint8Array } = {};
   for (const [path, content] of Object.entries(files)) {
     const outPath = path.startsWith('/') ? path.substr(1) : path;
@@ -116,7 +75,7 @@ async function* nodeExcelStream(workbook: Workbook, options?: ExcelFileStreamOpt
     }
   }
   // Synchronous zip for Node, split into chunks
-  const zipped: Uint8Array = zipSync(zipObj);
+  const zipped: Uint8Array = zipSync(zipObj, options?.zipOptions || {});
   const chunkByteSize = 64 * 1024; // 64KB per chunk
   let offset = 0;
   while (offset < zipped.length) {

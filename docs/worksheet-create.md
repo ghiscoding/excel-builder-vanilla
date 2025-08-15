@@ -39,3 +39,25 @@ This will set the 'name' of the worksheet to 'Account Summary' so it doesn't sho
 ```ts
 const accountSummarySheet = workbook.createWorksheet({ name: 'Account Summary' });
 ```
+
+---
+
+## NodeJS Usage Example
+
+Worksheets can be created and exported in NodeJS just like in the browser:
+
+```js
+import fs from 'node:fs';
+import { createWorkbook, createExcelFile } from 'excel-builder-vanilla';
+
+const workbook = createWorkbook();
+const sheet = workbook.createWorksheet({ name: 'Demo' });
+sheet.setData([
+	['Artist', 'Album', 'Price'],
+	['Buckethead', 'Albino Slug', 8.99],
+]);
+workbook.addWorksheet(sheet);
+
+const buffer = createExcelFile(workbook);
+fs.writeFileSync('output.xlsx', buffer);
+```

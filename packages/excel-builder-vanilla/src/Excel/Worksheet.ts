@@ -48,7 +48,7 @@ export class Worksheet {
   _freezePane: { xSplit?: number; ySplit?: number; cell?: string } = {};
   sharedStrings: SharedStrings | null = null;
 
-  hyperlinks = [];
+  hyperlinks: Array<{ cell: string; id: string; location?: string; targetMode?: string }> = [];
   sheetView: SheetView;
 
   showZeros: any = null;
@@ -354,7 +354,6 @@ export class Worksheet {
             cell = cellCache.formula.cloneNode(true);
             cell.firstChild.firstChild.nodeValue = cellValue as string;
             break;
-          // biome-ignore lint: original implementation
           case 'text':
           /*falls through*/
           default: {
@@ -652,14 +651,24 @@ export class Worksheet {
     return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
            xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
-           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
-  <sheetData>`;
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">`;
   }
 
   /**
    * Returns worksheet XML footer (everything after </sheetData>)
    */
   getWorksheetXmlFooter(): string {
+    if (this._headers.length > 0 || this._footers.length > 0) {
+      let xml = '<headerFooter>';
+      if (this._headers.length > 0) {
+        xml += `<oddHeader>${this.compilePageDetailPackage(this._headers)}</oddHeader>`;
+      }
+      if (this._footers.length > 0) {
+        xml += `<oddFooter>${this.compilePageDetailPackage(this._footers)}</oddFooter>`;
+      }
+      xml += '</headerFooter>';
+      return xml;
+    }
     return '';
   }
 
