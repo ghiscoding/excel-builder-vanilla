@@ -346,7 +346,10 @@ export class Workbook {
       this._generateCorePaths(files);
 
       for (let i = 0, l = this.worksheets.length; i < l; i++) {
-        files[`/xl/worksheets/sheet${i + 1}.xml`] = this.worksheets[i].toXML();
+        const xml = this.worksheets[i].toXML();
+        // Log non-streaming worksheet XML for comparison
+        console.log(`--- Non-streaming Worksheet XML for sheet${i + 1} ---\n`, typeof xml === 'string' ? xml : xml.toString());
+        files[`/xl/worksheets/sheet${i + 1}.xml`] = xml;
         Paths[this.worksheets[i].id] = `worksheets/sheet${i + 1}.xml`;
         files[`/xl/worksheets/_rels/sheet${i + 1}.xml.rels`] = this.worksheets[i].relations.toXML();
       }

@@ -649,38 +649,6 @@ export class Worksheet {
    * Returns worksheet XML header (everything before <sheetData>)
    */
   getWorksheetXmlHeader(): string {
-    // const doc = Util.createXmlDoc(Util.schemas.spreadsheetml, 'worksheet');
-    // const worksheet = doc.documentElement;
-    // worksheet.setAttribute('xmlns:r', Util.schemas.relationships);
-    // worksheet.setAttribute('xmlns:mc', Util.schemas.markupCompat);
-
-    // let maxX = 0;
-    // const data = this.data;
-    // const columns = this.columns || [];
-    // for (let row = 0, l = data.length; row < l; row++) {
-    //   const cellCount = data[row].length;
-    //   maxX = cellCount > maxX ? cellCount : maxX;
-    // }
-
-    // if (maxX !== 0) {
-    //   worksheet.appendChild(
-    //     Util.createElement(doc, 'dimension', [
-    //       ['ref', `${Util.positionToLetterRef(1, 1)}:${Util.positionToLetterRef(maxX, String(data.length))}`],
-    //     ]),
-    //   );
-    // } else {
-    //   worksheet.appendChild(Util.createElement(doc, 'dimension', [['ref', Util.positionToLetterRef(1, 1)]]));
-    // }
-
-    // worksheet.appendChild(this.sheetView.exportXML(doc));
-
-    // if (this.columns.length) {
-    //   worksheet.appendChild(this.exportColumns(doc));
-    // }
-
-    // // Add <sheetData> start tag
-    // const xml = doc.toString();
-    // return xml.substring(0, xml.indexOf('<sheetData>') + '<sheetData>'.length);
     return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"
            xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
@@ -692,79 +660,6 @@ export class Worksheet {
    * Returns worksheet XML footer (everything after </sheetData>)
    */
   getWorksheetXmlFooter(): string {
-    // const doc = Util.createXmlDoc(Util.schemas.spreadsheetml, 'worksheet');
-    // const worksheet = doc.documentElement;
-
-    // // Add all elements after <sheetData>
-    // if (this.sheetProtection) {
-    //   worksheet.appendChild(this.sheetProtection.exportXML(doc));
-    // }
-
-    // if (this.hyperlinks.length > 0) {
-    //   const hyperlinksEl = doc.createElement('hyperlinks');
-    //   const hyperlinks = this.hyperlinks;
-    //   for (let i = 0, l = hyperlinks.length; i < l; i++) {
-    //     const hyperlinkEl = doc.createElement('hyperlink');
-    //     const hyperlink: any = hyperlinks[i];
-    //     hyperlinkEl.setAttribute('ref', String(hyperlink.cell));
-    //     hyperlink.id = Util.uniqueId('hyperlink');
-    //     this.relations.addRelation(
-    //       {
-    //         id: hyperlink.id,
-    //         target: hyperlink.location,
-    //         targetMode: hyperlink.targetMode || 'External',
-    //       },
-    //       'hyperlink',
-    //     );
-    //     hyperlinkEl.setAttribute('r:id', this.relations.getRelationshipId(hyperlink));
-    //     hyperlinksEl.appendChild(hyperlinkEl);
-    //   }
-    //   worksheet.appendChild(hyperlinksEl);
-    // }
-
-    // if (this.mergedCells.length > 0) {
-    //   const mergeCells = doc.createElement('mergeCells');
-    //   for (let i = 0, l = this.mergedCells.length; i < l; i++) {
-    //     const mergeCell = doc.createElement('mergeCell');
-    //     mergeCell.setAttribute('ref', `${this.mergedCells[i][0]}:${this.mergedCells[i][1]}`);
-    //     mergeCells.appendChild(mergeCell);
-    //   }
-    //   worksheet.appendChild(mergeCells);
-    // }
-
-    // this.exportPageSettings(doc, worksheet);
-
-    // if (this._headers.length > 0 || this._footers.length > 0) {
-    //   const headerFooter = doc.createElement('headerFooter');
-    //   if (this._headers.length > 0) {
-    //     headerFooter.appendChild(this.exportHeader(doc));
-    //   }
-    //   if (this._footers.length > 0) {
-    //     headerFooter.appendChild(this.exportFooter(doc));
-    //   }
-    //   worksheet.appendChild(headerFooter);
-    // }
-
-    // for (let i = 0, l = this._drawings.length; i < l; i++) {
-    //   const drawing = doc.createElement('drawing');
-    //   drawing.setAttribute('r:id', this.relations.getRelationshipId(this._drawings[i]));
-    //   worksheet.appendChild(drawing);
-    // }
-
-    // if (this._tables.length > 0) {
-    //   const tables = doc.createElement('tableParts');
-    //   tables.setAttribute('count', this._tables.length);
-    //   for (let i = 0, l = this._tables.length; i < l; i++) {
-    //     const table = doc.createElement('tablePart');
-    //     table.setAttribute('r:id', this.relations.getRelationshipId(this._tables[i]));
-    //     tables.appendChild(table);
-    //   }
-    //   worksheet.appendChild(tables);
-    // }
-
-    // // Get everything after </sheetData>
-    // const xml = doc.toString();
-    // return xml.substring(xml.indexOf('</sheetData>') + '</sheetData>'.length);
     return '';
   }
 
@@ -772,14 +667,13 @@ export class Worksheet {
    * Serialize a chunk of rows to XML (same logic as in toXML)
    */
   serializeRows(rows: (number | string | boolean | Date | null | ExcelColumnMetadata)[][], startRow = 0): string {
-    const columns = this.columns || [];
     let xml = '';
     for (let row = 0, l = rows.length; row < l; row++) {
       const dataRow = rows[row];
       const cellCount = dataRow.length;
       let rowXml = `<row r="${startRow + row + 1}">`;
       for (let c = 0; c < cellCount; c++) {
-        let cellValue = dataRow[c];
+        const cellValue = dataRow[c];
         let cellType: any = typeof cellValue;
         // Always treat first row as text
         if (startRow + row === 0) {
