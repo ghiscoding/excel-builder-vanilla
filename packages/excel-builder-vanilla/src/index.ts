@@ -18,6 +18,7 @@ export { Workbook } from './Excel/Workbook.js';
 export { Worksheet } from './Excel/Worksheet.js';
 export { XMLDOM, XMLNode } from './Excel/XMLDOM.js';
 export { createExcelFile, createWorkbook, downloadExcelFile } from './factory.js';
+export { createExcelFileStream } from './streaming.js';
 export * from './interfaces.js';
 export { htmlEscape } from './utilities/escape.js';
 export { isObject, isPlainObject, isString } from './utilities/isTypeOf.js';

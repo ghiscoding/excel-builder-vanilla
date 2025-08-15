@@ -356,4 +356,14 @@ export class Workbook {
       return resolve(files);
     });
   }
+
+  serializeHeader(): string {
+    // Return workbook XML header
+    return '<?xml version="1.0" encoding="UTF-8"?><workbook>';
+  }
+
+  serializeFooter(): string {
+    // Return workbook XML footer
+    return '</workbook>';
+  }
 }

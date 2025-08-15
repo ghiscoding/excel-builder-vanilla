@@ -843,6 +843,10 @@ export declare class Worksheet {
 	 */
 	exportPageSettings(doc: XMLDOM, worksheet: XMLNode): void;
 	/**
+	 * Serialize a chunk of rows to XML.
+	 */
+	serializeRows(rows: any[]): string;
+	/**
 	 * http://www.schemacentral.com/sc/ooxml/t-ssml_ST_Orientation.html
 	 *
 	 * Can be one of 'portrait' or 'landscape'.
@@ -968,6 +972,8 @@ export declare class Workbook {
 	generateFiles(): Promise<{
 		[path: string]: string;
 	}>;
+	serializeHeader(): string;
+	serializeFooter(): string;
 }
 export declare class Picture extends Drawing {
 	id: string;
@@ -1043,6 +1049,22 @@ export declare function downloadExcelFile(workbook: Workbook, filename: string, 
 	mimeType?: string;
 	zipOptions?: ZipOptions;
 }): Promise<void>;
+/**
+ * Async generator that yields zipped Excel file chunks.
+ * @param workbook Workbook instance
+ * @param options {chunkSize} Number of rows per chunk
+ */
+export declare function createExcelFileStream(workbook: Workbook, options?: {
+	chunkSize?: number;
+}): AsyncGenerator<Uint8Array<ArrayBufferLike> | {
+	type: string;
+	name: string;
+	xml: string;
+} | {
+	type: string;
+	xml: string;
+	name?: undefined;
+}, void, unknown>;
 /**
  * Converts the characters "&", "<", ">", '"', and "'" in `string` to their
  * corresponding HTML entities.
