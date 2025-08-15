@@ -46,6 +46,10 @@
     "serve:demo": "pnpm -r --stream --filter \"./packages/demo/**\" dev",
     "test": "vitest --watch --config ./vitest/vitest.config.mts",
     "test:coverage": "vitest --coverage --config ./vitest/vitest.config.mts"
+  ,
+  "demo:node:streaming": "node ./packages/demo/examples/node-streaming-demo.mjs"
+  ,
+  "demo:node:non-streaming": "node ./packages/demo/examples/node-non-streaming-demo.mjs"
   },
   "engines": {
     "node": "^20.17.0 || >=22.9.0",

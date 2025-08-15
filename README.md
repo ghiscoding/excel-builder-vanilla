@@ -99,6 +99,7 @@ The modernization steps:
 - bump version to `v3.0.0` as a `major` release (_the original project version was in the `2.x` range._)
   - note that the changelog did not exists prior to `v3.0.0`
 - v4.x is now ESM-Only
+- new Streaming API for large datasets
 
 The project now requires only 1 small dependency which is [fflate](https://github.com/101arrowz/fflate).
 
