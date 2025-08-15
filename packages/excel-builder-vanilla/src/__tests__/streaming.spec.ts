@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { createWorkbook } from '../factory.js';
 import { createExcelFileStream } from '../streaming.js';
 import { Worksheet } from '../Excel/Worksheet.js';
+import { Workbook } from '../Excel/Workbook.js';
 
 // Basic streaming test for NodeJS and browser-like environments
 
@@ -201,5 +202,17 @@ describe('Streaming API', () => {
       expect(xml).toContain('<c r="A2" t="s"><v>0</v></c>');
       expect(xml).toContain('<c r="B2"><v>42</v></c>');
     });
+  });
+});
+
+describe('Workbook XML serialization', () => {
+  it('serializeHeader returns correct XML header', () => {
+    const wb = new Workbook();
+    expect(wb.serializeHeader()).toBe('<?xml version="1.0" encoding="UTF-8"?><workbook>');
+  });
+
+  it('serializeFooter returns correct XML footer', () => {
+    const wb = new Workbook();
+    expect(wb.serializeFooter()).toBe('</workbook>');
   });
 });
