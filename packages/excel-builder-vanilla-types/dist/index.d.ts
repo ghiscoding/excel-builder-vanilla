@@ -337,13 +337,16 @@ export interface ExcelBorderStyle {
 }
 export interface ExcelColumn {
 	bestFit?: boolean;
+	collapsed?: boolean;
 	customWidth?: number;
 	hidden?: boolean;
-	min?: number;
 	max?: number;
+	min?: number;
+	outlineLevel?: number;
+	phonetic?: boolean;
+	style?: number;
 	width?: number;
 }
-export type ExcelColumnFormat = "bestFit" | "collapsed" | "customWidth" | "hidden" | "max" | "min" | "outlineLevel" | "phonetic" | "style" | "width";
 export interface ExcelTableColumn {
 	name: string;
 	dataCellStyle?: any;
@@ -679,7 +682,7 @@ export declare class Worksheet {
 	id: string;
 	_timezoneOffset: number;
 	relations: any;
-	columnFormats: ExcelColumnFormat[];
+	columnFormats: ExcelColumn[];
 	data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][];
 	mergedCells: string[][];
 	columns: ExcelColumn[];
@@ -721,7 +724,7 @@ export declare class Worksheet {
 	 */
 	exportData(): {
 		relations: any;
-		columnFormats: ExcelColumnFormat[];
+		columnFormats: ExcelColumn[];
 		data: (string | number | boolean | Date | ExcelColumnMetadata | null)[][];
 		columns: ExcelColumn[];
 		mergedCells: string[][];
@@ -914,7 +917,7 @@ export declare class Worksheet {
 	 * width
 	 * @param {Array} columnFormats
 	 */
-	setColumnFormats(columnFormats: ExcelColumnFormat[]): void;
+	setColumnFormats(columnFormats: ExcelColumn[]): void;
 	/**
 	 * Returns worksheet XML header (everything before <sheetData>)
 	 */

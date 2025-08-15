@@ -41,24 +41,16 @@ export interface ExcelBorderStyle {
 
 export interface ExcelColumn {
   bestFit?: boolean;
+  collapsed?: boolean;
   customWidth?: number;
   hidden?: boolean;
-  min?: number;
   max?: number;
+  min?: number;
+  outlineLevel?: number;
+  phonetic?: boolean;
+  style?: number;
   width?: number;
 }
-
-export type ExcelColumnFormat =
-  | 'bestFit'
-  | 'collapsed'
-  | 'customWidth'
-  | 'hidden'
-  | 'max'
-  | 'min'
-  | 'outlineLevel'
-  | 'phonetic'
-  | 'style'
-  | 'width';
 
 export interface ExcelTableColumn {
   name: string;

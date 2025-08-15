@@ -6,6 +6,16 @@ import { createExcelFileStream } from '../streaming.js';
 import { Worksheet } from '../Excel/Worksheet.js';
 import { Workbook } from '../Excel/Workbook.js';
 
+describe('Worksheet.setColumnFormats', () => {
+  it('sets columnFormats property', () => {
+    const ws = new Worksheet({ name: 'TestSheet' });
+    // Use valid ExcelColumn objects
+    const formats = [{ width: 20 }, { hidden: true }];
+    ws.setColumnFormats(formats);
+    expect(ws.columnFormats).toBe(formats);
+  });
+});
+
 // Basic streaming test for NodeJS and browser-like environments
 
 describe('Streaming API', () => {

@@ -1,4 +1,4 @@
-import type { ExcelColumn, ExcelColumnFormat, ExcelColumnMetadata, ExcelMargin, ExcelStyleInstruction } from '../interfaces.js';
+import type { ExcelColumn, ExcelColumnMetadata, ExcelMargin, ExcelStyleInstruction } from '../interfaces.js';
 import { isObject, isString } from '../utilities/isTypeOf.js';
 import { uniqueId } from '../utilities/uniqueId.js';
 import type { Drawings } from './Drawings.js';
@@ -33,7 +33,7 @@ export class Worksheet {
   id = uniqueId('Worksheet');
   _timezoneOffset: number;
   relations: any = null;
-  columnFormats: ExcelColumnFormat[] = [];
+  columnFormats: ExcelColumn[] = [];
   data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][] = [];
   mergedCells: string[][] = [];
   columns: ExcelColumn[] = [];
@@ -640,7 +640,7 @@ export class Worksheet {
    * width
    * @param {Array} columnFormats
    */
-  setColumnFormats(columnFormats: ExcelColumnFormat[]) {
+  setColumnFormats(columnFormats: ExcelColumn[]) {
     this.columnFormats = columnFormats;
   }
 
