@@ -63,7 +63,7 @@ function browserExcelStream(workbook: Workbook, options?: ExcelFileStreamOptions
 /**
  * NodeJS: returns an async generator yielding zipped Excel file chunks.
  */
-async function* nodeExcelStream(workbook: Workbook, options?: ExcelFileStreamOptions) {
+export async function* nodeExcelStream(workbook: Workbook, options?: ExcelFileStreamOptions) {
   const files = await workbook.generateFiles();
   const zipObj: { [name: string]: Uint8Array } = {};
   for (const [path, content] of Object.entries(files)) {

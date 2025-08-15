@@ -1,3 +1,4 @@
+import { unzipSync } from 'fflate';
 import { describe, expect, it } from 'vitest';
 
 import { createWorkbook } from '../factory.js';
@@ -7,6 +8,108 @@ import { Worksheet } from '../Excel/Worksheet.js';
 // Basic streaming test for NodeJS and browser-like environments
 
 describe('Streaming API', () => {
+  describe('Streaming API edge cases', () => {
+    describe('NodeJS streaming', () => {
+      it('createExcelFileStream delegates to nodeExcelStream in NodeJS', async () => {
+        // Simulate NodeJS environment
+        const originalWindow = globalThis.window;
+        const originalProcess = globalThis.process;
+        // @ts-ignore
+        delete globalThis.window;
+        globalThis.process = { versions: { node: '18.0.0' } } as any;
+        const { createExcelFileStream } = await import('../streaming.js');
+        let called = false;
+        const fakeWorkbook: any = {
+          async generateFiles() {
+            called = true;
+            return {
+              'xl/worksheet.xml': '<xml>sheet</xml>',
+              'xl/media/image.png': btoa('fakebinary'),
+            };
+          },
+        };
+        const result = createExcelFileStream(fakeWorkbook, {});
+        const chunks: Uint8Array[] = [];
+        for await (const chunk of result) {
+          chunks.push(chunk);
+        }
+        expect(called).toBe(true);
+        // Restore
+        globalThis.window = originalWindow;
+        globalThis.process = originalProcess;
+      });
+
+      it('nodeExcelStream yields zipped chunks and covers non-XML file', async () => {
+        // Mock workbook with generateFiles returning both XML and non-XML
+        const workbook: any = {
+          async generateFiles() {
+            return {
+              'xl/worksheet.xml': '<xml>sheet</xml>',
+              'xl/media/image.png': btoa('fakebinary'),
+            };
+          },
+        };
+        // Import nodeExcelStream directly
+        const { nodeExcelStream } = await import('../streaming.js');
+        const chunks: Uint8Array[] = [];
+        for await (const chunk of nodeExcelStream(workbook)) {
+          chunks.push(chunk);
+        }
+        expect(chunks.length).toBeGreaterThan(0);
+        // Concatenate chunks correctly for unzipSync
+        const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
+        const zipped = new Uint8Array(totalLength);
+        let offset = 0;
+        for (const chunk of chunks) {
+          zipped.set(chunk, offset);
+          offset += chunk.length;
+        }
+        const files = unzipSync(zipped);
+        expect(Object.keys(files)).toContain('xl/worksheet.xml');
+        expect(Object.keys(files)).toContain('xl/media/image.png');
+      });
+    });
+
+    it('throws on unsupported environment', () => {
+      // Simulate an unsupported environment
+      const originalWindow = globalThis.window;
+      const originalProcess = globalThis.process;
+      // @ts-ignore
+      delete globalThis.window;
+      // @ts-ignore
+      delete globalThis.process;
+      const workbook = createWorkbook();
+      expect(() => createExcelFileStream(workbook)).toThrow();
+      // Restore
+      globalThis.window = originalWindow;
+      globalThis.process = originalProcess;
+    });
+
+    it('handles empty workbook', async () => {
+      const workbook = createWorkbook();
+      const chunks: Uint8Array[] = [];
+      for await (const chunk of createExcelFileStream(workbook)) {
+        chunks.push(chunk);
+      }
+      expect(chunks.length).toBeGreaterThan(0);
+    });
+
+    it('respects chunkSize option', async () => {
+      const workbook = createWorkbook();
+      const ws = workbook.createWorksheet({ name: 'Sheet1' });
+      ws.setData([
+        ['A', 'B'],
+        [1, 2],
+      ]);
+      workbook.addWorksheet(ws);
+      const chunks: Uint8Array[] = [];
+      for await (const chunk of createExcelFileStream(workbook, { chunkSize: 1 })) {
+        chunks.push(chunk);
+      }
+      expect(chunks.length).toBeGreaterThan(0);
+    });
+  });
+
   it('should stream Excel file chunks', async () => {
     const workbook = createWorkbook();
     const worksheet = workbook.createWorksheet({ name: 'Sheet1' });
