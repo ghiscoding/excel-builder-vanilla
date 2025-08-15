@@ -14,6 +14,7 @@ import Example13 from './examples/example13.js';
 import Example14 from './examples/example14.js';
 import Example15 from './examples/example15.js';
 import Example16 from './examples/example16.js';
+import Example17 from './examples/example17.js';
 import GettingStarted from './getting-started.js';
 
 export const navbarRouting = [
@@ -46,6 +47,7 @@ export const exampleRouting = [
       { name: 'example14', view: '/src/examples/example14.html', viewModel: Example14, title: '14- Pictures with different anchors' },
       { name: 'example15', view: '/src/examples/example15.html', viewModel: Example15, title: '15- Streaming Excel Export' },
       { name: 'example16', view: '/src/examples/example16.html', viewModel: Example16, title: '16- Streaming Features Demo' },
+      { name: 'example17', view: '/src/examples/example17.html', viewModel: Example17, title: '17- Streaming Export with Images' },
     ],
   },
 ];
