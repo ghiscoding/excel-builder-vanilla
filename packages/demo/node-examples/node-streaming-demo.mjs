@@ -22,7 +22,7 @@ dataArray.push(['ID', 'Name', 'Score']);
 for (let i = 1; i <= ROWS; i++) {
   dataArray.push([i, `User ${i}`, Math.floor(Math.random() * 100)]);
 }
-dataArray.push(['', 'Total', '=SUM(C2:C1001)']);
+dataArray.push(['', 'Total', { value: `SUM(C2:C${ROWS + 2})`, metadata: { type: 'formula' } }]);
 
 worksheet.setData(dataArray);
 worksheet.mergeCells('A1', 'C1');

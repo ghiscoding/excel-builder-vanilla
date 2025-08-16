@@ -61,3 +61,5 @@ workbook.addWorksheet(sheet);
 const buffer = createExcelFile(workbook);
 fs.writeFileSync('output.xlsx', buffer);
 ```
+
+> **Note:** a Node script can be found in the [packages/demo/node-examples/](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/demo/node-examples/) folder.

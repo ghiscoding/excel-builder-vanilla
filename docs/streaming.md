@@ -51,6 +51,8 @@ for await (const chunk of createExcelFileStream(workbook, { chunkSize: 1000 })) 
 output.end();
 ```
 
+> **Note:** a Node script can be found in the [packages/demo/node-examples/](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/demo/node-examples/) folder.
+
 ## Supported Features
 
 All features such as formulas, alignment, borders, styles, and images work with streaming export. The only difference is how the file is delivered.
