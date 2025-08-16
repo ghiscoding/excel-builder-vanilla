@@ -358,13 +358,13 @@ export class Workbook {
     });
   }
 
+  /** Return workbook XML header */
   serializeHeader(): string {
-    // Return workbook XML header
     return '<?xml version="1.0" encoding="UTF-8"?><workbook>';
   }
 
+  /** Return workbook XML footer */
   serializeFooter(): string {
-    // Return workbook XML footer
     return '</workbook>';
   }
 }
