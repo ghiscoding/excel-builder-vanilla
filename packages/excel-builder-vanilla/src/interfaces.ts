@@ -91,21 +91,6 @@ export interface ExcelFontStyle {
   underline?: boolean | 'single' | 'double' | 'singleAccounting' | 'doubleAccounting';
 }
 
-// type ExcelMetadataType =
-//   | 'general'
-//   | 'number'
-//   | 'currency'
-//   | 'accounting'
-//   | 'date'
-//   | 'time'
-//   | 'percentage'
-//   | 'formula'
-//   | 'fraction'
-//   | 'scientific'
-//   | 'text'
-//   | 'special'
-//   | 'custom';
-
 export interface ExcelMetadata {
   type?: string;
   style?: number;
@@ -151,10 +136,7 @@ export interface ExcelStyleInstruction {
   numFmtId?: number;
   width?: number;
   xfId?: number;
-  protection?: {
-    locked?: boolean;
-    hidden?: boolean;
-  };
+  protection?: { locked?: boolean; hidden?: boolean };
   /** style id */
   style?: number;
 }

@@ -90,7 +90,7 @@ describe('Streaming API', () => {
       // @ts-ignore
       delete globalThis.process;
       const workbook = createWorkbook();
-      expect(() => createExcelFileStream(workbook)).toThrow();
+      expect(() => createExcelFileStream(workbook)).toThrow('Streaming is only supported in browser or NodeJS environments.');
       // Restore
       globalThis.window = originalWindow;
       globalThis.process = originalProcess;

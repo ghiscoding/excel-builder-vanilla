@@ -1,13 +1,13 @@
-import { strToU8, zipSync } from 'fflate';
+import { strToU8, type ZipOptions, zipSync } from 'fflate';
 import type { Workbook } from './Excel/Workbook.js';
 import { base64ToUint8Array } from './factory.js';
 
 export interface ExcelFileStreamOptions {
   chunkSize?: number;
-  outputType?: 'Uint8Array' | 'Blob' | 'stream';
+  outputType?: 'Blob' | 'Uint8Array' | 'stream';
   fileFormat?: 'xlsx' | 'xls';
   mimeType?: string;
-  zipOptions?: import('fflate').ZipOptions;
+  zipOptions?: ZipOptions;
   downloadType?: 'browser' | 'node';
 }
 
