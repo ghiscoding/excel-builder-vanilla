@@ -34,3 +34,6 @@ tsconfig.tsbuildinfo
 playwright-report
 test-results
 /playwright/.cache
+
+# Ignore temp folder for streaming demo
+**/temp/

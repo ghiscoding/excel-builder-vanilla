@@ -346,7 +346,8 @@ export class Workbook {
       this._generateCorePaths(files);
 
       for (let i = 0, l = this.worksheets.length; i < l; i++) {
-        files[`/xl/worksheets/sheet${i + 1}.xml`] = this.worksheets[i].toXML();
+        const xml = this.worksheets[i].toXML();
+        files[`/xl/worksheets/sheet${i + 1}.xml`] = xml;
         Paths[this.worksheets[i].id] = `worksheets/sheet${i + 1}.xml`;
         files[`/xl/worksheets/_rels/sheet${i + 1}.xml.rels`] = this.worksheets[i].relations.toXML();
       }
@@ -355,5 +356,15 @@ export class Workbook {
 
       return resolve(files);
     });
+  }
+
+  /** Return workbook XML header */
+  serializeHeader(): string {
+    return '<?xml version="1.0" encoding="UTF-8"?><workbook>';
+  }
+
+  /** Return workbook XML footer */
+  serializeFooter(): string {
+    return '</workbook>';
   }
 }

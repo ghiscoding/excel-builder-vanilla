@@ -337,13 +337,16 @@ export interface ExcelBorderStyle {
 }
 export interface ExcelColumn {
 	bestFit?: boolean;
+	collapsed?: boolean;
 	customWidth?: number;
 	hidden?: boolean;
-	min?: number;
 	max?: number;
+	min?: number;
+	outlineLevel?: number;
+	phonetic?: boolean;
+	style?: number;
 	width?: number;
 }
-export type ExcelColumnFormat = "bestFit" | "collapsed" | "customWidth" | "hidden" | "max" | "min" | "outlineLevel" | "phonetic" | "style" | "width";
 export interface ExcelTableColumn {
 	name: string;
 	dataCellStyle?: any;
@@ -679,7 +682,7 @@ export declare class Worksheet {
 	id: string;
 	_timezoneOffset: number;
 	relations: any;
-	columnFormats: ExcelColumnFormat[];
+	columnFormats: ExcelColumn[];
 	data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][];
 	mergedCells: string[][];
 	columns: ExcelColumn[];
@@ -705,7 +708,12 @@ export declare class Worksheet {
 		cell?: string;
 	};
 	sharedStrings: SharedStrings | null;
-	hyperlinks: never[];
+	hyperlinks: Array<{
+		cell: string;
+		id: string;
+		location?: string;
+		targetMode?: string;
+	}>;
 	sheetView: SheetView;
 	showZeros: any;
 	constructor(config: WorksheetOption);
@@ -716,7 +724,7 @@ export declare class Worksheet {
 	 */
 	exportData(): {
 		relations: any;
-		columnFormats: ExcelColumnFormat[];
+		columnFormats: ExcelColumn[];
 		data: (string | number | boolean | Date | ExcelColumnMetadata | null)[][];
 		columns: ExcelColumn[];
 		mergedCells: string[][];
@@ -909,7 +917,19 @@ export declare class Worksheet {
 	 * width
 	 * @param {Array} columnFormats
 	 */
-	setColumnFormats(columnFormats: ExcelColumnFormat[]): void;
+	setColumnFormats(columnFormats: ExcelColumn[]): void;
+	/**
+	 * Returns worksheet XML header (everything before <sheetData>)
+	 */
+	getWorksheetXmlHeader(): string;
+	/**
+	 * Returns worksheet XML footer (everything after </sheetData>)
+	 */
+	getWorksheetXmlFooter(): string;
+	/**
+	 * Serialize a chunk of rows to XML (same logic as in toXML)
+	 */
+	serializeRows(rows: (number | string | boolean | Date | null | ExcelColumnMetadata)[][], startRow?: number): string;
 }
 export interface MediaMeta {
 	id: string;
@@ -968,6 +988,10 @@ export declare class Workbook {
 	generateFiles(): Promise<{
 		[path: string]: string;
 	}>;
+	/** Return workbook XML header */
+	serializeHeader(): string;
+	/** Return workbook XML footer */
+	serializeFooter(): string;
 }
 export declare class Picture extends Drawing {
 	id: string;
@@ -1043,6 +1067,19 @@ export declare function downloadExcelFile(workbook: Workbook, filename: string, 
 	mimeType?: string;
 	zipOptions?: ZipOptions;
 }): Promise<void>;
+export interface ExcelFileStreamOptions {
+	chunkSize?: number;
+	outputType?: "Uint8Array" | "Blob" | "stream";
+	fileFormat?: "xlsx" | "xls";
+	mimeType?: string;
+	zipOptions?: import("fflate").ZipOptions;
+	downloadType?: "browser" | "node";
+}
+/**
+ * Environment-aware streaming Excel file generator.
+ * Yields zipped chunks for browser (ReadableStream) or NodeJS (async generator).
+ */
+export declare function createExcelFileStream(workbook: Workbook, options?: ExcelFileStreamOptions): ReadableStream<Uint8Array<ArrayBufferLike>> | AsyncGenerator<Uint8Array<ArrayBufferLike>, void, unknown>;
 /**
  * Converts the characters "&", "<", ">", '"', and "'" in `string` to their
  * corresponding HTML entities.

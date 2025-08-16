@@ -1,4 +1,4 @@
-import type { ExcelColumn, ExcelColumnFormat, ExcelColumnMetadata, ExcelMargin, ExcelStyleInstruction } from '../interfaces.js';
+import type { ExcelColumn, ExcelColumnMetadata, ExcelMargin, ExcelStyleInstruction } from '../interfaces.js';
 import { isObject, isString } from '../utilities/isTypeOf.js';
 import { uniqueId } from '../utilities/uniqueId.js';
 import type { Drawings } from './Drawings.js';
@@ -33,7 +33,7 @@ export class Worksheet {
   id = uniqueId('Worksheet');
   _timezoneOffset: number;
   relations: any = null;
-  columnFormats: ExcelColumnFormat[] = [];
+  columnFormats: ExcelColumn[] = [];
   data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][] = [];
   mergedCells: string[][] = [];
   columns: ExcelColumn[] = [];
@@ -48,7 +48,7 @@ export class Worksheet {
   _freezePane: { xSplit?: number; ySplit?: number; cell?: string } = {};
   sharedStrings: SharedStrings | null = null;
 
-  hyperlinks = [];
+  hyperlinks: Array<{ cell: string; id: string; location?: string; targetMode?: string }> = [];
   sheetView: SheetView;
 
   showZeros: any = null;
@@ -354,7 +354,6 @@ export class Worksheet {
             cell = cellCache.formula.cloneNode(true);
             cell.firstChild.firstChild.nodeValue = cellValue as string;
             break;
-          // biome-ignore lint: original implementation
           case 'text':
           /*falls through*/
           default: {
@@ -641,7 +640,73 @@ export class Worksheet {
    * width
    * @param {Array} columnFormats
    */
-  setColumnFormats(columnFormats: ExcelColumnFormat[]) {
+  setColumnFormats(columnFormats: ExcelColumn[]) {
     this.columnFormats = columnFormats;
+  }
+
+  /**
+   * Returns worksheet XML header (everything before <sheetData>)
+   */
+  getWorksheetXmlHeader(): string {
+    return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<worksheet xmlns="${Util.schemas.spreadsheetml}"
+           xmlns:r="${Util.schemas.relationships}"
+           xmlns:mc="${Util.schemas.markupCompat}">`;
+  }
+
+  /**
+   * Returns worksheet XML footer (everything after </sheetData>)
+   */
+  getWorksheetXmlFooter(): string {
+    if (this._headers.length > 0 || this._footers.length > 0) {
+      let xml = '<headerFooter>';
+      if (this._headers.length > 0) {
+        xml += `<oddHeader>${this.compilePageDetailPackage(this._headers)}</oddHeader>`;
+      }
+      if (this._footers.length > 0) {
+        xml += `<oddFooter>${this.compilePageDetailPackage(this._footers)}</oddFooter>`;
+      }
+      xml += '</headerFooter>';
+      return xml;
+    }
+    return '';
+  }
+
+  /**
+   * Serialize a chunk of rows to XML (same logic as in toXML)
+   */
+  serializeRows(rows: (number | string | boolean | Date | null | ExcelColumnMetadata)[][], startRow = 0): string {
+    let xml = '';
+    for (let row = 0, l = rows.length; row < l; row++) {
+      const dataRow = rows[row];
+      const cellCount = dataRow.length;
+      let rowXml = `<row r="${startRow + row + 1}">`;
+      for (let c = 0; c < cellCount; c++) {
+        const cellValue = dataRow[c];
+        const cellType: any = typeof cellValue || 'text';
+        let cellXml = '';
+        const rAttr = ` r="${String.fromCharCode(65 + c)}${startRow + row + 1}"`;
+        switch (cellType) {
+          case 'number':
+            cellXml = `<c${rAttr}><v>${cellValue}</v></c>`;
+            break;
+          case 'text':
+          default: {
+            let id: number | undefined;
+            if (typeof this.sharedStrings?.strings[cellValue as string] !== 'undefined') {
+              id = this.sharedStrings.strings[cellValue as string];
+            } else {
+              id = this.sharedStrings?.addString(cellValue as string);
+            }
+            cellXml = `<c${rAttr} t="s"><v>${id}</v></c>`;
+            break;
+          }
+        }
+        rowXml += cellXml;
+      }
+      rowXml += '</row>';
+      xml += rowXml;
+    }
+    return xml;
   }
 }

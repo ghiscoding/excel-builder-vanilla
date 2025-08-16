@@ -1,4 +1,4 @@
-import { type ZipOptions, strToU8, zip } from 'fflate';
+import { strToU8, type ZipOptions, zip } from 'fflate';
 
 import { Workbook } from './Excel/Workbook.js';
 

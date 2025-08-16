@@ -41,24 +41,16 @@ export interface ExcelBorderStyle {
 
 export interface ExcelColumn {
   bestFit?: boolean;
+  collapsed?: boolean;
   customWidth?: number;
   hidden?: boolean;
-  min?: number;
   max?: number;
+  min?: number;
+  outlineLevel?: number;
+  phonetic?: boolean;
+  style?: number;
   width?: number;
 }
-
-export type ExcelColumnFormat =
-  | 'bestFit'
-  | 'collapsed'
-  | 'customWidth'
-  | 'hidden'
-  | 'max'
-  | 'min'
-  | 'outlineLevel'
-  | 'phonetic'
-  | 'style'
-  | 'width';
 
 export interface ExcelTableColumn {
   name: string;
@@ -98,21 +90,6 @@ export interface ExcelFontStyle {
   superscript?: boolean;
   underline?: boolean | 'single' | 'double' | 'singleAccounting' | 'doubleAccounting';
 }
-
-// type ExcelMetadataType =
-//   | 'general'
-//   | 'number'
-//   | 'currency'
-//   | 'accounting'
-//   | 'date'
-//   | 'time'
-//   | 'percentage'
-//   | 'formula'
-//   | 'fraction'
-//   | 'scientific'
-//   | 'text'
-//   | 'special'
-//   | 'custom';
 
 export interface ExcelMetadata {
   type?: string;
@@ -159,10 +136,7 @@ export interface ExcelStyleInstruction {
   numFmtId?: number;
   width?: number;
   xfId?: number;
-  protection?: {
-    locked?: boolean;
-    hidden?: boolean;
-  };
+  protection?: { locked?: boolean; hidden?: boolean };
   /** style id */
   style?: number;
 }

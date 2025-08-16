@@ -49,3 +49,29 @@ artistWorkbook.addWorksheet(albumList);
 const data = createExcelFile(artistWorkbook);
 downloader('Artist WB.xlsx', data);
 ```
+
+---
+
+## NodeJS Usage Example
+
+Headers and footers work in NodeJS as well:
+
+```js
+import fs from 'node:fs';
+import { createWorkbook, createExcelFile } from 'excel-builder-vanilla';
+
+const workbook = createWorkbook();
+const sheet = workbook.createWorksheet({ name: 'Demo' });
+sheet.setData([
+  ['Artist', 'Album', 'Price'],
+  ['Buckethead', 'Albino Slug', 8.99],
+]);
+sheet.setHeader(['Left', 'Center', 'Right']);
+sheet.setFooter(['Date: &D', '&A', 'Page &P of &N']);
+workbook.addWorksheet(sheet);
+
+const buffer = createExcelFile(workbook);
+fs.writeFileSync('output.xlsx', buffer);
+```
+
+> **Note:** a Node script can be found in the [packages/demo/node-examples/](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/demo/node-examples/) folder.

@@ -1,0 +1,108 @@
+<div class="example15">
+  <div class="row">
+    <div class="col-md-12 title-desc">
+      <h2 class="bd-title">
+        Example 15: Streaming Excel Export <small>(100,000 rows)</small>
+      </h2>
+      <div class="demo-subtitle">
+        For large datasets, streaming export is significantly more performant and memory-efficient compared to non-streaming export. This
+        example demonstrates streaming using <code>createExcelFileStream</code>. The export also includes Header &amp; Footer. Export
+        progress is shown below.
+      </div>
+    </div>
+  </div>
+  <div class="mb-2">
+    <button id="export" class="btn btn-success btn-sm">
+      <i class="fa fa-download"></i>
+      Stream Excel Export
+    </button>
+    <div id="progress" style="margin-top:10px; font-weight:bold;"></div>
+  </div>
+
+  <h6 class="mt-4">
+    <code>Header</code>
+  </h6>
+  <div class="table-container col-sm-8">
+    <table class="table table-bordered header">
+      <thead>
+        <tr>
+          <th scope="col">This will be on the left</th>
+          <th scope="col">
+            In the middle <strong>I shall be</strong>
+          </th>
+          <th scope="col">Right, underlined and size of 16</th>
+        </tr>
+      </thead>
+    </table>
+
+    <h6 class="mt-4">
+      <code>Body</code>
+    </h6>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Artist</th>
+          <th scope="col">Album</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Artist 1</td>
+          <td>Album 1</td>
+          <td>$8.99</td>
+        </tr>
+        <tr>
+          <td>Artist 2</td>
+          <td>Album 2</td>
+          <td>$13.99</td>
+        </tr>
+        <tr>
+          <td>Artist 3</td>
+          <td>Album 3</td>
+          <td>$11.34</td>
+        </tr>
+        <tr>
+          <td>Artist 4</td>
+          <td>Album 4</td>
+          <td>$10.54</td>
+        </tr>
+        <tr>
+          <td>Artist 5</td>
+          <td>Album 5</td>
+          <td>$10.64</td>
+        </tr>
+        <tr>
+          <td>Artist 6</td>
+          <td>Album 6</td>
+          <td>$8.99</td>
+        </tr>
+        <tr>
+          <td>Artist 7</td>
+          <td>Album 7</td>
+          <td>$9.99</td>
+        </tr>
+        <tr>
+          <td>Artist 8</td>
+          <td>Album 8</td>
+          <td>$12.49</td>
+        </tr>
+        <tr>
+          <td>Artist 9</td>
+          <td>Album 9</td>
+          <td>$7.99</td>
+        </tr>
+        <tr>
+          <td>Artist 10</td>
+          <td>Album 10</td>
+          <td>$15.00</td>
+        </tr>
+        <tr>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

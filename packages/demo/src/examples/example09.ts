@@ -1,4 +1,4 @@
-import { Table, createWorkbook, downloadExcelFile } from 'excel-builder-vanilla';
+import { createWorkbook, downloadExcelFile, Table } from 'excel-builder-vanilla';
 
 import './example09.scss';
 

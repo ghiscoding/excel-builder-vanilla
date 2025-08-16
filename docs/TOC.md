@@ -18,4 +18,5 @@
 - [Theming Tables](theming-tables.md)
 - [Tables Summaries](tables-summaries.md)
 - [Adding Headers and Footers to a Worksheet](worksheet-headers-footers.md)
-- [Inserting images into spreadsheets](inserting-pictures.md)
+	- [Inserting images into spreadsheets](inserting-pictures.md)
+	- [Streaming Excel Export](streaming.md)

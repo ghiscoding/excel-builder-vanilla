@@ -1,4 +1,5 @@
-import { createWorkbook, downloadExcelFile, Drawings, Picture, Positioning } from 'excel-builder-vanilla';
+import { createWorkbook, Drawings, downloadExcelFile, Picture, Positioning } from 'excel-builder-vanilla';
+
 import strawberryImageData from '../images/strawberry.jpg?base64'; // images must be provided in the `base64` format, use a Vite loader plugin
 import strawberryUrl from '../images/strawberry.jpg?url';
 
