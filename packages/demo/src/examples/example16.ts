@@ -63,6 +63,7 @@ export default class Example {
         { value: 'Total', metadata: { style: themeColor.id } },
       ],
     ];
+
     async function generateDataAsync() {
       const batchSize = 2000;
       for (let i = 0; i < ROWS; i += batchSize) {
