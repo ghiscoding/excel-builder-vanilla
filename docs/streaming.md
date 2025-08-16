@@ -1,4 +1,4 @@
-# Streaming Excel Export
+# Streaming Export API
 
 Streaming export is designed for large datasets, providing better performance and memory efficiency in both browser and NodeJS environments. The API and features are the same as the regular export and the features like formulas, alignment, borders, and more are all supported.
 

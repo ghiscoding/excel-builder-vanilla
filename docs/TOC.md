@@ -19,4 +19,4 @@
 - [Tables Summaries](tables-summaries.md)
 - [Adding Headers and Footers to a Worksheet](worksheet-headers-footers.md)
 - [Inserting images into spreadsheets](inserting-pictures.md)
-- [Streaming Excel Export](streaming.md)
+- [Streaming Export API](streaming.md)
