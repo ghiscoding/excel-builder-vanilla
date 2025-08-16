@@ -1,5 +1,7 @@
 import { createExcelFileStream, createWorkbook, type ExcelColumnMetadata } from 'excel-builder-vanilla';
 
+import './example15.scss';
+
 const ROWS = 100_000;
 
 export default class Example {
