@@ -25,7 +25,7 @@ describe('Streaming API', () => {
         // Simulate NodeJS environment
         const originalWindow = globalThis.window;
         const originalProcess = globalThis.process;
-        // @ts-ignore
+        // @ts-expect-error
         delete globalThis.window;
         globalThis.process = { versions: { node: '18.0.0' } } as any;
         const { createExcelFileStream } = await import('../streaming.js');
@@ -85,9 +85,9 @@ describe('Streaming API', () => {
       // Simulate an unsupported environment
       const originalWindow = globalThis.window;
       const originalProcess = globalThis.process;
-      // @ts-ignore
+      // @ts-expect-error
       delete globalThis.window;
-      // @ts-ignore
+      // @ts-expect-error
       delete globalThis.process;
       const workbook = createWorkbook();
       expect(() => createExcelFileStream(workbook)).toThrow('Streaming is only supported in browser or NodeJS environments.');
