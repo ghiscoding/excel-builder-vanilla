@@ -683,11 +683,7 @@ export class Worksheet {
       let rowXml = `<row r="${startRow + row + 1}">`;
       for (let c = 0; c < cellCount; c++) {
         const cellValue = dataRow[c];
-        let cellType: any = typeof cellValue;
-        // Always treat first row as text
-        if (startRow + row === 0) {
-          cellType = 'text';
-        }
+        const cellType: any = typeof cellValue || 'text';
         let cellXml = '';
         const rAttr = ` r="${String.fromCharCode(65 + c)}${startRow + row + 1}"`;
         switch (cellType) {

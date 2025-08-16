@@ -988,7 +988,9 @@ export declare class Workbook {
 	generateFiles(): Promise<{
 		[path: string]: string;
 	}>;
+	/** Return workbook XML header */
 	serializeHeader(): string;
+	/** Return workbook XML footer */
 	serializeFooter(): string;
 }
 export declare class Picture extends Drawing {
