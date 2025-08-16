@@ -1069,10 +1069,10 @@ export declare function downloadExcelFile(workbook: Workbook, filename: string, 
 }): Promise<void>;
 export interface ExcelFileStreamOptions {
 	chunkSize?: number;
-	outputType?: "Uint8Array" | "Blob" | "stream";
+	outputType?: "Blob" | "Uint8Array" | "stream";
 	fileFormat?: "xlsx" | "xls";
 	mimeType?: string;
-	zipOptions?: import("fflate").ZipOptions;
+	zipOptions?: ZipOptions;
 	downloadType?: "browser" | "node";
 }
 /**

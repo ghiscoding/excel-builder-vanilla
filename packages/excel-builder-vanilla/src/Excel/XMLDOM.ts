@@ -97,7 +97,7 @@ export class XMLNode {
     let string = `<${this.nodeName}`;
     for (const attr in this.attributes) {
       if (this.attributes.hasOwnProperty(attr)) {
-        string = `${string} ${attr}=\"${htmlEscape(this.attributes[attr])}\"`;
+        string = `${string} ${attr}="${htmlEscape(this.attributes[attr])}"`;
       }
     }
 
