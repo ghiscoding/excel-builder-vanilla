@@ -72,7 +72,6 @@ export default class Example {
           const album = `Album ${idx + 1}`;
           const price = Math.round(Math.random() * 10000) / 100;
           const quantity = Math.floor(Math.random() * 10) + 1;
-          // Excel formula for Total: =C{row}+D{row}
           const rowNum = idx + 3; // +3 for header rows
           originalData.push([
             { value: artist, metadata: { style: centerAlign.id } },
@@ -134,7 +133,6 @@ export default class Example {
       a.download = 'Artist WB - Streaming Features.xlsx';
       a.click();
       URL.revokeObjectURL(url);
-      // Do not reset progress bar after export; leave at 100% until next export
     })();
   }
 }

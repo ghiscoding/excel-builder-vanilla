@@ -1,4 +1,4 @@
-import { createWorkbook, createExcelFileStream, Drawings, Picture, Table } from 'excel-builder-vanilla';
+import { createExcelFileStream, createWorkbook, Drawings, Picture, Table } from 'excel-builder-vanilla';
 
 import './example13.scss';
 

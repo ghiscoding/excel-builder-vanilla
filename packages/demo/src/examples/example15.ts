@@ -27,14 +27,17 @@ export default class Example {
 
     const artistWorkbook = createWorkbook();
     const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
+
     // Apply currency format for Price column
     const stylesheet = artistWorkbook.getStyleSheet();
     const currencyFormat = stylesheet.createFormat({ format: '$#,##0.00' });
+
     // Update header to use currency style
     const headerCell = originalData[0][2];
     if (typeof headerCell === 'object' && headerCell !== null && 'metadata' in headerCell && headerCell.metadata) {
       headerCell.metadata.style = currencyFormat.id;
     }
+
     // Update all rows to use currency style for Price
     for (let i = 1; i < originalData.length; i++) {
       const cell = originalData[i][2];
@@ -42,6 +45,7 @@ export default class Example {
         cell.metadata.style = currencyFormat.id;
       }
     }
+
     albumList.setData(originalData);
     albumList.setHeader([
       'This will be on the left',
@@ -74,6 +78,6 @@ export default class Example {
     a.download = 'LargeArtistWB.xlsx';
     a.click();
     URL.revokeObjectURL(url);
-    this.progressElm.textContent = 'Export complete!';
+    this.progressElm.textContent = `Export successfully ${ROWS} rows!`;
   }
 }
