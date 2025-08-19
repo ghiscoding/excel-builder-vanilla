@@ -20,7 +20,7 @@ Some special codes:
 `&A` - The name of the worksheet
 
 ```ts
-import { ExcelBuilder } from 'excel-builder-vanilla';
+import { createExcelFile, createWorkbook } from 'excel-builder-vanilla';
 
 const originalData = [
   ['Artist', 'Album', 'Price'],
@@ -74,4 +74,4 @@ const buffer = createExcelFile(workbook);
 fs.writeFileSync('output.xlsx', buffer);
 ```
 
-> **Note:** a Node script can be found in the [packages/demo/node-examples/](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/demo/node-examples/) folder.
+> **Note:** some NodeJS scripts can be found in the [packages/demo/node-examples/](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/demo/node-examples/) folder.
