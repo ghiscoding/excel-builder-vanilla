@@ -1,6 +1,6 @@
 # Streaming Export API
 
-Streaming export is designed for large datasets, providing better performance and memory efficiency in both browser and NodeJS environments. The API and features are the same as the regular export and the features like formulas, alignment, borders, and more are all supported.
+Streaming export is designed for large datasets, providing better performance and memory efficiency in both browser and NodeJS environments. The API and features are the same as the regular export, all the features like formulas, alignments, borders, and everything else are all supported.
 
 ## Why Streaming?
 
@@ -51,11 +51,11 @@ for await (const chunk of createExcelFileStream(workbook, { chunkSize: 1000 })) 
 output.end();
 ```
 
-> **Note:** a Node script can be found in the [packages/demo/node-examples/](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/demo/node-examples/) folder.
+> **Note:** some NodeJS scripts can be found in the [packages/demo/node-examples/](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/demo/node-examples/) folder.
 
 ## Supported Features
 
-All features such as formulas, alignment, borders, styles, and images work with streaming export. The only difference is how the file is delivered.
+All features such as formulas, alignments, borders, styles, and images work with streaming export. The only difference is how the file is delivered.
 
 ## See Also
 
