@@ -3,7 +3,7 @@
 Adding data to a worksheet is very straightforward.
 
 ```ts
-import { ExcelBuilder } from 'excel-builder-vanilla';
+import { createExcelFile, createWorkbook } from 'excel-builder-vanilla';
 
 const originalData = [
   ['Artist', 'Album', 'Price'],
@@ -34,7 +34,7 @@ You can add data to a worksheet and export in NodeJS:
 
 ```js
 import fs from 'node:fs';
-import { createWorkbook, createExcelFile } from 'excel-builder-vanilla';
+import { createExcelFile, createWorkbook } from 'excel-builder-vanilla';
 
 const workbook = createWorkbook();
 const sheet = workbook.createWorksheet({ name: 'Demo' });
@@ -48,4 +48,4 @@ const buffer = createExcelFile(workbook);
 fs.writeFileSync('output.xlsx', buffer);
 ```
 
-> **Note:** a Node script can be found in the [packages/demo/node-examples/](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/demo/node-examples/) folder.
+> **Note:** some NodeJS scripts can be found in the [packages/demo/node-examples/](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/demo/node-examples/) folder.
