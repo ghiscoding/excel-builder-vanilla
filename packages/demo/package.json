@@ -13,7 +13,7 @@
   "dependencies": {
     "@excel-builder-vanilla/types": "workspace:*",
     "@popperjs/core": "^2.11.8",
-    "bootstrap": "^5.3.7",
+    "bootstrap": "^5.3.8",
     "excel-builder-vanilla": "workspace:*",
     "font-awesome": "^4.7.0"
   },
