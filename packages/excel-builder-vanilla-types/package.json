@@ -30,6 +30,16 @@
     },
     "./package.json": "./package.json"
   },
+  "keywords": [
+    "excel",
+    "export",
+    "javascript",
+    "xls",
+    "xlsx",
+    "spreadsheet",
+    "writer",
+    "types"
+  ],
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "scripts": {
