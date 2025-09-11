@@ -4,10 +4,12 @@
   "description": "An easy way of building Excel files with javascript",
   "keywords": [
     "excel",
+    "export",
     "javascript",
     "xls",
     "xlsx",
-    "spreadsheet"
+    "spreadsheet",
+    "writer"
   ],
   "author": "Stephen Liberty",
   "contributors": [
