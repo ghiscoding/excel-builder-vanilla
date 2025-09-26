@@ -1,8 +1,8 @@
 ## Excel-Builder-Vanilla (forked from [`excel-builder.js`](https://github.com/stephenliberty/excel-builder.js))
 
-Excel Builder (abbreviated as 'EB' for the sake of typing) is a relatively simple way of creating Office 2007 Excel files in JavaScript.
+Excel Builder (abbreviated as 'EB' for the sake of typing) is a relatively simple way of creating Ms Office 2007+ Excel compatible files in JavaScript.
 
-> This project was originally created by Stephen Liberty, `excel-builder-vanilla` is a fork of the original [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project that Stephen created. Thanks to him for his work on this great library.
+> This project was originally created by Stephen Liberty and `excel-builder-vanilla` is a fork of the original [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project that Stephen created. A huge thanks to Stephen for creating this great library.
 
 ### Download
 
@@ -45,7 +45,7 @@ There are a couple of reasons. First, consider that quite often the data one wan
 
 Second, consider that the user may already have all of the transformations they want done to the data on the screen - sorting, columns, colors, etc. This may take a while for the user to do - possibly rendering a caching mechanism useless. Or perhaps timing them out. You already have to collect their preferences in JavaScript - why bother creating a way to send the server those preferences, and then work through applying said preferences?
 
-Third, take a look at what an Office Excel file really is. It's a zip file full of XML files. The zip format is a very standardized format with a library that was written by some brainiac for JavaScript readily available. JavaScript eats XML files for breakfast - browsers already have the native ability to work with XML. With the eclipse of IE6 (and IE7 coming shortly), the JavaScript engines that may show up to grab a copy of that report are becoming increasingly powerful. More and more you should be pushing as much processing as you can onto the client and off of your server.
+Third, take a look at what an Ms Excel file really is. It's a zip file full of XML files. The zip format is a very standardized format with a library that was written by some brainiac for JavaScript readily available. JavaScript eats XML files for breakfast - browsers already have the native ability to work with XML. With the eclipse of IE6 (and IE7 coming shortly), the JavaScript engines that may show up to grab a copy of that report are becoming increasingly powerful. More and more you should be pushing as much processing as you can onto the client and off of your server.
 
 Heck, if you've been in the development business for more than 5 years, you probably have realized that some of your 'powerful' first webservers are vastly outpaced by today's laptop. I know that my first webserver was slower than my phone is now!
 
