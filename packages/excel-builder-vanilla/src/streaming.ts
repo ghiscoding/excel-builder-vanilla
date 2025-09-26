@@ -16,8 +16,8 @@ export interface ExcelFileStreamOptions {
  * Yields zipped chunks for browser (ReadableStream) or NodeJS (async generator).
  */
 export function createExcelFileStream(workbook: Workbook, options?: ExcelFileStreamOptions) {
-  const isBrowser = typeof window !== 'undefined' && typeof window.ReadableStream !== 'undefined';
-  const isNode = typeof process !== 'undefined' && process.versions?.node;
+  const isBrowser = typeof window?.ReadableStream !== 'undefined';
+  const isNode = typeof process?.versions?.node !== 'undefined';
   if (isBrowser) {
     return browserExcelStream(workbook, options);
   }
