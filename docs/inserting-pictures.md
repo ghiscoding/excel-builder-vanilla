@@ -6,9 +6,9 @@ Creating pictures in Excel is a bit complicated, mostly due to the many, many di
 - One-cell anchors - specify which cell the picture starts, and the width/height of the image.
 - Absolute anchors - specify the offset of the image, and the width/height of the image.
 
-OpenXML Drawings have an odd (understandable, but still odd) positioning system. Use the pixelsToEMUs method available in the Positioning.js to turn a pixel amount into EMU's, which is what is needed for any offset specification.
+OpenXML Drawings have an odd (understandable, but still odd) positioning system. Use the `pixelsToEMUs` method available in the `Positioning.js` to turn a pixel amount into EMU's, which is what is needed for any offset specification.
 
-> **Note** Please note that pictures **must be provided as `base64` format**, you can look on the internet on how to do that or if you're using ViteJS then look at the Vite loader plugin at the end of this document.
+> **Note** Please note that pictures **must be provided as `base64` format**, you can look on the internet on how to do that or if you're using ViteJS then scroll to the end of this document to see a code example of a custom Vite loader plugin.
 
 ```ts
 import { Drawings, ExcelBuilder, Picture, Positioning } from 'excel-builder-vanilla';
@@ -69,9 +69,9 @@ downloader('Fruit WB.xlsx', data);
 
 ### Vite `base64` loader plugin
 
-For loading an image as `base64` with ViteJS, you could do it easily with a Vite loader plugin.
+For loading an image as `base64` with ViteJS, you could do it easily with a custom Vite loader plugin.
 
-> The code below was pulled from this Stack Overflow [answer](https://stackoverflow.com/a/78012267/1212166)
+> The code shown below was copied from this Stack Overflow [answer](https://stackoverflow.com/a/78012267/1212166)
 
 ```ts
 import { readFileSync } from 'node:fs';
