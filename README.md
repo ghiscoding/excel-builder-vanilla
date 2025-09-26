@@ -16,11 +16,11 @@
 
 ## Description
 
-This lib allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making the library super lightweight for its main goal of strictly exporting data to Excel.
+This libray allows you to build and write an Excel file dynamically, it does **not** include any reader capabilities making the library super lightweight for its main goal of strictly exporting data to Excel.
 
 ### Creator
 
-This project was originally created by Stephen Liberty, `excel-builder-vanilla` is a fork of the original [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project that Stephen created. Thanks to him for this great library.
+This project was originally created by Stephen Liberty and `excel-builder-vanilla` is a fork of its original [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project that Stephen created. Thanks to him for this great library.
 
 ### Comparison to similar libraries
 
@@ -30,7 +30,7 @@ Excel-builder-vanilla is at the minimum 8x times smaller than the most popular l
 
 ## Live Demo
 
-Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers (all the demos are WYSIWYG (what you is what you'll get, UI vs Export)).<br>
+Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers (all the demos are WYSIWYG (what you is what you'll get in the Excel Export)).<br>
 You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
 
 ## License
@@ -61,7 +61,7 @@ import { createWorksheet } from 'excel-builder-vanilla';
 ```
 
 ### CSP (Content Security Policy)
-Please note that since we use `fflate` (which creates and compresses the Excel file before sending it to the browser), you might get some CSP errors because of its use of Web Workers. For that reason, you might need to adjust your CSP rules by adding `worker-src 'self' blob:;`
+Please note that since the library uses `fflate` (which creates and compresses the Excel file before sending it to the browser), you might get some CSP errors because of its use of Web Workers. For that reason, you might need to adjust your CSP rules by adding `worker-src 'self' blob:;`
 
 ```html
 <meta http-equiv="Content-Security-Policy"
@@ -89,7 +89,7 @@ downloadExcelFile(artistWorkbook, 'Artist WB.xlsx');
 ```
 
 ## Project History
-Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal of creating this fork was to modernize the project by removing old dependencies that are no longer necessary and also replace `JSZip` by `fflate` which provides an ESM build and is indirectly giving us better Tree Shaking. The other goal was also to provide an ESM build
+Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal to create this fork was to modernize the project by removing old dependencies that are no longer necessary and also replace `JSZip` with `fflate` which provides an ESM build and is indirectly giving us better Tree Shaking. The other goal was also to provide an ESM build
 
 The modernization steps:
 - migrate to TypeScript (which is giving us TS Types `d.ts`)
@@ -101,11 +101,11 @@ The modernization steps:
 - v4.x is now ESM-Only
 - new Streaming API for large datasets
 
-The project now requires only 1 small dependency which is [fflate](https://github.com/101arrowz/fflate).
+The project now requires only 1 small external dependency which is [fflate](https://github.com/101arrowz/fflate).
 
 ### Summary
 
-This modernization is providing a huge decrease in the final build size, with only 1 dependency, and also offers better performance 🚀
+This modernization provides a huge decrease in the final build size, with only 1 dependency, and also offers better performance 🚀
 
 ### Used by
 
@@ -177,9 +177,5 @@ Before submitting a PR (pull request), please make sure that you followed these 
   &nbsp;
   <span>
     <a href="https://github.com/gibson552" class="Link" title="gibson552" target="_blank"><img src="https://avatars.githubusercontent.com/u/84058359?s=52&v=4" class="avatar avatar-user" width="50" height="50" valign="middle" /></a>
-  </span>
-  &nbsp;
-  <span>
-    <a href="https://github.com/web-ascender" class="Link" title="Web Ascender" target="_blank"><img src="https://avatars.githubusercontent.com/u/832747?s=200&v=4" width="50" height="50" valign="middle" /></a>
   </span>
 </div>
