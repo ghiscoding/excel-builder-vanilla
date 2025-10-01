@@ -58,7 +58,7 @@
     "@biomejs/biome": "^2.2.4",
     "@lerna-lite/cli": "^4.9.0",
     "@lerna-lite/publish": "^4.9.0",
-    "@types/node": "^24.5.2",
+    "@types/node": "^24.6.1",
     "@vitest/coverage-v8": "^3.2.4",
     "conventional-changelog-conventionalcommits": "^9.1.0",
     "happy-dom": "^19.0.2",
