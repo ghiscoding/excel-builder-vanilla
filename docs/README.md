@@ -13,10 +13,7 @@ npm install excel-builder-vanilla
 
 ```ts
 // ESM (preferred)
-import { createWorksheet } from 'excel-builder-vanilla';
-
-// or CJS
-const { createWorksheet } = require('excel-builder-vanilla');
+import { createWorkbook, createWorksheet } from 'excel-builder-vanilla';
 ```
 
 or from CDN with standalone script (IIFE)
