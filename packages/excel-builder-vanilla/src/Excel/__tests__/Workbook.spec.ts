@@ -119,7 +119,7 @@ describe('Workbook', () => {
       // Mock window.XMLSerializer
       (globalThis as any).window = {
         XMLSerializer: class {
-          serializeToString(val: any) {
+          serializeToString(_val: any) {
             return '<mocked/>';
           }
         },

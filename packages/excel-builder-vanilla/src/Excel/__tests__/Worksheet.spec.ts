@@ -53,10 +53,10 @@ vi.mock('../Util.js', async () => {
       },
       createXmlDoc: vi.fn(() => ({
         documentElement: makeMockNode(),
-        createElement: vi.fn((doc, name) => makeMockNode(name)),
+        createElement: vi.fn((_doc, name) => makeMockNode(name)),
         createTextNode: vi.fn(() => ({})),
       })),
-      createElement: vi.fn((doc, name) => makeMockNode(name)),
+      createElement: vi.fn((_doc, name) => makeMockNode(name)),
       positionToLetterRef: vi.fn((col, row) => `${col}${row}`),
       setAttributesOnDoc: vi.fn(() => {}),
       uniqueId: vi.fn(prefix => `${prefix}-1`),
@@ -198,8 +198,6 @@ describe('Excel/Worksheet', () => {
       ws._orientation = 'landscape';
       (globalThis as any).__currentWorksheet = ws;
       ws.toXML();
-      // Check that Util.createElement was called with pageSetup and orientation
-      const calls = (globalThis as any).__colSetAttributeCalls;
       // Since our Util mock doesn't track pageSetup, let's spy on Util.createElement
       // Instead, check that the orientation is set on a node
       // (the Util mock will be called with name 'pageSetup' and orientation)
