@@ -6,15 +6,14 @@ Excel Builder (abbreviated as 'EB' for the sake of typing) is a relatively simpl
 
 ### Download
 
-```ts
-// install
+```sh
+# install
 npm install excel-builder-vanilla
+```
 
+```ts
 // ESM (preferred)
-import { createWorksheet } from 'excel-builder-vanilla';
-
-// or CJS
-const { createWorksheet } = require('excel-builder-vanilla');
+import { createWorkbook, createWorksheet } from 'excel-builder-vanilla';
 ```
 
 or from CDN with standalone script (IIFE)

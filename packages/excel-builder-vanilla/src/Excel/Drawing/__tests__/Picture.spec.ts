@@ -7,7 +7,7 @@ describe('Picture', () => {
   it('should initialize with unique ids and default values', () => {
     const pic = new Picture();
     expect(typeof pic.id).toBe('string');
-    expect(typeof pic.pictureId).toBe('string');
+    expect(typeof pic.pictureId).toBe('number');
     expect(pic.fill).toEqual({});
     expect(pic.mediaData).toBeNull();
     expect(pic.description).toBe('');

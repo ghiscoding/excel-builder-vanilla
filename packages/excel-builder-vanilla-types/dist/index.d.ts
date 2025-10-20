@@ -413,13 +413,13 @@ export interface ExcelSortState {
 export interface ExcelStyleInstruction {
 	id?: number;
 	alignment?: ExcelAlignmentStyle;
-	border?: ExcelBorderStyle;
+	border?: ExcelBorderStyle | number;
 	borderId?: number;
-	fill?: ExcelFillStyle;
+	fill?: ExcelFillStyle | number;
 	fillId?: number;
-	font?: ExcelFontStyle;
+	font?: ExcelFontStyle | number;
 	fontId?: number;
-	format?: string;
+	format?: string | number;
 	height?: number;
 	numFmt?: string;
 	numFmtId?: number;

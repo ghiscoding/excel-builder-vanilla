@@ -17,8 +17,7 @@ export class Util {
     if (!Util._idSpaces[space]) {
       Util._idSpaces[space] = 1;
     }
-    const id = Util._idSpaces[space]++;
-    return `${space}${id}`;
+    return Util._idSpaces[space]++;
   }
 
   /**

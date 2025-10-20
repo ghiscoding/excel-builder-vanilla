@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.1.1...v4.1.2) (2025-10-18)
+
+### Bug Fixes
+
+* ExcelStyleInstruction props can also be numbers ([d9c0987](https://github.com/ghiscoding/excel-builder-vanilla/commit/d9c09877bf5bfdf088618805b402e450a1251d58)) - by @ghiscoding
+
 ## [4.1.1](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.1.0...v4.1.1) (2025-09-27)
 
 ### Bug Fixes

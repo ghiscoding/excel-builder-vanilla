@@ -14,7 +14,7 @@ Available [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) w
 npm install excel-builder-vanilla
 ```
 
-The project offers 3 different bundle types, choose the best for your use case
+The project offers 2 different bundle types, choose the best for your use case
 1. ESM: to `import from` (preferred)
 2. IIFE: standalone script with `ExcelBuilder` available on the `window` object
 
@@ -32,7 +32,7 @@ import { createWorksheet } from 'excel-builder-vanilla';
 ### Basic Usage
 
 ```ts
-import { Workbook, downloadExcelFile } from 'excel-builder-vanilla';
+import { downloadExcelFile, Workbook } from 'excel-builder-vanilla';
 
 const originalData = [
   ['Artist', 'Album', 'Price'],
