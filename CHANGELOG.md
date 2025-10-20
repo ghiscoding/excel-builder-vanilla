@@ -4,6 +4,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.3](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.1.2...v4.1.3) (2025-10-20)
+
+### Bug Fixes
+
+* add missing `columns` prop in WorksheetOption ([ddd4bf6](https://github.com/ghiscoding/excel-builder-vanilla/commit/ddd4bf6e6fa363be8177d219271ea2dd7c78760b)) - by @ghiscoding
+* check ref instance before any other code in toXML() fn ([3f483b5](https://github.com/ghiscoding/excel-builder-vanilla/commit/3f483b5c9179368edcd17b29ca463dfdf45d792c)) - by @ghiscoding
+* use the correct variable `yOff` w/assigning to same `to.yOff` var ([81ad4ca](https://github.com/ghiscoding/excel-builder-vanilla/commit/81ad4ca837f4bc12f2b46b9a9075b1cacc3188ff)) - by @ghiscoding
+
 ## [4.1.2](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.1.1...v4.1.2) (2025-10-18)
 
 ### Bug Fixes
