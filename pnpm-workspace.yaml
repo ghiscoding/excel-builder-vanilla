@@ -7,4 +7,4 @@ catalog:
   sass: ^1.93.2
   'remove-glob': ^0.4.4
   typescript: ^5.9.3
-  vite: ^7.1.10
+  vite: ^7.1.11
