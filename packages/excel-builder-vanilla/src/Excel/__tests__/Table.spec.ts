@@ -1,6 +1,6 @@
 import { describe, expect, it, test, vi } from 'vitest';
 
-import { Table } from '../Excel/Table';
+import { Table } from '../Table';
 
 // Minimal mocks for Util (replace jest.fn with vi.fn)
 vi.mock('../Excel/Util', () => ({

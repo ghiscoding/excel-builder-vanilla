@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
-import { Picture } from '../Excel/Drawing/Picture.js';
-import { Drawings } from '../Excel/Drawings.js';
-import { Positioning } from '../Excel/Positioning.js';
-import { createWorkbook } from '../factory.js';
+import { createWorkbook } from '../../factory.js';
+import { Picture } from '../Drawing/Picture.js';
+import { Drawings } from '../Drawings.js';
+import { Positioning } from '../Positioning.js';
 
 describe('Drawings', () => {
   test('Drawings', async () => {
@@ -76,6 +76,7 @@ describe('Drawings', () => {
 
     const wsXML = fruitWorkbook.toXML();
     expect(wsXML.documentElement.children.length).toBe(2);
+    expect(drawings.getCount()).toBe(3);
   });
 
   test('toXML with missing relationship', () => {

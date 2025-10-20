@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { SheetView } from '../Excel/SheetView.js';
+import { SheetView } from '../SheetView.js';
 
 describe('SheetView', () => {
   test('exportXML with all options', () => {

@@ -104,6 +104,17 @@ describe('Excel/Worksheet', () => {
     expect(ws.columns[0]).toBeDefined();
   });
 
+  it('should set bestFit attribute in exportColumns if bestFit is true', () => {
+    const ws = new Worksheet({ name: 'Test' });
+    ws.columns = [{ bestFit: true }];
+    const doc = { createElement: () => ({}) as any } as any;
+    ws.exportColumns(doc);
+    // Check the global mock for col setAttribute calls
+    const calls = (globalThis as any).__colSetAttributeCalls;
+    const found = calls.some(([key, value]: [string, any]) => key === 'bestFit' && value === '1');
+    expect(found).toBe(true);
+  });
+
   describe('setHeader() method', () => {
     test('setHeader throws if not passed an array', () => {
       const ws = new Worksheet({ name: 'Test' });

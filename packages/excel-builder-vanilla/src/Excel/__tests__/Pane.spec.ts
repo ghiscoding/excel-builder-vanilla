@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { Pane } from '../Excel/Pane.js';
+import { Pane } from '../Pane.js';
 
 describe('Pane', () => {
   test('Pane with invalid state', () => {
@@ -16,5 +16,11 @@ describe('Pane', () => {
     pane._freezePane = { xSplit: 1, ySplit: 1, cell: 'A1' };
     const doc = { createElement: () => ({ setAttribute: () => {} }) };
     expect(() => pane.exportXML(doc as any)).not.toThrow();
+  });
+
+  test('freezePane sets _freezePane correctly', () => {
+    const pane = new Pane();
+    pane.freezePane(2, 3, 'B2');
+    expect(pane._freezePane).toEqual({ xSplit: 2, ySplit: 3, cell: 'B2' });
   });
 });
