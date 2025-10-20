@@ -1,6 +1,6 @@
-import type { DualAnchorOption } from './Drawing.js';
 import { Util } from '../Util.js';
 import type { XMLDOM } from '../XMLDOM.js';
+import type { DualAnchorOption } from './Drawing.js';
 
 export class TwoCellAnchor {
   from: any = { xOff: 0, yOff: 0 };

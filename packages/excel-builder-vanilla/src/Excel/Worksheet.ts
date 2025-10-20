@@ -20,6 +20,7 @@ interface CharType {
 interface WorksheetOption {
   name?: string;
   sheetView?: SheetView;
+  columns?: ExcelColumn[];
 }
 
 /**

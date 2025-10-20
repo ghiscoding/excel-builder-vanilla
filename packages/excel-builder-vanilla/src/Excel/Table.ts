@@ -94,6 +94,9 @@ export class Table {
   }
 
   toXML() {
+    if (!this.ref) {
+      throw new Error('Needs at least a reference range');
+    }
     const doc = Util.createXmlDoc(Util.schemas.spreadsheetml, 'table');
     const table = doc.documentElement;
     table.setAttribute('id', this.tableId);
@@ -114,16 +117,11 @@ export class Table {
     if (this.headerRowBorderDxfId) {
       table.setAttribute('headerRowBorderDxfId', this.headerRowBorderDxfId);
     }
-
-    if (!this.ref) {
-      throw new Error('Needs at least a reference range');
-    }
     if (!this.autoFilter) {
       this.addAutoFilter(this.ref[0], this.ref[1]);
     }
 
     table.appendChild(this.exportAutoFilter(doc));
-
     table.appendChild(this.exportTableColumns(doc));
     table.appendChild(this.exportTableStyleInfo(doc));
     return doc;
