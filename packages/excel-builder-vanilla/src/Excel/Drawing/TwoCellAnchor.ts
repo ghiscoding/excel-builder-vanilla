@@ -8,7 +8,7 @@ export class TwoCellAnchor {
 
   constructor(config: DualAnchorOption) {
     if (config) {
-      this.setFrom(config.from.x, config.from.y, config.to.xOff, config.to.yOff);
+      this.setFrom(config.from.x, config.from.y, config.from.xOff, config.from.yOff);
       this.setTo(config.to.x, config.to.y, config.to.xOff, config.to.yOff);
     }
   }

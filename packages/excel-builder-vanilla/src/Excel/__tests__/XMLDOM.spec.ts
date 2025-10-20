@@ -38,6 +38,11 @@ describe('basic DOM simulator for web workers', () => {
         '<arbitraryNodeName xmlns="arbitraryNS"><foo france="silly" britain="port"><bar georgia="peaches"/></foo><baz/></arbitraryNodeName>',
       );
     });
+
+    it('returns null for unknown type in XMLDOM.Node.Create', () => {
+      const result = XMLDOM.Node.Create({ type: 'UNKNOWN' });
+      expect(result).toBeNull();
+    });
   });
 
   describe('XMLDOM.XMLNode', () => {

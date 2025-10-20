@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { StyleSheet } from '../Excel/StyleSheet.js';
-import { XMLNode } from '../Excel/XMLDOM.js';
+import { StyleSheet } from '../StyleSheet.js';
+import { XMLNode } from '../XMLDOM.js';
 
 describe('StyleSheet', () => {
   test('createFormat with empty object', () => {

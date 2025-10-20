@@ -1,8 +1,8 @@
-import { Drawing } from './Drawing.js';
 import { uniqueId } from '../../utilities/uniqueId.js';
 import { Util } from '../Util.js';
 import type { MediaMeta } from '../Workbook.js';
 import type { XMLDOM } from '../XMLDOM.js';
+import { Drawing } from './Drawing.js';
 
 export class Picture extends Drawing {
   id = uniqueId('Picture');

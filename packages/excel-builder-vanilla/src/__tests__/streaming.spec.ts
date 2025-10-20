@@ -226,3 +226,38 @@ describe('Workbook XML serialization', () => {
     expect(wb.serializeFooter()).toBe('</workbook>');
   });
 });
+
+describe('browserExcelStream base64ToUint8Array branch', () => {
+  it('covers non-XML file in browser stream', async () => {
+    // Simulate browser environment
+    const originalWindow = globalThis.window;
+    globalThis.window = { ReadableStream: class {} } as any;
+    const { createExcelFileStream } = await import('../streaming.js');
+    // Mock workbook with a non-XML file
+    const fakeWorkbook: any = {
+      async generateFiles() {
+        return {
+          'xl/media/image.png': btoa('fakebinary'),
+        };
+      },
+    };
+    // Patch globalThis.ReadableStream to real ReadableStream for test
+    globalThis.window.ReadableStream = ReadableStream;
+    const stream = createExcelFileStream(fakeWorkbook, {});
+    if (typeof (stream as any).getReader === 'function') {
+      const reader = (stream as any).getReader();
+      let gotChunk = false;
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        expect(value).toBeInstanceOf(Uint8Array);
+        gotChunk = true;
+      }
+      expect(gotChunk).toBe(true);
+    } else {
+      throw new Error('Returned stream is not a ReadableStream.');
+    }
+    // Restore
+    globalThis.window = originalWindow;
+  });
+});

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { RelationshipManager } from '../Excel/RelationshipManager.js';
+import { RelationshipManager } from '../RelationshipManager.js';
 
 describe('RelationshipManager', () => {
   test('toXML with targetMode', () => {
