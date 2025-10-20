@@ -25,12 +25,12 @@ This project was originally created by Stephen Liberty and `excel-builder-vanill
 ### Comparison to similar libraries
 
 Excel-builder-vanilla is at the minimum 8x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 16.5Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates to these 2 major differences: 
-- excel-builder-vanilla is ESM-Only (tree shakable) and all other libraries are just offering CJS (CommonJS) increasing their download/install size (not tree shakable)
-- excel-builder-vanilla only offers Excel export (writer) but without any reading capabilities
+- excel-builder-vanilla is ESM-Only (tree shakable) and all other libraries are still just offering CJS (CommonJS) which increases their download/install size (not tree shakable)
+- excel-builder-vanilla is only offering Excel export (writer) but without any reading capabilities making the project very lightweight
 
 ## Live Demo
 
-Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library offers (all the demos are WYSIWYG (what you is what you'll get in the Excel Export)).<br>
+Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library has to offer, all the demos are WYSIWYG (what you is what you'll get in the Excel Export).<br>
 You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
 
 ## License
@@ -45,7 +45,7 @@ You can also take a look at the "[Used by](#used-by)" section below to see real 
 npm install excel-builder-vanilla
 ```
 
-The project offers 3 different build types, choose the best one depending on your use case
+The project offers 2 different build types, choose the best one depending on your use case
 1. **ESM**: to `import from` (_**preferred**_)
 2. **IIFE**: standalone script which provides `ExcelBuilder` on the `window` object
 
@@ -72,7 +72,7 @@ Please note that since the library uses `fflate` (which creates and compresses t
 ### Basic Usage
 
 ```ts
-import { Workbook, downloadExcelFile } from 'excel-builder-vanilla';
+import { downloadExcelFile, Workbook } from 'excel-builder-vanilla';
 
 const originalData = [
   ['Artist', 'Album', 'Price'],
@@ -89,7 +89,7 @@ downloadExcelFile(artistWorkbook, 'Artist WB.xlsx');
 ```
 
 ## Project History
-Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal to create this fork was to modernize the project by removing old dependencies that are no longer necessary and also replace `JSZip` with `fflate` which provides an ESM build and is indirectly giving us better Tree Shaking. The other goal was also to provide an ESM build
+Excel-Builder-Vanilla is a fork of the popular [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project (thanks to @stephenliberty for this great library). The main goal of this fork was to modernize the project by removing old dependencies which are no longer necessary and also replace `JSZip` with `fflate` since it provides an ESM build and is indirectly giving us better Tree Shaking. The other goal was also to provide an ESM build.
 
 The modernization steps:
 - migrate to TypeScript (which is giving us TS Types `d.ts`)
@@ -101,7 +101,7 @@ The modernization steps:
 - v4.x is now ESM-Only
 - new Streaming API for large datasets
 
-The project now requires only 1 small external dependency which is [fflate](https://github.com/101arrowz/fflate).
+The project now has only 1 small dependency which is [fflate](https://github.com/101arrowz/fflate).
 
 ### Summary
 
@@ -109,12 +109,12 @@ This modernization provides a huge decrease in the final build size, with only 1
 
 ### Used by
 
-This fork was created mostly to support Tree Shaking (ESM), to provide TS Types and finally to update all project dependencies. It is used by a few other Open Source libraries that I also maintain and require Excel export:
+This fork was created mostly to support Tree Shaking (ESM), then to provide TS Types and finally to update all project dependencies. It is used by a few other Open Source libraries that I also maintain and require Excel export:
 
-- [Angular-Slickgrid](https://github.com/ghiscoding/Angular-Slickgrid)
-- [Aurelia-Slickgrid](https://github.com/ghiscoding/aurelia-slickgrid)
-- [Slickgrid-React](https://github.com/ghiscoding/slickgrid-react)
-- [Slickgrid-Universal](https://github.com/ghiscoding/slickgrid-universal)
+- [Angular-Slickgrid](https://ghiscoding.github.io/angular-slickgrid-demos)
+- [Aurelia-Slickgrid](https://ghiscoding.github.io/aurelia-slickgrid-demos)
+- [Slickgrid-React](https://ghiscoding.github.io/slickgrid-react-demos)
+- [Slickgrid-Universal](https://ghiscoding.github.io/slickgrid-universal)
 
 ## Contributions
 
