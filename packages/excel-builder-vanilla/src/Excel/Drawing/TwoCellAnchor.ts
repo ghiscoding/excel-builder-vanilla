@@ -20,7 +20,7 @@ export class TwoCellAnchor {
       this.from.xOff = xOff;
     }
     if (yOff !== undefined) {
-      this.from.yOff = xOff;
+      this.from.yOff = yOff;
     }
   }
 
@@ -31,7 +31,7 @@ export class TwoCellAnchor {
       this.to.xOff = xOff;
     }
     if (yOff !== undefined) {
-      this.to.yOff = xOff;
+      this.to.yOff = yOff;
     }
   }
 
