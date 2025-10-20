@@ -60,9 +60,9 @@ describe('Picture', () => {
       createTextNode: (text: string) => ({ text }),
     };
     const origCreateElement = Util.createElement;
-    Util.createElement = (doc: any, name: string, attrs?: any) => doc.createElement(name);
+    Util.createElement = (doc: any, name: string, _attrs?: any) => doc.createElement(name);
     const pic = new Picture();
-    pic.anchor = { toXML: (doc: any, node: any) => ({ nodeName: 'anchored', children: [node] }) } as any;
+    pic.anchor = { toXML: (_doc: any, node: any) => ({ nodeName: 'anchored', children: [node] }) } as any;
     pic.setMedia({ fileName: 'img.png', rId: 'rId1', id: '4', data: '', contentType: 'image/png', extension: 'png' });
     pic.setDescription('desc');
     const xml = pic.toXML(xmlDoc as any);
