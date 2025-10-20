@@ -670,6 +670,7 @@ export interface CharType {
 export interface WorksheetOption {
 	name?: string;
 	sheetView?: SheetView;
+	columns?: ExcelColumn[];
 }
 /**
  * This module represents an excel worksheet in its basic form - no tables, charts, etc. Its purpose is
