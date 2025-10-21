@@ -3,6 +3,11 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createExcelFile, createWorkbook, downloadExcelFile } from '../factory.js';
 
+// Patch global Blob and URL.createObjectURL to always use window.Blob and a mock for Vitest 4 compatibility
+// Directly mock URL.createObjectURL to bypass Blob instanceof issues in Vitest 4
+globalThis.URL.createObjectURL = () => 'blob:http://localhost/fake';
+globalThis.Blob = window.Blob;
+
 describe('ExcelExportService', () => {
   describe('with Translater Service', () => {
     beforeEach(() => {
@@ -67,6 +72,11 @@ describe('ExcelExportService', () => {
 
     describe('downloadExcelFile() method', () => {
       it('should be able to download Excel file via browser', async () => {
+        // Ensure Blob and URL.createObjectURL are compatible with Vitest 4.0
+        globalThis.Blob = globalThis.Blob || window.Blob;
+        if (!globalThis.URL.createObjectURL) {
+          globalThis.URL.createObjectURL = vi.fn(() => 'blob:http://localhost/fake');
+        }
         const createUrlSpy = vi.spyOn(URL, 'createObjectURL');
         const revokeUrlSpy = vi.spyOn(URL, 'revokeObjectURL');
         const anchorSpy = vi.spyOn(document, 'createElement');
