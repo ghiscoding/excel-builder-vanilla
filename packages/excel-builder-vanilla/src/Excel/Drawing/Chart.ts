@@ -175,6 +175,9 @@ export class Chart extends Drawing {
         }
       }
 
+      // Optional per-series color (basic solid fill / line stroke)
+      this._applySeriesColor(doc, ser, type, s.color);
+
       primaryChartNode.appendChild(ser);
     });
 
@@ -360,5 +363,36 @@ export class Chart extends Drawing {
     }
     if (title) valAx.appendChild(this._createTitleNode(doc, title));
     return valAx;
+  }
+
+  /** Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
+  private _applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string) {
+    if (!color || typeof color !== 'string') return;
+    let hex = color.trim().replace(/^#/, '').toUpperCase();
+    // Accept 6 (RGB) or 8 (ARGB) hex chars; strip leading alpha if present
+    if (/^[0-9A-F]{8}$/.test(hex)) {
+      hex = hex.slice(2);
+    } else if (!/^[0-9A-F]{6}$/.test(hex)) {
+      return; // invalid format; silently ignore
+    }
+    // Create spPr container
+    const spPr = Util.createElement(doc, 'c:spPr');
+    if (type === 'line' || type === 'scatter') {
+      // For line/scatter charts define stroke color (ln)
+      const ln = Util.createElement(doc, 'a:ln');
+      const solidFill = Util.createElement(doc, 'a:solidFill');
+      solidFill.appendChild(Util.createElement(doc, 'a:srgbClr', [['val', hex]]));
+      ln.appendChild(solidFill);
+      spPr.appendChild(ln);
+    } else if (type !== 'pie' && type !== 'doughnut') {
+      // For column/bar (and future types) define a solid fill
+      const solidFill = Util.createElement(doc, 'a:solidFill');
+      solidFill.appendChild(Util.createElement(doc, 'a:srgbClr', [['val', hex]]));
+      spPr.appendChild(solidFill);
+    } else {
+      // For pie/doughnut omit series-level color (Excel varies slice colors automatically)
+      return;
+    }
+    serNode.appendChild(spPr);
   }
 }

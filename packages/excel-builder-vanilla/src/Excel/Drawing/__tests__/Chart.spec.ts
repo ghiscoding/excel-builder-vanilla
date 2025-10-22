@@ -492,6 +492,65 @@ describe('Chart', () => {
     expect(xml).toContain('<c:max val="300"');
   });
 
+  // -----------------
+  // Series color tests
+  // -----------------
+  it('applies solidFill color for column series', () => {
+    const { xml } = buildChart({
+      type: 'column',
+      title: 'Colored Column',
+      series: [
+        { name: 'S1', valuesRange: 'S!$B$2:$B$4', color: 'FFFF0000' },
+        { name: 'S2', valuesRange: 'S!$C$2:$C$4' },
+      ],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    // Expect a:solidFill with srgbClr val="FF0000" (alpha stripped from ARGB FFFF0000)
+    expect(xml).toContain('<a:solidFill><a:srgbClr val="FF0000"');
+  });
+
+  it('applies stroke color for line series via a:ln', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Colored Line',
+      series: [
+        { name: 'S1', valuesRange: 'S!$B$2:$B$4', color: '80ABCDEF' }, // ARGB; expect ABCDEF
+      ],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toContain('<a:ln><a:solidFill><a:srgbClr val="ABCDEF"');
+  });
+
+  it('applies stroke color for scatter series', () => {
+    const { xml } = buildChart({
+      type: 'scatter',
+      title: 'Colored Scatter',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4', scatterXRange: 'S!$A$2:$A$4', color: 'FF00FF00' }],
+    });
+    expect(xml).toContain('<a:ln><a:solidFill><a:srgbClr val="00FF00"');
+  });
+
+  it('ignores invalid color strings silently', () => {
+    const { xml } = buildChart({
+      type: 'column',
+      title: 'Invalid Color',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4', color: 'GARBAGE' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).not.toContain('<c:spPr>');
+  });
+
+  it('does not emit series color styling for pie', () => {
+    const { xml } = buildChart({
+      type: 'pie',
+      title: 'Pie No Series Color',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4', color: 'FF112233' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    // Pie chart series should not contain c:spPr produced by our color logic
+    expect(xml).not.toContain('<c:spPr>');
+  });
+
   it('category axis renders majorGridlines when showGridLines true', () => {
     const { xml } = buildChart({
       type: 'line',

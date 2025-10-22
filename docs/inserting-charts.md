@@ -26,7 +26,7 @@ Add charts to a workbook: create data, create a chart, add it, position it. That
 | stacking | 'stacked' | 'percent' | Stacks series (column/bar/line) |
 | width / height | Size override | Defaults used if omitted |
 | categoriesRange | Category labels range | Skip for scatter when using `scatterXRange` |
-| series | Array of `{ name, valuesRange }` | 2+ series => legend |
+| series | Array of `{ name, valuesRange, color? }` | 2+ series => legend; `color` optional (opaque ARGB e.g. FF3366CC) |
 | series[].scatterXRange | Scatter X values range | Only for scatter |
 
 
@@ -161,8 +161,8 @@ const col = new Chart({
   title: 'Monthly Revenue',
   axis: { x: { title: 'Month' }, y: { title: 'Amount', minimum: 0, showGridLines: true } },
   series: [
-    { name: 'Q1', valuesRange: 'Sales!$B$2:$B$13' },
-    { name: 'Q2', valuesRange: 'Sales!$C$2:$C$13' },
+  { name: 'Q1', valuesRange: 'Sales!$B$2:$B$13', color: 'FF3366CC' }, // ARGB
+  { name: 'Q2', valuesRange: 'Sales!$C$2:$C$13', color: 'FFFF9933' }, // ARGB
   ],
   categoriesRange: 'Sales!$A$2:$A$13',
 });
@@ -189,7 +189,7 @@ const line = new Chart({
   type: 'line',
   title: 'Trend',
   axis: { x: { title: 'Month' }, y: { title: 'Value', showGridLines: true } },
-  series: [{ name: 'Q1', valuesRange: 'Sales!$B$2:$B$13' }],
+  series: [{ name: 'Q1', valuesRange: 'Sales!$B$2:$B$13', color: 'FF99CC00' }],
   categoriesRange: 'Sales!$A$2:$A$13',
 });
 wb.addChart(line);
@@ -227,6 +227,7 @@ const scatter = new Chart({
     name: 'Run A',
   scatterXRange: 'Runs!$A$2:$A$21',
     valuesRange: 'Runs!$B$2:$B$21',
+  color: 'FFFF0000', // ARGB stroke color (opaque red)
   }],
 });
 wb.addChart(scatter);
@@ -329,3 +330,19 @@ wb.addChart(barPct);
 
 ---
 End of chart type examples.
+
+### Series Color Notes
+See also the general color section in `fonts-and-colors.md`.
+
+Format:
+- Opaque ARGB only: `FFRRGGBB` (e.g. `FF3366CC`). Use `FF` for fully opaque colors.
+
+Behavior:
+- Column / Bar: sets a solid fill color.
+- Line / Scatter: sets the stroke line color (markers, if/when added later, would share that color).
+- Pie / Doughnut: series color is ignored; Excel auto-assigns slice colors (one series per pie/ring).
+
+Notes:
+- Alpha channel (when other than `FF`) is currently ignored; colors render fully opaque.
+- Invalid hex strings are silently ignored (no styling emitted).
+- Theme-based colors (e.g. `{ theme: 2 }`) are not yet supported for charts—pass an ARGB/RGB string.

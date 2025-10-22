@@ -34,7 +34,7 @@ export default class Example18 {
       const qSheet = /[\s%]/.test(sheetName) ? `'${sheetName}'` : sheetName;
       const ws = wb.createWorksheet({ name: sheetName });
       let categoriesRange: string | undefined;
-      let seriesDefs: { name: string; valuesRange: string; scatterXRange?: string }[] = [];
+      let seriesDefs: { name: string; valuesRange: string; scatterXRange?: string; color?: string }[] = [];
 
       if (type === 'scatter') {
         // Provide a richer numeric dataset for scatter (X,Y pairs) with 8 points
@@ -44,7 +44,14 @@ export default class Example18 {
         wb.addWorksheet(ws);
         const xRange = `${qSheet}!$A$2:$A$${xVals.length + 1}`;
         const yRange = `${qSheet}!$B$2:$B$${yVals.length + 1}`;
-        seriesDefs = [{ name: 'Y vs X', valuesRange: yRange, scatterXRange: xRange }];
+        seriesDefs = [
+          {
+            name: 'Y vs X',
+            valuesRange: yRange,
+            scatterXRange: xRange,
+            color: 'FFFF3333', // optional ARGB (FF opaque) stroke color (line/marker) for scatter
+          },
+        ];
       } else {
         // Use month/Q1/Q2 table for most non-scatter charts.
         // Doughnut: intentionally single-series to avoid visual confusion (multi-series would render concentric rings)
@@ -53,7 +60,13 @@ export default class Example18 {
           wb.addWorksheet(ws);
           categoriesRange = `${qSheet}!$A$2:$A$${months.length + 1}`;
           const q1Range = `${qSheet}!$B$2:$B$${months.length + 1}`;
-          seriesDefs = [{ name: 'Q1', valuesRange: q1Range }];
+          seriesDefs = [
+            {
+              name: 'Q1',
+              valuesRange: q1Range,
+              // color intentionally omitted for doughnut: series color is ignored (Excel auto-colors slices)
+            },
+          ];
         } else {
           if (type === 'pie') {
             // Single-series pie (Q1 only)
@@ -61,7 +74,13 @@ export default class Example18 {
             wb.addWorksheet(ws);
             categoriesRange = `${qSheet}!$A$2:$A$${months.length + 1}`;
             const q1Range = `${qSheet}!$B$2:$B$${months.length + 1}`;
-            seriesDefs = [{ name: 'Q1', valuesRange: q1Range }];
+            seriesDefs = [
+              {
+                name: 'Q1',
+                valuesRange: q1Range,
+                // color intentionally omitted for pie to let Excel vary slice colors
+              },
+            ];
           } else {
             ws.setData([['Month', 'Q1', 'Q2'], ...months.map((m, i) => [m, q1[i], q2[i]])]);
             wb.addWorksheet(ws);
@@ -69,8 +88,8 @@ export default class Example18 {
             const q1Range = `${qSheet}!$B$2:$B$${months.length + 1}`;
             const q2Range = `${qSheet}!$C$2:$C$${months.length + 1}`;
             seriesDefs = [
-              { name: 'Q1', valuesRange: q1Range },
-              { name: 'Q2', valuesRange: q2Range },
+              { name: 'Q1', valuesRange: q1Range /* color: 'FF3366CC'*/ }, // ARGB (FF opaque) custom solid fill
+              { name: 'Q2', valuesRange: q2Range /* color: 'FFFF9933'*/ }, // ARGB (FF opaque)
             ];
           }
         }

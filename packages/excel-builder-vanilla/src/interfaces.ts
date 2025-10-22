@@ -164,7 +164,7 @@ export interface ChartSeriesRef {
   name: string;
   /** Cell range for series values (e.g. Sheet1!$B$2:$B$5) */
   valuesRange: string;
-  /** Hex ARGB or RGB color (e.g. FF0000 or FF0000FF) - currently cosmetic placeholder */
+  /** Optional solid color for the series. Use opaque ARGB `FFRRGGBB` (e.g. FF3366CC). Alpha (other than FF) currently ignored. Theme colors not yet supported for charts. */
   color?: string;
   /** Scatter only: per-series X axis numeric range (ignored for non-scatter charts) */
   scatterXRange?: string;

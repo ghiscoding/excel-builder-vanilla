@@ -304,10 +304,10 @@ export interface ChartSeriesRef {
 	name: string;
 	/** Cell range for series values (e.g. Sheet1!$B$2:$B$5) */
 	valuesRange: string;
-	/** Hex ARGB or RGB color (e.g. FF0000 or FF0000FF) - currently cosmetic placeholder */
+	/** Optional solid color for the series. Recommended: opaque ARGB `FFRRGGBB` (e.g. FF3366CC). RGB `RRGGBB` also accepted and treated as opaque. Alpha (other than FF) currently ignored. Theme colors not yet supported for charts. */
 	color?: string;
-	/** For scatter charts: X axis values range */
-	xValuesRange?: string;
+	/** Scatter only: per-series X axis numeric range (ignored for non-scatter charts) */
+	scatterXRange?: string;
 }
 export interface ChartOptions {
 	/** Chart type (defaults to 'column' if omitted) */
@@ -436,6 +436,8 @@ export declare class Chart extends Drawing {
 	private _createCategoryAxis;
 	/** Create a value axis (valAx) */
 	private _createValueAxis;
+	/** Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
+	private _applySeriesColor;
 }
 export type Relation = {
 	[id: string]: {
