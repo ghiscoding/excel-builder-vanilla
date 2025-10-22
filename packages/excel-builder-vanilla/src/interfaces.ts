@@ -4,6 +4,7 @@
  * Online tool: https://www.myfixguide.com/color-converter/
  */
 export type ExcelColorStyle = string | { theme: number };
+
 export interface ExcelAlignmentStyle {
   horizontal?: 'center' | 'fill' | 'general' | 'justify' | 'left' | 'right';
   justifyLastLine?: boolean;
@@ -139,4 +140,45 @@ export interface ExcelStyleInstruction {
   protection?: { locked?: boolean; hidden?: boolean };
   /** style id */
   style?: number;
+}
+
+// ---------------------------
+// Chart related interfaces
+// ---------------------------
+export type ChartType = 'bar' | 'line' | 'pie' | 'scatter';
+
+export interface ChartSeriesRef {
+  /** Series display name */
+  name: string;
+  /** Cell range for series values (e.g. Sheet1!$B$2:$B$5) */
+  valuesRange: string;
+  /** Hex ARGB or RGB color (e.g. FF0000 or FF0000FF) - currently cosmetic placeholder */
+  color?: string;
+  /** For scatter charts: X axis values range */
+  xValuesRange?: string;
+}
+
+export interface ChartOptions {
+  /** Chart type (bar default if omitted for backward compatibility) */
+  type?: ChartType;
+  /** Chart title shown above plot area */
+  title?: string;
+  /** Category axis title (ignored for pie) */
+  xAxisTitle?: string;
+  /** Value axis title (ignored for pie) */
+  yAxisTitle?: string;
+  /** Width in EMUs */
+  width?: number;
+  /** Height in EMUs */
+  height?: number;
+  /** Worksheet name containing referenced ranges */
+  sheetName?: string;
+  /** Categories range (for non-scatter) e.g. Sheet1!$A$2:$A$5 */
+  categoriesRange?: string;
+  /** Multi-series cell references */
+  series?: ChartSeriesRef[];
+  /** Legacy single-series fallback: categories literal */
+  categories?: string[];
+  /** Legacy single-series fallback: values literal */
+  values?: number[];
 }

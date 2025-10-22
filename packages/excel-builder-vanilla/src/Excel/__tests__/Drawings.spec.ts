@@ -3,6 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { createWorkbook } from '../../factory.js';
 import { Picture } from '../Drawing/Picture.js';
 import { Drawings } from '../Drawings.js';
+import { Chart } from '../Drawing/Chart.js';
 import { Positioning } from '../Positioning.js';
 
 describe('Drawings', () => {
@@ -89,5 +90,22 @@ describe('Drawings', () => {
     } as any);
     d.relations = { getRelationshipId: () => null, addRelation: () => 'rId1' } as any;
     expect(() => d.toXML()).not.toThrow();
+  });
+
+  test('toXML chart branch assigns relationship and appends XML', () => {
+    const d = new Drawings();
+    const chart = new Chart({
+      type: 'bar',
+      title: 'ChartRel',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$A$1:$A$1' }],
+      categoriesRange: 'Sheet!$A$1:$A$1',
+    });
+    chart.createAnchor('twoCellAnchor', { from: { x: 0, y: 0 }, to: { x: 2, y: 5 } });
+    d.addDrawing(chart);
+    const xmlDoc = d.toXML();
+    expect(chart.relId).toMatch(/^rId\d+$/);
+    const xmlStr = xmlDoc.toString();
+    expect(xmlStr).toContain('ChartRel');
+    expect(xmlStr).toContain('<c:chart '); // chart branch executed
   });
 });

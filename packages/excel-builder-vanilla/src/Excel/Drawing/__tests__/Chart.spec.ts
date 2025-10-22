@@ -1,10 +1,470 @@
 import { describe, expect, it } from 'vitest';
 
+import { Util } from '../../Util.js';
 import { Chart } from '../Chart.js';
 
+function buildChart(opts: any) {
+  const chart = new Chart(opts);
+  // simulate workbook assigning index to make axis ids stable-ish
+  chart.index = 1;
+  const xml = chart.toChartSpaceXML().toString();
+  return { chart, xml };
+}
+
 describe('Chart', () => {
-  it('can be instantiated', () => {
-    const chart = new Chart();
-    expect(chart).toBeInstanceOf(Chart);
+  it('emits barChart node for bar type', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      title: 'Bar Chart',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:barChart');
+    expect(xml).not.toContain('<c:lineChart');
+  });
+
+  it('emits lineChart node for line type', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Line Chart',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:lineChart');
+    expect(xml).not.toContain('<c:barChart');
+  });
+  it('drawing graphicFrame uses default ext when Chart options width/height omitted', () => {
+    const chart = new Chart({
+      type: 'bar',
+      title: 'Defaults',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    chart.index = 3;
+    chart.setRelationshipId('rId99');
+    chart.createAnchor('twoCellAnchor', { from: { x: 1, y: 1, height: 1, width: 1 }, to: { x: 5, y: 20, height: 1, width: 1 } });
+    const drawingDoc = Util.createXmlDoc(Util.schemas.spreadsheetDrawing, 'xdr:wsDr');
+    const drawingNode = chart.toXML(drawingDoc).toString();
+    // Attribute order (cx/cy) isn't guaranteed; accept either order.
+    expect(drawingNode).toMatch(/<a:ext (?:cx="4000000" cy="3000000"|cy="3000000" cx="4000000")/);
+  });
+
+  it('emits scatterChart with two value axes and no catAx', () => {
+    const { xml } = buildChart({
+      type: 'scatter',
+      title: 'Scatter Chart',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4', xValuesRange: 'Sheet!$A$2:$A$4' }],
+    });
+    expect(xml).toContain('<c:scatterChart');
+    // Two valAx expected
+    const valAxCount = xml.split('<c:valAx').length - 1;
+    expect(valAxCount).toBe(2);
+    expect(xml).not.toContain('<c:catAx');
+  });
+
+  it('includes chart title when provided and sets autoTitleDeleted=0', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      title: 'Custom Title',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('Custom Title');
+    expect(xml).toContain('<c:autoTitleDeleted val="0"');
+  });
+
+  it('omits chart title when not provided and sets autoTitleDeleted=1', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).not.toContain('<c:title>');
+    expect(xml).toContain('<c:autoTitleDeleted val="1"');
+  });
+
+  it('includes axis titles on non-pie charts', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Line',
+      xAxisTitle: 'Months',
+      yAxisTitle: 'Values',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    // Expect two axis title occurrences plus main chart title (3 total c:title nodes)
+    const titleNodeCount = xml.split('<c:title>').length - 1;
+    expect(titleNodeCount).toBe(3);
+    expect(xml).toContain('Months');
+    expect(xml).toContain('Values');
+  });
+
+  it('does not include axis titles for pie even if provided', () => {
+    const { xml } = buildChart({
+      type: 'pie',
+      title: 'Pie',
+      xAxisTitle: 'ShouldNotShow',
+      yAxisTitle: 'ShouldNotShow',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    // Should only have chart-level title
+    const titleNodeCount = xml.split('<c:title>').length - 1;
+    expect(titleNodeCount).toBe(1);
+    expect(xml).not.toContain('ShouldNotShow');
+  });
+
+  it('emits multiple series with correct idx/order', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      title: 'Bar',
+      series: [
+        { name: 'Q1', valuesRange: 'Sheet!$B$2:$B$4' },
+        { name: 'Q2', valuesRange: 'Sheet!$C$2:$C$4' },
+      ],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    // Two c:ser nodes
+    const serCount = xml.split('<c:ser>').length - 1;
+    expect(serCount).toBe(2);
+    expect(xml).toContain('<c:idx val="0"');
+    expect(xml).toContain('<c:idx val="1"');
+    expect(xml).toContain('<c:order val="0"');
+    expect(xml).toContain('<c:order val="1"');
+  });
+
+  it('defaults to barChart when type omitted', () => {
+    const { xml } = buildChart({
+      title: 'Implicit Bar',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:barChart');
+  });
+
+  it('omits legend when only one series', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Single',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).not.toContain('<c:legend>');
+  });
+
+  it('includes legend when more than one series', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Multi',
+      series: [
+        { name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' },
+        { name: 'S2', valuesRange: 'Sheet!$C$2:$C$4' },
+      ],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:legend>');
+  });
+
+  it('generates fallback single series ranges when categories & values provided without series', () => {
+    const { xml } = buildChart({ sheetName: 'Data', title: 'Fallback', categories: ['A', 'B', 'C'], values: [1, 2, 3] });
+    // Expect generated series referencing B column (values) and categories referencing A column
+    expect(xml).toContain('Data!$B$2:$B$4');
+    expect(xml).toContain('Data!$A$2:$A$4');
+  });
+
+  it('scatter falls back to numLit xVal when xValuesRange missing', () => {
+    const { xml } = buildChart({
+      type: 'scatter',
+      title: 'Scatter Fallback',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
+      categories: ['Jan', 'Feb', 'Mar'],
+      values: [10, 20, 30],
+      sheetName: 'Sheet',
+    });
+    expect(xml).toContain('<c:numLit>');
+    expect(xml).toContain('<c:ptCount val="3"');
+  });
+
+  it('chart title overlay value is set to 0', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      title: 'Overlay Check',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:overlay val="0"');
+  });
+
+  it('no axis titles output when not provided', () => {
+    const { xml } = buildChart({ type: 'line', series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }], categoriesRange: 'S!$A$2:$A$4' });
+    // Only chart title autoDeleted present, no axis title nodes
+    const titleNodeCount = xml.split('<c:title>').length - 1;
+    expect(titleNodeCount).toBe(0);
+  });
+
+  it('scatter axis titles render on both value axes when provided', () => {
+    const { xml } = buildChart({
+      type: 'scatter',
+      title: 'Scatter With Axis Titles',
+      xAxisTitle: 'X Axis',
+      yAxisTitle: 'Y Axis',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4', xValuesRange: 'Sheet!$A$2:$A$4' }],
+    });
+    // Expect 3 title nodes: chart + x axis + y axis
+    const titleNodeCount = xml.split('<c:title>').length - 1;
+    expect(titleNodeCount).toBe(3);
+    expect(xml).toContain('X Axis');
+    expect(xml).toContain('Y Axis');
+  });
+
+  it('getMediaType returns chart', () => {
+    const chart = new Chart({
+      type: 'bar',
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(chart.getMediaType()).toBe('chart');
+  });
+
+  it('bar chart specific attributes present', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      title: 'Bar Attr',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:barDir val="col"');
+    expect(xml).toContain('<c:grouping val="clustered"');
+    expect(xml).toContain('<c:varyColors val="0"');
+  });
+
+  it('line chart grouping and varyColors present', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Line Attr',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:grouping val="standard"');
+    expect(xml).toContain('<c:varyColors val="0"');
+  });
+
+  it('pie chart varyColors set to 1', () => {
+    const { xml } = buildChart({
+      type: 'pie',
+      title: 'Pie Attr',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:pieChart');
+    expect(xml).toContain('<c:varyColors val="1"');
+  });
+
+  it('scatter chart style marker and varyColors 0', () => {
+    const { xml } = buildChart({
+      type: 'scatter',
+      title: 'Scatter Attr',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4', xValuesRange: 'S!$A$2:$A$4' }],
+    });
+    expect(xml).toContain('<c:scatterStyle val="marker"');
+    expect(xml).toContain('<c:varyColors val="0"');
+  });
+
+  it('axis IDs differ between charts with different index values', () => {
+    const chart1 = new Chart({
+      type: 'line',
+      title: 'C1',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    chart1.index = 1;
+    const xml1 = chart1.toChartSpaceXML().toString();
+    expect(xml1).toContain('<c:axId val="1001"');
+    expect(xml1).toContain('<c:axId val="1002"');
+
+    const chart2 = new Chart({
+      type: 'line',
+      title: 'C2',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    chart2.index = 2;
+    const xml2 = chart2.toChartSpaceXML().toString();
+    expect(xml2).toContain('<c:axId val="2001"');
+    expect(xml2).toContain('<c:axId val="2002"');
+  });
+
+  it('single xAxisTitle only adds chart + x axis title nodes', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      title: 'Bar Single X',
+      xAxisTitle: 'Only X',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    const titleNodeCount = xml.split('<c:title>').length - 1;
+    expect(titleNodeCount).toBe(2); // chart + x axis
+    expect(xml).toContain('Only X');
+  });
+
+  it('single yAxisTitle only adds chart + y axis title nodes', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Line Single Y',
+      yAxisTitle: 'Only Y',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    const titleNodeCount = xml.split('<c:title>').length - 1;
+    expect(titleNodeCount).toBe(2); // chart + y axis
+    expect(xml).toContain('Only Y');
+  });
+
+  it('custom width/height override graphicFrame ext', () => {
+    const chart = new Chart({
+      type: 'bar',
+      title: 'Sized',
+      width: 5000000,
+      height: 1000000,
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    chart.index = 5;
+    chart.setRelationshipId('rId50');
+    chart.createAnchor('twoCellAnchor', { from: { x: 0, y: 0 }, to: { x: 3, y: 10 } });
+    const drawingDoc = Util.createXmlDoc(Util.schemas.spreadsheetDrawing, 'xdr:wsDr');
+    const xml = chart.toXML(drawingDoc).toString();
+    expect(xml).toMatch(/<a:ext (?:cx="5000000" cy="1000000"|cy="1000000" cx="5000000")/);
+  });
+
+  it('legend structure contains legendPos and layout', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Legend Struct',
+      series: [
+        { name: 'S1', valuesRange: 'S!$B$2:$B$4' },
+        { name: 'S2', valuesRange: 'S!$C$2:$C$4' },
+      ],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:legendPos val="r"');
+    expect(xml).toContain('<c:layout');
+  });
+
+  it('overlay node absent when no title', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).not.toContain('<c:overlay');
+  });
+
+  it('empty series array falls back to generated single series and no legend', () => {
+    const { xml } = buildChart({
+      sheetName: 'Data',
+      title: 'Empty Series',
+      categories: ['A', 'B', 'C'],
+      values: [1, 2, 3],
+      series: [],
+    });
+    expect(xml).toContain('Data!$B$2:$B$4');
+    expect(xml).toContain('Data!$A$2:$A$4');
+    expect(xml).not.toContain('<c:legend>');
+  });
+
+  it('scatter numLit fallback ptCount is 0 when no categories provided', () => {
+    const chart = new Chart({
+      type: 'scatter',
+      title: 'Zero Scatter',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+    });
+    chart.index = 3;
+    const xml = chart.toChartSpaceXML().toString();
+    expect(xml).toContain('<c:numLit>');
+    expect(xml).toContain('<c:ptCount val="0"');
+  });
+
+  it('plotVisOnly and printSettings nodes present', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Vis Only',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:plotVisOnly val="1"');
+    expect(xml).toContain('<c:printSettings');
+  });
+
+  it('graphicFrame name defaults to "Chart" when title omitted', () => {
+    const chart = new Chart({
+      type: 'bar',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    chart.index = 7;
+    chart.setRelationshipId('rId707');
+    chart.createAnchor('twoCellAnchor', { from: { x: 0, y: 0 }, to: { x: 2, y: 8 } });
+    const drawingDoc = Util.createXmlDoc(Util.schemas.spreadsheetDrawing, 'xdr:wsDr');
+    const xml = chart.toXML(drawingDoc).toString();
+    // Attribute order isn't guaranteed; accept either order.
+    expect(xml).toMatch(/<xdr:cNvPr (?:id="7" name="Chart"|name="Chart" id="7")/);
+  });
+
+  it('graphicFrame chart element includes r:id attribute once relationship set', () => {
+    const chart = new Chart({
+      type: 'line',
+      title: 'Has Rel',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    chart.index = 4;
+    chart.setRelationshipId('rId404');
+    chart.createAnchor('twoCellAnchor', { from: { x: 1, y: 1 }, to: { x: 4, y: 12 } });
+    const drawingDoc = Util.createXmlDoc(Util.schemas.spreadsheetDrawing, 'xdr:wsDr');
+    const xml = chart.toXML(drawingDoc).toString();
+    // Ensure r:id attribute present pointing to relationship id
+    expect(xml).toMatch(/<c:chart[^>]*r:id="rId404"/);
+  });
+
+  it('axis IDs reflect index multiplier base for higher index value', () => {
+    const chart = new Chart({
+      type: 'bar',
+      title: 'Axis Base High',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    chart.index = 5; // expect 5001 & 5002
+    const xml = chart.toChartSpaceXML().toString();
+    expect(xml).toContain('<c:axId val="5001"');
+    expect(xml).toContain('<c:axId val="5002"');
+  });
+
+  it('title node includes layout and overlay children when title provided', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Title Layout Overlay',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    // Verify both layout and overlay appear inside title block
+    const titleSegment = xml.match(/<c:title>[\s\S]*?<\/c:title>/);
+    expect(titleSegment?.[0]).toContain('<c:layout');
+    expect(titleSegment?.[0]).toContain('<c:overlay val="0"');
+  });
+
+  it('graphicFrame r:id is empty when relationship not yet set', () => {
+    const chart = new Chart({
+      type: 'bar',
+      title: 'No Rel',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    chart.index = 9;
+    chart.createAnchor('twoCellAnchor', { from: { x: 0, y: 0 }, to: { x: 3, y: 6 } });
+    const drawingDoc = Util.createXmlDoc(Util.schemas.spreadsheetDrawing, 'xdr:wsDr');
+    const xml = chart.toXML(drawingDoc).toString();
+    // r:id attribute present but empty string value
+    expect(xml).toMatch(/<c:chart[^>]*r:id=""/);
   });
 });

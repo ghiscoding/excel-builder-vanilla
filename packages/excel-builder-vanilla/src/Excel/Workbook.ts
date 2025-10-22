@@ -1,4 +1,5 @@
 import { uniqueId } from '../utilities/uniqueId.js';
+import type { Chart } from './Drawing/Chart.js';
 import type { Drawings } from './Drawings.js';
 import { Paths } from './Paths.js';
 import { RelationshipManager } from './RelationshipManager.js';
@@ -28,6 +29,7 @@ export class Workbook {
   sharedStrings = new SharedStrings();
   relations = new RelationshipManager();
   worksheets: Worksheet[] = [];
+  charts: Chart[] = [];
   tables: Table[] = [];
   drawings: Drawings[] = [];
   media: { [filename: string]: MediaMeta } = {};
@@ -61,6 +63,13 @@ export class Workbook {
 
   addDrawings(drawings: Drawings) {
     this.drawings.push(drawings);
+  }
+
+  addChart(chart: Chart) {
+    // Assign 1-based index & relative target for drawing relationship
+    chart.index = this.charts.length + 1;
+    chart.target = `../charts/chart${chart.index}.xml`;
+    this.charts.push(chart);
   }
 
   /**
@@ -217,6 +226,15 @@ export class Workbook {
       );
     }
 
+    for (i = 0, l = this.charts.length; i < l; i++) {
+      types.appendChild(
+        Util.createElement(doc, 'Override', [
+          ['PartName', `/xl/charts/chart${i + 1}.xml`],
+          ['ContentType', 'application/vnd.openxmlformats-officedocument.drawingml.chart+xml'],
+        ]),
+      );
+    }
+
     return doc;
   }
 
@@ -312,6 +330,11 @@ export class Workbook {
       files[`/xl/drawings/drawing${i + 1}.xml`] = this.drawings[i].toXML();
       Paths[this.drawings[i].id] = `/xl/drawings/drawing${i + 1}.xml`;
       files[`/xl/drawings/_rels/drawing${i + 1}.xml.rels`] = this.drawings[i].relations.toXML();
+    }
+
+    for (i = 0, l = this.charts.length; i < l; i++) {
+      files[`/xl/charts/chart${i + 1}.xml`] = this.charts[i].toChartSpaceXML();
+      Paths[this.charts[i].id] = `/xl/charts/chart${i + 1}.xml`;
     }
   }
 

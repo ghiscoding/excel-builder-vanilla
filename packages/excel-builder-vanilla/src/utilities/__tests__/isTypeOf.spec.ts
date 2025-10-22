@@ -34,6 +34,13 @@ describe('isPlainObject() method', () => {
     const output = isPlainObject(null);
     expect(output).toBeFalsy();
   });
+
+  it('should return truthy when object has a null prototype', () => {
+    const obj = Object.create(null);
+    (obj as any).foo = 'bar';
+    const output = isPlainObject(obj);
+    expect(output).toBeTruthy();
+  });
 });
 
 describe('isString() method', () => {
