@@ -177,10 +177,4 @@ export interface ChartOptions {
   categoriesRange?: string;
   /** Multi-series cell references */
   series?: ChartSeriesRef[];
-  /** Legacy single-series fallback: categories literal */
-  categories?: string[];
-  /** Legacy single-series fallback: values literal */
-  values?: number[];
-  /** Whether to also embed a snapshot of the data for quicker chart load. Defaults to true; set false to shrink file size for very large datasets. */
-  includeDataCache?: boolean;
 }

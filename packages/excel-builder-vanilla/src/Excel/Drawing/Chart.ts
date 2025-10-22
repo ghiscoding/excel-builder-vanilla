@@ -111,6 +111,8 @@ export class Chart extends Drawing {
 
     // Default to vertical column chart if type omitted (Excel naming consistency).
     const type = this.options.type || 'column';
+    // Categories range (shared across all non-scatter series when provided)
+    const categoriesRange = this.options.categoriesRange || '';
     let primaryChartNode: XMLNode;
     switch (type) {
       case 'line':
@@ -120,6 +122,8 @@ export class Chart extends Drawing {
         break;
       case 'pie':
         primaryChartNode = Util.createElement(doc, 'c:pieChart');
+        primaryChartNode.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
+        // Pie charts typically set varyColors=1 so each slice gets a distinct fill.
         primaryChartNode.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '1']]));
         break;
       case 'scatter':
@@ -128,7 +132,7 @@ export class Chart extends Drawing {
         primaryChartNode.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
         break;
       case 'bar':
-        // Horizontal bar chart (Excel's Bar chart)
+        // Horizontal bar chart
         primaryChartNode = Util.createElement(doc, 'c:barChart');
         primaryChartNode.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'bar']]));
         primaryChartNode.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
@@ -144,56 +148,9 @@ export class Chart extends Drawing {
         break;
     }
 
-    // Build series (multi or single fallback)
-    const seriesDefs = this.options.series?.length
-      ? this.options.series
-      : [
-          {
-            name: this.options.title || 'Series 1',
-            valuesRange:
-              this.options.values?.length && this.options.sheetName && this.options.categories?.length
-                ? `${this.options.sheetName}!$B$2:$B$${this.options.categories.length + 1}`
-                : '',
-          },
-        ];
+    // Lean chart XML (no fallback shorthand or data cache snapshots)
 
-    const categoriesRange =
-      this.options.categoriesRange ||
-      (this.options.sheetName && this.options.categories?.length
-        ? `${this.options.sheetName}!$A$2:$A$${this.options.categories.length + 1}`
-        : '');
-
-    const includeCache = this.options.includeDataCache !== false; // default true
-
-    const buildStrCache = (values: string[]): XMLNode => {
-      const cache = Util.createElement(doc, 'c:strCache');
-      cache.appendChild(Util.createElement(doc, 'c:ptCount', [['val', String(values.length)]]));
-      values.forEach((v, i) => {
-        const pt = Util.createElement(doc, 'c:pt', [['idx', String(i)]]);
-        const vNode = Util.createElement(doc, 'c:v');
-        vNode.appendChild(doc.createTextNode(v));
-        pt.appendChild(vNode);
-        cache.appendChild(pt);
-      });
-      return cache;
-    };
-
-    const buildNumCache = (values: (string | number)[]): XMLNode => {
-      const cache = Util.createElement(doc, 'c:numCache');
-      // Excel typically includes formatCode; using General as safe default
-      cache.appendChild(Util.createElement(doc, 'c:formatCode', [['val', 'General']]));
-      cache.appendChild(Util.createElement(doc, 'c:ptCount', [['val', String(values.length)]]));
-      values.forEach((v, i) => {
-        const pt = Util.createElement(doc, 'c:pt', [['idx', String(i)]]);
-        const vNode = Util.createElement(doc, 'c:v');
-        vNode.appendChild(doc.createTextNode(String(v)));
-        pt.appendChild(vNode);
-        cache.appendChild(pt);
-      });
-      return cache;
-    };
-
-    seriesDefs.forEach((s, idx) => {
+    (this.options.series || []).forEach((s, idx) => {
       const ser = Util.createElement(doc, 'c:ser');
       ser.appendChild(Util.createElement(doc, 'c:idx', [['val', String(idx)]]));
       ser.appendChild(Util.createElement(doc, 'c:order', [['val', String(idx)]]));
@@ -213,22 +170,11 @@ export class Chart extends Drawing {
           const fNodeX = Util.createElement(doc, 'c:f');
           fNodeX.appendChild(doc.createTextNode(s.xValuesRange));
           numRefX.appendChild(fNodeX);
-          if (includeCache && this.options.categories?.length) {
-            numRefX.appendChild(buildNumCache(this.options.categories.map((_, i) => i))); // categories indices act as X when explicit xValuesRange used? Keep empty unless fallback.
-          }
           xVal.appendChild(numRefX);
         } else {
-          // fallback generate indices
+          // Minimal empty numLit fallback
           const numLitX = Util.createElement(doc, 'c:numLit');
-          const count = this.options.categories?.length || 0;
-          numLitX.appendChild(Util.createElement(doc, 'c:ptCount', [['val', String(count)]]));
-          for (let i = 0; i < count; i++) {
-            const pt = Util.createElement(doc, 'c:pt', [['idx', String(i)]]);
-            const vNode = Util.createElement(doc, 'c:v');
-            vNode.appendChild(doc.createTextNode(String(i)));
-            pt.appendChild(vNode);
-            numLitX.appendChild(pt);
-          }
+          numLitX.appendChild(Util.createElement(doc, 'c:ptCount', [['val', '0']]));
           xVal.appendChild(numLitX);
         }
         ser.appendChild(xVal);
@@ -237,9 +183,6 @@ export class Chart extends Drawing {
         const fNodeY = Util.createElement(doc, 'c:f');
         fNodeY.appendChild(doc.createTextNode(s.valuesRange));
         numRefY.appendChild(fNodeY);
-        if (includeCache && this.options.values?.length) {
-          numRefY.appendChild(buildNumCache(this.options.values));
-        }
         yVal.appendChild(numRefY);
         ser.appendChild(yVal);
       } else {
@@ -250,9 +193,6 @@ export class Chart extends Drawing {
           const fNodeCat = Util.createElement(doc, 'c:f');
           fNodeCat.appendChild(doc.createTextNode(categoriesRange));
           strRef.appendChild(fNodeCat);
-          if (includeCache && this.options.categories?.length) {
-            strRef.appendChild(buildStrCache(this.options.categories));
-          }
           cat.appendChild(strRef);
           ser.appendChild(cat);
         }
@@ -263,9 +203,6 @@ export class Chart extends Drawing {
           const fNodeVal = Util.createElement(doc, 'c:f');
           fNodeVal.appendChild(doc.createTextNode(s.valuesRange));
           numRef.appendChild(fNodeVal);
-          if (includeCache && this.options.values?.length) {
-            numRef.appendChild(buildNumCache(this.options.values));
-          }
           val.appendChild(numRef);
           ser.appendChild(val);
         }
@@ -348,7 +285,7 @@ export class Chart extends Drawing {
     }
 
     // Legend if multiple series
-    if (seriesDefs.length > 1) {
+    if ((this.options.series || []).length > 1) {
       const legend = Util.createElement(doc, 'c:legend');
       legend.appendChild(Util.createElement(doc, 'c:legendPos', [['val', 'r']]));
       legend.appendChild(Util.createElement(doc, 'c:layout'));

@@ -317,10 +317,6 @@ export interface ChartOptions {
 	categoriesRange?: string;
 	/** Multi-series cell references */
 	series?: ChartSeriesRef[];
-	/** Legacy single-series fallback: categories literal */
-	categories?: string[];
-	/** Legacy single-series fallback: values literal */
-	values?: number[];
 }
 /**
  * @module Excel/Util

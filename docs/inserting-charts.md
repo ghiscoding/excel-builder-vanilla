@@ -8,7 +8,7 @@ Add charts to a workbook: create data, create a chart, add it, position it. That
 ### Core steps
 1. Create a workbook & worksheet
 2. Add data rows
-3. Create a chart (ranges or fallback arrays)
+3. Create a chart (using cell ranges)
 4. Call `wb.addChart(chart)`
 5. Anchor it (e.g. `twoCellAnchor`)
 6. Generate files
@@ -24,7 +24,7 @@ Add charts to a workbook: create data, create a chart, add it, position it. That
 | categoriesRange | Category labels range | Skip for scatter when using `xValuesRange` |
 | series | Array of `{ name, valuesRange }` | 2+ series => legend |
 | series[].xValuesRange | Scatter X values range | Only for scatter |
-| sheetName + categories + values | Fallback single series | Arrays instead of ranges |
+| sheetName | Name used when building range strings | Optional (used for convenience or clarity) |
 
 
 ### Quick start (multi‑series column chart)
@@ -112,16 +112,6 @@ const scatter = new Chart({
 wb.addChart(scatter);
 ```
 
-### Fallback single series (arrays)
-```ts
-const autoChart = new Chart({
-  sheetName: 'AutoData',
-  categories: ['Jan', 'Feb', 'Mar'],
-  values: [10, 20, 30],
-  title: 'Auto Series',
-});
-wb.addChart(autoChart); // legend omitted (only one series)
-```
 
 ## Resizing (width & height)
 ```ts
@@ -149,7 +139,6 @@ The legend only appears when the chart has two or more series.
 
 Notes:
 - Pie: if you add multiple series you get multiple pies; the legend shows the series names.
-- Fallback (arrays) path creates only one series, so no legend.
 
 Example (legend will show 2 entries):
 ```ts
