@@ -72,7 +72,7 @@ export default class Example18 {
       });
 
       const anchor = chart.createAnchor('twoCellAnchor', {
-        from: { x: 4, y: 6 }, // start at internal column index 4 (visually appears around Excel column E due to default widths)
+        from: { x: 4, y: 1 }, // start Chart at E2 cell
         to: { x: 15, y: 30 }, // end column chosen to preserve approximate chart width
       });
       chart.anchor = anchor;
