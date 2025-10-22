@@ -18,8 +18,12 @@ Add charts to a workbook: create data, create a chart, add it, position it. That
 |--------|---------|-------|
 | type | `column` | `bar` | `line` | `pie` | `scatter` | Defaults to `column` |
 | title | Chart title | Omit for none |
-| xAxisTitle | X axis label | Ignored for pie |
-| yAxisTitle | Y axis label | Ignored for pie |
+| axis.x.title | X axis label | Ignored for pie |
+| axis.y.title | Y axis label | Ignored for pie |
+| axis.x.showGridLines | Show vertical gridlines | Category axis (non-pie) |
+| axis.y.showGridLines | Show horizontal gridlines | Value axis (non-pie) |
+| axis.y.minimum / axis.y.maximum | Force value axis bounds | Optional (numeric) |
+| stacking | 'stacked' | 'percent' | Stacks series (column/bar/line) |
 | width / height | Size override | Defaults used if omitted |
 | categoriesRange | Category labels range | Skip for scatter when using `xValuesRange` |
 | series | Array of `{ name, valuesRange }` | 2+ series => legend |
@@ -40,8 +44,10 @@ ws.addRow(['Mar', 30, 35]);
 const chart = new Chart({
   type: 'column',
   title: 'Quarterly Sales',
-  xAxisTitle: 'Month',
-  yAxisTitle: 'Revenue',
+  axis: {
+    x: { title: 'Month' },
+    y: { title: 'Revenue', minimum: 0, showGridLines: true },
+  },
   series: [
     { name: 'Q1', valuesRange: 'Sales!$B$2:$B$4' },
     { name: 'Q2', valuesRange: 'Sales!$C$2:$C$4' },
@@ -75,8 +81,7 @@ wb.addChart(barChart);
 const lineChart = new Chart({
   type: 'line',
   title: 'Revenue Trend',
-  xAxisTitle: 'Month',
-  yAxisTitle: 'Total',
+  axis: { x: { title: 'Month' }, y: { title: 'Total', showGridLines: true } },
   series: [{ name: 'Q1', valuesRange: 'Sales!$B$2:$B$13' }],
   categoriesRange: 'Sales!$A$2:$A$13',
 });
@@ -100,8 +105,7 @@ Provide both X and Y value ranges (numeric): (less common, placed last)
 const scatter = new Chart({
   type: 'scatter',
   title: 'Distance vs Speed',
-  xAxisTitle: 'Distance',
-  yAxisTitle: 'Speed',
+  axis: { x: { title: 'Distance' }, y: { title: 'Speed' } },
   series: [{
     name: 'Run A',
     xValuesRange: 'Runs!$A$2:$A$11',
@@ -144,6 +148,7 @@ Example (legend will show 2 entries):
 new Chart({
   type: 'bar',
   title: 'Year Comparison',
+  axis: { x: { title: 'Month' }, y: { title: 'Revenue' } },
   series: [
     { name: '2024', valuesRange: 'Sales!$B$2:$B$5' },
     { name: '2025', valuesRange: 'Sales!$C$2:$C$5' },
@@ -164,6 +169,7 @@ new Chart({
 ```ts
 const simple = new Chart({
   type: 'bar',
+  axis: { y: { minimum: 0 } },
   series: [{ name: 'Sales', valuesRange: 'Sales!$B$2:$B$4' }],
   categoriesRange: 'Sales!$A$2:$A$4',
 });
@@ -171,3 +177,24 @@ wb.addChart(simple);
 ```
 
 That's it — build your workbook and open in Excel.
+
+### Stacked & Percent Stacked
+
+Enable stacking on multi-series column, bar, or line charts:
+```ts
+new Chart({
+  type: 'column',
+  stacking: 'stacked', // or 'percent'
+  axis: { x: { title: 'Month' }, y: { title: 'Revenue', minimum: 0, showGridLines: true } },
+  series: [
+    { name: 'Q1', valuesRange: 'Sales!$B$2:$B$4' },
+    { name: 'Q2', valuesRange: 'Sales!$C$2:$C$4' },
+  ],
+  categoriesRange: 'Sales!$A$2:$A$4',
+});
+```
+
+Notes:
+- Stacking ignored for pie & scatter.
+- Percent stacking displays proportional contribution (0–100%).
+- Overlap is automatically set for stacked column/bar to align segments.

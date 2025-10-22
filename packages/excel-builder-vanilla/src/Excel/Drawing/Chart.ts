@@ -186,14 +186,16 @@ export class Chart extends Drawing {
     plotArea.appendChild(primaryChartNode);
 
     if (type !== 'pie') {
-      const xAxisTitle = this.options.axis?.x?.title;
-      const yAxisTitle = this.options.axis?.y?.title;
+      const xAxisOpts = this.options.axis?.x;
+      const yAxisOpts = this.options.axis?.y;
+      const xAxisTitle = xAxisOpts?.title;
+      const yAxisTitle = yAxisOpts?.title;
       if (type === 'scatter') {
-        plotArea.appendChild(this._createValueAxis(doc, axIdCat, axIdVal, 'b', xAxisTitle));
-        plotArea.appendChild(this._createValueAxis(doc, axIdVal, axIdCat, 'l', yAxisTitle));
+        plotArea.appendChild(this._createValueAxis(doc, axIdCat, axIdVal, 'b', xAxisTitle, xAxisOpts));
+        plotArea.appendChild(this._createValueAxis(doc, axIdVal, axIdCat, 'l', yAxisTitle, yAxisOpts));
       } else {
-        plotArea.appendChild(this._createCategoryAxis(doc, axIdCat, axIdVal, xAxisTitle));
-        plotArea.appendChild(this._createValueAxis(doc, axIdVal, axIdCat, 'l', yAxisTitle));
+        plotArea.appendChild(this._createCategoryAxis(doc, axIdCat, axIdVal, xAxisTitle, xAxisOpts));
+        plotArea.appendChild(this._createValueAxis(doc, axIdVal, axIdCat, 'l', yAxisTitle, yAxisOpts));
       }
     }
 
@@ -302,7 +304,7 @@ export class Chart extends Drawing {
   }
 
   /** Create a category axis (catAx) */
-  private _createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string): XMLNode {
+  private _createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string, opts?: { showGridLines?: boolean }): XMLNode {
     const catAx = Util.createElement(doc, 'c:catAx');
     catAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axId)]]));
     const scaling = Util.createElement(doc, 'c:scaling');
@@ -313,22 +315,41 @@ export class Chart extends Drawing {
     catAx.appendChild(Util.createElement(doc, 'c:tickLblPos', [['val', 'nextTo']]));
     catAx.appendChild(Util.createElement(doc, 'c:crossAx', [['val', String(crossAx)]]));
     catAx.appendChild(Util.createElement(doc, 'c:crosses', [['val', 'autoZero']]));
+    if (opts?.showGridLines) {
+      catAx.appendChild(Util.createElement(doc, 'c:majorGridlines'));
+    }
     if (title) catAx.appendChild(this._createTitleNode(doc, title));
     return catAx;
   }
 
   /** Create a value axis (valAx) */
-  private _createValueAxis(doc: XMLDOM, axId: number, crossAx: number, pos: 'l' | 'b', title?: string): XMLNode {
+  private _createValueAxis(
+    doc: XMLDOM,
+    axId: number,
+    crossAx: number,
+    pos: 'l' | 'b',
+    title?: string,
+    opts?: { minimum?: number; maximum?: number; showGridLines?: boolean },
+  ): XMLNode {
     const valAx = Util.createElement(doc, 'c:valAx');
     valAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axId)]]));
     const scaling = Util.createElement(doc, 'c:scaling');
     scaling.appendChild(Util.createElement(doc, 'c:orientation', [['val', 'minMax']]));
+    if (typeof opts?.minimum === 'number') {
+      scaling.appendChild(Util.createElement(doc, 'c:min', [['val', String(opts.minimum)]]));
+    }
+    if (typeof opts?.maximum === 'number') {
+      scaling.appendChild(Util.createElement(doc, 'c:max', [['val', String(opts.maximum)]]));
+    }
     valAx.appendChild(scaling);
     valAx.appendChild(Util.createElement(doc, 'c:delete', [['val', '0']]));
     valAx.appendChild(Util.createElement(doc, 'c:axPos', [['val', pos]]));
     valAx.appendChild(Util.createElement(doc, 'c:crossAx', [['val', String(crossAx)]]));
     valAx.appendChild(Util.createElement(doc, 'c:crosses', [['val', 'autoZero']]));
     valAx.appendChild(Util.createElement(doc, 'c:crossBetween', [['val', 'between']]));
+    if (opts?.showGridLines) {
+      valAx.appendChild(Util.createElement(doc, 'c:majorGridlines'));
+    }
     if (title) valAx.appendChild(this._createTitleNode(doc, title));
     return valAx;
   }

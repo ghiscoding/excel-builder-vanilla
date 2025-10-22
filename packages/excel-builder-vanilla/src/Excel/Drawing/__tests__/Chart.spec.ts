@@ -452,6 +452,54 @@ describe('Chart', () => {
     expect(titleSegment?.[0]).toContain('<c:overlay val="0"');
   });
 
+  it('value axis includes min/max when provided', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Axis MinMax',
+      axis: { y: { minimum: 0, maximum: 500 } },
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    // Expect c:min and c:max under scaling
+    expect(xml).toContain('<c:min val="0"');
+    expect(xml).toContain('<c:max val="500"');
+  });
+
+  it('value axis omits min when not provided and includes only max when provided', () => {
+    const { xml } = buildChart({
+      type: 'column',
+      title: 'Axis Max Only',
+      axis: { y: { maximum: 300 } },
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).not.toContain('<c:min val="');
+    expect(xml).toContain('<c:max val="300"');
+  });
+
+  it('category axis renders majorGridlines when showGridLines true', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Cat Gridlines',
+      axis: { x: { showGridLines: true }, y: { showGridLines: true } },
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    // Expect two majorGridlines nodes (one for category axis, one for value axis)
+    const gridCount = xml.split('<c:majorGridlines').length - 1;
+    expect(gridCount).toBe(2);
+  });
+
+  it('no majorGridlines nodes when showGridLines false/undefined', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'No Gridlines',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).not.toContain('<c:majorGridlines');
+  });
+
   it('graphicFrame r:id is empty when relationship not yet set', () => {
     const chart = new Chart({
       type: 'column',

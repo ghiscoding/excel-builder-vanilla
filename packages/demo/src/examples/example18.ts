@@ -70,19 +70,29 @@ export default class Example18 {
         stacking,
         title: `${sheetName} (${type}${stacking ? ' ' + stacking : ''}) Chart`,
         axis: {
-          x: { title: type === 'pie' ? undefined : type === 'scatter' ? 'X Values' : 'Month' },
-          y: { title: type === 'pie' ? undefined : type === 'scatter' ? 'Y Values' : 'Values' },
+          x: {
+            title: type === 'pie' ? undefined : type === 'scatter' ? 'X Values' : 'Month',
+            // Show gridlines only on line & percent stacked line charts for demo
+            showGridLines: sheetName.includes('Line') && !sheetName.includes('Bar'),
+          },
+          y: {
+            title: type === 'pie' ? undefined : type === 'scatter' ? 'Y Values' : sheetName.includes('% Stacked') ? 'Percent' : 'Values',
+            // Use 0 baseline for stacked & percent stacked; cap percent stacks at 1
+            minimum: sheetName.includes('Stacked') ? 0 : undefined,
+            maximum: sheetName.includes('% Stacked') ? 1 : undefined,
+            showGridLines: sheetName.includes('Column') || sheetName.includes('Line % Stacked'),
+          },
         },
-        // Reduced to ~80% of previous size (640x400 -> 512x320)
-        width: 512 * 9525,
-        height: 320 * 9525,
+        // Further reduced by an additional 10% (was 512x320 -> now ~460x288)
+        width: 460 * 9525,
+        height: 288 * 9525,
         categoriesRange,
         series: seriesDefs,
       });
 
       const anchor = chart.createAnchor('twoCellAnchor', {
         from: { x: 4, y: 1 }, // start Chart at E2 cell
-        to: { x: 15, y: 30 }, // end column chosen to preserve approximate chart width
+        to: { x: 14, y: 28 }, // adjusted end cell to reflect 10% smaller chart footprint
       });
       chart.anchor = anchor;
       drawings.addDrawing(chart);
