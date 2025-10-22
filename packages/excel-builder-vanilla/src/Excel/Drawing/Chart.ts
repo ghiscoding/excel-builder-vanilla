@@ -163,6 +163,36 @@ export class Chart extends Drawing {
         ? `${this.options.sheetName}!$A$2:$A$${this.options.categories.length + 1}`
         : '');
 
+    const includeCache = this.options.includeDataCache !== false; // default true
+
+    const buildStrCache = (values: string[]): XMLNode => {
+      const cache = Util.createElement(doc, 'c:strCache');
+      cache.appendChild(Util.createElement(doc, 'c:ptCount', [['val', String(values.length)]]));
+      values.forEach((v, i) => {
+        const pt = Util.createElement(doc, 'c:pt', [['idx', String(i)]]);
+        const vNode = Util.createElement(doc, 'c:v');
+        vNode.appendChild(doc.createTextNode(v));
+        pt.appendChild(vNode);
+        cache.appendChild(pt);
+      });
+      return cache;
+    };
+
+    const buildNumCache = (values: (string | number)[]): XMLNode => {
+      const cache = Util.createElement(doc, 'c:numCache');
+      // Excel typically includes formatCode; using General as safe default
+      cache.appendChild(Util.createElement(doc, 'c:formatCode', [['val', 'General']]));
+      cache.appendChild(Util.createElement(doc, 'c:ptCount', [['val', String(values.length)]]));
+      values.forEach((v, i) => {
+        const pt = Util.createElement(doc, 'c:pt', [['idx', String(i)]]);
+        const vNode = Util.createElement(doc, 'c:v');
+        vNode.appendChild(doc.createTextNode(String(v)));
+        pt.appendChild(vNode);
+        cache.appendChild(pt);
+      });
+      return cache;
+    };
+
     seriesDefs.forEach((s, idx) => {
       const ser = Util.createElement(doc, 'c:ser');
       ser.appendChild(Util.createElement(doc, 'c:idx', [['val', String(idx)]]));
@@ -183,6 +213,9 @@ export class Chart extends Drawing {
           const fNodeX = Util.createElement(doc, 'c:f');
           fNodeX.appendChild(doc.createTextNode(s.xValuesRange));
           numRefX.appendChild(fNodeX);
+          if (includeCache && this.options.categories?.length) {
+            numRefX.appendChild(buildNumCache(this.options.categories.map((_, i) => i))); // categories indices act as X when explicit xValuesRange used? Keep empty unless fallback.
+          }
           xVal.appendChild(numRefX);
         } else {
           // fallback generate indices
@@ -204,6 +237,9 @@ export class Chart extends Drawing {
         const fNodeY = Util.createElement(doc, 'c:f');
         fNodeY.appendChild(doc.createTextNode(s.valuesRange));
         numRefY.appendChild(fNodeY);
+        if (includeCache && this.options.values?.length) {
+          numRefY.appendChild(buildNumCache(this.options.values));
+        }
         yVal.appendChild(numRefY);
         ser.appendChild(yVal);
       } else {
@@ -214,6 +250,9 @@ export class Chart extends Drawing {
           const fNodeCat = Util.createElement(doc, 'c:f');
           fNodeCat.appendChild(doc.createTextNode(categoriesRange));
           strRef.appendChild(fNodeCat);
+          if (includeCache && this.options.categories?.length) {
+            strRef.appendChild(buildStrCache(this.options.categories));
+          }
           cat.appendChild(strRef);
           ser.appendChild(cat);
         }
@@ -224,6 +263,9 @@ export class Chart extends Drawing {
           const fNodeVal = Util.createElement(doc, 'c:f');
           fNodeVal.appendChild(doc.createTextNode(s.valuesRange));
           numRef.appendChild(fNodeVal);
+          if (includeCache && this.options.values?.length) {
+            numRef.appendChild(buildNumCache(this.options.values));
+          }
           val.appendChild(numRef);
           ser.appendChild(val);
         }

@@ -481,4 +481,71 @@ describe('Chart', () => {
     // r:id attribute present but empty string value
     expect(xml).toMatch(/<c:chart[^>]*r:id=""/);
   });
+
+  // -----------------
+  // Data cache tests
+  // -----------------
+  it('includes strCache and numCache for fallback single series when categories & values provided', () => {
+    const { xml } = buildChart({
+      sheetName: 'Data',
+      title: 'Cached Fallback',
+      categories: ['North', 'South', 'East'],
+      values: [10, 20, 30],
+    });
+    expect(xml).toContain('<c:strCache>');
+    expect(xml).toContain('<c:numCache>');
+    // ptCount should match length 3
+    const ptCountMatches = xml.match(/<c:ptCount val="3"/g) || [];
+    expect(ptCountMatches.length).toBeGreaterThan(0);
+    // indices 0,1,2 present
+    expect(xml).toContain('<c:pt idx="0"');
+    expect(xml).toContain('<c:pt idx="1"');
+    expect(xml).toContain('<c:pt idx="2"');
+  });
+
+  it('omits caches when includeDataCache is false', () => {
+    const chart = new Chart({
+      sheetName: 'Data',
+      title: 'No Cache',
+      categories: ['A', 'B', 'C', 'D'],
+      values: [5, 15, 25, 35],
+      includeDataCache: false,
+    });
+    chart.index = 2;
+    const xml = chart.toChartSpaceXML().toString();
+    expect(xml).not.toContain('<c:strCache>');
+    expect(xml).not.toContain('<c:numCache>');
+  });
+
+  it('scatter chart includes numCache blocks for xVal and yVal when categories & values arrays provided', () => {
+    const chart = new Chart({
+      type: 'scatter',
+      sheetName: 'Data',
+      title: 'Scatter Cache',
+      categories: ['Jan', 'Feb', 'Mar', 'Apr'], // used for x fallback indices cache
+      values: [5, 15, 25, 35],
+      series: [{ name: 'S1', valuesRange: 'Data!$B$2:$B$5', xValuesRange: 'Data!$A$2:$A$5' }],
+    });
+    chart.index = 3;
+    const xml = chart.toChartSpaceXML().toString();
+    // Expect two numCache occurrences (xVal and yVal)
+    const numCacheCount = xml.split('<c:numCache>').length - 1;
+    expect(numCacheCount).toBe(2);
+    // Each should have ptCount val="4"
+    const ptCounts = xml.match(/<c:ptCount val="4"/g) || [];
+    expect(ptCounts.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it('caches reflect point indices contiguous from 0', () => {
+    const { xml } = buildChart({
+      sheetName: 'Data',
+      title: 'Contiguous Cache',
+      categories: ['X', 'Y', 'Z', 'W'],
+      values: [1, 2, 3, 4],
+    });
+    // Ensure indices 0..3 present and no gap (basic check)
+    for (let i = 0; i < 4; i++) {
+      expect(xml).toContain(`<c:pt idx="${i}"`);
+    }
+  });
 });
