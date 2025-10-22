@@ -311,8 +311,6 @@ export interface ChartOptions {
 	width?: number;
 	/** Height in EMUs */
 	height?: number;
-	/** Worksheet name containing referenced ranges */
-	sheetName?: string;
 	/** Categories range (for non-scatter) e.g. Sheet1!$A$2:$A$5 */
 	categoriesRange?: string;
 	/** Multi-series cell references */
@@ -414,6 +412,10 @@ export declare class Chart extends Drawing {
 	toChartSpaceXML(): XMLDOM;
 	/** Create a c:title node with minimal rich text required for Excel to render */
 	private _createTitleNode;
+	/** Create a category axis (catAx) */
+	private _createCategoryAxis;
+	/** Create a value axis (valAx) */
+	private _createValueAxis;
 }
 export type Relation = {
 	[id: string]: {

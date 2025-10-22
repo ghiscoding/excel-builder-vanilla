@@ -220,67 +220,11 @@ export class Chart extends Drawing {
 
     if (type !== 'pie') {
       if (type === 'scatter') {
-        // Scatter requires two value axes (X and Y), not a category axis.
-        const xValAx = Util.createElement(doc, 'c:valAx');
-        xValAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axIdCat)]]));
-        const xScaling = Util.createElement(doc, 'c:scaling');
-        xScaling.appendChild(Util.createElement(doc, 'c:orientation', [['val', 'minMax']]));
-        xValAx.appendChild(xScaling);
-        xValAx.appendChild(Util.createElement(doc, 'c:delete', [['val', '0']]));
-        xValAx.appendChild(Util.createElement(doc, 'c:axPos', [['val', 'b']]));
-        xValAx.appendChild(Util.createElement(doc, 'c:crossAx', [['val', String(axIdVal)]]));
-        xValAx.appendChild(Util.createElement(doc, 'c:crosses', [['val', 'autoZero']]));
-        xValAx.appendChild(Util.createElement(doc, 'c:crossBetween', [['val', 'between']]));
-        if (this.options.xAxisTitle) {
-          xValAx.appendChild(this._createTitleNode(doc, this.options.xAxisTitle));
-        }
-        plotArea.appendChild(xValAx);
-
-        const yValAx = Util.createElement(doc, 'c:valAx');
-        yValAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axIdVal)]]));
-        const yScaling = Util.createElement(doc, 'c:scaling');
-        yScaling.appendChild(Util.createElement(doc, 'c:orientation', [['val', 'minMax']]));
-        yValAx.appendChild(yScaling);
-        yValAx.appendChild(Util.createElement(doc, 'c:delete', [['val', '0']]));
-        yValAx.appendChild(Util.createElement(doc, 'c:axPos', [['val', 'l']]));
-        yValAx.appendChild(Util.createElement(doc, 'c:crossAx', [['val', String(axIdCat)]]));
-        yValAx.appendChild(Util.createElement(doc, 'c:crosses', [['val', 'autoZero']]));
-        yValAx.appendChild(Util.createElement(doc, 'c:crossBetween', [['val', 'between']]));
-        if (this.options.yAxisTitle) {
-          yValAx.appendChild(this._createTitleNode(doc, this.options.yAxisTitle));
-        }
-        plotArea.appendChild(yValAx);
+        plotArea.appendChild(this._createValueAxis(doc, axIdCat, axIdVal, 'b', this.options.xAxisTitle));
+        plotArea.appendChild(this._createValueAxis(doc, axIdVal, axIdCat, 'l', this.options.yAxisTitle));
       } else {
-        // Non-scatter (bar/line) use category axis + value axis.
-        const catAx = Util.createElement(doc, 'c:catAx');
-        catAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axIdCat)]]));
-        const catScaling = Util.createElement(doc, 'c:scaling');
-        catScaling.appendChild(Util.createElement(doc, 'c:orientation', [['val', 'minMax']]));
-        catAx.appendChild(catScaling);
-        catAx.appendChild(Util.createElement(doc, 'c:delete', [['val', '0']]));
-        catAx.appendChild(Util.createElement(doc, 'c:axPos', [['val', 'b']]));
-        catAx.appendChild(Util.createElement(doc, 'c:tickLblPos', [['val', 'nextTo']]));
-        catAx.appendChild(Util.createElement(doc, 'c:crossAx', [['val', String(axIdVal)]]));
-        catAx.appendChild(Util.createElement(doc, 'c:crosses', [['val', 'autoZero']]));
-        if (this.options.xAxisTitle) {
-          catAx.appendChild(this._createTitleNode(doc, this.options.xAxisTitle));
-        }
-        plotArea.appendChild(catAx);
-
-        const valAx = Util.createElement(doc, 'c:valAx');
-        valAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axIdVal)]]));
-        const valScaling = Util.createElement(doc, 'c:scaling');
-        valScaling.appendChild(Util.createElement(doc, 'c:orientation', [['val', 'minMax']]));
-        valAx.appendChild(valScaling);
-        valAx.appendChild(Util.createElement(doc, 'c:delete', [['val', '0']]));
-        valAx.appendChild(Util.createElement(doc, 'c:axPos', [['val', 'l']]));
-        valAx.appendChild(Util.createElement(doc, 'c:crossAx', [['val', String(axIdCat)]]));
-        valAx.appendChild(Util.createElement(doc, 'c:crosses', [['val', 'autoZero']]));
-        valAx.appendChild(Util.createElement(doc, 'c:crossBetween', [['val', 'between']]));
-        if (this.options.yAxisTitle) {
-          valAx.appendChild(this._createTitleNode(doc, this.options.yAxisTitle));
-        }
-        plotArea.appendChild(valAx);
+        plotArea.appendChild(this._createCategoryAxis(doc, axIdCat, axIdVal, this.options.xAxisTitle));
+        plotArea.appendChild(this._createValueAxis(doc, axIdVal, axIdCat, 'l', this.options.yAxisTitle));
       }
     }
 
@@ -321,5 +265,37 @@ export class Chart extends Drawing {
     title.appendChild(Util.createElement(doc, 'c:layout'));
     title.appendChild(Util.createElement(doc, 'c:overlay', [['val', '0']]));
     return title;
+  }
+
+  /** Create a category axis (catAx) */
+  private _createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string): XMLNode {
+    const catAx = Util.createElement(doc, 'c:catAx');
+    catAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axId)]]));
+    const scaling = Util.createElement(doc, 'c:scaling');
+    scaling.appendChild(Util.createElement(doc, 'c:orientation', [['val', 'minMax']]));
+    catAx.appendChild(scaling);
+    catAx.appendChild(Util.createElement(doc, 'c:delete', [['val', '0']]));
+    catAx.appendChild(Util.createElement(doc, 'c:axPos', [['val', 'b']]));
+    catAx.appendChild(Util.createElement(doc, 'c:tickLblPos', [['val', 'nextTo']]));
+    catAx.appendChild(Util.createElement(doc, 'c:crossAx', [['val', String(crossAx)]]));
+    catAx.appendChild(Util.createElement(doc, 'c:crosses', [['val', 'autoZero']]));
+    if (title) catAx.appendChild(this._createTitleNode(doc, title));
+    return catAx;
+  }
+
+  /** Create a value axis (valAx) */
+  private _createValueAxis(doc: XMLDOM, axId: number, crossAx: number, pos: 'l' | 'b', title?: string): XMLNode {
+    const valAx = Util.createElement(doc, 'c:valAx');
+    valAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axId)]]));
+    const scaling = Util.createElement(doc, 'c:scaling');
+    scaling.appendChild(Util.createElement(doc, 'c:orientation', [['val', 'minMax']]));
+    valAx.appendChild(scaling);
+    valAx.appendChild(Util.createElement(doc, 'c:delete', [['val', '0']]));
+    valAx.appendChild(Util.createElement(doc, 'c:axPos', [['val', pos]]));
+    valAx.appendChild(Util.createElement(doc, 'c:crossAx', [['val', String(crossAx)]]));
+    valAx.appendChild(Util.createElement(doc, 'c:crosses', [['val', 'autoZero']]));
+    valAx.appendChild(Util.createElement(doc, 'c:crossBetween', [['val', 'between']]));
+    if (title) valAx.appendChild(this._createTitleNode(doc, title));
+    return valAx;
   }
 }
