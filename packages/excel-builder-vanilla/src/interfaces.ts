@@ -170,6 +170,16 @@ export interface ChartSeriesRef {
   scatterXRange?: string;
 }
 
+/** Legend configuration (minimal) */
+export interface LegendOptions {
+  /** Force show (true) or hide (false). If undefined, auto: show only when multiple series */
+  show?: boolean;
+  /** Legend position (defaults to 'right' if omitted) */
+  position?: 'right' | 'left' | 'top' | 'bottom' | 'topRight';
+  /** Overlay the legend on the plot area (no space reservation) */
+  overlay?: boolean;
+}
+
 export interface ChartOptions {
   /** Chart type (defaults to 'column' if omitted) */
   type?: ChartType;
@@ -192,4 +202,6 @@ export interface ChartOptions {
   stacking?: 'stacked' | 'percent';
   /** Multi-series cell references */
   series?: ChartSeriesRef[];
+  /** Legend configuration */
+  legend?: LegendOptions;
 }

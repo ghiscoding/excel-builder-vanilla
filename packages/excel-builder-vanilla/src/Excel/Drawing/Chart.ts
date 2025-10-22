@@ -202,11 +202,24 @@ export class Chart extends Drawing {
       }
     }
 
-    // Legend if multiple series
-    if ((this.options.series || []).length > 1) {
+    // Legend logic (configurable)
+    const legendOpts = this.options.legend;
+    const seriesCount = (this.options.series || []).length;
+    const autoShouldShow = seriesCount > 1; // previous behavior
+    const effectiveShow = typeof legendOpts?.show === 'boolean' ? legendOpts.show : autoShouldShow;
+    if (effectiveShow) {
       const legend = Util.createElement(doc, 'c:legend');
-      legend.appendChild(Util.createElement(doc, 'c:legendPos', [['val', 'r']]));
+      // Map high-level position to OOXML codes
+      const posMap: Record<string, string> = { right: 'r', left: 'l', top: 't', bottom: 'b', topRight: 'tr' };
+      const pos = posMap[legendOpts?.position || 'right'] || 'r';
+      legend.appendChild(Util.createElement(doc, 'c:legendPos', [['val', pos]]));
       legend.appendChild(Util.createElement(doc, 'c:layout'));
+      // Overlay (default 0)
+      if (legendOpts?.overlay) {
+        legend.appendChild(Util.createElement(doc, 'c:overlay', [['val', '1']]));
+      } else {
+        legend.appendChild(Util.createElement(doc, 'c:overlay', [['val', '0']]));
+      }
       chart.appendChild(legend);
     }
 

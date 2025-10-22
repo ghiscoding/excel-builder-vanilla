@@ -84,15 +84,26 @@ chart.createAnchor('twoCellAnchor', { from: { x: 4, y: 1 }, to: { x: 10, y: 16 }
 Values are column/row indices (0-based).
 
 ### Legend
-The legend only appears when the chart has two or more series.
+Auto behavior (no `legend` option provided): show legend only when there are 2 or more series.
 
-- 1 series: legend is omitted automatically.
-- 2+ series: legend lists each `series.name`.
+You can override with the `legend` option:
+```ts
+legend: {
+  show: true,              // force show (even for single series) | false to hide
+  position: 'topRight',    // 'right' (default) | 'left' | 'top' | 'bottom' | 'topRight'
+  overlay: false,          // true => overlay plot area (no layout space)
+}
+```
+Rules:
+- `show: true` forces a legend even for 1 series.
+- `show: false` suppresses legend even for multiple series.
+- If `show` is undefined, auto mode (2+ series) applies.
+- `overlay` emits `<c:overlay val="1">` when true; otherwise `0`.
 
 Notes:
-- Pie / Doughnut: if you add multiple series you get multiple rings (doughnut) or pies; the legend shows the series names.
+- Pie / Doughnut: adding multiple series produces multiple pies/rings; legend lists series names.
 
-Example (legend will show 2 entries):
+Example (legend will show 2 entries and be placed top-right):
 ```ts
 new Chart({
   type: 'bar',
@@ -103,6 +114,7 @@ new Chart({
     { name: '2025', valuesRange: 'Sales!$C$2:$C$5' },
   ],
   categoriesRange: 'Sales!$A$2:$A$5',
+  legend: { position: 'topRight' },
 });
 ```
 

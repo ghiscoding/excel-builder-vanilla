@@ -304,10 +304,19 @@ export interface ChartSeriesRef {
 	name: string;
 	/** Cell range for series values (e.g. Sheet1!$B$2:$B$5) */
 	valuesRange: string;
-	/** Optional solid color for the series. Recommended: opaque ARGB `FFRRGGBB` (e.g. FF3366CC). RGB `RRGGBB` also accepted and treated as opaque. Alpha (other than FF) currently ignored. Theme colors not yet supported for charts. */
+	/** Optional solid color for the series. Use opaque ARGB `FFRRGGBB` (e.g. FF3366CC). Alpha (other than FF) currently ignored. Theme colors not yet supported for charts. */
 	color?: string;
 	/** Scatter only: per-series X axis numeric range (ignored for non-scatter charts) */
 	scatterXRange?: string;
+}
+/** Legend configuration (minimal) */
+export interface LegendOptions {
+	/** Force show (true) or hide (false). If undefined, auto: show only when multiple series */
+	show?: boolean;
+	/** Legend position (defaults to 'right' if omitted) */
+	position?: "right" | "left" | "top" | "bottom" | "topRight";
+	/** Overlay the legend on the plot area (no space reservation) */
+	overlay?: boolean;
 }
 export interface ChartOptions {
 	/** Chart type (defaults to 'column' if omitted) */
@@ -331,6 +340,8 @@ export interface ChartOptions {
 	stacking?: "stacked" | "percent";
 	/** Multi-series cell references */
 	series?: ChartSeriesRef[];
+	/** Legend configuration */
+	legend?: LegendOptions;
 }
 /**
  * @module Excel/Util

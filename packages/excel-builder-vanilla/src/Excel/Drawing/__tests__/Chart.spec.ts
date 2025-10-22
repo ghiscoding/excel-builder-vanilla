@@ -686,4 +686,61 @@ describe('Chart', () => {
     expect(xml).toContain('<c:grouping val="percentStacked"');
     expect(xml).not.toContain('<c:overlap');
   });
+
+  // -----------------
+  // Legend options
+  // -----------------
+  it('legend.show true forces legend for single series', () => {
+    const { xml } = buildChart({
+      type: 'column',
+      title: 'Force Legend',
+      legend: { show: true },
+      series: [{ name: 'Only', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:legend>');
+  });
+
+  it('legend.show false hides legend even for multiple series', () => {
+    const { xml } = buildChart({
+      type: 'column',
+      title: 'Hide Legend',
+      legend: { show: false },
+      series: [
+        { name: 'A', valuesRange: 'S!$B$2:$B$4' },
+        { name: 'B', valuesRange: 'S!$C$2:$C$4' },
+      ],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).not.toContain('<c:legend>');
+  });
+
+  it('legend position maps to topRight', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Legend Position',
+      legend: { show: true, position: 'topRight' },
+      series: [
+        { name: 'S1', valuesRange: 'S!$B$2:$B$4' },
+        { name: 'S2', valuesRange: 'S!$C$2:$C$4' },
+      ],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toMatch(/<c:legend>[\s\S]*?<c:legendPos val="tr"/);
+  });
+
+  it('legend overlay true emits overlay val=1', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      title: 'Legend Overlay',
+      legend: { show: true, overlay: true },
+      series: [
+        { name: 'A', valuesRange: 'S!$B$2:$B$4' },
+        { name: 'B', valuesRange: 'S!$C$2:$C$4' },
+      ],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    const legendSegment = xml.match(/<c:legend>[\s\S]*?<\/c:legend>/)?.[0];
+    expect(legendSegment).toContain('<c:overlay val="1"');
+  });
 });

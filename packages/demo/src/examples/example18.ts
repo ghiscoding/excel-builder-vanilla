@@ -96,6 +96,14 @@ export default class Example18 {
       }
 
       const drawings = new Drawings();
+      const legendConfig = (() => {
+        // Demonstrate legend options selectively
+        if (type === 'pie') return { show: true, position: 'topRight' as const }; // force legend for single-series pie
+        if (sheetName === 'Column') return { position: 'topRight' as const }; // custom position (auto show since >1 series)
+        if (sheetName === 'Bar Stacked') return { overlay: true }; // overlay example
+        return undefined;
+      })();
+
       const chart = new Chart({
         type,
         stacking,
@@ -114,11 +122,11 @@ export default class Example18 {
             showGridLines: sheetName.includes('Column') || sheetName.includes('Line % Stacked'),
           },
         },
-        // Further reduced by an additional 10% (was 512x320 -> now ~460x288)
         width: 460 * 9525,
         height: 288 * 9525,
         categoriesRange,
         series: seriesDefs,
+        legend: legendConfig,
       });
 
       const anchor = chart.createAnchor('twoCellAnchor', {
