@@ -181,6 +181,20 @@ export class Chart extends Drawing {
       primaryChartNode.appendChild(ser);
     });
 
+    // Data labels (chart-level). Specification places <c:dLbls> inside the chart-type node
+    const dLblsCfg = this.options.dataLabels;
+    if (dLblsCfg) {
+      // Always emit <c:dLbls>; write each known child with explicit 0/1 to prevent Excel defaults.
+      const dLbls = Util.createElement(doc, 'c:dLbls');
+      const valNode = (tag: string, enabled: boolean | undefined) =>
+        dLbls.appendChild(Util.createElement(doc, tag, [['val', enabled === true ? '1' : '0']]));
+      valNode('c:showVal', dLblsCfg.showValue);
+      valNode('c:showCatName', dLblsCfg.showCategory);
+      valNode('c:showPercent', dLblsCfg.showPercent);
+      valNode('c:showSerName', dLblsCfg.showSeriesName);
+      primaryChartNode.appendChild(dLbls);
+    }
+
     // Axis IDs (except pie which has no axes)
     if (type !== 'pie' && type !== 'doughnut') {
       primaryChartNode.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axIdCat)]]));

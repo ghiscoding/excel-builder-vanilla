@@ -1,6 +1,6 @@
 ## Inserting charts
 
-Add charts to a workbook: create data, create a chart, add it, position it. That's all—just practical usage.
+Add charts to a workbook: add data, build a chart with cell ranges, position it.
 
 ### Supported types
 `column` (vertical clustered), `bar` (horizontal), `line`, `pie`, `doughnut`, `scatter`
@@ -16,18 +16,17 @@ Add charts to a workbook: create data, create a chart, add it, position it. That
 ### Option summary (ChartOptions)
 | Option | Purpose | Notes |
 |--------|---------|-------|
-| type | `column` | `bar` | `line` | `pie` | `doughnut` | `scatter` | Defaults to `column` |
-| title | Chart title | Omit for none |
-| axis.x.title | X axis label | Ignored for pie |
-| axis.y.title | Y axis label | Ignored for pie |
-| axis.x.showGridLines | Show vertical gridlines | Category axis (non-pie) |
-| axis.y.showGridLines | Show horizontal gridlines | Value axis (non-pie) |
-| axis.y.minimum / axis.y.maximum | Force value axis bounds | Optional (numeric) |
-| stacking | 'stacked' | 'percent' | Stacks series (column/bar/line) |
-| width / height | Size override | Defaults used if omitted |
-| categoriesRange | Category labels range | Skip for scatter when using `scatterXRange` |
-| series | Array of `{ name, valuesRange, color? }` | 2+ series => legend; `color` optional (opaque ARGB e.g. FF3366CC) |
-| series[].scatterXRange | Scatter X values range | Only for scatter |
+| type | Chart type | One of: column, bar, line, pie, doughnut, scatter (default: column) |
+| title | Chart title | Omit for no title |
+| axis.x.title / axis.y.title | Axis labels | Ignored for pie/doughnut |
+| axis.x.showGridLines / axis.y.showGridLines | Gridlines toggles | x = vertical lines, y = horizontal lines |
+| axis.y.minimum / axis.y.maximum | Value axis bounds | Numbers (e.g. 0, 1) |
+| stacking | Stack series | 'stacked' or 'percent' (column / bar / line only) |
+| width / height | Size (EMUs) | Usually omit (auto size) |
+| categoriesRange | Category labels range | Not used by scatter (use scatterXRange instead) |
+| series | Data series | Array of { name, valuesRange, color? } |
+| series[].scatterXRange | X values (scatter) | Only for scatter charts |
+| dataLabels | Point label toggles | { showValue?, showCategory?, showPercent?, showSeriesName? } |
 
 
 ### Quick start (multi‑series column chart)
@@ -36,18 +35,17 @@ const wb = createWorkbook();
 const ws = wb.createWorksheet({ name: 'Sales' });
 wb.addWorksheet(ws);
 
-ws.addRow(['Month', 'Q1', 'Q2']);
-ws.addRow(['Jan', 10, 15]);
-ws.addRow(['Feb', 20, 25]);
-ws.addRow(['Mar', 30, 35]);
+ws.setData([
+  ['Month', 'Q1', 'Q2'],
+  ['Jan', 10, 15],
+  ['Feb', 20, 25],
+  ['Mar', 30, 35],
+]);
 
 const chart = new Chart({
   type: 'column',
   title: 'Quarterly Sales',
-  axis: {
-    x: { title: 'Month' },
-    y: { title: 'Revenue', minimum: 0, showGridLines: true },
-  },
+  axis: { x: { title: 'Month' }, y: { title: 'Revenue', minimum: 0, showGridLines: true } },
   series: [
     { name: 'Q1', valuesRange: 'Sales!$B$2:$B$4' },
     { name: 'Q2', valuesRange: 'Sales!$C$2:$C$4' },
@@ -55,10 +53,9 @@ const chart = new Chart({
   categoriesRange: 'Sales!$A$2:$A$4',
 });
 wb.addChart(chart);
-
 chart.createAnchor('twoCellAnchor', { from: { x: 4, y: 1 }, to: { x: 10, y: 16 } });
-ws.addDrawings(drawings.addDrawing(chart)); // or add drawings first then the chart
 
+// (Workbook export depends on your surrounding setup)
 await wb.generateFiles();
 ```
 
@@ -77,11 +74,14 @@ new Chart({
 ```
 
 ## Positioning
-Use a two-cell anchor:
+Position a chart with a two‑cell anchor (start & end grid cells):
 ```ts
-chart.createAnchor('twoCellAnchor', { from: { x: 4, y: 1 }, to: { x: 10, y: 16 } });
+chart.createAnchor('twoCellAnchor', { 
+    from: { x: 4, y: 1 }, 
+    to: { x: 10, y: 16 } 
+});
 ```
-Values are column/row indices (0-based).
+Indices are zero‑based (0 = first column / row).
 
 ### Legend
 Auto behavior (no `legend` option provided): show legend only when there are 2 or more series.
@@ -100,8 +100,54 @@ Rules:
 - If `show` is undefined, auto mode (2+ series) applies.
 - `overlay` emits `<c:overlay val="1">` when true; otherwise `0`.
 
-Notes:
-- Pie / Doughnut: adding multiple series produces multiple pies/rings; legend lists series names.
+Note: Pie / Doughnut with multiple series produces multiple pies/rings; legend lists series names.
+
+### Data Labels
+Provide high-level toggles for what text appears on each point.
+
+API flags:
+```ts
+dataLabels: {
+  showValue?: boolean;       // numeric value (Y value or slice value)
+  showCategory?: boolean;    // category text (Month, Region, etc.)
+  showPercent?: boolean;     // percentage (pie/doughnut, or percent-stacked series)
+  showSeriesName?: boolean;  // series name (useful with multiple series where value alone is ambiguous)
+}
+```
+
+Behavior:
+- Pick the parts you want (value, percent, category, series name). Omitted = hidden.
+- Omit `dataLabels` completely for none.
+- Hover tooltips are unchanged (Excel shows full details on hover).
+
+Examples:
+1. Value-only on a column chart:
+```ts
+dataLabels: { showValue: true }
+```
+2. Percent-only on a pie (concise slice labels):
+```ts
+dataLabels: { showPercent: true }
+```
+3. Value + percent on a doughnut:
+```ts
+dataLabels: { showValue: true, showPercent: true }
+```
+4. Series name only (multi-line chart where legend is hidden):
+```ts
+dataLabels: { showSeriesName: true }
+```
+
+Full example (pie with percent only):
+```ts
+new Chart({
+  type: 'pie',
+  title: 'Share',
+  dataLabels: { showPercent: true },
+  series: [{ name: '2025', valuesRange: 'Regions!$B$2:$B$6' }],
+  categoriesRange: 'Regions!$A$2:$A$6',
+});
+```
 
 Example (legend will show 2 entries and be placed top-right):
 ```ts
@@ -156,15 +202,14 @@ new Chart({
 ```
 
 Notes:
-- Stacking ignored for: doughnut, pie & scatter
-- Percent stacking displays proportional contribution (0–100%).
-- Overlap is automatically set for stacked column/bar to align segments.
+- Stacking applies only to column, bar, line.
+- Percent stacking rescales each category to 100%.
 
 ---
 
 ## Chart Type Examples
 
-Below are minimal, focused examples for each supported chart type. They assume you have already created a workbook `wb`, added a worksheet `ws` with suitable data, and added that worksheet to the workbook. Only the chart-specific parts are shown.
+Below are small, focused snippets for each type. They assume you already created a workbook (`wb`) and worksheet (`ws`) with matching ranges.
 
 #### Column
 ```ts
@@ -173,8 +218,8 @@ const col = new Chart({
   title: 'Monthly Revenue',
   axis: { x: { title: 'Month' }, y: { title: 'Amount', minimum: 0, showGridLines: true } },
   series: [
-  { name: 'Q1', valuesRange: 'Sales!$B$2:$B$13', color: 'FF3366CC' }, // ARGB
-  { name: 'Q2', valuesRange: 'Sales!$C$2:$C$13', color: 'FFFF9933' }, // ARGB
+  { name: 'Q1', valuesRange: 'Sales!$B$2:$B$13', color: 'FF3366CC' },
+  { name: 'Q2', valuesRange: 'Sales!$C$2:$C$13', color: 'FFFF9933' },
   ],
   categoriesRange: 'Sales!$A$2:$A$13',
 });
@@ -203,6 +248,7 @@ const line = new Chart({
   axis: { x: { title: 'Month' }, y: { title: 'Value', showGridLines: true } },
   series: [{ name: 'Q1', valuesRange: 'Sales!$B$2:$B$13', color: 'FF99CC00' }],
   categoriesRange: 'Sales!$A$2:$A$13',
+  dataLabels: { showValue: true },
 });
 wb.addChart(line);
 ```
@@ -212,6 +258,7 @@ wb.addChart(line);
 const pie = new Chart({
   type: 'pie',
   title: 'Share by Region',
+  dataLabels: { showValue: true, showPercent: true },
   series: [{ name: '2025', valuesRange: 'Regions!$B$2:$B$6' }],
   categoriesRange: 'Regions!$A$2:$A$6',
 });
@@ -239,8 +286,9 @@ const scatter = new Chart({
     name: 'Run A',
   scatterXRange: 'Runs!$A$2:$A$21',
     valuesRange: 'Runs!$B$2:$B$21',
-  color: 'FFFF0000', // ARGB stroke color (opaque red)
+    color: 'FFFF0000', // ARGB stroke color (opaque red)
   }],
+  dataLabels: { showValue: true }, // shows Y values at each point
 });
 wb.addChart(scatter);
 ```
@@ -343,18 +391,27 @@ wb.addChart(barPct);
 ---
 End of chart type examples.
 
-### Series Color Notes
-See also the general color section in `fonts-and-colors.md`.
+### Series Colors
+Format: opaque ARGB `FFRRGGBB` (examples: `FFFF9933` = orange, `FF3366CC` = blue).
 
-Format:
-- Opaque ARGB only: `FFRRGGBB` (e.g. `FF3366CC`). Use `FF` for fully opaque colors.
-
-Behavior:
-- Column / Bar: sets a solid fill color.
-- Line / Scatter: sets the stroke line color (markers, if/when added later, would share that color).
-- Pie / Doughnut: series color is ignored; Excel auto-assigns slice colors (one series per pie/ring).
+Effects:
+- Column / Bar: fill color
+- Line / Scatter: stroke color
+- Pie / Doughnut: ignored (Excel auto colors slices)
 
 Notes:
-- Alpha channel (when other than `FF`) is currently ignored; colors render fully opaque.
-- Invalid hex strings are silently ignored (no styling emitted).
-- Theme-based colors (e.g. `{ theme: 2 }`) are not yet supported for charts—pass an ARGB/RGB string.
+- Alpha (anything other than `FF`) is ignored; colors are always rendered fully opaque.
+- Invalid strings are ignored silently.
+- Theme colors are not supported; supply an ARGB hex.
+
+### Cell Range Cheat Sheet
+| Want | Pattern | Example |
+|------|---------|---------|
+| 3 category labels | Sheet!$A$2:$A$4 | `Sales!$A$2:$A$4` |
+| Series values | Sheet!$B$2:$B$4 | `Sales!$B$2:$B$4` |
+| Scatter X values | Sheet!$A$2:$A$21 | `Runs!$A$2:$A$21` |
+| Scatter Y values | Sheet!$B$2:$B$21 | `Runs!$B$2:$B$21` |
+
+Tips:
+- Always use absolute refs (`$A$1`) so range stays stable.
+- Category and each series range must have the same number of rows.

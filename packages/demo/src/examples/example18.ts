@@ -127,6 +127,12 @@ export default class Example18 {
         categoriesRange,
         series: seriesDefs,
         legend: legendConfig,
+        dataLabels:
+          type === 'pie' || type === 'doughnut'
+            ? { showPercent: true }
+            : sheetName === 'Column' || sheetName === 'Bar' || sheetName === 'Line'
+              ? { showValue: true }
+              : undefined,
       });
 
       const anchor = chart.createAnchor('twoCellAnchor', {

@@ -743,4 +743,58 @@ describe('Chart', () => {
     const legendSegment = xml.match(/<c:legend>[\s\S]*?<\/c:legend>/)?.[0];
     expect(legendSegment).toContain('<c:overlay val="1"');
   });
+
+  // -----------------
+  // Data labels
+  // -----------------
+  it('emits dLbls with requested flags (value + percent) and suppresses others', () => {
+    const { xml } = buildChart({
+      type: 'pie',
+      title: 'Pie Labels',
+      dataLabels: { showValue: true, showPercent: true },
+      series: [{ name: 'S', valuesRange: 'S!$B$2:$B$5' }],
+      categoriesRange: 'S!$A$2:$A$5',
+    });
+    expect(xml).toContain('<c:dLbls');
+    expect(xml).toContain('<c:showVal val="1"');
+    expect(xml).toContain('<c:showPercent val="1"');
+    // The other flags should appear with val="0"
+    expect(xml).toContain('<c:showCatName val="0"');
+    expect(xml).toContain('<c:showSerName val="0"');
+  });
+
+  it('emits dLbls with all flags =0 when empty object provided', () => {
+    const { xml } = buildChart({
+      type: 'column',
+      title: 'No Labels',
+      dataLabels: {},
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    // We now always emit <c:dLbls> for provided object, but with no child nodes since no keys specified.
+    expect(xml).toContain('<c:dLbls');
+    const seg = xml.match(/<c:dLbls>[\s\S]*?<\/c:dLbls>/) ? xml : xml; // self-closing OK
+    expect(seg).toContain('<c:showVal val="0"');
+    expect(seg).toContain('<c:showCatName val="0"');
+    expect(seg).toContain('<c:showPercent val="0"');
+    expect(seg).toContain('<c:showSerName val="0"');
+  });
+
+  it('emits showSerName when requested and suppresses others explicitly', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      title: 'Series Name Labels',
+      dataLabels: { showSeriesName: true, showValue: false },
+      series: [
+        { name: 'Alpha', valuesRange: 'S!$B$2:$B$4' },
+        { name: 'Beta', valuesRange: 'S!$C$2:$C$4' },
+      ],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    const dLblsSegment = xml.match(/<c:dLbls>[\s\S]*?<\/c:dLbls>/)?.[0] || xml; // fallback to whole xml
+    expect(dLblsSegment).toContain('<c:showSerName val="1"');
+    expect(dLblsSegment).toContain('<c:showVal val="0"');
+    expect(dLblsSegment).toContain('<c:showCatName val="0"');
+    expect(dLblsSegment).toContain('<c:showPercent val="0"');
+  });
 });

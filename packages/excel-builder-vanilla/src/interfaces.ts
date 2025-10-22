@@ -204,4 +204,15 @@ export interface ChartOptions {
   series?: ChartSeriesRef[];
   /** Legend configuration */
   legend?: LegendOptions;
+  /** Global data label toggles (applies to the whole chart). If any flag true a <c:dLbls> node is emitted. */
+  dataLabels?: {
+    /** Show numerical value */
+    showValue?: boolean;
+    /** Show category text (for non-scatter) */
+    showCategory?: boolean;
+    /** Show percentage (mainly useful for pie/doughnut or percent stacked) */
+    showPercent?: boolean;
+    /** Show series name (useful when multiple series and category/value alone is ambiguous) */
+    showSeriesName?: boolean;
+  };
 }
