@@ -88,8 +88,7 @@ describe('Chart', () => {
     const { xml } = buildChart({
       type: 'line',
       title: 'Line',
-      xAxisTitle: 'Months',
-      yAxisTitle: 'Values',
+      axis: { x: { title: 'Months' }, y: { title: 'Values' } },
       series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
       categoriesRange: 'Sheet!$A$2:$A$4',
     });
@@ -104,8 +103,7 @@ describe('Chart', () => {
     const { xml } = buildChart({
       type: 'pie',
       title: 'Pie',
-      xAxisTitle: 'ShouldNotShow',
-      yAxisTitle: 'ShouldNotShow',
+      axis: { x: { title: 'ShouldNotShow' }, y: { title: 'ShouldNotShow' } },
       series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
       categoriesRange: 'Sheet!$A$2:$A$4',
     });
@@ -203,8 +201,7 @@ describe('Chart', () => {
     const { xml } = buildChart({
       type: 'scatter',
       title: 'Scatter With Axis Titles',
-      xAxisTitle: 'X Axis',
-      yAxisTitle: 'Y Axis',
+      axis: { x: { title: 'X Axis' }, y: { title: 'Y Axis' } },
       series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4', xValuesRange: 'Sheet!$A$2:$A$4' }],
     });
     // Expect 3 title nodes: chart + x axis + y axis
@@ -307,7 +304,7 @@ describe('Chart', () => {
     const { xml } = buildChart({
       type: 'column',
       title: 'Bar Single X',
-      xAxisTitle: 'Only X',
+      axis: { x: { title: 'Only X' } },
       series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
       categoriesRange: 'S!$A$2:$A$4',
     });
@@ -320,7 +317,7 @@ describe('Chart', () => {
     const { xml } = buildChart({
       type: 'line',
       title: 'Line Single Y',
-      yAxisTitle: 'Only Y',
+      axis: { y: { title: 'Only Y' } },
       series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
       categoriesRange: 'S!$A$2:$A$4',
     });
@@ -474,4 +471,97 @@ describe('Chart', () => {
   // Data cache tests
   // -----------------
   // Removed data cache tests due to API minimization (no includeDataCache, no fallback arrays)
+
+  // -----------------
+  // Stacking tests
+  // -----------------
+  it('column stacked chart uses grouping stacked and overlap 100', () => {
+    const { xml } = buildChart({
+      type: 'column',
+      stacking: 'stacked',
+      title: 'Column Stacked',
+      series: [
+        { name: 'Q1', valuesRange: 'Sheet!$B$2:$B$4' },
+        { name: 'Q2', valuesRange: 'Sheet!$C$2:$C$4' },
+      ],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:grouping val="stacked"');
+    expect(xml).toContain('<c:overlap val="100"');
+  });
+
+  it('column percent stacked chart uses grouping percentStacked and overlap 100', () => {
+    const { xml } = buildChart({
+      type: 'column',
+      stacking: 'percent',
+      title: 'Column % Stacked',
+      series: [
+        { name: 'Q1', valuesRange: 'Sheet!$B$2:$B$4' },
+        { name: 'Q2', valuesRange: 'Sheet!$C$2:$C$4' },
+      ],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:grouping val="percentStacked"');
+    expect(xml).toContain('<c:overlap val="100"');
+  });
+
+  it('bar stacked chart uses grouping stacked and overlap 100', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      stacking: 'stacked',
+      title: 'Bar Stacked',
+      series: [
+        { name: 'Q1', valuesRange: 'Sheet!$B$2:$B$4' },
+        { name: 'Q2', valuesRange: 'Sheet!$C$2:$C$4' },
+      ],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:grouping val="stacked"');
+    expect(xml).toContain('<c:overlap val="100"');
+  });
+
+  it('bar percent stacked chart uses grouping percentStacked and overlap 100', () => {
+    const { xml } = buildChart({
+      type: 'bar',
+      stacking: 'percent',
+      title: 'Bar % Stacked',
+      series: [
+        { name: 'Q1', valuesRange: 'Sheet!$B$2:$B$4' },
+        { name: 'Q2', valuesRange: 'Sheet!$C$2:$C$4' },
+      ],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:grouping val="percentStacked"');
+    expect(xml).toContain('<c:overlap val="100"');
+  });
+
+  it('line stacked chart uses grouping stacked (no overlap node)', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      stacking: 'stacked',
+      title: 'Line Stacked',
+      series: [
+        { name: 'Q1', valuesRange: 'Sheet!$B$2:$B$4' },
+        { name: 'Q2', valuesRange: 'Sheet!$C$2:$C$4' },
+      ],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:grouping val="stacked"');
+    expect(xml).not.toContain('<c:overlap');
+  });
+
+  it('line percent stacked chart uses grouping percentStacked (no overlap node)', () => {
+    const { xml } = buildChart({
+      type: 'line',
+      stacking: 'percent',
+      title: 'Line % Stacked',
+      series: [
+        { name: 'Q1', valuesRange: 'Sheet!$B$2:$B$4' },
+        { name: 'Q2', valuesRange: 'Sheet!$C$2:$C$4' },
+      ],
+      categoriesRange: 'Sheet!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:grouping val="percentStacked"');
+    expect(xml).not.toContain('<c:overlap');
+  });
 });

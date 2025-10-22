@@ -109,44 +109,11 @@ export class Chart extends Drawing {
     const axIdCat = axisBase + 1;
     const axIdVal = axisBase + 2;
 
-    // Default to vertical column chart if type omitted (Excel naming consistency).
+    // Default chart type
     const type = this.options.type || 'column';
     // Categories range (shared across all non-scatter series when provided)
     const categoriesRange = this.options.categoriesRange || '';
-    let primaryChartNode: XMLNode;
-    switch (type) {
-      case 'line':
-        primaryChartNode = Util.createElement(doc, 'c:lineChart');
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'standard']]));
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
-        break;
-      case 'pie':
-        primaryChartNode = Util.createElement(doc, 'c:pieChart');
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
-        // Pie charts typically set varyColors=1 so each slice gets a distinct fill.
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '1']]));
-        break;
-      case 'scatter':
-        primaryChartNode = Util.createElement(doc, 'c:scatterChart');
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:scatterStyle', [['val', 'marker']]));
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
-        break;
-      case 'bar':
-        // Horizontal bar chart
-        primaryChartNode = Util.createElement(doc, 'c:barChart');
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'bar']]));
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
-        break;
-      case 'column':
-      default:
-        // Vertical column chart (previous 'bar' behavior)
-        primaryChartNode = Util.createElement(doc, 'c:barChart');
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'col']]));
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
-        primaryChartNode.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
-        break;
-    }
+    const primaryChartNode = this._createPrimaryChartNode(doc, type, this.options.stacking);
 
     // Lean chart XML (no fallback shorthand or data cache snapshots)
 
@@ -219,12 +186,14 @@ export class Chart extends Drawing {
     plotArea.appendChild(primaryChartNode);
 
     if (type !== 'pie') {
+      const xAxisTitle = this.options.axis?.x?.title;
+      const yAxisTitle = this.options.axis?.y?.title;
       if (type === 'scatter') {
-        plotArea.appendChild(this._createValueAxis(doc, axIdCat, axIdVal, 'b', this.options.xAxisTitle));
-        plotArea.appendChild(this._createValueAxis(doc, axIdVal, axIdCat, 'l', this.options.yAxisTitle));
+        plotArea.appendChild(this._createValueAxis(doc, axIdCat, axIdVal, 'b', xAxisTitle));
+        plotArea.appendChild(this._createValueAxis(doc, axIdVal, axIdCat, 'l', yAxisTitle));
       } else {
-        plotArea.appendChild(this._createCategoryAxis(doc, axIdCat, axIdVal, this.options.xAxisTitle));
-        plotArea.appendChild(this._createValueAxis(doc, axIdVal, axIdCat, 'l', this.options.yAxisTitle));
+        plotArea.appendChild(this._createCategoryAxis(doc, axIdCat, axIdVal, xAxisTitle));
+        plotArea.appendChild(this._createValueAxis(doc, axIdVal, axIdCat, 'l', yAxisTitle));
       }
     }
 
@@ -241,6 +210,71 @@ export class Chart extends Drawing {
     chartSpace.appendChild(chart);
     chartSpace.appendChild(Util.createElement(doc, 'c:printSettings'));
     return doc;
+  }
+  /** Create the primary chart node based on type and stacking */
+  private _createPrimaryChartNode(doc: XMLDOM, type: string, stacking?: 'stacked' | 'percent'): XMLNode {
+    let node: XMLNode;
+    const groupingValue = this._resolveGrouping(type, stacking);
+    switch (type) {
+      case 'line': {
+        node = Util.createElement(doc, 'c:lineChart');
+        node.appendChild(Util.createElement(doc, 'c:grouping', [['val', groupingValue]]));
+        node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
+        break;
+      }
+      case 'pie': {
+        node = Util.createElement(doc, 'c:pieChart');
+        node.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
+        node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '1']]));
+        break;
+      }
+      case 'scatter': {
+        node = Util.createElement(doc, 'c:scatterChart');
+        node.appendChild(Util.createElement(doc, 'c:scatterStyle', [['val', 'marker']]));
+        node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
+        break;
+      }
+      case 'bar': {
+        node = Util.createElement(doc, 'c:barChart');
+        node.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'bar']]));
+        node.appendChild(Util.createElement(doc, 'c:grouping', [['val', groupingValue]]));
+        if (stacking) {
+          // Ensure stacked bars/columns align in same category slot
+          node.appendChild(Util.createElement(doc, 'c:overlap', [['val', '100']]));
+        }
+        node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
+        break;
+      }
+      case 'column':
+      default: {
+        node = Util.createElement(doc, 'c:barChart');
+        node.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'col']]));
+        node.appendChild(Util.createElement(doc, 'c:grouping', [['val', groupingValue]]));
+        if (stacking) {
+          node.appendChild(Util.createElement(doc, 'c:overlap', [['val', '100']]));
+        }
+        node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
+        break;
+      }
+    }
+    return node;
+  }
+
+  /** Resolve grouping value based on chart type and stacking */
+  private _resolveGrouping(type: string, stacking?: 'stacked' | 'percent'): string {
+    if (type === 'pie') return 'clustered'; // required but cosmetic for pie
+    if (type === 'line') {
+      if (stacking === 'stacked') return 'stacked';
+      if (stacking === 'percent') return 'percentStacked';
+      return 'standard';
+    }
+    if (type === 'bar' || type === 'column') {
+      if (stacking === 'stacked') return 'stacked';
+      if (stacking === 'percent') return 'percentStacked';
+      return 'clustered';
+    }
+    // scatter doesn't use grouping; still return default for structural consistency
+    return 'standard';
   }
 
   /** Create a c:title node with minimal rich text required for Excel to render */

@@ -288,6 +288,17 @@ export interface ExcelStyleInstruction {
 	style?: number;
 }
 export type ChartType = "column" | "bar" | "line" | "pie" | "scatter";
+/** Axis configuration options */
+export interface AxisOptions {
+	/** Axis title label */
+	title?: string;
+	/** Explicit minimum value (value axis only; ignored for category axis unless future numeric category support) */
+	minimum?: number;
+	/** Explicit maximum value (value axis only) */
+	maximum?: number;
+	/** Show major gridlines */
+	showGridLines?: boolean;
+}
 export interface ChartSeriesRef {
 	/** Series display name */
 	name: string;
@@ -303,16 +314,21 @@ export interface ChartOptions {
 	type?: ChartType;
 	/** Chart title shown above plot area */
 	title?: string;
-	/** Category axis title (ignored for pie) */
-	xAxisTitle?: string;
-	/** Value axis title (ignored for pie) */
-	yAxisTitle?: string;
+	/** Axis configuration (ignored for pie except title for completeness) */
+	axis?: {
+		/** Category/X axis options */
+		x?: AxisOptions;
+		/** Value/Y axis options */
+		y?: AxisOptions;
+	};
 	/** Width in EMUs */
 	width?: number;
 	/** Height in EMUs */
 	height?: number;
 	/** Categories range (for non-scatter) e.g. Sheet1!$A$2:$A$5 */
 	categoriesRange?: string;
+	/** Stacking mode for supported chart types (column, bar, line). 'stacked' for cumulative, 'percent' for 100% scaling. Undefined => no stacking */
+	stacking?: "stacked" | "percent";
 	/** Multi-series cell references */
 	series?: ChartSeriesRef[];
 }
@@ -410,6 +426,10 @@ export declare class Chart extends Drawing {
 	private _nextAxisIdBase;
 	/** Chart part XML: /xl/charts/chartN.xml */
 	toChartSpaceXML(): XMLDOM;
+	/** Create the primary chart node based on type and stacking */
+	private _createPrimaryChartNode;
+	/** Resolve grouping value based on chart type and stacking */
+	private _resolveGrouping;
 	/** Create a c:title node with minimal rich text required for Excel to render */
 	private _createTitleNode;
 	/** Create a category axis (catAx) */
