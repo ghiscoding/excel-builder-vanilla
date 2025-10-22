@@ -24,7 +24,6 @@ Add charts to a workbook: create data, create a chart, add it, position it. That
 | categoriesRange | Category labels range | Skip for scatter when using `xValuesRange` |
 | series | Array of `{ name, valuesRange }` | 2+ series => legend |
 | series[].xValuesRange | Scatter X values range | Only for scatter |
-| sheetName | Name used when building range strings | Optional (used for convenience or clarity) |
 
 
 ### Quick start (multi‑series column chart)

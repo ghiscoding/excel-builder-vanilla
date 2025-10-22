@@ -171,8 +171,6 @@ export interface ChartOptions {
   width?: number;
   /** Height in EMUs */
   height?: number;
-  /** Worksheet name containing referenced ranges */
-  sheetName?: string;
   /** Categories range (for non-scatter) e.g. Sheet1!$A$2:$A$5 */
   categoriesRange?: string;
   /** Multi-series cell references */

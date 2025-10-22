@@ -67,7 +67,6 @@ export default class Example18 {
         // Reduced to ~80% of previous size (640x400 -> 512x320)
         width: 512 * 9525,
         height: 320 * 9525,
-        sheetName,
         categoriesRange,
         series: seriesDefs,
       });

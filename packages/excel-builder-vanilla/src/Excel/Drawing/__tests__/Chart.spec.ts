@@ -167,11 +167,9 @@ describe('Chart', () => {
     expect(xml).toContain('<c:legend>');
   });
 
-  it('generates single series ranges when categories & values provided without series', () => {
-    // Removed fallback behavior (no implicit series creation). Test now asserts absence of old markers.
-    const { xml } = buildChart({ sheetName: 'Data', title: 'Fallback' });
-    expect(xml).not.toContain('Data!$B$2:$B$4');
-    expect(xml).not.toContain('Data!$A$2:$A$4');
+  it('generates no implicit series when only title provided', () => {
+    const { xml } = buildChart({ title: 'Fallback' });
+    expect(xml).not.toContain('<c:ser>');
   });
 
   it('scatter emits empty numLit xVal when xValuesRange missing', () => {
@@ -371,9 +369,8 @@ describe('Chart', () => {
     expect(xml).not.toContain('<c:overlay');
   });
 
-  it('empty series array generates single series and no legend', () => {
-    const { xml } = buildChart({ sheetName: 'Data', title: 'Empty Series', series: [] });
-    // No series emitted, no legend expected
+  it('empty series array emits no series and no legend', () => {
+    const { xml } = buildChart({ title: 'Empty Series', series: [] });
     expect(xml).not.toContain('<c:ser>');
     expect(xml).not.toContain('<c:legend>');
   });
