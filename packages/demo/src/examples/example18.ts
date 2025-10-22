@@ -34,7 +34,7 @@ export default class Example18 {
       const qSheet = /[\s%]/.test(sheetName) ? `'${sheetName}'` : sheetName;
       const ws = wb.createWorksheet({ name: sheetName });
       let categoriesRange: string | undefined;
-      let seriesDefs: { name: string; valuesRange: string; xValuesRange?: string }[] = [];
+      let seriesDefs: { name: string; valuesRange: string; scatterXRange?: string }[] = [];
 
       if (type === 'scatter') {
         // Provide a richer numeric dataset for scatter (X,Y pairs) with 8 points
@@ -44,7 +44,7 @@ export default class Example18 {
         wb.addWorksheet(ws);
         const xRange = `${qSheet}!$A$2:$A$${xVals.length + 1}`;
         const yRange = `${qSheet}!$B$2:$B$${yVals.length + 1}`;
-        seriesDefs = [{ name: 'Y vs X', valuesRange: yRange, xValuesRange: xRange }];
+        seriesDefs = [{ name: 'Y vs X', valuesRange: yRange, scatterXRange: xRange }];
       } else {
         // Use month/Q1/Q2 table for most non-scatter charts.
         // Doughnut: intentionally single-series to avoid visual confusion (multi-series would render concentric rings)

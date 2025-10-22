@@ -25,9 +25,9 @@ Add charts to a workbook: create data, create a chart, add it, position it. That
 | axis.y.minimum / axis.y.maximum | Force value axis bounds | Optional (numeric) |
 | stacking | 'stacked' | 'percent' | Stacks series (column/bar/line) |
 | width / height | Size override | Defaults used if omitted |
-| categoriesRange | Category labels range | Skip for scatter when using `xValuesRange` |
+| categoriesRange | Category labels range | Skip for scatter when using `scatterXRange` |
 | series | Array of `{ name, valuesRange }` | 2+ series => legend |
-| series[].xValuesRange | Scatter X values range | Only for scatter |
+| series[].scatterXRange | Scatter X values range | Only for scatter |
 
 
 ### Quick start (multi‑series column chart)
@@ -225,7 +225,7 @@ const scatter = new Chart({
   axis: { x: { title: 'Distance' }, y: { title: 'Speed' } },
   series: [{
     name: 'Run A',
-    xValuesRange: 'Runs!$A$2:$A$21',
+  scatterXRange: 'Runs!$A$2:$A$21',
     valuesRange: 'Runs!$B$2:$B$21',
   }],
 });

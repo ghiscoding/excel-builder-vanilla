@@ -166,8 +166,8 @@ export interface ChartSeriesRef {
   valuesRange: string;
   /** Hex ARGB or RGB color (e.g. FF0000 or FF0000FF) - currently cosmetic placeholder */
   color?: string;
-  /** For scatter charts: X axis values range */
-  xValuesRange?: string;
+  /** Scatter only: per-series X axis numeric range (ignored for non-scatter charts) */
+  scatterXRange?: string;
 }
 
 export interface ChartOptions {

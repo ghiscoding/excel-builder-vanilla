@@ -132,10 +132,10 @@ export class Chart extends Drawing {
       if (type === 'scatter') {
         // Scatter uses xVal & yVal
         const xVal = Util.createElement(doc, 'c:xVal');
-        if (s.xValuesRange) {
+        if (s.scatterXRange) {
           const numRefX = Util.createElement(doc, 'c:numRef');
           const fNodeX = Util.createElement(doc, 'c:f');
-          fNodeX.appendChild(doc.createTextNode(s.xValuesRange));
+          fNodeX.appendChild(doc.createTextNode(s.scatterXRange));
           numRefX.appendChild(fNodeX);
           xVal.appendChild(numRefX);
         } else {

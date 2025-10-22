@@ -54,7 +54,7 @@ describe('Chart', () => {
     const { xml } = buildChart({
       type: 'scatter',
       title: 'Scatter Chart',
-      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4', xValuesRange: 'Sheet!$A$2:$A$4' }],
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4', scatterXRange: 'Sheet!$A$2:$A$4' }],
     });
     expect(xml).toContain('<c:scatterChart');
     // Two valAx expected
@@ -170,7 +170,7 @@ describe('Chart', () => {
     expect(xml).not.toContain('<c:ser>');
   });
 
-  it('scatter emits empty numLit xVal when xValuesRange missing', () => {
+  it('scatter emits empty numLit xVal when scatterXRange missing', () => {
     const { xml } = buildChart({
       type: 'scatter',
       title: 'Scatter No X Range',
@@ -202,7 +202,7 @@ describe('Chart', () => {
       type: 'scatter',
       title: 'Scatter With Axis Titles',
       axis: { x: { title: 'X Axis' }, y: { title: 'Y Axis' } },
-      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4', xValuesRange: 'Sheet!$A$2:$A$4' }],
+      series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4', scatterXRange: 'Sheet!$A$2:$A$4' }],
     });
     // Expect 3 title nodes: chart + x axis + y axis
     const titleNodeCount = xml.split('<c:title>').length - 1;
@@ -285,7 +285,7 @@ describe('Chart', () => {
     const { xml } = buildChart({
       type: 'scatter',
       title: 'Scatter Attr',
-      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4', xValuesRange: 'S!$A$2:$A$4' }],
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4', scatterXRange: 'S!$A$2:$A$4' }],
     });
     expect(xml).toContain('<c:scatterStyle val="marker"');
     expect(xml).toContain('<c:varyColors val="0"');
