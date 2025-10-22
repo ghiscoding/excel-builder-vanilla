@@ -179,13 +179,13 @@ export class Chart extends Drawing {
     });
 
     // Axis IDs (except pie which has no axes)
-    if (type !== 'pie') {
+    if (type !== 'pie' && type !== 'doughnut') {
       primaryChartNode.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axIdCat)]]));
       primaryChartNode.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axIdVal)]]));
     }
     plotArea.appendChild(primaryChartNode);
 
-    if (type !== 'pie') {
+    if (type !== 'pie' && type !== 'doughnut') {
       const xAxisOpts = this.options.axis?.x;
       const yAxisOpts = this.options.axis?.y;
       const xAxisTitle = xAxisOpts?.title;
@@ -230,6 +230,14 @@ export class Chart extends Drawing {
         node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '1']]));
         break;
       }
+      case 'doughnut': {
+        node = Util.createElement(doc, 'c:doughnutChart');
+        node.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
+        node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '1']]));
+        // Add a default holeSize (50%) to visualize doughnut; Excel defaults to 50 if absent but explicit for clarity
+        node.appendChild(Util.createElement(doc, 'c:holeSize', [['val', '50']]));
+        break;
+      }
       case 'scatter': {
         node = Util.createElement(doc, 'c:scatterChart');
         node.appendChild(Util.createElement(doc, 'c:scatterStyle', [['val', 'marker']]));
@@ -264,7 +272,7 @@ export class Chart extends Drawing {
 
   /** Resolve grouping value based on chart type and stacking */
   private _resolveGrouping(type: string, stacking?: 'stacked' | 'percent'): string {
-    if (type === 'pie') return 'clustered'; // required but cosmetic for pie
+    if (type === 'pie' || type === 'doughnut') return 'clustered'; // required but cosmetic
     if (type === 'line') {
       if (stacking === 'stacked') return 'stacked';
       if (stacking === 'percent') return 'percentStacked';

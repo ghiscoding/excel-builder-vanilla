@@ -1,4 +1,5 @@
-import { Chart, Drawings, downloadExcelFile, Workbook } from 'excel-builder-vanilla';
+import { Chart, type ChartType, Drawings, downloadExcelFile, Workbook } from 'excel-builder-vanilla';
+import chartUrl from '../images/charts.png?url';
 
 export default class Example18 {
   exportBtnElm!: HTMLButtonElement;
@@ -6,6 +7,13 @@ export default class Example18 {
   mount() {
     this.exportBtnElm = document.querySelector('#export-chart') as HTMLButtonElement;
     this.exportBtnElm.addEventListener('click', this.startProcess.bind(this));
+    // If an image placeholder exists, set its src (Vite will resolve the imported URL)
+    const imgElm = document.querySelector<HTMLImageElement>('#chart-screenshot');
+    if (imgElm) {
+      imgElm.src = chartUrl;
+      imgElm.alt = 'Exported Excel charts screenshot';
+      imgElm.loading = 'lazy';
+    }
   }
 
   unmount() {
@@ -21,11 +29,7 @@ export default class Example18 {
     const wb = new Workbook();
 
     // Helper: create a sheet that includes its own data table & a chart of given type
-    const createChartSheetWithLocalData = (
-      type: 'column' | 'bar' | 'line' | 'pie' | 'scatter',
-      sheetName: string,
-      stacking?: 'stacked' | 'percent',
-    ) => {
+    const createChartSheetWithLocalData = (type: ChartType, sheetName: string, stacking?: 'stacked' | 'percent') => {
       // Excel range sheet names with spaces or special chars must be quoted (e.g. 'Column Stacked'!$A$1)
       const qSheet = /[\s%]/.test(sheetName) ? `'${sheetName}'` : sheetName;
       const ws = wb.createWorksheet({ name: sheetName });
@@ -42,25 +46,33 @@ export default class Example18 {
         const yRange = `${qSheet}!$B$2:$B$${yVals.length + 1}`;
         seriesDefs = [{ name: 'Y vs X', valuesRange: yRange, xValuesRange: xRange }];
       } else {
-        // Use month/Q1/Q2 table for non-scatter charts
-        ws.setData([['Month', 'Q1', 'Q2'], ...months.map((m, i) => [m, q1[i], q2[i]])]);
-        wb.addWorksheet(ws);
-        categoriesRange = `${qSheet}!$A$2:$A$${months.length + 1}`;
-        const q1Range = `${qSheet}!$B$2:$B$${months.length + 1}`;
-        const q2Range = `${qSheet}!$C$2:$C$${months.length + 1}`;
-        switch (type) {
-          case 'pie':
+        // Use month/Q1/Q2 table for most non-scatter charts.
+        // Doughnut: intentionally single-series to avoid visual confusion (multi-series would render concentric rings)
+        if (type === 'doughnut') {
+          ws.setData([['Month', 'Q1'], ...months.map((m, i) => [m, q1[i]])]);
+          wb.addWorksheet(ws);
+          categoriesRange = `${qSheet}!$A$2:$A$${months.length + 1}`;
+          const q1Range = `${qSheet}!$B$2:$B$${months.length + 1}`;
+          seriesDefs = [{ name: 'Q1', valuesRange: q1Range }];
+        } else {
+          if (type === 'pie') {
+            // Single-series pie (Q1 only)
+            ws.setData([['Month', 'Q1'], ...months.map((m, i) => [m, q1[i]])]);
+            wb.addWorksheet(ws);
+            categoriesRange = `${qSheet}!$A$2:$A$${months.length + 1}`;
+            const q1Range = `${qSheet}!$B$2:$B$${months.length + 1}`;
+            seriesDefs = [{ name: 'Q1', valuesRange: q1Range }];
+          } else {
+            ws.setData([['Month', 'Q1', 'Q2'], ...months.map((m, i) => [m, q1[i], q2[i]])]);
+            wb.addWorksheet(ws);
+            categoriesRange = `${qSheet}!$A$2:$A$${months.length + 1}`;
+            const q1Range = `${qSheet}!$B$2:$B$${months.length + 1}`;
+            const q2Range = `${qSheet}!$C$2:$C$${months.length + 1}`;
             seriesDefs = [
               { name: 'Q1', valuesRange: q1Range },
               { name: 'Q2', valuesRange: q2Range },
             ];
-            break;
-          default:
-            seriesDefs = [
-              { name: 'Q1', valuesRange: q1Range },
-              { name: 'Q2', valuesRange: q2Range },
-            ];
-            break;
+          }
         }
       }
 
@@ -68,7 +80,7 @@ export default class Example18 {
       const chart = new Chart({
         type,
         stacking,
-        title: `${sheetName} (${type}${stacking ? ' ' + stacking : ''}) Chart`,
+        title: `${sheetName} (${type}${stacking ? ` ${stacking}` : ''}) Chart`,
         axis: {
           x: {
             title: type === 'pie' ? undefined : type === 'scatter' ? 'X Values' : 'Month',
@@ -106,6 +118,7 @@ export default class Example18 {
     createChartSheetWithLocalData('bar', 'Bar'); // horizontal bar chart
     createChartSheetWithLocalData('line', 'Line');
     createChartSheetWithLocalData('pie', 'Pie');
+    createChartSheetWithLocalData('doughnut', 'Doughnut');
     createChartSheetWithLocalData('scatter', 'Scatter');
 
     // Stacked variants (multi-series required for meaningful stack)

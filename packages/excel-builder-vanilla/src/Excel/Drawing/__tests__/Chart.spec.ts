@@ -266,6 +266,21 @@ describe('Chart', () => {
     expect(xml).toContain('<c:varyColors val="1"');
   });
 
+  it('doughnut chart emits doughnutChart node with holeSize and varyColors 1', () => {
+    const { xml } = buildChart({
+      type: 'doughnut',
+      title: 'Doughnut Attr',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:doughnutChart');
+    expect(xml).toContain('<c:holeSize val="50"');
+    expect(xml).toContain('<c:varyColors val="1"');
+    // no axes expected
+    expect(xml).not.toContain('<c:catAx');
+    expect(xml).not.toContain('<c:valAx');
+  });
+
   it('scatter chart style marker and varyColors 0', () => {
     const { xml } = buildChart({
       type: 'scatter',

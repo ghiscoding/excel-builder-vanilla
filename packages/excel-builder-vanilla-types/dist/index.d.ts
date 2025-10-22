@@ -287,7 +287,7 @@ export interface ExcelStyleInstruction {
 	/** style id */
 	style?: number;
 }
-export type ChartType = "column" | "bar" | "line" | "pie" | "scatter";
+export type ChartType = "column" | "bar" | "line" | "pie" | "doughnut" | "scatter";
 /** Axis configuration options */
 export interface AxisOptions {
 	/** Axis title label */
