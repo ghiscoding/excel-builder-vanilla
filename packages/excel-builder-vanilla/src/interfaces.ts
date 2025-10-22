@@ -145,7 +145,7 @@ export interface ExcelStyleInstruction {
 // ---------------------------
 // Chart related interfaces
 // ---------------------------
-export type ChartType = 'bar' | 'line' | 'pie' | 'scatter';
+export type ChartType = 'column' | 'bar' | 'line' | 'pie' | 'scatter';
 
 export interface ChartSeriesRef {
   /** Series display name */
@@ -159,7 +159,7 @@ export interface ChartSeriesRef {
 }
 
 export interface ChartOptions {
-  /** Chart type (bar default if omitted for backward compatibility) */
+  /** Chart type (defaults to 'column' if omitted) */
   type?: ChartType;
   /** Chart title shown above plot area */
   title?: string;

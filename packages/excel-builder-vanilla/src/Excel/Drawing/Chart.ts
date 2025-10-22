@@ -109,7 +109,8 @@ export class Chart extends Drawing {
     const axIdCat = axisBase + 1;
     const axIdVal = axisBase + 2;
 
-    const type = this.options.type || 'bar';
+    // Default to vertical column chart if type omitted (Excel naming consistency).
+    const type = this.options.type || 'column';
     let primaryChartNode: XMLNode;
     switch (type) {
       case 'line':
@@ -127,7 +128,15 @@ export class Chart extends Drawing {
         primaryChartNode.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
         break;
       case 'bar':
+        // Horizontal bar chart (Excel's Bar chart)
+        primaryChartNode = Util.createElement(doc, 'c:barChart');
+        primaryChartNode.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'bar']]));
+        primaryChartNode.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
+        primaryChartNode.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
+        break;
+      case 'column':
       default:
+        // Vertical column chart (previous 'bar' behavior)
         primaryChartNode = Util.createElement(doc, 'c:barChart');
         primaryChartNode.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'col']]));
         primaryChartNode.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));

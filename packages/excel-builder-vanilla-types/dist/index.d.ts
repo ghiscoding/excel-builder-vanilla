@@ -287,7 +287,7 @@ export interface ExcelStyleInstruction {
 	/** style id */
 	style?: number;
 }
-export type ChartType = "bar" | "line" | "pie" | "scatter";
+export type ChartType = "column" | "bar" | "line" | "pie" | "scatter";
 export interface ChartSeriesRef {
 	/** Series display name */
 	name: string;
@@ -299,7 +299,7 @@ export interface ChartSeriesRef {
 	xValuesRange?: string;
 }
 export interface ChartOptions {
-	/** Chart type (bar default if omitted for backward compatibility) */
+	/** Chart type (defaults to 'column' if omitted) */
 	type?: ChartType;
 	/** Chart title shown above plot area */
 	title?: string;

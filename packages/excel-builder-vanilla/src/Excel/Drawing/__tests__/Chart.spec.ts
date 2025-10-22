@@ -12,7 +12,7 @@ function buildChart(opts: any) {
 }
 
 describe('Chart', () => {
-  it('emits barChart node for bar type', () => {
+  it('emits barChart node for horizontal bar type (barDir bar)', () => {
     const { xml } = buildChart({
       type: 'bar',
       title: 'Bar Chart',
@@ -20,6 +20,7 @@ describe('Chart', () => {
       categoriesRange: 'Sheet!$A$2:$A$4',
     });
     expect(xml).toContain('<c:barChart');
+    expect(xml).toContain('<c:barDir val="bar"');
     expect(xml).not.toContain('<c:lineChart');
   });
 
@@ -35,7 +36,7 @@ describe('Chart', () => {
   });
   it('drawing graphicFrame uses default ext when Chart options width/height omitted', () => {
     const chart = new Chart({
-      type: 'bar',
+      type: 'column',
       title: 'Defaults',
       series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
       categoriesRange: 'S!$A$2:$A$4',
@@ -64,7 +65,7 @@ describe('Chart', () => {
 
   it('includes chart title when provided and sets autoTitleDeleted=0', () => {
     const { xml } = buildChart({
-      type: 'bar',
+      type: 'column',
       title: 'Custom Title',
       series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
       categoriesRange: 'Sheet!$A$2:$A$4',
@@ -75,7 +76,7 @@ describe('Chart', () => {
 
   it('omits chart title when not provided and sets autoTitleDeleted=1', () => {
     const { xml } = buildChart({
-      type: 'bar',
+      type: 'column',
       series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
       categoriesRange: 'Sheet!$A$2:$A$4',
     });
@@ -116,7 +117,7 @@ describe('Chart', () => {
 
   it('emits multiple series with correct idx/order', () => {
     const { xml } = buildChart({
-      type: 'bar',
+      type: 'column',
       title: 'Bar',
       series: [
         { name: 'Q1', valuesRange: 'Sheet!$B$2:$B$4' },
@@ -133,13 +134,14 @@ describe('Chart', () => {
     expect(xml).toContain('<c:order val="1"');
   });
 
-  it('defaults to barChart when type omitted', () => {
+  it('defaults to column (vertical) when type omitted', () => {
     const { xml } = buildChart({
-      title: 'Implicit Bar',
+      title: 'Implicit Column',
       series: [{ name: 'S1', valuesRange: 'Sheet!$B$2:$B$4' }],
       categoriesRange: 'Sheet!$A$2:$A$4',
     });
     expect(xml).toContain('<c:barChart');
+    expect(xml).toContain('<c:barDir val="col"');
   });
 
   it('omits legend when only one series', () => {
@@ -187,7 +189,7 @@ describe('Chart', () => {
 
   it('chart title overlay value is set to 0', () => {
     const { xml } = buildChart({
-      type: 'bar',
+      type: 'column',
       title: 'Overlay Check',
       series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
       categoriesRange: 'S!$A$2:$A$4',
@@ -230,6 +232,18 @@ describe('Chart', () => {
     const { xml } = buildChart({
       type: 'bar',
       title: 'Bar Attr',
+      series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
+      categoriesRange: 'S!$A$2:$A$4',
+    });
+    expect(xml).toContain('<c:barDir val="bar"');
+    expect(xml).toContain('<c:grouping val="clustered"');
+    expect(xml).toContain('<c:varyColors val="0"');
+  });
+
+  it('column chart specific attributes present', () => {
+    const { xml } = buildChart({
+      type: 'column',
+      title: 'Column Attr',
       series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
       categoriesRange: 'S!$A$2:$A$4',
     });
@@ -296,7 +310,7 @@ describe('Chart', () => {
 
   it('single xAxisTitle only adds chart + x axis title nodes', () => {
     const { xml } = buildChart({
-      type: 'bar',
+      type: 'column',
       title: 'Bar Single X',
       xAxisTitle: 'Only X',
       series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
@@ -322,7 +336,7 @@ describe('Chart', () => {
 
   it('custom width/height override graphicFrame ext', () => {
     const chart = new Chart({
-      type: 'bar',
+      type: 'column',
       title: 'Sized',
       width: 5000000,
       height: 1000000,
@@ -398,7 +412,7 @@ describe('Chart', () => {
 
   it('graphicFrame name defaults to "Chart" when title omitted', () => {
     const chart = new Chart({
-      type: 'bar',
+      type: 'column',
       series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
       categoriesRange: 'S!$A$2:$A$4',
     });
@@ -429,7 +443,7 @@ describe('Chart', () => {
 
   it('axis IDs reflect index multiplier base for higher index value', () => {
     const chart = new Chart({
-      type: 'bar',
+      type: 'column',
       title: 'Axis Base High',
       series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
       categoriesRange: 'S!$A$2:$A$4',
@@ -455,7 +469,7 @@ describe('Chart', () => {
 
   it('graphicFrame r:id is empty when relationship not yet set', () => {
     const chart = new Chart({
-      type: 'bar',
+      type: 'column',
       title: 'No Rel',
       series: [{ name: 'S1', valuesRange: 'S!$B$2:$B$4' }],
       categoriesRange: 'S!$A$2:$A$4',

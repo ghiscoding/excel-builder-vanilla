@@ -1,4 +1,4 @@
-import { downloadExcelFile, Workbook, Chart, Drawings } from 'excel-builder-vanilla';
+import { Chart, Drawings, downloadExcelFile, Workbook } from 'excel-builder-vanilla';
 
 export default class Example18 {
   exportBtnElm!: HTMLButtonElement;
@@ -21,7 +21,7 @@ export default class Example18 {
     const wb = new Workbook();
 
     // Helper: create a sheet that includes its own data table & a chart of given type
-    const createChartSheetWithLocalData = (type: 'bar' | 'line' | 'pie' | 'scatter', sheetName: string) => {
+    const createChartSheetWithLocalData = (type: 'column' | 'bar' | 'line' | 'pie' | 'scatter', sheetName: string) => {
       const ws = wb.createWorksheet({ name: sheetName });
       let categoriesRange: string | undefined;
       let seriesDefs: { name: string; valuesRange: string; xValuesRange?: string }[] = [];
@@ -64,8 +64,9 @@ export default class Example18 {
         title: `${sheetName} (${type}) Chart`,
         xAxisTitle: type === 'pie' ? undefined : type === 'scatter' ? 'X Values' : 'Month',
         yAxisTitle: type === 'pie' ? undefined : type === 'scatter' ? 'Y Values' : 'Values',
-        width: 640 * 9525,
-        height: 400 * 9525,
+        // Reduced to ~80% of previous size (640x400 -> 512x320)
+        width: 512 * 9525,
+        height: 320 * 9525,
         sheetName,
         categoriesRange,
         series: seriesDefs,
@@ -83,7 +84,8 @@ export default class Example18 {
     };
 
     // Create one sheet per chart type with its own data
-    createChartSheetWithLocalData('bar', 'Bar');
+    createChartSheetWithLocalData('column', 'Column'); // vertical column chart
+    createChartSheetWithLocalData('bar', 'Bar'); // horizontal bar chart
     createChartSheetWithLocalData('line', 'Line');
     createChartSheetWithLocalData('pie', 'Pie');
     createChartSheetWithLocalData('scatter', 'Scatter');

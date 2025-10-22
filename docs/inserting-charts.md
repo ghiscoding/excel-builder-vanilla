@@ -3,7 +3,7 @@
 Add charts to a workbook: create data, create a chart, add it, position it. That's all—just practical usage.
 
 ### Supported types
-`bar` (clustered column), `line`, `pie`, `scatter`
+`column` (vertical clustered), `bar` (horizontal), `line`, `pie`, `scatter`
 
 ### Core steps
 1. Create a workbook & worksheet
@@ -16,7 +16,7 @@ Add charts to a workbook: create data, create a chart, add it, position it. That
 ### Option summary (ChartOptions)
 | Option | Purpose | Notes |
 |--------|---------|-------|
-| type | `bar` | `line` | `pie` | `scatter` | Defaults to `bar` |
+| type | `column` | `bar` | `line` | `pie` | `scatter` | Defaults to `column` |
 | title | Chart title | Omit for none |
 | xAxisTitle | X axis label | Ignored for pie |
 | yAxisTitle | Y axis label | Ignored for pie |
@@ -27,7 +27,7 @@ Add charts to a workbook: create data, create a chart, add it, position it. That
 | sheetName + categories + values | Fallback single series | Arrays instead of ranges |
 
 
-### Quick start (multi‑series bar chart)
+### Quick start (multi‑series column chart)
 ```ts
 const wb = createWorkbook();
 const ws = wb.createWorksheet({ name: 'Sales' });
@@ -39,7 +39,7 @@ ws.addRow(['Feb', 20, 25]);
 ws.addRow(['Mar', 30, 35]);
 
 const chart = new Chart({
-  type: 'bar',
+  type: 'column',
   title: 'Quarterly Sales',
   xAxisTitle: 'Month',
   yAxisTitle: 'Revenue',
@@ -55,6 +55,20 @@ chart.createAnchor('twoCellAnchor', { from: { x: 4, y: 1 }, to: { x: 10, y: 16 }
 ws.addDrawings(drawings.addDrawing(chart)); // or add drawings first then the chart
 
 await wb.generateFiles();
+```
+
+### Horizontal bar chart
+```ts
+const barChart = new Chart({
+  type: 'bar',
+  title: 'Revenue (Horizontal Bar)',
+  series: [
+    { name: 'Q1', valuesRange: 'Sales!$B$2:$B$4' },
+    { name: 'Q2', valuesRange: 'Sales!$C$2:$C$4' },
+  ],
+  categoriesRange: 'Sales!$A$2:$A$4',
+});
+wb.addChart(barChart);
 ```
 
 ### Line chart (with axis titles)
