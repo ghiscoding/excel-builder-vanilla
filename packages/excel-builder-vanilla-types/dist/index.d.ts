@@ -437,29 +437,33 @@ export declare class Chart extends Drawing {
 	target: string | null;
 	options: ChartOptions;
 	constructor(options: ChartOptions);
-	/** RelationshipManager calls this via Drawings */
-	setRelationshipId(rId: string): void;
 	/** Return relationship type for this drawing */
 	getMediaType(): keyof typeof Util.schemas;
-	/** Creates the graphicFrame container that goes inside an anchor in drawing part */
-	private createGraphicFrame;
+	/** RelationshipManager calls this via Drawings */
+	setRelationshipId(rId: string): void;
 	/** Drawing part representation (inside an anchor) */
 	toXML(xmlDoc: XMLDOM): XMLNode;
-	private _nextAxisIdBase;
 	/** Chart part XML: /xl/charts/chartN.xml */
 	toChartSpaceXML(): XMLDOM;
+	/** Creates the graphicFrame container that goes inside an anchor in drawing part */
+	private createGraphicFrame;
 	/** Create the primary chart node based on type and stacking */
 	private _createPrimaryChartNode;
-	/** Resolve grouping value based on chart type and stacking */
-	private _resolveGrouping;
+	/** Build a <c:ser> node */
+	private _createSeriesNode;
+	/** Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
+	private _applySeriesColor;
+	/** Create legend node honoring position + overlay */
+	private _createLegendNode;
 	/** Create a c:title node with minimal rich text required for Excel to render */
 	private _createTitleNode;
 	/** Create a category axis (catAx) */
 	private _createCategoryAxis;
 	/** Create a value axis (valAx) */
 	private _createValueAxis;
-	/** Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
-	private _applySeriesColor;
+	private _nextAxisIdBase;
+	/** Resolve grouping value based on chart type and stacking */
+	private _resolveGrouping;
 }
 export type Relation = {
 	[id: string]: {
