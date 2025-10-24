@@ -70,61 +70,61 @@
     <script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.1/dist/excel-builder.iife.js"></script>
 
     <script>
-      function downloader(options) {
-        // when using IE/Edge, then use different download call
-        if (typeof navigator.msSaveOrOpenBlob === 'function') {
-          navigator.msSaveOrOpenBlob(options.blob, options.filename);
-        } else {
-          // this trick will generate a temp <a /> tag
-          // the code will then trigger a hidden click for it to start downloading
-          const link = document.createElement('a');
-          const url = URL.createObjectURL(options.blob);
+    function downloader(options) {
+      // when using IE/Edge, then use different download call
+      if (typeof navigator.msSaveOrOpenBlob === 'function') {
+        navigator.msSaveOrOpenBlob(options.blob, options.filename);
+      } else {
+        // this trick will generate a temp <a /> tag
+        // the code will then trigger a hidden click for it to start downloading
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(options.blob);
 
-          if (link && document) {
-            link.textContent = 'download';
-            link.href = url;
-            link.setAttribute('download', options.filename);
+        if (link && document) {
+          link.textContent = 'download';
+          link.href = url;
+          link.setAttribute('download', options.filename);
 
-            // set the visibility to hidden so there is no effect on your web-layout
-            link.style.visibility = 'hidden';
+          // set the visibility to hidden so there is no effect on your web-layout
+          link.style.visibility = 'hidden';
 
-            // this part will append the anchor tag, trigger a click (for download to start) and finally remove the tag once completed
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          }
+          // this part will append the anchor tag, trigger a click (for download to start) and finally remove the tag once completed
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         }
       }
+    }
 
-      function exportExcel() {
-        const originalData = [
-          ['Artist', 'Album', 'Price'],
-          ['Buckethead', 'Albino Slug', 8.99],
-          ['Buckethead', 'Electric Tears', 13.99],
-          ['Buckethead', 'Colma', 11.34],
-          ['Crystal Method', 'Vegas', 10.54],
-          ['Crystal Method', 'Tweekend', 10.64],
-          ['Crystal Method', 'Divided By Night', 8.99],
-        ];
-        const artistWorkbook = new window.ExcelBuilder.Workbook();
-        const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
-        albumList.setData(originalData);
-        artistWorkbook.addWorksheet(albumList);
+    function exportExcel() {
+      const originalData = [
+        ['Artist', 'Album', 'Price'],
+        ['Buckethead', 'Albino Slug', 8.99],
+        ['Buckethead', 'Electric Tears', 13.99],
+        ['Buckethead', 'Colma', 11.34],
+        ['Crystal Method', 'Vegas', 10.54],
+        ['Crystal Method', 'Tweekend', 10.64],
+        ['Crystal Method', 'Divided By Night', 8.99],
+      ];
+      const artistWorkbook = new window.ExcelBuilder.Workbook();
+      const albumList = artistWorkbook.createWorksheet({ name: 'Artists' });
+      albumList.setData(originalData);
+      artistWorkbook.addWorksheet(albumList);
 
-        new window.ExcelBuilder.createExcelFile(artistWorkbook, { type: 'blob' }).then((excelBlob) => {
-          const downloadOptions = {
-            filename: 'Artist WB.xlsx',
-            format: 'xlsx',
-          };
+      new window.ExcelBuilder.createExcelFile(artistWorkbook, { type: 'blob' }).then(excelBlob => {
+        const downloadOptions = {
+          filename: 'Artist WB.xlsx',
+          format: 'xlsx',
+        };
 
-          // start downloading but add the Blob property only on the start download not on the event itself
-          downloader({ ...downloadOptions, blob: excelBlob, data: albumList.data });
-        });
-      }
-
-      document.querySelector('button#export').addEventListener('click', () => {
-        exportExcel();
+        // start downloading but add the Blob property only on the start download not on the event itself
+        downloader({ ...downloadOptions, blob: excelBlob, data: albumList.data });
       });
+    }
+
+    document.querySelector('button#export').addEventListener('click', () => {
+      exportExcel();
+    });
     </script>
   </body>
 </html>
