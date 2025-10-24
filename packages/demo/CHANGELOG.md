@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.1.3...v4.2.0) (2025-10-24)
+
+### Features
+
+* add Excel Charts ([422a53e](https://github.com/ghiscoding/excel-builder-vanilla/commit/422a53ed567bbe77b3df6c8d1b6c187ab2b0d585)) - by @ghiscoding
+
 ## [4.1.3](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.1.2...v4.1.3) (2025-10-20)
 
 **Note:** Version bump only for package excel-builder-vanilla-demo
