@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.1](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.2.0...v4.2.1) (2025-10-24)
+
+### Bug Fixes
+
+* remove private functions to fix DTS mismatch with lib vs types pkg ([5120504](https://github.com/ghiscoding/excel-builder-vanilla/commit/51205044ff7f877493a0242f3a1e8671216040db)) - by @ghiscoding
+
 ## [4.2.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.1.3...v4.2.0) (2025-10-24)
 
 ### Features
