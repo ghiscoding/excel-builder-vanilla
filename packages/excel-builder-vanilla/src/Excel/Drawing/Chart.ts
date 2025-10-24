@@ -6,15 +6,15 @@ import { Drawing } from './Drawing.js';
 /**
  * Minimal Chart implementation (clustered column) required for Excel to render without repair.
  * This produces 2 parts:
- * 1) Drawing graphicFrame (returned by toXML for inclusion in /xl/drawings/drawingN.xml)
- * 2) Chart part XML (returned by toChartSpaceXML for inclusion in /xl/charts/chartN.xml)
+ *  1) Drawing graphicFrame (returned by toXML for inclusion in `/xl/drawings/drawingN.xml`)
+ *  2) Chart part XML (returned by toChartSpaceXML for inclusion in `/xl/charts/chartN.xml`)
  * Relationships:
- * drawingN.xml.rels -> ../charts/chartN.xml (Type chart)
+ *  `drawingN.xml.rels` -> `../charts/chartN.xml` (Type chart)
  */
 export class Chart extends Drawing {
   relId: string | null = null; // relationship id from drawing rels
   index: number | null = null; // 1-based index assigned by workbook
-  target: string | null = null; // relative target path (../charts/chartN.xml)
+  target: string | null = null; // relative target path (`../charts/chartN.xml`)
   options: ChartOptions;
 
   constructor(options: ChartOptions) {
@@ -37,7 +37,7 @@ export class Chart extends Drawing {
     return this.anchor.toXML(xmlDoc, this.createGraphicFrame(xmlDoc));
   }
 
-  /** Chart part XML: /xl/charts/chartN.xml */
+  /** Chart part XML: `/xl/charts/chartN.xml` */
   toChartSpaceXML(): XMLDOM {
     const doc = Util.createXmlDoc('http://schemas.openxmlformats.org/drawingml/2006/chart', 'c:chartSpace');
     const chartSpace = doc.documentElement;
@@ -46,7 +46,7 @@ export class Chart extends Drawing {
     chartSpace.setAttribute('xmlns:r', Util.schemas.relationships);
 
     const chart = Util.createElement(doc, 'c:chart');
-    // Title (only if provided). autoTitleDeleted must be 0 or omitted when we set a title.
+    // Title (only if provided). `autoTitleDeleted` must be 0 or omitted when we set a title.
     if (this.options.title) {
       chart.appendChild(this._createTitleNode(doc, this.options.title));
       chart.appendChild(Util.createElement(doc, 'c:autoTitleDeleted', [['val', '0']]));
@@ -65,7 +65,8 @@ export class Chart extends Drawing {
     const categoriesRange = this.options.categoriesRange || '';
     const primaryChartNode = this._createPrimaryChartNode(doc, type, this.options.stacking);
     // Series
-    (this.options.series || []).forEach((s, idx) => {
+    const series = this.options.series || [];
+    series.forEach((s, idx) => {
       primaryChartNode.appendChild(this._createSeriesNode(doc, s, idx, type, categoriesRange));
     });
 
@@ -106,8 +107,7 @@ export class Chart extends Drawing {
 
     // Legend (auto show for >1 series unless overridden)
     const legendOpts = this.options.legend;
-    const seriesCount = (this.options.series || []).length;
-    const autoShouldShow = seriesCount > 1;
+    const autoShouldShow = series.length > 1;
     const effectiveShow = typeof legendOpts?.show === 'boolean' ? legendOpts.show : autoShouldShow;
     if (effectiveShow) {
       chart.appendChild(this._createLegendNode(doc, legendOpts));
@@ -125,7 +125,6 @@ export class Chart extends Drawing {
   /** Creates the graphicFrame container that goes inside an anchor in drawing part */
   private createGraphicFrame(xmlDoc: XMLDOM) {
     const graphicFrame = Util.createElement(xmlDoc, 'xdr:graphicFrame');
-
     const nvGraphicFramePr = Util.createElement(xmlDoc, 'xdr:nvGraphicFramePr');
     nvGraphicFramePr.appendChild(
       Util.createElement(xmlDoc, 'xdr:cNvPr', [
@@ -374,7 +373,9 @@ export class Chart extends Drawing {
     if (opts?.showGridLines) {
       catAx.appendChild(Util.createElement(doc, 'c:majorGridlines'));
     }
-    if (title) catAx.appendChild(this._createTitleNode(doc, title));
+    if (title) {
+      catAx.appendChild(this._createTitleNode(doc, title));
+    }
     return catAx;
   }
 
@@ -406,7 +407,9 @@ export class Chart extends Drawing {
     if (opts?.showGridLines) {
       valAx.appendChild(Util.createElement(doc, 'c:majorGridlines'));
     }
-    if (title) valAx.appendChild(this._createTitleNode(doc, title));
+    if (title) {
+      valAx.appendChild(this._createTitleNode(doc, title));
+    }
     return valAx;
   }
 
@@ -417,7 +420,9 @@ export class Chart extends Drawing {
 
   /** Resolve grouping value based on chart type and stacking */
   private _resolveGrouping(type: string, stacking?: 'stacked' | 'percent'): string {
-    if (type === 'pie' || type === 'doughnut') return 'clustered'; // required but cosmetic
+    if (type === 'pie' || type === 'doughnut') {
+      return 'clustered'; // required but cosmetic
+    }
     if (type === 'line') {
       if (stacking === 'stacked') return 'stacked';
       if (stacking === 'percent') return 'percentStacked';

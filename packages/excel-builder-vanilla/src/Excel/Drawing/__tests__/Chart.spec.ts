@@ -590,11 +590,6 @@ describe('Chart', () => {
   });
 
   // -----------------
-  // Data cache tests
-  // -----------------
-  // Removed data cache tests due to API minimization (no includeDataCache, no fallback arrays)
-
-  // -----------------
   // Stacking tests
   // -----------------
   it('column stacked chart uses grouping stacked and overlap 100', () => {

@@ -302,9 +302,12 @@ export interface AxisOptions {
 export interface ChartSeriesRef {
 	/** Series display name */
 	name: string;
-	/** Cell range for series values (e.g. Sheet1!$B$2:$B$5) */
+	/** Cell range for series values (e.g. `Sheet1!$B$2:$B$5`) */
 	valuesRange: string;
-	/** Optional solid color for the series. Use opaque ARGB `FFRRGGBB` (e.g. FF3366CC). Alpha (other than FF) currently ignored. Theme colors not yet supported for charts. */
+	/**
+	 * Optional solid color for the series. Use opaque ARGB `FFRRGGBB` (e.g. FF3366CC).
+	 * Alpha (other than FF) currently ignored. Theme colors not yet supported for charts.
+	 */
 	color?: string;
 	/** Scatter only: per-series X axis numeric range (ignored for non-scatter charts) */
 	scatterXRange?: string;
@@ -426,10 +429,10 @@ export declare class Util {
 /**
  * Minimal Chart implementation (clustered column) required for Excel to render without repair.
  * This produces 2 parts:
- * 1) Drawing graphicFrame (returned by toXML for inclusion in /xl/drawings/drawingN.xml)
- * 2) Chart part XML (returned by toChartSpaceXML for inclusion in /xl/charts/chartN.xml)
+ *  1) Drawing graphicFrame (returned by toXML for inclusion in `/xl/drawings/drawingN.xml`)
+ *  2) Chart part XML (returned by toChartSpaceXML for inclusion in `/xl/charts/chartN.xml`)
  * Relationships:
- * drawingN.xml.rels -> ../charts/chartN.xml (Type chart)
+ *  `drawingN.xml.rels` -> `../charts/chartN.xml` (Type chart)
  */
 export declare class Chart extends Drawing {
 	relId: string | null;
@@ -443,7 +446,7 @@ export declare class Chart extends Drawing {
 	setRelationshipId(rId: string): void;
 	/** Drawing part representation (inside an anchor) */
 	toXML(xmlDoc: XMLDOM): XMLNode;
-	/** Chart part XML: /xl/charts/chartN.xml */
+	/** Chart part XML: `/xl/charts/chartN.xml` */
 	toChartSpaceXML(): XMLDOM;
 	/** Creates the graphicFrame container that goes inside an anchor in drawing part */
 	private createGraphicFrame;

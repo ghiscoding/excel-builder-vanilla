@@ -13,6 +13,10 @@ Add charts to a workbook: add data, build a chart with cell ranges, position it.
 5. Anchor it (e.g. `twoCellAnchor`)
 6. Generate files
 
+{% hint style="info" %}
+**Tips** Categories typically populate the X-axis, while series values go on the Y-axis.
+{% endhint %}
+
 ### Option summary (ChartOptions)
 | Option | Purpose | Notes |
 |--------|---------|-------|
@@ -24,9 +28,9 @@ Add charts to a workbook: add data, build a chart with cell ranges, position it.
 | stacking | Stack series | 'stacked' or 'percent' (column / bar / line only) |
 | width / height | Size (EMUs) | Usually omit (auto size) |
 | categoriesRange | Category labels range | Not used by scatter (use scatterXRange instead) |
-| series | Data series | Array of { name, valuesRange, color? } |
+| series | Data series | Array of { name, valuesRange, color } |
 | series[].scatterXRange | X values (scatter) | Only for scatter charts |
-| dataLabels | Point label toggles | { showValue?, showCategory?, showPercent?, showSeriesName? } |
+| dataLabels | Point label toggles | { showValue, showCategory, showPercent, showSeriesName } |
 
 
 ### Quick start (multi‑series column chart)
@@ -45,7 +49,10 @@ ws.setData([
 const chart = new Chart({
   type: 'column',
   title: 'Quarterly Sales',
-  axis: { x: { title: 'Month' }, y: { title: 'Revenue', minimum: 0, showGridLines: true } },
+  axis: { 
+    x: { title: 'Month' },  // X-Axis: Horizontal categories (months)
+    y: { title: 'Revenue', minimum: 0, showGridLines: true } // Y-Axis: Vertical values (sales amounts)
+  },
   series: [
     { name: 'Q1', valuesRange: 'Sales!$B$2:$B$4' },
     { name: 'Q2', valuesRange: 'Sales!$C$2:$C$4' },
@@ -192,7 +199,10 @@ Enable stacking on multi-series column, bar, or line charts:
 new Chart({
   type: 'column',
   stacking: 'stacked', // or 'percent'
-  axis: { x: { title: 'Month' }, y: { title: 'Revenue', minimum: 0, showGridLines: true } },
+  axis: { 
+    x: { title: 'Month' }, 
+    y: { title: 'Revenue', minimum: 0, showGridLines: true } 
+  },
   series: [
     { name: 'Q1', valuesRange: 'Sales!$B$2:$B$4' },
     { name: 'Q2', valuesRange: 'Sales!$C$2:$C$4' },
@@ -216,7 +226,10 @@ Below are small, focused snippets for each type. They assume you already created
 const col = new Chart({
   type: 'column',
   title: 'Monthly Revenue',
-  axis: { x: { title: 'Month' }, y: { title: 'Amount', minimum: 0, showGridLines: true } },
+  axis: { 
+    x: { title: 'Month' },     // X-Axis: Horizontal categories (months)
+    y: { title: 'Amount', minimum: 0, showGridLines: true } // Y-Axis: Vertical values (revenue)
+  },
   series: [
   { name: 'Q1', valuesRange: 'Sales!$B$2:$B$13', color: 'FF3366CC' },
   { name: 'Q2', valuesRange: 'Sales!$C$2:$C$13', color: 'FFFF9933' },
@@ -315,7 +328,9 @@ const colPct = new Chart({
   type: 'column',
   stacking: 'percent',
   title: 'Product Mix %',
-  axis: { x: { title: 'Month' }, y: { title: 'Percent', minimum: 0, maximum: 1, showGridLines: true } },
+  axis: { 
+    x: { title: 'Month' }, 
+    y: { title: 'Percent', minimum: 0, maximum: 1, showGridLines: true } },
   series: [
     { name: 'Product A', valuesRange: 'Sales!$B$2:$B$13' },
     { name: 'Product B', valuesRange: 'Sales!$C$2:$C$13' },
@@ -347,7 +362,10 @@ const linePct = new Chart({
   type: 'line',
   stacking: 'percent',
   title: 'Regional Contribution %',
-  axis: { x: { title: 'Month' }, y: { title: 'Percent', minimum: 0, maximum: 1 } },
+  axis: { 
+    x: { title: 'Month' }, 
+    y: { title: 'Percent', minimum: 0, maximum: 1 } 
+  },
   series: [
     { name: 'North', valuesRange: 'Regions!$B$2:$B$13' },
     { name: 'South', valuesRange: 'Regions!$C$2:$C$13' },

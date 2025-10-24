@@ -162,9 +162,12 @@ export interface AxisOptions {
 export interface ChartSeriesRef {
   /** Series display name */
   name: string;
-  /** Cell range for series values (e.g. Sheet1!$B$2:$B$5) */
+  /** Cell range for series values (e.g. `Sheet1!$B$2:$B$5`) */
   valuesRange: string;
-  /** Optional solid color for the series. Use opaque ARGB `FFRRGGBB` (e.g. FF3366CC). Alpha (other than FF) currently ignored. Theme colors not yet supported for charts. */
+  /**
+   * Optional solid color for the series. Use opaque ARGB `FFRRGGBB` (e.g. FF3366CC).
+   * Alpha (other than FF) currently ignored. Theme colors not yet supported for charts.
+   */
   color?: string;
   /** Scatter only: per-series X axis numeric range (ignored for non-scatter charts) */
   scatterXRange?: string;
