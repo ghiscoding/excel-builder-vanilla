@@ -4,6 +4,7 @@
  * Online tool: https://www.myfixguide.com/color-converter/
  */
 export type ExcelColorStyle = string | { theme: number };
+
 export interface ExcelAlignmentStyle {
   horizontal?: 'center' | 'fill' | 'general' | 'justify' | 'left' | 'right';
   justifyLastLine?: boolean;
@@ -139,4 +140,82 @@ export interface ExcelStyleInstruction {
   protection?: { locked?: boolean; hidden?: boolean };
   /** style id */
   style?: number;
+}
+
+// ---------------------------
+// Chart related interfaces
+// ---------------------------
+export type ChartType = 'column' | 'bar' | 'line' | 'pie' | 'doughnut' | 'scatter';
+
+/** Axis configuration options */
+export interface AxisOptions {
+  /** Axis title label */
+  title?: string;
+  /** Explicit minimum value (value axis only; ignored for category axis unless future numeric category support) */
+  minimum?: number;
+  /** Explicit maximum value (value axis only) */
+  maximum?: number;
+  /** Show major gridlines */
+  showGridLines?: boolean;
+}
+
+export interface ChartSeriesRef {
+  /** Series display name */
+  name: string;
+  /** Cell range for series values (e.g. `Sheet1!$B$2:$B$5`) */
+  valuesRange: string;
+  /**
+   * Optional solid color for the series. Use opaque ARGB `FFRRGGBB` (e.g. FF3366CC).
+   * Alpha (other than FF) currently ignored. Theme colors not yet supported for charts.
+   */
+  color?: string;
+  /** Scatter only: per-series X axis numeric range (ignored for non-scatter charts) */
+  scatterXRange?: string;
+}
+
+/** Legend configuration (minimal) */
+export interface LegendOptions {
+  /** Force show (true) or hide (false). If undefined, auto: show only when multiple series */
+  show?: boolean;
+  /** Legend position (defaults to 'right' if omitted) */
+  position?: 'right' | 'left' | 'top' | 'bottom' | 'topRight';
+  /** Overlay the legend on the plot area (no space reservation) */
+  overlay?: boolean;
+}
+
+export interface ChartOptions {
+  /** Chart type (defaults to 'column' if omitted) */
+  type?: ChartType;
+  /** Chart title shown above plot area */
+  title?: string;
+  /** Axis configuration (ignored for pie except title for completeness) */
+  axis?: {
+    /** Category/X axis options */
+    x?: AxisOptions;
+    /** Value/Y axis options */
+    y?: AxisOptions;
+  };
+  /** Width in EMUs */
+  width?: number;
+  /** Height in EMUs */
+  height?: number;
+  /** Categories range (for non-scatter) e.g. Sheet1!$A$2:$A$5 */
+  categoriesRange?: string;
+  /** Stacking mode for supported chart types (column, bar, line). 'stacked' for cumulative, 'percent' for 100% scaling. Undefined => no stacking */
+  stacking?: 'stacked' | 'percent';
+  /** Multi-series cell references */
+  series?: ChartSeriesRef[];
+  /** Legend configuration */
+  legend?: LegendOptions;
+  /** Global data label toggles (applies to the whole chart). If any flag true a <c:dLbls> node is emitted. */
+  dataLabels?: {
+    /** Show numerical value */
+    showValue?: boolean;
+    /** Show category text (for non-scatter) */
+    showCategory?: boolean;
+    /** Show percentage (mainly useful for pie/doughnut or percent stacked) */
+    showPercent?: boolean;
+    /** Show series name (useful when multiple series and category/value alone is ambiguous) */
+    showSeriesName?: boolean;
+  };
 }

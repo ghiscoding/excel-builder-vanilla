@@ -127,7 +127,6 @@ class Main {
     }
     if (foundRouter?.view) {
       this.currentRouter = foundRouter;
-      // const html = await import(/*@vite-ignore*/ `${foundRouter.view}?raw`).default;
       document.querySelector('.panel-wm-content')!.innerHTML = pageLayoutGlobs[foundRouter.view] as string;
       const vm = new foundRouter.viewModel() as ViewModel;
       this.currentModel = vm;

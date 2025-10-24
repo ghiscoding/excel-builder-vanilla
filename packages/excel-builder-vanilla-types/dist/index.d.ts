@@ -149,151 +149,6 @@ export declare class AbsoluteAnchor {
 	setDimensions(width: number, height: number): void;
 	toXML(xmlDoc: XMLDOM, content: any): XMLNode;
 }
-export declare class Chart {
-}
-/**
- * @module Excel/Util
- */
-export declare class Util {
-	static _idSpaces: {
-		[space: string]: number;
-	};
-	/**
-	 * Returns a number based on a namespace. So, running with 'Picture' will return 1. Run again, you will get 2. Run with 'Foo', you'll get 1.
-	 * @param {String} space
-	 * @returns {Number}
-	 */
-	static uniqueId(space: string): number;
-	/**
-	 * Attempts to create an XML document. After some investigation, using the 'fake' document
-	 * is significantly faster than creating an actual XML document, so we're going to go with
-	 * that. Besides, it just makes it easier to port to node.
-	 *
-	 * Takes a namespace to start the xml file in, as well as the root element
-	 * of the xml file.
-	 *
-	 * @param {type} ns
-	 * @param {type} base
-	 * @returns {@new;XMLDOM}
-	 */
-	static createXmlDoc(ns: string, base: string): XMLDOM;
-	/**
-	 * Creates an xml node (element). Used to simplify some calls, as IE is
-	 * very particular about namespaces and such.
-	 *
-	 * @param {XMLDOM} doc An xml document (actual DOM or fake DOM, not a string)
-	 * @param {type} name The name of the element
-	 * @param {type} attributes
-	 * @returns {XML Node}
-	 */
-	static createElement(doc: XMLDOM, name: string, attributes?: any): XMLNode;
-	/**
-	 * This is sort of slow, but it's a huge convenience method for the code. It probably shouldn't be used
-	 * in high repetition areas.
-	 *
-	 * @param {XMLDoc} doc
-	 * @param {Object} attrs
-	 */
-	static setAttributesOnDoc(doc: XMLNode, attrs: {
-		[key: string]: any;
-	}): void;
-	static LETTER_REFS: any;
-	static positionToLetterRef(x: number, y: number | string): any;
-	static schemas: {
-		worksheet: string;
-		sharedStrings: string;
-		stylesheet: string;
-		relationships: string;
-		relationshipPackage: string;
-		contentTypes: string;
-		spreadsheetml: string;
-		markupCompat: string;
-		x14ac: string;
-		officeDocument: string;
-		package: string;
-		table: string;
-		spreadsheetDrawing: string;
-		drawing: string;
-		drawingRelationship: string;
-		image: string;
-		chart: string;
-		hyperlink: string;
-	};
-}
-export type Relation = {
-	[id: string]: {
-		id: string;
-		schema: string;
-		object: any;
-		data?: {
-			id: number;
-			schema: string;
-			object: any;
-		};
-	};
-};
-/**
- * @module Excel/RelationshipManager
- */
-export declare class RelationshipManager {
-	relations: Relation;
-	lastId: number;
-	constructor();
-	importData(data: {
-		relations: Relation;
-		lastId: number;
-	}): void;
-	exportData(): {
-		relations: Relation;
-		lastId: number;
-	};
-	addRelation(object: {
-		id: string;
-	}, type: keyof typeof Util.schemas): string;
-	getRelationshipId(object: {
-		id: string;
-	}): string | null;
-	toXML(): XMLDOM;
-}
-/**
- * @module Excel/Drawings
- */
-export declare class Drawings {
-	drawings: (Drawing | Picture)[];
-	relations: RelationshipManager;
-	id: string;
-	/**
-	 * Adds a drawing (more likely a subclass of a Drawing) to the 'Drawings' for a particular worksheet.
-	 *
-	 * @param {Drawing} drawing
-	 * @returns {undefined}
-	 */
-	addDrawing(drawing: Drawing): void;
-	getCount(): number;
-	toXML(): XMLDOM;
-}
-/**
- * @module Excel/SharedStrings
- */
-export declare class SharedStrings {
-	strings: {
-		[key: string]: number;
-	};
-	stringArray: string[];
-	id: string;
-	/**
-	 * Adds a string to the shared string file, and returns the ID of the
-	 * string which can be used to reference it in worksheets.
-	 *
-	 * @param str {String}
-	 * @return int
-	 */
-	addString(str: string): number;
-	exportData(): {
-		[key: string]: number;
-	};
-	toXML(): XMLDOM;
-}
 /**
  * Excel Color in ARGB format, for color aren't transparent just use "FF" as prefix.
  * For example if the color you want to add is a blue with HTML color "#0000FF", then the excel color we need to add is "FF0000FF"
@@ -431,6 +286,261 @@ export interface ExcelStyleInstruction {
 	};
 	/** style id */
 	style?: number;
+}
+export type ChartType = "column" | "bar" | "line" | "pie" | "doughnut" | "scatter";
+/** Axis configuration options */
+export interface AxisOptions {
+	/** Axis title label */
+	title?: string;
+	/** Explicit minimum value (value axis only; ignored for category axis unless future numeric category support) */
+	minimum?: number;
+	/** Explicit maximum value (value axis only) */
+	maximum?: number;
+	/** Show major gridlines */
+	showGridLines?: boolean;
+}
+export interface ChartSeriesRef {
+	/** Series display name */
+	name: string;
+	/** Cell range for series values (e.g. `Sheet1!$B$2:$B$5`) */
+	valuesRange: string;
+	/**
+	 * Optional solid color for the series. Use opaque ARGB `FFRRGGBB` (e.g. FF3366CC).
+	 * Alpha (other than FF) currently ignored. Theme colors not yet supported for charts.
+	 */
+	color?: string;
+	/** Scatter only: per-series X axis numeric range (ignored for non-scatter charts) */
+	scatterXRange?: string;
+}
+/** Legend configuration (minimal) */
+export interface LegendOptions {
+	/** Force show (true) or hide (false). If undefined, auto: show only when multiple series */
+	show?: boolean;
+	/** Legend position (defaults to 'right' if omitted) */
+	position?: "right" | "left" | "top" | "bottom" | "topRight";
+	/** Overlay the legend on the plot area (no space reservation) */
+	overlay?: boolean;
+}
+export interface ChartOptions {
+	/** Chart type (defaults to 'column' if omitted) */
+	type?: ChartType;
+	/** Chart title shown above plot area */
+	title?: string;
+	/** Axis configuration (ignored for pie except title for completeness) */
+	axis?: {
+		/** Category/X axis options */
+		x?: AxisOptions;
+		/** Value/Y axis options */
+		y?: AxisOptions;
+	};
+	/** Width in EMUs */
+	width?: number;
+	/** Height in EMUs */
+	height?: number;
+	/** Categories range (for non-scatter) e.g. Sheet1!$A$2:$A$5 */
+	categoriesRange?: string;
+	/** Stacking mode for supported chart types (column, bar, line). 'stacked' for cumulative, 'percent' for 100% scaling. Undefined => no stacking */
+	stacking?: "stacked" | "percent";
+	/** Multi-series cell references */
+	series?: ChartSeriesRef[];
+	/** Legend configuration */
+	legend?: LegendOptions;
+	/** Global data label toggles (applies to the whole chart). If any flag true a <c:dLbls> node is emitted. */
+	dataLabels?: {
+		/** Show numerical value */
+		showValue?: boolean;
+		/** Show category text (for non-scatter) */
+		showCategory?: boolean;
+		/** Show percentage (mainly useful for pie/doughnut or percent stacked) */
+		showPercent?: boolean;
+		/** Show series name (useful when multiple series and category/value alone is ambiguous) */
+		showSeriesName?: boolean;
+	};
+}
+/**
+ * @module Excel/Util
+ */
+export declare class Util {
+	static _idSpaces: {
+		[space: string]: number;
+	};
+	/**
+	 * Returns a number based on a namespace. So, running with 'Picture' will return 1. Run again, you will get 2. Run with 'Foo', you'll get 1.
+	 * @param {String} space
+	 * @returns {Number}
+	 */
+	static uniqueId(space: string): number;
+	/**
+	 * Attempts to create an XML document. After some investigation, using the 'fake' document
+	 * is significantly faster than creating an actual XML document, so we're going to go with
+	 * that. Besides, it just makes it easier to port to node.
+	 *
+	 * Takes a namespace to start the xml file in, as well as the root element
+	 * of the xml file.
+	 *
+	 * @param {type} ns
+	 * @param {type} base
+	 * @returns {@new;XMLDOM}
+	 */
+	static createXmlDoc(ns: string, base: string): XMLDOM;
+	/**
+	 * Creates an xml node (element). Used to simplify some calls, as IE is
+	 * very particular about namespaces and such.
+	 *
+	 * @param {XMLDOM} doc An xml document (actual DOM or fake DOM, not a string)
+	 * @param {type} name The name of the element
+	 * @param {type} attributes
+	 * @returns {XML Node}
+	 */
+	static createElement(doc: XMLDOM, name: string, attributes?: any): XMLNode;
+	/**
+	 * This is sort of slow, but it's a huge convenience method for the code. It probably shouldn't be used
+	 * in high repetition areas.
+	 *
+	 * @param {XMLDoc} doc
+	 * @param {Object} attrs
+	 */
+	static setAttributesOnDoc(doc: XMLNode, attrs: {
+		[key: string]: any;
+	}): void;
+	static LETTER_REFS: any;
+	static positionToLetterRef(x: number, y: number | string): any;
+	static schemas: {
+		worksheet: string;
+		sharedStrings: string;
+		stylesheet: string;
+		relationships: string;
+		relationshipPackage: string;
+		contentTypes: string;
+		spreadsheetml: string;
+		markupCompat: string;
+		x14ac: string;
+		officeDocument: string;
+		package: string;
+		table: string;
+		spreadsheetDrawing: string;
+		drawing: string;
+		drawingRelationship: string;
+		image: string;
+		chart: string;
+		hyperlink: string;
+	};
+}
+/**
+ * Minimal Chart implementation (clustered column) required for Excel to render without repair.
+ * This produces 2 parts:
+ *  1) Drawing graphicFrame (returned by toXML for inclusion in `/xl/drawings/drawingN.xml`)
+ *  2) Chart part XML (returned by toChartSpaceXML for inclusion in `/xl/charts/chartN.xml`)
+ * Relationships:
+ *  `drawingN.xml.rels` -> `../charts/chartN.xml` (Type chart)
+ */
+export declare class Chart extends Drawing {
+	relId: string | null;
+	index: number | null;
+	target: string | null;
+	options: ChartOptions;
+	constructor(options: ChartOptions);
+	/** Return relationship type for this drawing */
+	getMediaType(): keyof typeof Util.schemas;
+	/** RelationshipManager calls this via Drawings */
+	setRelationshipId(rId: string): void;
+	/** Drawing part representation (inside an anchor) */
+	toXML(xmlDoc: XMLDOM): XMLNode;
+	/** Chart part XML: `/xl/charts/chartN.xml` */
+	toChartSpaceXML(): XMLDOM;
+	/** Creates the graphicFrame container that goes inside an anchor in drawing part */
+	private createGraphicFrame;
+	/** Create the primary chart node based on type and stacking */
+	private _createPrimaryChartNode;
+	/** Build a <c:ser> node */
+	private _createSeriesNode;
+	/** Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
+	private _applySeriesColor;
+	/** Create legend node honoring position + overlay */
+	private _createLegendNode;
+	/** Create a c:title node with minimal rich text required for Excel to render */
+	private _createTitleNode;
+	/** Create a category axis (catAx) */
+	private _createCategoryAxis;
+	/** Create a value axis (valAx) */
+	private _createValueAxis;
+	private _nextAxisIdBase;
+	/** Resolve grouping value based on chart type and stacking */
+	private _resolveGrouping;
+}
+export type Relation = {
+	[id: string]: {
+		id: string;
+		schema: string;
+		object: any;
+		data?: {
+			id: number;
+			schema: string;
+			object: any;
+		};
+	};
+};
+/**
+ * @module Excel/RelationshipManager
+ */
+export declare class RelationshipManager {
+	relations: Relation;
+	lastId: number;
+	constructor();
+	importData(data: {
+		relations: Relation;
+		lastId: number;
+	}): void;
+	exportData(): {
+		relations: Relation;
+		lastId: number;
+	};
+	addRelation(object: {
+		id: string;
+	}, type: keyof typeof Util.schemas): string;
+	getRelationshipId(object: {
+		id: string;
+	}): string | null;
+	toXML(): XMLDOM;
+}
+/**
+ * @module Excel/Drawings
+ */
+export declare class Drawings {
+	drawings: Drawing[];
+	relations: RelationshipManager;
+	id: string;
+	/**
+	 * Adds a drawing (more likely a subclass of a Drawing) to the 'Drawings' for a particular worksheet.
+	 *
+	 * @param {Drawing} drawing
+	 * @returns {undefined}
+	 */
+	addDrawing(drawing: Drawing): void;
+	getCount(): number;
+	toXML(): XMLDOM;
+}
+/**
+ * @module Excel/SharedStrings
+ */
+export declare class SharedStrings {
+	strings: {
+		[key: string]: number;
+	};
+	stringArray: string[];
+	id: string;
+	/**
+	 * Adds a string to the shared string file, and returns the ID of the
+	 * string which can be used to reference it in worksheets.
+	 *
+	 * @param str {String}
+	 * @return int
+	 */
+	addString(str: string): number;
+	exportData(): {
+		[key: string]: number;
+	};
+	toXML(): XMLDOM;
 }
 /**
  * @module Excel/StyleSheet
@@ -949,6 +1059,7 @@ export declare class Workbook {
 	sharedStrings: SharedStrings;
 	relations: RelationshipManager;
 	worksheets: Worksheet[];
+	charts: Chart[];
 	tables: Table[];
 	drawings: Drawings[];
 	media: {
@@ -961,6 +1072,7 @@ export declare class Workbook {
 	getStyleSheet(): StyleSheet$1;
 	addTable(table: Table): void;
 	addDrawings(drawings: Drawings): void;
+	addChart(chart: Chart): void;
 	/**
 	 * Set number of rows to repeat for this sheet.
 	 *

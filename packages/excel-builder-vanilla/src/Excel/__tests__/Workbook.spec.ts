@@ -1,7 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { Workbook } from '../Workbook.js';
+import { Chart } from '../Drawing/Chart.js';
 import { Paths } from '../Paths.js';
+import { Workbook } from '../Workbook.js';
 
 describe('Workbook', () => {
   it('should initialize with default properties', () => {
@@ -128,6 +129,52 @@ describe('Workbook', () => {
       expect(files['/xl/test.xml']).toContain('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>');
       expect(files['/xl/test.xml']).toContain('<mocked/>');
       delete (globalThis as any).window;
+    });
+  });
+
+  describe('chart-related branches', () => {
+    it('addChart assigns index and target', () => {
+      const wb = new Workbook();
+      const chart = new Chart({
+        type: 'bar',
+        title: 'C1',
+        series: [{ name: 'S1', valuesRange: 'Sheet!$A$1:$A$1' }],
+        categoriesRange: 'Sheet!$A$1:$A$1',
+      });
+      wb.addChart(chart);
+      expect(chart.index).toBe(1);
+      expect(chart.target).toBe('../charts/chart1.xml');
+    });
+
+    it('_generateCorePaths adds chart XML and path', () => {
+      const wb = new Workbook();
+      const chart = new Chart({
+        type: 'line',
+        title: 'LineChart',
+        series: [{ name: 'S1', valuesRange: 'Sheet!$A$1:$A$1' }],
+        categoriesRange: 'Sheet!$A$1:$A$1',
+      });
+      wb.addChart(chart);
+      const files: any = {};
+      wb._generateCorePaths(files);
+      expect(files['/xl/charts/chart1.xml']).toBeTruthy();
+      expect(Paths[chart.id]).toBe('/xl/charts/chart1.xml');
+    });
+
+    it('generateFiles includes worksheet rel file and chart file', async () => {
+      const wb = new Workbook();
+      const ws = wb.createWorksheet({ name: 'Data' });
+      wb.addWorksheet(ws);
+      const chart = new Chart({
+        type: 'pie',
+        title: 'PieChart',
+        series: [{ name: 'S1', valuesRange: 'Data!$A$1:$A$1' }],
+        categoriesRange: 'Data!$A$1:$A$1',
+      });
+      wb.addChart(chart);
+      const files = await wb.generateFiles();
+      expect(files['/xl/worksheets/_rels/sheet1.xml.rels']).toBeTruthy();
+      expect(files['/xl/charts/chart1.xml']).toBeTruthy();
     });
   });
 });
