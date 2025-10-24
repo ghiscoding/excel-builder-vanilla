@@ -49,7 +49,7 @@ export const exampleRouting = [
       { name: 'example15', view: '/src/examples/example15.html', viewModel: Example15, title: '15- Streaming Excel Export' },
       { name: 'example16', view: '/src/examples/example16.html', viewModel: Example16, title: '16- Streaming Features Demo' },
       { name: 'example17', view: '/src/examples/example17.html', viewModel: Example17, title: '17- Streaming Export with Images' },
-      { name: 'example18', view: '/src/examples/example18.html', viewModel: Example18, title: '18- Charts Demo' },
+      { name: 'example18', view: '/src/examples/example18.html', viewModel: Example18, title: '18- Charts' },
     ],
   },
 ];
