@@ -34,7 +34,7 @@ export class Chart extends Drawing {
 
   /** Drawing part representation (inside an anchor) */
   toXML(xmlDoc: XMLDOM) {
-    return this.anchor.toXML(xmlDoc, this.createGraphicFrame(xmlDoc));
+    return this.anchor.toXML(xmlDoc, this._createGraphicFrame(xmlDoc));
   }
 
   /** Chart part XML: `/xl/charts/chartN.xml` */
@@ -122,8 +122,8 @@ export class Chart extends Drawing {
 
   // -- private functions
 
-  /** Creates the graphicFrame container that goes inside an anchor in drawing part */
-  private createGraphicFrame(xmlDoc: XMLDOM) {
+  /** @private Creates the graphicFrame container that goes inside an anchor in drawing part */
+  _createGraphicFrame(xmlDoc: XMLDOM) {
     const graphicFrame = Util.createElement(xmlDoc, 'xdr:graphicFrame');
     const nvGraphicFramePr = Util.createElement(xmlDoc, 'xdr:nvGraphicFramePr');
     nvGraphicFramePr.appendChild(
@@ -166,8 +166,8 @@ export class Chart extends Drawing {
     return graphicFrame;
   }
 
-  /** Create the primary chart node based on type and stacking */
-  private _createPrimaryChartNode(doc: XMLDOM, type: string, stacking?: 'stacked' | 'percent'): XMLNode {
+  /** @private Create the primary chart node based on type and stacking */
+  _createPrimaryChartNode(doc: XMLDOM, type: string, stacking?: 'stacked' | 'percent'): XMLNode {
     let node: XMLNode;
     const groupingValue = this._resolveGrouping(type, stacking);
     switch (type) {
@@ -223,8 +223,8 @@ export class Chart extends Drawing {
     return node;
   }
 
-  /** Build a <c:ser> node */
-  private _createSeriesNode(
+  /** @private Build a <c:ser> node */
+  _createSeriesNode(
     doc: XMLDOM,
     s: { name: string; valuesRange: string; scatterXRange?: string; color?: string },
     idx: number,
@@ -292,8 +292,8 @@ export class Chart extends Drawing {
     return ser;
   }
 
-  /** Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
-  private _applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string) {
+  /** @private Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
+  _applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string) {
     if (!color || typeof color !== 'string') return;
     let hex = color.trim().replace(/^#/, '').toUpperCase();
     // Accept 6 (RGB) or 8 (ARGB) hex chars; strip leading alpha if present
@@ -323,8 +323,8 @@ export class Chart extends Drawing {
     serNode.appendChild(spPr);
   }
 
-  /** Create legend node honoring position + overlay */
-  private _createLegendNode(doc: XMLDOM, legendOpts?: { position?: string; overlay?: boolean }): XMLNode {
+  /** @private Create legend node honoring position + overlay */
+  _createLegendNode(doc: XMLDOM, legendOpts?: { position?: string; overlay?: boolean }): XMLNode {
     const legend = Util.createElement(doc, 'c:legend');
     const posMap: Record<string, string> = { right: 'r', left: 'l', top: 't', bottom: 'b', topRight: 'tr' };
     const pos = posMap[legendOpts?.position || 'right'] || 'r';
@@ -334,8 +334,8 @@ export class Chart extends Drawing {
     return legend;
   }
 
-  /** Create a c:title node with minimal rich text required for Excel to render */
-  private _createTitleNode(doc: XMLDOM, text: string): XMLNode {
+  /** @private Create a c:title node with minimal rich text required for Excel to render */
+  _createTitleNode(doc: XMLDOM, text: string): XMLNode {
     const title = Util.createElement(doc, 'c:title');
     const tx = Util.createElement(doc, 'c:tx');
     const rich = Util.createElement(doc, 'c:rich');
@@ -358,8 +358,8 @@ export class Chart extends Drawing {
     return title;
   }
 
-  /** Create a category axis (catAx) */
-  private _createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string, opts?: { showGridLines?: boolean }): XMLNode {
+  /** @private Create a category axis (catAx) */
+  _createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string, opts?: { showGridLines?: boolean }): XMLNode {
     const catAx = Util.createElement(doc, 'c:catAx');
     catAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axId)]]));
     const scaling = Util.createElement(doc, 'c:scaling');
@@ -379,8 +379,8 @@ export class Chart extends Drawing {
     return catAx;
   }
 
-  /** Create a value axis (valAx) */
-  private _createValueAxis(
+  /** @private Create a value axis (valAx) */
+  _createValueAxis(
     doc: XMLDOM,
     axId: number,
     crossAx: number,
@@ -413,13 +413,13 @@ export class Chart extends Drawing {
     return valAx;
   }
 
-  private _nextAxisIdBase(): number {
-    // Simple axis id base using index plus a constant offset
+  /** @private Simple axis id base using index plus a constant offset */
+  _nextAxisIdBase(): number {
     return (this.index || 1) * 1000;
   }
 
-  /** Resolve grouping value based on chart type and stacking */
-  private _resolveGrouping(type: string, stacking?: 'stacked' | 'percent'): string {
+  /** @private Resolve grouping value based on chart type and stacking */
+  _resolveGrouping(type: string, stacking?: 'stacked' | 'percent'): string {
     if (type === 'pie' || type === 'doughnut') {
       return 'clustered'; // required but cosmetic
     }

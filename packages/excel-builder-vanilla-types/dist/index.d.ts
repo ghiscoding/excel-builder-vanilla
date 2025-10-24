@@ -561,25 +561,40 @@ export declare class Chart extends Drawing {
 	toXML(xmlDoc: XMLDOM): XMLNode;
 	/** Chart part XML: `/xl/charts/chartN.xml` */
 	toChartSpaceXML(): XMLDOM;
-	/** Creates the graphicFrame container that goes inside an anchor in drawing part */
-	private createGraphicFrame;
-	/** Create the primary chart node based on type and stacking */
-	private _createPrimaryChartNode;
-	/** Build a <c:ser> node */
-	private _createSeriesNode;
-	/** Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
-	private _applySeriesColor;
-	/** Create legend node honoring position + overlay */
-	private _createLegendNode;
-	/** Create a c:title node with minimal rich text required for Excel to render */
-	private _createTitleNode;
-	/** Create a category axis (catAx) */
-	private _createCategoryAxis;
-	/** Create a value axis (valAx) */
-	private _createValueAxis;
-	private _nextAxisIdBase;
-	/** Resolve grouping value based on chart type and stacking */
-	private _resolveGrouping;
+	/** @private Creates the graphicFrame container that goes inside an anchor in drawing part */
+	_createGraphicFrame(xmlDoc: XMLDOM): XMLNode;
+	/** @private Create the primary chart node based on type and stacking */
+	_createPrimaryChartNode(doc: XMLDOM, type: string, stacking?: "stacked" | "percent"): XMLNode;
+	/** @private Build a <c:ser> node */
+	_createSeriesNode(doc: XMLDOM, s: {
+		name: string;
+		valuesRange: string;
+		scatterXRange?: string;
+		color?: string;
+	}, idx: number, type: string, categoriesRange: string): XMLNode;
+	/** @private Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
+	_applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string): void;
+	/** @private Create legend node honoring position + overlay */
+	_createLegendNode(doc: XMLDOM, legendOpts?: {
+		position?: string;
+		overlay?: boolean;
+	}): XMLNode;
+	/** @private Create a c:title node with minimal rich text required for Excel to render */
+	_createTitleNode(doc: XMLDOM, text: string): XMLNode;
+	/** @private Create a category axis (catAx) */
+	_createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string, opts?: {
+		showGridLines?: boolean;
+	}): XMLNode;
+	/** @private Create a value axis (valAx) */
+	_createValueAxis(doc: XMLDOM, axId: number, crossAx: number, pos: "l" | "b", title?: string, opts?: {
+		minimum?: number;
+		maximum?: number;
+		showGridLines?: boolean;
+	}): XMLNode;
+	/** @private Simple axis id base using index plus a constant offset */
+	_nextAxisIdBase(): number;
+	/** @private Resolve grouping value based on chart type and stacking */
+	_resolveGrouping(type: string, stacking?: "stacked" | "percent"): string;
 }
 export type Relation = {
 	[id: string]: {
