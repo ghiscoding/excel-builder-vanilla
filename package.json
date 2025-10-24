@@ -58,13 +58,13 @@
     "@biomejs/biome": "^2.3.0",
     "@lerna-lite/cli": "^4.9.1",
     "@lerna-lite/publish": "^4.9.1",
-    "@types/node": "^24.9.0",
-    "@vitest/coverage-v8": "^4.0.0-beta.19",
+    "@types/node": "^24.9.1",
+    "@vitest/coverage-v8": "^4.0.3",
     "conventional-changelog-conventionalcommits": "^9.1.0",
-    "happy-dom": "^20.0.7",
+    "happy-dom": "^20.0.8",
     "remove-glob": "catalog:",
     "typescript": "catalog:",
-    "vitest": "^4.0.0-beta.19"
+    "vitest": "^4.0.3"
   },
   "pnpm": {
     "overrides": {
