@@ -7,14 +7,6 @@
 import type { XMLDOM } from './XMLDOM.js';
 
 export class Pane {
-  /*
-    Possible Values:
-     null
-     split	Split
-     frozen	Frozen
-     frozenSplit	Frozen Split
-     http://www.datypic.com/sc/ooxml/t-ssml_ST_PaneState.html
-     */
   state: null | 'split' | 'frozen' | 'frozenSplit' = null;
   xSplit: number | null = null;
   ySplit: number | null = null;

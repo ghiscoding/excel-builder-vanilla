@@ -33,14 +33,14 @@ export class Worksheet {
   name = '';
   id = uniqueId('Worksheet');
   _timezoneOffset: number;
-  relations: any = null;
+  relations: RelationshipManager | null = null;
   columnFormats: ExcelColumn[] = [];
   data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][] = [];
   mergedCells: string[][] = [];
   columns: ExcelColumn[] = [];
-  sheetProtection: any = false;
-  _headers: [left?: any, center?: any, right?: any] = [];
-  _footers: [left?: any, center?: any, right?: any] = [];
+  sheetProtection: { exportXML: (doc: XMLDOM) => XMLNode } | false = false;
+  _headers: [left?: string | CharType | any[], center?: string | CharType | any[], right?: string | CharType | any[]] = [];
+  _footers: [left?: string | CharType | any[], center?: string | CharType | any[], right?: string | CharType | any[]] = [];
   _tables: Table[] = [];
   _drawings: Array<Table | Drawings> = [];
   _orientation?: string;
@@ -79,7 +79,7 @@ export class Worksheet {
    */
   exportData() {
     return {
-      relations: this.relations.exportData(),
+      relations: this.relations?.exportData(),
       columnFormats: this.columnFormats,
       data: this.data,
       columns: this.columns,
@@ -99,7 +99,7 @@ export class Worksheet {
    * @param {Object} data
    */
   importData(data: any) {
-    this.relations.importData(data.relations);
+    this.relations?.importData(data.relations);
     delete data.relations;
     Object.assign(this, data);
   }
@@ -110,12 +110,12 @@ export class Worksheet {
 
   addTable(table: Table) {
     this._tables.push(table);
-    this.relations.addRelation(table, 'table');
+    this.relations?.addRelation(table, 'table');
   }
 
   addDrawings(drawings: Drawings) {
     this._drawings.push(drawings);
-    this.relations.addRelation(drawings, 'drawingRelationship');
+    this.relations?.addRelation(drawings, 'drawingRelationship');
   }
 
   setRowInstructions(rowIndex: number, instructions: ExcelStyleInstruction) {
@@ -132,7 +132,7 @@ export class Worksheet {
    */
   setHeader(headers: [left: any, center: any, right: any]) {
     if (!Array.isArray(headers)) {
-      throw 'Invalid argument type - setHeader expects an array of three instructions';
+      throw new Error('Invalid argument type - setHeader expects an array of three instructions');
     }
     this._headers = headers;
   }
@@ -147,7 +147,7 @@ export class Worksheet {
    */
   setFooter(footers: [left: any, center: any, right: any]) {
     if (!Array.isArray(footers)) {
-      throw 'Invalid argument type - setFooter expects an array of three instructions';
+      throw new Error('Invalid argument type - setFooter expects an array of three instructions');
     }
     this._footers = footers;
   }
@@ -429,15 +429,17 @@ export class Worksheet {
         const hyperlink: any = hyperlinks[i];
         hyperlinkEl.setAttribute('ref', String(hyperlink.cell));
         hyperlink.id = Util.uniqueId('hyperlink');
-        this.relations.addRelation(
-          {
-            id: hyperlink.id,
-            target: hyperlink.location,
-            targetMode: hyperlink.targetMode || 'External',
-          },
-          'hyperlink',
-        );
-        hyperlinkEl.setAttribute('r:id', this.relations.getRelationshipId(hyperlink));
+        if (this.relations) {
+          this.relations.addRelation(
+            {
+              id: hyperlink.id,
+              target: hyperlink.location,
+              targetMode: hyperlink.targetMode || 'External',
+            },
+            'hyperlink',
+          );
+          hyperlinkEl.setAttribute('r:id', this.relations.getRelationshipId(hyperlink));
+        }
         hyperlinksEl.appendChild(hyperlinkEl);
       }
       worksheet.appendChild(hyperlinksEl);
@@ -472,7 +474,9 @@ export class Worksheet {
     // to issue with Microsoft Excel (2007, 2013)
     for (i = 0, l = this._drawings.length; i < l; i++) {
       const drawing = doc.createElement('drawing');
-      drawing.setAttribute('r:id', this.relations.getRelationshipId(this._drawings[i]));
+      if (this.relations) {
+        drawing.setAttribute('r:id', this.relations.getRelationshipId(this._drawings[i]));
+      }
       worksheet.appendChild(drawing);
     }
 
@@ -481,7 +485,9 @@ export class Worksheet {
       tables.setAttribute('count', this._tables.length);
       for (i = 0, l = this._tables.length; i < l; i++) {
         const table = doc.createElement('tablePart');
-        table.setAttribute('r:id', this.relations.getRelationshipId(this._tables[i]));
+        if (this.relations) {
+          table.setAttribute('r:id', this.relations.getRelationshipId(this._tables[i]));
+        }
         tables.appendChild(table);
       }
       worksheet.appendChild(tables);

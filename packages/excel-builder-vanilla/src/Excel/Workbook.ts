@@ -33,7 +33,7 @@ export class Workbook {
   tables: Table[] = [];
   drawings: Drawings[] = [];
   media: { [filename: string]: MediaMeta } = {};
-  printTitles: any;
+  printTitles?: Record<string, { top?: number; left?: string }>;
 
   constructor() {
     this.initialize();
@@ -49,7 +49,7 @@ export class Workbook {
   }
 
   createWorksheet(config?: any) {
-    config = Object.assign({}, { name: 'Sheet '.concat(String(this.worksheets.length + 1)) }, config);
+    config = Object.assign({}, { name: `Sheet ${this.worksheets.length + 1}` }, config);
     return new Worksheet(config);
   }
 
@@ -110,22 +110,14 @@ export class Workbook {
   addMedia(_type: string, fileName: string, fileData: any, contentType?: string | null) {
     const fileNamePieces = fileName.split('.');
     const extension = fileNamePieces[fileNamePieces.length - 1];
+    const mediaTypeMap: Record<string, string> = {
+      jpeg: 'image/jpeg',
+      jpg: 'image/jpeg',
+      png: 'image/png',
+      gif: 'image/gif',
+    };
     if (!contentType) {
-      switch (extension.toLowerCase()) {
-        case 'jpeg':
-        case 'jpg':
-          contentType = 'image/jpeg';
-          break;
-        case 'png':
-          contentType = 'image/png';
-          break;
-        case 'gif':
-          contentType = 'image/gif';
-          break;
-        default:
-          contentType = null;
-          break;
-      }
+      contentType = mediaTypeMap[extension.toLowerCase()] ?? null;
     }
     if (!this.media[fileName]) {
       this.media[fileName] = {
@@ -164,21 +156,17 @@ export class Workbook {
       ]),
     );
 
-    const extensions: any = {};
+    const extensions: Record<string, string | null> = {};
     for (const filename in this.media) {
-      if (filename in this.media) {
-        extensions[this.media[filename].extension] = this.media[filename].contentType;
-      }
+      extensions[this.media[filename].extension] = this.media[filename].contentType;
     }
     for (const extension in extensions) {
-      if (extension in extensions) {
-        types.appendChild(
-          Util.createElement(doc, 'Default', [
-            ['Extension', extension],
-            ['ContentType', extensions[extension]],
-          ]),
-        );
-      }
+      types.appendChild(
+        Util.createElement(doc, 'Default', [
+          ['Extension', extension],
+          ['ContentType', extensions[extension]],
+        ]),
+      );
     }
 
     types.appendChild(
@@ -319,11 +307,9 @@ export class Workbook {
     }
 
     for (const fileName in this.media) {
-      if (fileName in this.media) {
-        const media = this.media[fileName];
-        files[`/xl/media/${fileName}`] = media.data;
-        Paths[fileName] = `/xl/media/${fileName}`;
-      }
+      const media = this.media[fileName];
+      files[`/xl/media/${fileName}`] = media.data;
+      Paths[fileName] = `/xl/media/${fileName}`;
     }
 
     for (i = 0, l = this.drawings.length; i < l; i++) {
@@ -364,21 +350,19 @@ export class Workbook {
   }
 
   generateFiles(): Promise<{ [path: string]: string }> {
-    return new Promise(resolve => {
-      const files: any = {};
-      this._generateCorePaths(files);
+    const files: any = {};
+    this._generateCorePaths(files);
 
-      for (let i = 0, l = this.worksheets.length; i < l; i++) {
-        const xml = this.worksheets[i].toXML();
-        files[`/xl/worksheets/sheet${i + 1}.xml`] = xml;
-        Paths[this.worksheets[i].id] = `worksheets/sheet${i + 1}.xml`;
-        files[`/xl/worksheets/_rels/sheet${i + 1}.xml.rels`] = this.worksheets[i].relations.toXML();
-      }
+    for (let i = 0, l = this.worksheets.length; i < l; i++) {
+      const xml = this.worksheets[i].toXML();
+      files[`/xl/worksheets/sheet${i + 1}.xml`] = xml;
+      Paths[this.worksheets[i].id] = `worksheets/sheet${i + 1}.xml`;
+      files[`/xl/worksheets/_rels/sheet${i + 1}.xml.rels`] = this.worksheets[i].relations?.toXML();
+    }
 
-      this._prepareFilesForPackaging(files);
+    this._prepareFilesForPackaging(files);
 
-      return resolve(files);
-    });
+    return Promise.resolve(files);
   }
 
   /** Return workbook XML header */
