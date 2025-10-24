@@ -1,4 +1,4 @@
-import type { ExcelFontStyle, ExcelStyleInstruction } from '../interfaces.js';
+import type { BorderInstruction, ExcelFontStyle, ExcelStyleInstruction } from '../interfaces.js';
 import { isObject, isString } from '../utilities/isTypeOf.js';
 import { pick } from '../utilities/pick.js';
 import { uniqueId } from '../utilities/uniqueId.js';
@@ -202,45 +202,21 @@ export class StyleSheet {
   }
 
   /**
-   * All params optional
-   * Expects: {
-   * top: {},
-   * left: {},
-   * right: {},
-   * bottom: {},
-   * diagonal: {},
-   * outline: boolean,
-   * diagonalUp: boolean,
-   * diagonalDown: boolean
-   * }
-   * Each border should follow:
+   * All params optional. each border should follow:
    * {
    * style: styleString, http://www.schemacentral.com/sc/ooxml/t-ssml_ST_BorderStyle.html
    * color: ARBG color (requires the A, so for example FF006666)
    * }
    * @param {Object} border
    */
-  createBorderFormatter(border: any) {
+  createBorderFormatter(border: BorderInstruction) {
     border = { top: {}, left: {}, right: {}, bottom: {}, diagonal: {}, id: this.borders.length, ...border };
     this.borders.push(border);
     return border;
   }
 
   /**
-   * Supported font styles:
-   * bold
-   * italic
-   * underline (single, double, singleAccounting, doubleAccounting)
-   * size
-   * color
-   * fontName
-   * strike (strikethrough)
-   * outline (does this actually do anything?)
-   * shadow (does this actually do anything?)
-   * superscript
-   * subscript
-   *
-   * Color is a future goal - at the moment it's looking a bit complicated
+   * Font styles, color is a future goal - at the moment it's looking a bit complicated
    * @param {Object} instructions
    */
   createFontStyle(instructions: ExcelFontStyle) {

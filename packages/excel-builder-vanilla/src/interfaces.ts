@@ -5,6 +5,25 @@
  */
 export type ExcelColorStyle = string | { theme: number };
 
+// Border style for each side
+export type BorderStyle = {
+  style?: string; // e.g., 'thin', 'medium', etc.
+  color?: string | { theme: number; [key: string]: any }; // ARGB color or color object
+};
+
+// Border instruction object for createBorderFormatter
+export interface BorderInstruction {
+  top?: BorderStyle;
+  left?: BorderStyle;
+  right?: BorderStyle;
+  bottom?: BorderStyle;
+  diagonal?: BorderStyle;
+  outline?: boolean;
+  diagonalUp?: boolean;
+  diagonalDown?: boolean;
+  id?: number;
+}
+
 export interface ExcelAlignmentStyle {
   /** Horizontal alignment of cell content */
   horizontal?: 'center' | 'fill' | 'general' | 'justify' | 'left' | 'right';

@@ -31,8 +31,8 @@ declare class TextNode {
 	toString(): string;
 }
 export declare class XMLNode {
-	nodeName: string;
-	children: XMLNode[];
+	readonly nodeName: string;
+	readonly children: XMLNode[];
 	nodeValue: string;
 	attributes: {
 		[key: string]: any;
@@ -83,21 +83,27 @@ export declare class TwoCellAnchor {
 	toXML(xmlDoc: XMLDOM, content: any): XMLNode;
 }
 export interface AnchorOption {
-	/** X offset in EMU's */
+	/** X offset in EMUs (English Metric Units) */
 	x: number;
-	/** Y offset in EMU's */
+	/** Y offset in EMUs (English Metric Units) */
 	y: number;
+	/** Optional: X offset as boolean (for cell anchoring) */
 	xOff?: boolean;
+	/** Optional: Y offset as boolean (for cell anchoring) */
 	yOff?: boolean;
-	/** Width in EMU's */
-	height: number;
-	/** Height in EMU's */
-	width: number;
+	/** Width in EMUs */
+	width?: number;
+	/** Height in EMUs */
+	height?: number;
+	/** Reference to parent Drawing instance */
 	drawing?: Drawing;
 }
 export interface DualAnchorOption {
+	/** Ending anchor position (AnchorOption) */
 	to: AnchorOption;
+	/** Starting anchor position (AnchorOption) */
 	from: AnchorOption;
+	/** Reference to parent Drawing instance */
 	drawing?: Drawing;
 }
 /**
@@ -114,7 +120,7 @@ export declare class Drawing {
 	 * @param {Object} config Shorthand - pass the created anchor coords that can normally be used to construct it.
 	 * @returns {Anchor}
 	 */
-	createAnchor(type: "absoluteAnchor" | "oneCellAnchor" | "twoCellAnchor", config: any): AbsoluteAnchor | OneCellAnchor | TwoCellAnchor;
+	createAnchor(type: "absoluteAnchor" | "oneCellAnchor" | "twoCellAnchor", config: Partial<AnchorOption | DualAnchorOption>): AbsoluteAnchor | OneCellAnchor | TwoCellAnchor;
 }
 /**
  *
@@ -157,6 +163,24 @@ export declare class AbsoluteAnchor {
 export type ExcelColorStyle = string | {
 	theme: number;
 };
+export type BorderStyle = {
+	style?: string;
+	color?: string | {
+		theme: number;
+		[key: string]: any;
+	};
+};
+export interface BorderInstruction {
+	top?: BorderStyle;
+	left?: BorderStyle;
+	right?: BorderStyle;
+	bottom?: BorderStyle;
+	diagonal?: BorderStyle;
+	outline?: boolean;
+	diagonalUp?: boolean;
+	diagonalDown?: boolean;
+	id?: number;
+}
 export interface ExcelAlignmentStyle {
 	/** Horizontal alignment of cell content */
 	horizontal?: "center" | "fill" | "general" | "justify" | "left" | "right";
@@ -561,7 +585,12 @@ export type Relation = {
 	[id: string]: {
 		id: string;
 		schema: string;
-		object: any;
+		object: {
+			id: string;
+			target?: string | null;
+			targetMode?: string;
+			[key: string]: any;
+		};
 		data?: {
 			id: number;
 			schema: string;
@@ -586,9 +615,13 @@ export declare class RelationshipManager {
 	};
 	addRelation(object: {
 		id: string;
+		target?: string | null;
+		targetMode?: string;
 	}, type: keyof typeof Util.schemas): string;
 	getRelationshipId(object: {
 		id: string;
+		target?: string | null;
+		targetMode?: string;
 	}): string | null;
 	toXML(): XMLDOM;
 }
@@ -675,40 +708,16 @@ declare class StyleSheet$1 {
 	 */
 	createTableStyle(instructions: any): void;
 	/**
-	 * All params optional
-	 * Expects: {
-	 * top: {},
-	 * left: {},
-	 * right: {},
-	 * bottom: {},
-	 * diagonal: {},
-	 * outline: boolean,
-	 * diagonalUp: boolean,
-	 * diagonalDown: boolean
-	 * }
-	 * Each border should follow:
+	 * All params optional. each border should follow:
 	 * {
 	 * style: styleString, http://www.schemacentral.com/sc/ooxml/t-ssml_ST_BorderStyle.html
 	 * color: ARBG color (requires the A, so for example FF006666)
 	 * }
 	 * @param {Object} border
 	 */
-	createBorderFormatter(border: any): any;
+	createBorderFormatter(border: BorderInstruction): BorderInstruction;
 	/**
-	 * Supported font styles:
-	 * bold
-	 * italic
-	 * underline (single, double, singleAccounting, doubleAccounting)
-	 * size
-	 * color
-	 * fontName
-	 * strike (strikethrough)
-	 * outline (does this actually do anything?)
-	 * shadow (does this actually do anything?)
-	 * superscript
-	 * subscript
-	 *
-	 * Color is a future goal - at the moment it's looking a bit complicated
+	 * Font styles, color is a future goal - at the moment it's looking a bit complicated
 	 * @param {Object} instructions
 	 */
 	createFontStyle(instructions: ExcelFontStyle): any;
@@ -752,24 +761,36 @@ export declare class Table {
 	id: string;
 	tableId: string;
 	displayName: string;
-	dataCellStyle: any;
+	dataCellStyle: string | null;
 	dataDfxId: number | null;
 	headerRowBorderDxfId: number | null;
-	headerRowCellStyle: any;
+	headerRowCellStyle: string | null;
 	headerRowCount: number;
 	headerRowDxfId: number | null;
 	insertRow: boolean;
 	insertRowShift: boolean;
-	ref: any;
+	ref: [
+		number[],
+		number[]
+	] | null;
 	tableBorderDxfId: number | null;
 	totalsRowBorderDxfId: number | null;
-	totalsRowCellStyle: any;
+	totalsRowCellStyle: string | null;
 	totalsRowCount: number;
 	totalsRowDxfId: number | null;
-	tableColumns: any;
-	autoFilter: any;
-	sortState: any;
-	styleInfo: any;
+	tableColumns: ExcelTableColumn[];
+	autoFilter: [
+		number[],
+		number[]
+	] | null;
+	sortState: ExcelSortState | null;
+	styleInfo: {
+		themeStyle?: string;
+		showFirstColumn?: boolean;
+		showLastColumn?: boolean;
+		showColumnStripes?: boolean;
+		showRowStripes?: boolean;
+	};
 	constructor(config?: any);
 	initialize(config: any): void;
 	setReferenceRange(start: number[], end: number[]): void;
@@ -881,21 +902,23 @@ export declare class Worksheet {
 	name: string;
 	id: string;
 	_timezoneOffset: number;
-	relations: any;
+	relations: RelationshipManager | null;
 	columnFormats: ExcelColumn[];
 	data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][];
 	mergedCells: string[][];
 	columns: ExcelColumn[];
-	sheetProtection: any;
+	sheetProtection: {
+		exportXML: (doc: XMLDOM) => XMLNode;
+	} | false;
 	_headers: [
-		left?: any,
-		center?: any,
-		right?: any
+		left?: string | CharType | any[],
+		center?: string | CharType | any[],
+		right?: string | CharType | any[]
 	];
 	_footers: [
-		left?: any,
-		center?: any,
-		right?: any
+		left?: string | CharType | any[],
+		center?: string | CharType | any[],
+		right?: string | CharType | any[]
 	];
 	_tables: Table[];
 	_drawings: Array<Table | Drawings>;
@@ -923,20 +946,39 @@ export declare class Worksheet {
 	 * @returns {Object}
 	 */
 	exportData(): {
-		relations: any;
+		relations: {
+			relations: {
+				[id: string]: {
+					id: string;
+					schema: string;
+					object: {
+						id: string;
+						target?: string | null;
+						targetMode?: string;
+						[key: string]: any;
+					};
+					data?: {
+						id: number;
+						schema: string;
+						object: any;
+					};
+				};
+			};
+			lastId: number;
+		} | undefined;
 		columnFormats: ExcelColumn[];
 		data: (string | number | boolean | Date | ExcelColumnMetadata | null)[][];
 		columns: ExcelColumn[];
 		mergedCells: string[][];
 		_headers: [
-			left?: any,
-			center?: any,
-			right?: any
+			left?: string | any[] | CharType | undefined,
+			center?: string | any[] | CharType | undefined,
+			right?: string | any[] | CharType | undefined
 		];
 		_footers: [
-			left?: any,
-			center?: any,
-			right?: any
+			left?: string | any[] | CharType | undefined,
+			center?: string | any[] | CharType | undefined,
+			right?: string | any[] | CharType | undefined
 		];
 		_tables: Table[];
 		_rowInstructions: any;
@@ -1154,7 +1196,10 @@ export declare class Workbook {
 	media: {
 		[filename: string]: MediaMeta;
 	};
-	printTitles: any;
+	printTitles?: Record<string, {
+		top?: number;
+		left?: string;
+	}>;
 	constructor();
 	initialize(): void;
 	createWorksheet(config?: any): Worksheet;

@@ -22,7 +22,7 @@ export class OneCellAnchor {
   constructor(config: AnchorOption) {
     if (config) {
       this.setPos(config.x, config.y, config.xOff, config.yOff);
-      this.setDimensions(config.width, config.height);
+      this.setDimensions(config.width || 0, config.height || 0);
     }
   }
 

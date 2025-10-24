@@ -5,22 +5,28 @@ import { TwoCellAnchor } from './TwoCellAnchor.js';
 // import { Picture } from './Picture.js';
 
 export interface AnchorOption {
-  /** X offset in EMU's */
+  /** X offset in EMUs (English Metric Units) */
   x: number;
-  /** Y offset in EMU's */
+  /** Y offset in EMUs (English Metric Units) */
   y: number;
+  /** Optional: X offset as boolean (for cell anchoring) */
   xOff?: boolean;
+  /** Optional: Y offset as boolean (for cell anchoring) */
   yOff?: boolean;
-  /** Width in EMU's */
-  height: number;
-  /** Height in EMU's */
-  width: number;
+  /** Width in EMUs */
+  width?: number;
+  /** Height in EMUs */
+  height?: number;
+  /** Reference to parent Drawing instance */
   drawing?: Drawing;
 }
 
 export interface DualAnchorOption {
+  /** Ending anchor position (AnchorOption) */
   to: AnchorOption;
+  /** Starting anchor position (AnchorOption) */
   from: AnchorOption;
+  /** Reference to parent Drawing instance */
   drawing?: Drawing;
 }
 
@@ -39,11 +45,10 @@ export class Drawing {
    * @param {Object} config Shorthand - pass the created anchor coords that can normally be used to construct it.
    * @returns {Anchor}
    */
-  // TODO: couldn't get function override working, but hopefully in the future
-  // createAnchor(type: 'absoluteAnchor', config: AnchorOption): AbsoluteAnchor;
-  // createAnchor(type: 'oneCellAnchor', config: AnchorOption): OneCellAnchor;
-  // createAnchor(type: 'twoCellAnchor', config: DualAnchorOption): TwoCellAnchor;
-  createAnchor(type: 'absoluteAnchor' | 'oneCellAnchor' | 'twoCellAnchor', config: any): AbsoluteAnchor | OneCellAnchor | TwoCellAnchor {
+  createAnchor(
+    type: 'absoluteAnchor' | 'oneCellAnchor' | 'twoCellAnchor',
+    config: Partial<AnchorOption | DualAnchorOption>,
+  ): AbsoluteAnchor | OneCellAnchor | TwoCellAnchor {
     config ??= {} as AnchorOption | DualAnchorOption;
     config.drawing = this;
     switch (type) {

@@ -6,7 +6,12 @@ type Relation = {
   [id: string]: {
     id: string;
     schema: string;
-    object: any;
+    object: {
+      id: string;
+      target?: string | null;
+      targetMode?: string;
+      [key: string]: any;
+    };
     data?: {
       id: number;
       schema: string;
@@ -38,7 +43,7 @@ export class RelationshipManager {
     };
   }
 
-  addRelation(object: { id: string }, type: keyof typeof Util.schemas) {
+  addRelation(object: { id: string; target?: string | null; targetMode?: string }, type: keyof typeof Util.schemas) {
     this.relations[object.id] = {
       id: uniqueId('rId'),
       schema: Util.schemas[type],
@@ -47,7 +52,7 @@ export class RelationshipManager {
     return this.relations[object.id].id;
   }
 
-  getRelationshipId(object: { id: string }) {
+  getRelationshipId(object: { id: string; target?: string | null; targetMode?: string }) {
     return this.relations[object.id] ? this.relations[object.id].id : null;
   }
 

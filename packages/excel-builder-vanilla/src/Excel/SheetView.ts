@@ -56,7 +56,7 @@ export class SheetView {
     const sheetView = doc.createElement('sheetView');
 
     Util.setAttributesOnDoc(sheetView, {
-      //TODO apparent you can add 'book views'.. investigate what these are
+      // TODO: apparently you can add 'book views'.. investigate what these are
       workbookViewId: 0,
       showZeros: { v: this.showZeros, type: Boolean },
       defaultGridColor: { v: this.defaultGridColor, type: Boolean },
@@ -79,7 +79,6 @@ export class SheetView {
     });
 
     sheetView.appendChild(this.pane.exportXML(doc));
-
     sheetViews.appendChild(sheetView);
     return sheetViews;
   }

@@ -66,8 +66,8 @@ class TextNode {
 }
 
 export class XMLNode {
-  nodeName = '';
-  children: XMLNode[];
+  readonly nodeName: string;
+  readonly children: XMLNode[];
   nodeValue: string;
   attributes: { [key: string]: any };
   firstChild?: XMLNode;
@@ -85,10 +85,8 @@ export class XMLNode {
     }
 
     if (config.attributes) {
-      for (const attr in config.attributes) {
-        if (config.attributes.hasOwnProperty(attr)) {
-          this.setAttribute(attr, config.attributes[attr]);
-        }
+      for (const [attr, value] of Object.entries(config.attributes)) {
+        this.setAttribute(attr, value);
       }
     }
   }

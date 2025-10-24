@@ -12,24 +12,30 @@ export class Table {
   id = '';
   tableId = '';
   displayName = '';
-  dataCellStyle: any = null;
+  dataCellStyle: string | null = null;
   dataDfxId: number | null = null;
   headerRowBorderDxfId: number | null = null;
-  headerRowCellStyle: any = null;
+  headerRowCellStyle: string | null = null;
   headerRowCount = 1;
   headerRowDxfId: number | null = null;
   insertRow = false;
   insertRowShift = false;
-  ref: any = null;
+  ref: [number[], number[]] | null = null;
   tableBorderDxfId: number | null = null;
   totalsRowBorderDxfId: number | null = null;
-  totalsRowCellStyle: any = null;
+  totalsRowCellStyle: string | null = null;
   totalsRowCount = 0;
   totalsRowDxfId: number | null = null;
-  tableColumns: any = [];
-  autoFilter: any = null;
-  sortState: any = null;
-  styleInfo: any = {};
+  tableColumns: ExcelTableColumn[] = [];
+  autoFilter: [number[], number[]] | null = null;
+  sortState: ExcelSortState | null = null;
+  styleInfo: {
+    themeStyle?: string;
+    showFirstColumn?: boolean;
+    showLastColumn?: boolean;
+    showColumnStripes?: boolean;
+    showRowStripes?: boolean;
+  } = {};
 
   constructor(config?: any) {
     this.initialize(config);
@@ -40,7 +46,9 @@ export class Table {
     this.name = this.displayName;
     this.id = this.name;
     this.tableId = this.id.replace('Table', '');
-    Object.assign(this, config);
+    if (config) {
+      Object.assign(this, config);
+    }
   }
 
   setReferenceRange(start: number[], end: number[]) {
@@ -70,15 +78,11 @@ export class Table {
    * totalFormulaIsArrayType (boolean)
    */
   addTableColumn(column: ExcelTableColumn | string) {
-    if (isString(column)) {
-      column = {
-        name: column,
-      };
-    }
-    if (!column.name) {
+    const col = isString(column) ? ({ name: column } as ExcelTableColumn) : column;
+    if (!col.name) {
       throw new Error('Invalid argument for addTableColumn - minimum requirement is a name property');
     }
-    this.tableColumns.push(column);
+    this.tableColumns.push(col);
   }
 
   /**
@@ -107,15 +111,15 @@ export class Table {
     table.setAttribute('ref', `${Util.positionToLetterRef(s[0], s[1])}:${Util.positionToLetterRef(e[0], e[1])}`);
 
     /** TOTALS **/
-    table.setAttribute('totalsRowCount', this.totalsRowCount);
+    table.setAttribute('totalsRowCount', String(this.totalsRowCount));
 
     /** HEADER **/
-    table.setAttribute('headerRowCount', this.headerRowCount);
+    table.setAttribute('headerRowCount', String(this.headerRowCount));
     if (this.headerRowDxfId) {
-      table.setAttribute('headerRowDxfId', this.headerRowDxfId);
+      table.setAttribute('headerRowDxfId', String(this.headerRowDxfId));
     }
     if (this.headerRowBorderDxfId) {
-      table.setAttribute('headerRowBorderDxfId', this.headerRowBorderDxfId);
+      table.setAttribute('headerRowBorderDxfId', String(this.headerRowBorderDxfId));
     }
     if (!this.autoFilter) {
       this.addAutoFilter(this.ref[0], this.ref[1]);
@@ -129,37 +133,40 @@ export class Table {
 
   exportTableColumns(doc: XMLDOM) {
     const tableColumns = doc.createElement('tableColumns');
-    tableColumns.setAttribute('count', this.tableColumns.length);
-    const tcs = this.tableColumns;
-    for (let i = 0, l = tcs.length; i < l; i++) {
-      const tc = tcs[i];
+    tableColumns.setAttribute('count', String(this.tableColumns.length));
+    for (let i = 0, l = this.tableColumns.length; i < l; i++) {
+      const tc = this.tableColumns[i];
       const tableColumn = doc.createElement('tableColumn');
       tableColumn.setAttribute('id', String(i + 1));
       tableColumn.setAttribute('name', tc.name);
-      tableColumns.appendChild(tableColumn);
-
       if (tc.totalsRowFunction) {
         tableColumn.setAttribute('totalsRowFunction', tc.totalsRowFunction);
       }
       if (tc.totalsRowLabel) {
         tableColumn.setAttribute('totalsRowLabel', tc.totalsRowLabel);
       }
+      tableColumns.appendChild(tableColumn);
     }
     return tableColumns;
   }
 
   exportAutoFilter(doc: XMLDOM) {
     const autoFilter = doc.createElement('autoFilter');
-    const s = this.autoFilter[0];
-    const e = this.autoFilter[1];
-    autoFilter.setAttribute('ref', `${Util.positionToLetterRef(s[0], s[1])}:${Util.positionToLetterRef(e[0], e[1] - this.totalsRowCount)}`);
+    if (this.autoFilter) {
+      const s = this.autoFilter[0];
+      const e = this.autoFilter[1];
+      autoFilter.setAttribute(
+        'ref',
+        `${Util.positionToLetterRef(s[0], s[1])}:${Util.positionToLetterRef(e[0], e[1] - this.totalsRowCount)}`,
+      );
+    }
     return autoFilter;
   }
 
   exportTableStyleInfo(doc: XMLDOM) {
     const ts = this.styleInfo;
     const tableStyle = doc.createElement('tableStyleInfo');
-    tableStyle.setAttribute('name', ts.themeStyle);
+    tableStyle.setAttribute('name', ts.themeStyle ?? '');
     tableStyle.setAttribute('showFirstColumn', ts.showFirstColumn ? '1' : '0');
     tableStyle.setAttribute('showLastColumn', ts.showLastColumn ? '1' : '0');
     tableStyle.setAttribute('showColumnStripes', ts.showColumnStripes ? '1' : '0');
