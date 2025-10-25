@@ -8,7 +8,7 @@
 
 [![NPM downloads](https://img.shields.io/npm/dy/excel-builder-vanilla)](https://npmjs.org/package/excel-builder-vanilla)
 [![npm](https://img.shields.io/npm/v/excel-builder-vanilla.svg?logo=npm&logoColor=fff&label=npm)](https://www.npmjs.com/package/excel-builder-vanilla)
-[![npm bundle size](https://deno.bundlejs.com/badge?q=excel-builder-vanilla)](https://bundlejs.com/?q=excel-builder-vanilla)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/excel-builder-vanilla?color=success&label=gzip)](https://bundlephobia.com/result?p=excel-builder-vanilla)
 
 ## Documentation
 
