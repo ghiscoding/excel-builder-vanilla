@@ -18,11 +18,15 @@ import { createWorkbook, createWorksheet } from 'excel-builder-vanilla';
 
 or from CDN with standalone script (IIFE)
 ```html
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.1/dist/excel-builder.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.2.0/dist/excel-builder.iife.js"></script>
 <script>
   const worksheet = ExcelBuilder.createWorksheet(); // or window.ExcelBuilder.createWorksheet();
 </script>
 ```
+
+{% hint style="info" %}
+ESM import is the preferred approach and IIFE might actually be removed in the future to lower download size even further.
+{% endhint %}
 
 ### Features Supported
 
