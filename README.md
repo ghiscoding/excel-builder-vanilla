@@ -49,6 +49,9 @@ The project offers 2 different build types, choose the best one depending on you
 1. **ESM**: to `import from` (_**preferred**_)
 2. **IIFE**: standalone script which provides `ExcelBuilder` on the `window` object
 
+> [!NOTE]
+> ESM import is the preferred approach and IIFE might actually be removed in the future to lower download size even further.
+
 ```ts
 // ESM (preferred) - npm install
 import { createWorksheet } from 'excel-builder-vanilla';
