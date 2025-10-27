@@ -100,8 +100,8 @@ The modernization steps:
   - note that the changelog did not exists prior to `v3.0.0`
 - v4.x is now ESM-Only
 - new features
-  - Streaming API for large datasets
-  - Excel Charts
+  - Streaming API for large datasets (_see [Example 15](https://ghiscoding.github.io/excel-builder-vanilla/#/example15)_)
+  - Excel Charts (_see [Example 18](https://ghiscoding.github.io/excel-builder-vanilla/#/example18)_)
 
 The project now has only 1 small dependency which is [fflate](https://github.com/101arrowz/fflate).
 
@@ -111,7 +111,7 @@ This modernization provides a huge decrease in the final build size, with only 1
 
 ### Used by
 
-This fork was created mostly to support Tree Shaking (ESM), then to provide TS Types and finally to update all project dependencies. It is used by a few other Open Source libraries that I also maintain and require Excel export:
+This fork was created mostly to support Tree Shaking (ESM), provide TS Types and finally to update all project dependencies. It is used by a few other Open Source libraries that I also maintain and require Excel export:
 
 - [Angular-Slickgrid](https://ghiscoding.github.io/angular-slickgrid-demos)
 - [Aurelia-Slickgrid](https://ghiscoding.github.io/aurelia-slickgrid-demos)
