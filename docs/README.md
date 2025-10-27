@@ -24,8 +24,8 @@ or from CDN with standalone script (IIFE)
 </script>
 ```
 
-{% hint style="info" %}
-ESM import is the preferred approach and IIFE might actually be removed in the future to lower download size even further.
+{% hint style="warning" %}
+**Warning** ESM import is the preferred approach and IIFE might actually be removed in the future to lower download size even further.
 {% endhint %}
 
 ### Features Supported
