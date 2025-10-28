@@ -24,7 +24,7 @@ This project was originally created by Stephen Liberty and `excel-builder-vanill
 
 ### Comparison to similar libraries
 
-Excel-builder-vanilla is at the minimum 8x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 19.1Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates to these 2 major differences: 
+Excel-builder-vanilla is at the minimum 7-13x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 19Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates to these 2 major differences: 
 - excel-builder-vanilla is ESM-Only (tree shakable) and all other libraries are still just offering CJS (CommonJS) which increases their download/install size (not tree shakable)
 - excel-builder-vanilla is only offering Excel export (writer) but without any reading capabilities making the project very lightweight
 
@@ -57,7 +57,7 @@ The project offers 2 different build types, choose the best one depending on you
 import { createWorksheet } from 'excel-builder-vanilla';
 
 // IIFE - CDN
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.0.1/dist/excel-builder.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.2.0/dist/excel-builder.iife.js"></script>
 <script>
   const worksheet = ExcelBuilder.createWorksheet(); // or window.ExcelBuilder.createWorksheet();
 </script>
