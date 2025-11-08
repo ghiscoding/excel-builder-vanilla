@@ -4,7 +4,7 @@ packages:
 # Define a catalog of version ranges.
 catalog:
   fflate: ^0.8.2
-  sass: ^1.93.2
+  sass: ^1.93.3
   'remove-glob': ^0.4.4
   typescript: ^5.9.3
-  vite: ^7.1.12
+  vite: ^7.2.2

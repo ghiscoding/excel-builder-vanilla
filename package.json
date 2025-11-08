@@ -55,16 +55,16 @@
   },
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
-    "@biomejs/biome": "^2.3.0",
-    "@lerna-lite/cli": "^4.9.1",
-    "@lerna-lite/publish": "^4.9.1",
-    "@types/node": "^24.9.1",
-    "@vitest/coverage-v8": "^4.0.3",
+    "@biomejs/biome": "^2.3.4",
+    "@lerna-lite/cli": "^4.9.2",
+    "@lerna-lite/publish": "^4.9.2",
+    "@types/node": "^24.10.0",
+    "@vitest/coverage-v8": "^4.0.8",
     "conventional-changelog-conventionalcommits": "^9.1.0",
-    "happy-dom": "^20.0.8",
+    "happy-dom": "^20.0.10",
     "remove-glob": "catalog:",
     "typescript": "catalog:",
-    "vitest": "^4.0.3"
+    "vitest": "^4.0.8"
   },
   "pnpm": {
     "overrides": {
