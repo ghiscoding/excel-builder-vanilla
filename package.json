@@ -56,8 +56,8 @@
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
     "@biomejs/biome": "^2.3.0",
-    "@lerna-lite/cli": "^4.9.1",
-    "@lerna-lite/publish": "^4.9.1",
+    "@lerna-lite/cli": "^4.10.2",
+    "@lerna-lite/publish": "^4.10.2",
     "@types/node": "^24.9.1",
     "@vitest/coverage-v8": "^4.0.3",
     "conventional-changelog-conventionalcommits": "^9.1.0",
