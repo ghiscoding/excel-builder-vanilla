@@ -6,7 +6,7 @@
 
 ## Live Demo
 
-Available [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) which displays all available options/methods.
+Available [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) which displays a rough WYSIWYG (What You See Is What You Get) idea of all available options/methods.
 
 ## Installation
 
@@ -14,16 +14,19 @@ Available [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) w
 npm install excel-builder-vanilla
 ```
 
-The project offers 2 different bundle types, choose the best for your use case
+The project offers 2 different bundle types, choose the best one depending on your use case: 
 1. ESM: to `import from` (preferred)
 2. IIFE: standalone script with `ExcelBuilder` available on the `window` object
+
+> [!NOTE]
+> ESM import is the preferred approach and IIFE might actually be removed in the future to lower download size even further.
 
 ```ts
 // ESM - npm install
 import { createWorksheet } from 'excel-builder-vanilla';
 
 // IIFE - CDN
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.0.1/dist/excel-builder.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.2.0/dist/excel-builder.iife.js"></script>
 <script>
   const worksheet = ExcelBuilder.createWorksheet();
 </script>

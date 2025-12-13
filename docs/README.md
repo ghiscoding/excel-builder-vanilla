@@ -18,11 +18,15 @@ import { createWorkbook, createWorksheet } from 'excel-builder-vanilla';
 
 or from CDN with standalone script (IIFE)
 ```html
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@3.0.1/dist/excel-builder.iife.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.2.0/dist/excel-builder.iife.js"></script>
 <script>
   const worksheet = ExcelBuilder.createWorksheet(); // or window.ExcelBuilder.createWorksheet();
 </script>
 ```
+
+{% hint style="warning" %}
+**Warning** ESM import is the preferred approach and IIFE might actually be removed in the future to lower download size even further.
+{% endhint %}
 
 ### Features Supported
 
@@ -35,6 +39,7 @@ or from CDN with standalone script (IIFE)
 - Setting page headers and footers
 - Formula support
 - Insertion of pictures
+- Charts
 
 ### Why on earth would you build an excel file in JavaScript?!?!
 
@@ -44,13 +49,13 @@ There are a couple of reasons. First, consider that quite often the data one wan
 
 Second, consider that the user may already have all of the transformations they want done to the data on the screen - sorting, columns, colors, etc. This may take a while for the user to do - possibly rendering a caching mechanism useless. Or perhaps timing them out. You already have to collect their preferences in JavaScript - why bother creating a way to send the server those preferences, and then work through applying said preferences?
 
-Third, take a look at what an Ms Excel file really is. It's a zip file full of XML files. The zip format is a very standardized format with a library that was written by some brainiac for JavaScript readily available. JavaScript eats XML files for breakfast - browsers already have the native ability to work with XML. With the eclipse of IE6 (and IE7 coming shortly), the JavaScript engines that may show up to grab a copy of that report are becoming increasingly powerful. More and more you should be pushing as much processing as you can onto the client and off of your server.
+Third, take a look at what an Ms Excel file really is. It's a zip file full of XML files. The zip format is a very standardized format with a library that was written by some brainiac for JavaScript readily available. JavaScript eats XML files for breakfast - browsers already have the native ability to work with XML. The JavaScript engines that may show up to grab a copy of that report are becoming increasingly powerful. More and more you should be pushing as much processing as you can onto the client and off of your server.
 
 Heck, if you've been in the development business for more than 5 years, you probably have realized that some of your 'powerful' first webservers are vastly outpaced by today's laptop. I know that my first webserver was slower than my phone is now!
 
 ### OK - So how do I "download" a file that the browser creates?
 
-Here's the tricky part. There are a couple different ways of doing this, so pick the one that is least painful.
+Here's the tricky part. There are a couple different ways of doing this, so pick the one that is the least painful.
 
 - Use the Downloadify project
 - Use the newer browser's API's to create a Blob and save it. Google always helps here..
