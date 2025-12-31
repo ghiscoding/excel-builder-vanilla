@@ -29,7 +29,7 @@
   },
   "scripts": {
     "clean": "remove --glob \"**/dist **/tsconfig.tsbuildinfo\"",
-    "build": "pnpm run clean && pnpm run biome:lint:write && pnpm run biome:format:write && pnpm -r --stream build",
+    "build": "pnpm clean && pnpm biome:lint:write && pnpm biome:format:write && pnpm -r --stream build",
     "build:demo": "pnpm -r --stream --filter \"./packages/demo/**\" build",
     "build:lib": "pnpm -r --stream --filter \"./packages/excel-builder-vanilla/**\" build",
     "dev": "pnpm -r dev:init && pnpm -r --parallel dev",
