@@ -22,7 +22,7 @@ This libray allows you to build and write an Excel file dynamically, it does **n
 
 This project was originally created by Stephen Liberty and `excel-builder-vanilla` is a fork of its original [excel-builder.js](https://github.com/stephenliberty/excel-builder.js) project that Stephen created. Thanks to him for this great library.
 
-### Comparison to similar libraries
+### Comparison to other similar libraries
 
 Excel-builder-vanilla is at the minimum 7-13x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 19Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates to these 2 major differences: 
 - excel-builder-vanilla is ESM-Only (tree shakable) and all other libraries are still just offering CJS (CommonJS) which increases their download/install size (not tree shakable)
@@ -30,7 +30,7 @@ Excel-builder-vanilla is at the minimum 7-13x times smaller than the most popula
 
 ## Live Demo
 
-Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library has to offer, all the demos are WYSIWYG (what you is what you'll get in the Excel Export).<br>
+Visit the [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) to get started and see all available options and methods that the library has to offer, all the demos are WYSIWYG (what you see is what you'll get in the Excel Export).<br>
 You can also take a look at the "[Used by](#used-by)" section below to see real world applications taking advantage of this library.
 
 ## License
