@@ -39,8 +39,6 @@ You can also take a look at the "[Used by](#used-by)" section below to see real 
 
 ## Installation
 
-[![Open in Codeflow](https://developer.stackblitz.com/img/open_in_codeflow.svg)](https:///pr.new/ghiscoding/excel-builder-vanilla)
-
 ```sh
 npm install excel-builder-vanilla
 ```
