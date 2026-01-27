@@ -98,8 +98,8 @@ importers:
         specifier: ^9.5.1
         version: 9.5.1
       native-copyfiles:
-        specifier: ^1.3.7
-        version: 1.3.7
+        specifier: ^2.0.0
+        version: 2.0.0
       remove-glob:
         specifier: 'catalog:'
         version: 0.4.10
@@ -1430,9 +1430,9 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  native-copyfiles@1.3.7:
-    resolution: {integrity: sha512-ZFi2QXlHqCDWcEUQ8DaiyiO8t83VD4PEIZ6nYmW2KwGjVu41jhrm3NgvixvdhV0oauVIscebLGkg4IsUL1H+Og==}
-    engines: {node: ^20.0.0 || >=22.0.0}
+  native-copyfiles@2.0.0:
+    resolution: {integrity: sha512-WwTP53/MgNmP4oDjBiVmoYqyE2CDS8ENKDpRGcKXwoAyDh7uTY8THxrr5NZPEv6KFWMkI08SPIbxAJqHaKYfDA==}
+    engines: {node: ^22.17.0 || >=24.0.0}
     hasBin: true
 
   negotiator@1.0.0:
@@ -3456,10 +3456,9 @@ snapshots:
 
   nanoid@3.3.11: {}
 
-  native-copyfiles@1.3.7:
+  native-copyfiles@2.0.0:
     dependencies:
       cli-nano: 1.2.2
-      tinyglobby: 0.2.15
       untildify: 6.0.0
 
   negotiator@1.0.0: {}
