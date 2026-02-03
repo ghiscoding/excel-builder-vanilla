@@ -14,22 +14,12 @@ Available [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) w
 npm install excel-builder-vanilla
 ```
 
-The project offers 2 different bundle types, choose the best one depending on your use case: 
-1. ESM: to `import from` (preferred)
-2. IIFE: standalone script with `ExcelBuilder` available on the `window` object
-
-> [!NOTE]
-> ESM import is the preferred approach and IIFE might actually be removed in the future to lower download size even further.
+The project only offers 1 bundle type
+- ESM: to `import from` (preferred)
 
 ```ts
 // ESM - npm install
 import { createWorksheet } from 'excel-builder-vanilla';
-
-// IIFE - CDN
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.2.0/dist/excel-builder.iife.js"></script>
-<script>
-  const worksheet = ExcelBuilder.createWorksheet();
-</script>
 ```
 
 ### Basic Usage
@@ -58,3 +48,14 @@ downloadExcelFile(artistWorkbook, 'Artist WB.xlsx');
 ## LICENSE
 
 [MIT License](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/LICENSE.md)
+
+## Major Changes
+
+### version 3.0
+- initial release (forked from original `excel-builder` library)
+
+### version 4.0
+- build as ESM-Only and drop CJS (CommonJS) build (aka `require()`)
+
+### version 5.0
+- drop the legacy IIFE build and the use of `window` object (typically used when loading as the legacy `<script>`).

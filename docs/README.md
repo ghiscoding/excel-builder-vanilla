@@ -20,7 +20,7 @@ or from CDN with standalone script (IIFE)
 ```html
 <script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.2.0/dist/excel-builder.iife.js"></script>
 <script>
-  const worksheet = ExcelBuilder.createWorksheet(); // or window.ExcelBuilder.createWorksheet();
+  const worksheet = ExcelBuilder.createWorksheet();
 </script>
 ```
 
