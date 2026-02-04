@@ -48,11 +48,6 @@ downloadExcelFile(artistWorkbook, 'Artist WB.xlsx');
 
 ## Major Changes
 
-#### version 3.0
-- initial release (forked from original `excel-builder` library)
-
-#### version 4.0
-- build as ESM-Only and drop CJS (CommonJS) build (aka `require()`)
-
-#### version 5.0
-- drop the legacy IIFE build and the use of `window` object (typically used when loading as the legacy `<script>`).
+**version 3.0** - initial release (forked from original `excel-builder` library)
+**version 4.0** - build as ESM-Only and drop CJS (CommonJS) build (aka `require()`)
+**version 5.0** - drop the legacy IIFE build and the use of `window` object (typically used when loading as the legacy `<script>`).
