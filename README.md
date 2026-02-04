@@ -24,7 +24,7 @@ This project was originally created by Stephen Liberty and `excel-builder-vanill
 
 ### Comparison to other similar libraries
 
-Excel-builder-vanilla is at the minimum 7-13x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 19Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates to these 2 major differences: 
+Excel-builder-vanilla is at the minimum 7-13x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 19Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates to these 2 major differences:
 - excel-builder-vanilla is ESM-Only (tree shakable) and all other libraries are still just offering CJS (CommonJS) which increases their download/install size (not tree shakable)
 - excel-builder-vanilla is only offering Excel export (writer) but without any reading capabilities making the project very lightweight
 
@@ -43,12 +43,7 @@ You can also take a look at the "[Used by](#used-by)" section below to see real 
 npm install excel-builder-vanilla
 ```
 
-The project offers 2 different build types, choose the best one depending on your use case
-1. **ESM**: to `import from` (_**preferred**_)
-2. **IIFE**: standalone script which provides `ExcelBuilder` on the `window` object
-
-> [!NOTE]
-> ESM import is the preferred approach and IIFE might actually be removed in the future to lower download size even further.
+The project is now only offered as an ESM Only build
 
 ```ts
 // ESM (preferred) - npm install
@@ -57,7 +52,7 @@ import { createWorksheet } from 'excel-builder-vanilla';
 // IIFE - CDN
 <script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.2.0/dist/excel-builder.iife.js"></script>
 <script>
-  const worksheet = ExcelBuilder.createWorksheet(); // or window.ExcelBuilder.createWorksheet();
+  const worksheet = ExcelBuilder.createWorksheet();
 </script>
 ```
 
@@ -109,6 +104,17 @@ The project now has only 1 small dependency which is [fflate](https://github.com
 ### Summary
 
 This modernization provides a huge decrease in the final build size, with only 1 dependency, and also offers better performance 🚀
+
+## Major Changes
+
+### version 3.0
+- initial release (forked from original `excel-builder` library)
+
+### version 4.0
+- build as ESM-Only and drop CJS (CommonJS) build (aka `require()`)
+
+### version 5.0
+- drop the legacy IIFE build and the use of `window` object (typically used when loading as the legacy `<script>`).
 
 ### Used by
 
