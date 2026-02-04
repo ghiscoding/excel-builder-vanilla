@@ -4,6 +4,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.2.1...v5.0.0) (2026-02-04)
+
+### ⚠ BREAKING CHANGES
+
+* drop standalone legacy browser <script> & `window` object usage
+
+### Features
+
+* drop standalone legacy browser <script> & `window` object usage ([8658f49](https://github.com/ghiscoding/excel-builder-vanilla/commit/8658f495c60f924565d60c2fad85172cfc71590c)) - by @ghiscoding
+
 ## [4.2.1](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.2.0...v4.2.1) (2025-10-24)
 
 ### Bug Fixes
