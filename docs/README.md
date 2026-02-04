@@ -12,21 +12,9 @@ npm install excel-builder-vanilla
 ```
 
 ```ts
-// ESM (preferred)
+// ESM import
 import { createWorkbook, createWorksheet } from 'excel-builder-vanilla';
 ```
-
-or from CDN with standalone script (IIFE)
-```html
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.2.0/dist/excel-builder.iife.js"></script>
-<script>
-  const worksheet = ExcelBuilder.createWorksheet();
-</script>
-```
-
-{% hint style="warning" %}
-**Warning** ESM import is the preferred approach and IIFE might actually be removed in the future to lower download size even further.
-{% endhint %}
 
 ### Features Supported
 

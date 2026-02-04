@@ -46,14 +46,8 @@ npm install excel-builder-vanilla
 The project is now only offered as an ESM Only build
 
 ```ts
-// ESM (preferred) - npm install
+// ESM import
 import { createWorksheet } from 'excel-builder-vanilla';
-
-// IIFE - CDN
-<script src="https://cdn.jsdelivr.net/npm/excel-builder-vanilla@4.2.0/dist/excel-builder.iife.js"></script>
-<script>
-  const worksheet = ExcelBuilder.createWorksheet();
-</script>
 ```
 
 ### CSP (Content Security Policy)

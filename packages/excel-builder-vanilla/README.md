@@ -14,9 +14,6 @@ Available [**Live demo**](https://ghiscoding.github.io/excel-builder-vanilla/) w
 npm install excel-builder-vanilla
 ```
 
-The project only offers 1 bundle type
-- ESM: to `import from` (preferred)
-
 ```ts
 // ESM - npm install
 import { createWorksheet } from 'excel-builder-vanilla';
