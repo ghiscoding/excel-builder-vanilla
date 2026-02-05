@@ -2,5 +2,6 @@ tsconfig.json
 tsconfig.tsbuildinfo
 node_modules
 CHANGELOG.md
+copy-types.mjs
 vite.config.mts
 __tests__
