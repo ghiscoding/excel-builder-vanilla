@@ -1,4 +1,5 @@
-tsconfig.json
-tsconfig.tsbuildinfo
+biome.json
 node_modules
 CHANGELOG.md
+tsconfig.json
+tsconfig.tsbuildinfo
