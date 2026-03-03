@@ -54,13 +54,13 @@
   },
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
-    "@biomejs/biome": "^2.4.4",
+    "@biomejs/biome": "^2.4.5",
     "@lerna-lite/cli": "^4.11.3",
     "@lerna-lite/publish": "^4.11.3",
-    "@types/node": "^25.3.0",
+    "@types/node": "^25.3.3",
     "@vitest/coverage-v8": "^4.0.18",
-    "conventional-changelog-conventionalcommits": "^9.1.0",
-    "happy-dom": "^20.7.0",
+    "conventional-changelog-conventionalcommits": "^9.2.0",
+    "happy-dom": "^20.8.3",
     "remove-glob": "catalog:",
     "typescript": "catalog:",
     "vitest": "^4.0.18"
