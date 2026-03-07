@@ -19,6 +19,6 @@ Before accepting any Pull Request, we need to make sure that you followed the st
 5. run a full TypeScript (TSC) build (this will also run Biome Lint & Format)
    - `pnpm build` OR `npx pnpm build`
 6. add/run Vitest unit tests (make sure to run the previous steps first):
-   - `pnpm test` (watch mode)
-   - `pnpm test:coverage` (full test coverage)
+   - `pnpm test:watch` (watch mode)
+   - `pnpm test` (full test coverage)
 7. after achieving step 3 to 6, then the final step would be to create the Pull Request...
