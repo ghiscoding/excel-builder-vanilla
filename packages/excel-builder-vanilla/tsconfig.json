@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
     "declaration": true,
     "declarationMap": true,
     "rootDir": "src",
@@ -13,6 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "strict": true,
+    "types": ["node"],
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
