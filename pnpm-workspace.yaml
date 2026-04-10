@@ -8,7 +8,7 @@ catalog:
   remove-glob: ^1.2.0
   sass: ^1.99.0
   typescript: ^6.0.2
-  vite: ^8.0.7
+  vite: ^8.0.8
 
 overrides:
   immutable: ^5.1.5
