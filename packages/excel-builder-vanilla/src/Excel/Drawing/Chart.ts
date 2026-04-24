@@ -419,7 +419,7 @@ export class Chart extends Drawing {
   }
 
   /** @private Resolve grouping value based on chart type and stacking */
-  _resolveGrouping(type: string, stacking?: 'stacked' | 'percent'): string {
+  _resolveGrouping(type: string, stacking?: 'stacked' | 'percent') {
     if (type === 'pie' || type === 'doughnut') {
       return 'clustered'; // required but cosmetic
     }

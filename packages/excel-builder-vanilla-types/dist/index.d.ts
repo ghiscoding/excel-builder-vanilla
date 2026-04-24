@@ -594,7 +594,7 @@ export declare class Chart extends Drawing {
 	/** @private Simple axis id base using index plus a constant offset */
 	_nextAxisIdBase(): number;
 	/** @private Resolve grouping value based on chart type and stacking */
-	_resolveGrouping(type: string, stacking?: "stacked" | "percent"): string;
+	_resolveGrouping(type: string, stacking?: "stacked" | "percent"): "standard" | "stacked" | "clustered" | "percentStacked";
 }
 export type Relation = {
 	[id: string]: {

@@ -88,7 +88,7 @@ export default class Example {
 
     (async () => {
       // Reset progress bar at the start of export, with a small delay for UI
-      const progressElm = document.getElementById('progress') as HTMLDivElement;
+      const progressElm = document.querySelector('#progress') as HTMLDivElement;
       const progressBar = progressElm ? (progressElm.querySelector('.progress-bar') as HTMLDivElement) : null;
       if (progressElm && progressBar) {
         progressBar.style.width = '0%';

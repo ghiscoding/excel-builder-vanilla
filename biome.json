@@ -48,7 +48,10 @@
       "correctness": {
         "useImportExtensions": {
           "options": {
-            "forceJsExtensions": true
+            "extensionMappings": {
+              "ts": "js",
+              "tsx": "js"
+            }
           }
         }
       },
@@ -56,7 +59,7 @@
       "complexity": {
         "noForEach": "off",
         "noStaticOnlyClass": "off",
-        "noUselessSwitchCase": "off"
+        "noUselessEscapeInRegex": "error"
       },
       "performance": {
         "noBarrelFile": "off",
@@ -69,16 +72,12 @@
       "style": {
         "noNonNullAssertion": "off",
         "noParameterAssign": "off",
-        "useExponentiationOperator": "off",
-        "useAsConstAssertion": "error",
-        "useDefaultParameterLast": "error",
-        "useEnumInitializers": "error",
-        "useSelfClosingElements": "error",
-        "useSingleVarDeclarator": "error",
-        "noUnusedTemplateLiteral": "error",
-        "useNumberNamespace": "error",
-        "noInferrableTypes": "error",
-        "noUselessElse": "error"
+        "useExponentiationOperator": "off"
+      },
+      "nursery": {
+        "noMisleadingReturnType": "error",
+        "noUnnecessaryTemplateExpression": "error",
+        "useDomQuerySelector": "error"
       }
     }
   },
