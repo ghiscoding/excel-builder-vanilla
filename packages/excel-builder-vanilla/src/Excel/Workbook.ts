@@ -22,7 +22,6 @@ export interface MediaMeta {
 /**
  * @module Excel/Workbook
  */
-/* globals console: true */
 export class Workbook {
   id = uniqueId('Workbook');
   styleSheet = new StyleSheet();
@@ -103,7 +102,7 @@ export class Workbook {
     if (this.printTitles[inSheet] == null) {
       this.printTitles[inSheet] = {};
     }
-    //WARN: this does not handle AA, AB, etc.
+    // WARN: this does not handle AA, AB, etc.
     this.printTitles[inSheet].left = String.fromCharCode(64 + inRowCount);
   }
 
@@ -251,7 +250,7 @@ export class Workbook {
     }
     wb.appendChild(sheets);
 
-    //now to add repeating rows
+    // now to add repeating rows
     const definedNames = Util.createElement(doc, 'definedNames');
     let ctr = 0;
     for (const name in this.printTitles) {
