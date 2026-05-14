@@ -54,15 +54,15 @@
   },
   "packageManager": "pnpm@10.33.2",
   "devDependencies": {
-    "@biomejs/biome": "^2.4.13",
-    "@lerna-lite/cli": "^5.2.0",
-    "@lerna-lite/publish": "^5.2.0",
-    "@types/node": "^25.6.0",
-    "@vitest/coverage-v8": "^4.1.5",
+    "@biomejs/biome": "^2.4.15",
+    "@lerna-lite/cli": "^5.2.1",
+    "@lerna-lite/publish": "^5.2.1",
+    "@types/node": "^25.7.0",
+    "@vitest/coverage-v8": "^4.1.6",
     "conventional-changelog-conventionalcommits": "^9.3.1",
     "happy-dom": "^20.9.0",
     "remove-glob": "catalog:",
     "typescript": "catalog:",
-    "vitest": "^4.1.5"
+    "vitest": "^4.1.6"
   }
 }
