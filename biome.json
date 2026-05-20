@@ -59,7 +59,8 @@
       "complexity": {
         "noForEach": "off",
         "noStaticOnlyClass": "off",
-        "noUselessEscapeInRegex": "error"
+        "noUselessEscapeInRegex": "error",
+        "noUselessSwitchCase": "off"
       },
       "performance": {
         "noBarrelFile": "off",
