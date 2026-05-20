@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.1](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.0.0...v5.0.1) (2026-05-20)
+
+### Bug Fixes
+
+* **deps:** update fflate to v0.8.3 ([226e15d](https://github.com/ghiscoding/excel-builder-vanilla/commit/226e15d1f9b6b65dfc275cf9819515cf57de9998)) - by @ghiscoding
+
 ## [5.0.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.2.1...v5.0.0) (2026-02-04)
 
 **Note:** Version bump only for package @excel-builder-vanilla/types
