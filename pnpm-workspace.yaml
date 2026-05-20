@@ -3,9 +3,9 @@ packages:
 
 # Define a catalog of version ranges.
 catalog:
-  fflate: ^0.8.2
+  fflate: ^0.8.3
   native-copyfiles: ^2.0.1
   remove-glob: ^1.2.0
   sass: ^1.99.0
   typescript: ^6.0.3
-  vite: ^8.0.12
+  vite: ^8.0.13

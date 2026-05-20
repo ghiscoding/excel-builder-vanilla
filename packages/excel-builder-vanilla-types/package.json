@@ -50,6 +50,6 @@
     "url": "https://ko-fi.com/ghiscoding"
   },
   "dependencies": {
-    "fflate": "^0.8.2"
+    "fflate": "catalog:"
   }
 }
