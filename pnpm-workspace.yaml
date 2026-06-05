@@ -5,7 +5,13 @@ packages:
 catalog:
   fflate: ^0.8.3
   native-copyfiles: ^2.0.1
-  remove-glob: ^1.2.0
+  remove-glob: ^1.2.1
   sass: ^1.99.0
   typescript: ^6.0.3
   vite: ^8.0.13
+
+minimumReleaseAge: 2880 # 2 days in minutes
+
+minimumReleaseAgeExclude:
+  # exclude packages that I personally maintain and are safe to use on the same day
+  - '@lerna-lite/*'

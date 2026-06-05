@@ -1,13 +1,21 @@
 {
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
   extends: ['config:base', 'group:allNonMajor'],
   labels: ['dependencies'],
   dependencyDashboard: false,
   lockFileMaintenance: { 
     enabled: false
   },
+  minimumReleaseAge: '2 days',
   pin: false,
   rangeStrategy: 'bump',
-  packageRules: [],
+  packageRules: [
+    {
+      // Exclude @lerna-lite/* from minimumReleaseAge since I'm the maintainer of Lerna-Lite
+      matchPackagePatterns: ['^@lerna-lite/'],
+      minimumReleaseAge: '0',
+    },
+  ],
   ignoreDeps: ['node', 'pnpm'],
   schedule: ['every 3 months'],
 }
