@@ -1,10 +1,10 @@
 import { unzipSync } from 'fflate';
 import { describe, expect, it } from 'vitest';
 
+import { Workbook } from '../Excel/Workbook.js';
+import { Worksheet } from '../Excel/Worksheet.js';
 import { createWorkbook } from '../factory.js';
 import { createExcelFileStream } from '../streaming.js';
-import { Worksheet } from '../Excel/Worksheet.js';
-import { Workbook } from '../Excel/Workbook.js';
 
 describe('Worksheet.setColumnFormats', () => {
   it('sets columnFormats property', () => {
@@ -24,10 +24,10 @@ describe('Streaming API', () => {
       it('createExcelFileStream delegates to nodeExcelStream in NodeJS', async () => {
         // Simulate NodeJS environment
         const originalWindow = globalThis.window;
-        const originalProcess = globalThis.process;
+        const originalProcess = (globalThis as any).process;
         // @ts-expect-error
         delete globalThis.window;
-        globalThis.process = { versions: { node: '18.0.0' } } as any;
+        (globalThis as any).process = { versions: { node: '18.0.0' } } as any;
         const { createExcelFileStream } = await import('../streaming.js');
         let called = false;
         const fakeWorkbook: any = {
@@ -47,7 +47,7 @@ describe('Streaming API', () => {
         expect(called).toBe(true);
         // Restore
         globalThis.window = originalWindow;
-        globalThis.process = originalProcess;
+        (globalThis as any).process = originalProcess;
       });
 
       it('nodeExcelStream yields zipped chunks and covers non-XML file', async () => {
@@ -84,7 +84,7 @@ describe('Streaming API', () => {
     it('throws on unsupported environment', () => {
       // Simulate an unsupported environment
       const originalWindow = globalThis.window;
-      const originalProcess = globalThis.process;
+      const originalProcess = (globalThis as any).process;
       // @ts-expect-error
       delete globalThis.window;
       // @ts-expect-error
@@ -93,7 +93,7 @@ describe('Streaming API', () => {
       expect(() => createExcelFileStream(workbook)).toThrow('Streaming is only supported in browser or NodeJS environments.');
       // Restore
       globalThis.window = originalWindow;
-      globalThis.process = originalProcess;
+      (globalThis as any).process = originalProcess;
     });
 
     it('handles empty workbook', async () => {

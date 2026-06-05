@@ -1,6 +1,6 @@
 import { describe, expect, it, test, vi } from 'vitest';
 
-import { Table } from '../Table';
+import { Table } from '../Table.js';
 
 // Minimal mocks for Util (replace jest.fn with vi.fn)
 vi.mock('../Excel/Util', () => ({
@@ -157,9 +157,12 @@ describe('Table', () => {
 
     test('Table autoFilter and sortState', () => {
       const table = new Table();
-      table.autoFilter = { ref: 'A1:B2' };
+      table.setReferenceRange([1, 1], [2, 5]);
+      const doc = table.toXML();
+      const autoFilter = table.exportAutoFilter(doc);
       table.sortState = { columnSort: true };
-      expect(table.autoFilter.ref).toBe('A1:B2');
+
+      expect(autoFilter.attributes.ref).toBe('A1:B5');
       expect(table.sortState.columnSort).toBe(true);
     });
 

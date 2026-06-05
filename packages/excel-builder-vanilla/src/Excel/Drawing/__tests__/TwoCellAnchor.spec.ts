@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { Util } from '../../Util';
-import { TwoCellAnchor } from '../TwoCellAnchor';
+import { Util } from '../../Util.js';
+import { TwoCellAnchor } from '../TwoCellAnchor.js';
 
 describe('TwoCellAnchor', () => {
   it('should set from and to positions and offsets via constructor', () => {

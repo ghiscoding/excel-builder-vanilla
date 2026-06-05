@@ -47,8 +47,8 @@ describe('Workbook', () => {
     const wb = new Workbook();
     wb.setPrintTitleTop('Sheet1', 5);
     wb.setPrintTitleLeft('Sheet1', 2);
-    expect(wb.printTitles.Sheet1.top).toBe(5);
-    expect(wb.printTitles.Sheet1.left).toBe('B');
+    expect(wb.printTitles!.Sheet1.top).toBe(5);
+    expect(wb.printTitles!.Sheet1.left).toBe('B');
   });
 
   it('should add media and return correct meta', () => {

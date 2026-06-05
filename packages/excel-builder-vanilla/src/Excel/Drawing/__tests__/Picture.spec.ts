@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { Util } from '../../Util';
-import { Picture } from '../Picture';
+import { Util } from '../../Util.js';
+import { Picture } from '../Picture.js';
 
 describe('Picture', () => {
   it('should initialize with unique ids and default values', () => {

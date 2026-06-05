@@ -81,7 +81,7 @@ describe('Excel/Worksheet', () => {
 
   test('importData assigns properties and calls relations.importData', () => {
     const ws = new Worksheet({ name: 'Test' });
-    const importSpy = vi.spyOn(ws.relations, 'importData');
+    const importSpy = vi.spyOn(ws.relations!, 'importData');
     ws.importData({ relations: 'rel-data', foo: 123 });
     expect(importSpy).toHaveBeenCalledWith('rel-data');
     expect((ws as any).foo).toBe(123);
@@ -255,10 +255,10 @@ describe('Excel/Worksheet', () => {
       const table1 = { id: 'table1' } as any;
       const table2 = { id: 'table2' } as any;
       ws._tables = [table1, table2];
-      ws.relations.getRelationshipId = vi.fn(tbl => `rId-${tbl.id}`);
+      ws.relations!.getRelationshipId = vi.fn(tbl => `rId-${tbl.id}`);
       (globalThis as any).__currentWorksheet = ws;
       ws.toXML();
-      const calls = ws.relations.getRelationshipId.mock.calls;
+      const calls = (ws.relations as any).getRelationshipId.mock.calls;
       expect(calls.length).toBe(2);
       expect(calls[0][0]).toBe(table1);
       expect(calls[1][0]).toBe(table2);
@@ -283,7 +283,7 @@ describe('Excel/Worksheet', () => {
       const ws = new Worksheet({ name: 'Test' });
       ws.data = [[1]];
       ws.sheetProtection = {
-        exportXML: vi.fn(() => 'sheetProtectionXML'),
+        exportXML: vi.fn(() => 'sheetProtectionXML') as any,
       };
       ws.toXML();
       expect(ws.sheetProtection.exportXML).toHaveBeenCalled();
@@ -293,11 +293,11 @@ describe('Excel/Worksheet', () => {
       const ws = new Worksheet({ name: 'Test' });
       ws.data = [[1]];
       ws.hyperlinks = [{ cell: 'A1', id: 'h1', location: 'http://example.com' }];
-      ws.relations.addRelation = vi.fn(() => ({}));
-      ws.relations.getRelationshipId = vi.fn(() => 'rId1');
+      ws.relations!.addRelation = vi.fn(() => ({})) as any;
+      ws.relations!.getRelationshipId = vi.fn(() => 'rId1');
       ws.toXML();
-      expect(ws.relations.addRelation).toHaveBeenCalled();
-      expect(ws.relations.getRelationshipId).toHaveBeenCalled();
+      expect(ws.relations!.addRelation).toHaveBeenCalled();
+      expect(ws.relations!.getRelationshipId).toHaveBeenCalled();
     });
 
     it('should set cell and row style/height attributes from metadata and _rowInstructions', () => {

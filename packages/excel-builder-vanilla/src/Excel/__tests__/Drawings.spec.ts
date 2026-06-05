@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
 import { createWorkbook } from '../../factory.js';
+import { Chart } from '../Drawing/Chart.js';
 import { Picture } from '../Drawing/Picture.js';
 import { Drawings } from '../Drawings.js';
-import { Chart } from '../Drawing/Chart.js';
 import { Positioning } from '../Positioning.js';
 
 describe('Drawings', () => {

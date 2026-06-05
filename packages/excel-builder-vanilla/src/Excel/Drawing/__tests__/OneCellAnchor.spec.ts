@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { Util } from '../../Util';
-import { OneCellAnchor } from '../OneCellAnchor';
+import { Util } from '../../Util.js';
+import { OneCellAnchor } from '../OneCellAnchor.js';
 
 describe('OneCellAnchor', () => {
   it('should set xOff and yOff when provided', () => {
