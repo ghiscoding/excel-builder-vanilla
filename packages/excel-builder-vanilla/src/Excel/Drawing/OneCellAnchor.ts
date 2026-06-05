@@ -1,6 +1,6 @@
-import type { AnchorOption } from './Drawing.js';
 import { Util } from '../Util.js';
 import type { XMLDOM } from '../XMLDOM.js';
+import type { AnchorOption } from './Drawing.js';
 
 /**
  *
