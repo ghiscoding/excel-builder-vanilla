@@ -48,8 +48,5 @@
   "funding": {
     "type": "ko_fi",
     "url": "https://ko-fi.com/ghiscoding"
-  },
-  "dependencies": {
-    "fflate": "catalog:"
   }
 }
