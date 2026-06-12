@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.0.0...v5.1.0) (2026-06-12)
+
+### Features
+
+* inline ZipOptions interface to drop fflate dep in types pkg ([810ca75](https://github.com/ghiscoding/excel-builder-vanilla/commit/810ca75cda89b4709b129df1daf8b4629f1d19f1)) - by @ghiscoding
+
 ## [5.0.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v4.2.1...v5.0.0) (2026-02-04)
 
 > [!NOTE]
