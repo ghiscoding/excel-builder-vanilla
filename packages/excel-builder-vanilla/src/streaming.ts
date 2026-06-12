@@ -1,7 +1,8 @@
-import { strToU8, type ZipOptions, zipSync } from 'fflate';
+import { strToU8, zipSync } from 'fflate';
 
 import type { Workbook } from './Excel/Workbook.js';
 import { base64ToUint8Array } from './factory.js';
+import type { ZipOptions } from './interfaces.js';
 
 export interface ExcelFileStreamOptions {
   chunkSize?: number;
