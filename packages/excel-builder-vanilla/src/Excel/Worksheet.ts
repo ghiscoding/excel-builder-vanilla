@@ -697,7 +697,6 @@ export class Worksheet {
           case 'number':
             cellXml = `<c${rAttr}><v>${cellValue}</v></c>`;
             break;
-          case 'text':
           default: {
             let id: number | undefined;
             if (typeof this.sharedStrings?.strings[cellValue as string] !== 'undefined') {

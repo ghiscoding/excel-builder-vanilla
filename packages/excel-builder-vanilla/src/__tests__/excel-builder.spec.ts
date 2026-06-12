@@ -807,7 +807,11 @@ describe('Excel-Builder-Vanilla', () => {
     const albumTable = new Table();
     const originalData = [
       ['Artist', 'Album', 'Price'],
-      ['Buckethead', 'Albino Slug', 8.99],
+      [
+        { value: 'Buckethead', metadata: { type: 'string' } },
+        { value: 'Albino Slug', metadata: { type: 'string' } },
+        { value: 8.99, metadata: { type: 'number' } },
+      ],
       ['Buckethead', 'Electric Tears', 13.99],
       ['Buckethead', 'Colma', 11.34],
       ['Crystal Method', 'Vegas', 10.54],
@@ -892,7 +896,11 @@ describe('Excel-Builder-Vanilla', () => {
       columns: [],
       data: [
         ['Artist', 'Album', 'Price'],
-        ['Buckethead', 'Albino Slug', 8.99],
+        [
+          { value: 'Buckethead', metadata: { type: 'string' } },
+          { value: 'Albino Slug', metadata: { type: 'string' } },
+          { value: 8.99, metadata: { type: 'number' } },
+        ],
         ['Buckethead', 'Electric Tears', 13.99],
         ['Buckethead', 'Colma', 11.34],
         ['Crystal Method', 'Vegas', 10.54],
