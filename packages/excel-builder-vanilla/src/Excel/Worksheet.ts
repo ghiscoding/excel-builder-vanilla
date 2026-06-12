@@ -355,8 +355,7 @@ export class Worksheet {
             cell = cellCache.formula.cloneNode(true);
             cell.firstChild.firstChild.nodeValue = cellValue as string;
             break;
-          case 'text':
-          /*falls through*/
+          /*falls through, text type */
           default: {
             let id: number | undefined;
             if (typeof this.sharedStrings?.strings[cellValue as string] !== 'undefined') {
@@ -697,7 +696,6 @@ export class Worksheet {
           case 'number':
             cellXml = `<c${rAttr}><v>${cellValue}</v></c>`;
             break;
-          case 'text':
           default: {
             let id: number | undefined;
             if (typeof this.sharedStrings?.strings[cellValue as string] !== 'undefined') {

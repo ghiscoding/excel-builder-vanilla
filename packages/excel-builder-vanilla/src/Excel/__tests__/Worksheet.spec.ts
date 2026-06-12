@@ -351,6 +351,18 @@ describe('Excel/Worksheet', () => {
       expect(xml).toContain('<row');
     });
 
+    test('serializeRows with sharedStrings with value and metadata', () => {
+      const ws = new Worksheet({ name: 'Test' });
+      ws.sharedStrings = { strings: {}, addString: () => 0 } as any;
+      const xml = ws.serializeRows([
+        [
+          { value: 'A', metadata: { type: 'string' } },
+          { value: 1, metadata: { type: 'number' } },
+        ],
+      ]);
+      expect(xml).toContain('<row');
+    });
+
     it('should use sharedStrings.strings if defined, else call addString', () => {
       const ws = new Worksheet({ name: 'Test' });
       const addStringSpy = vi.fn(() => 42);
