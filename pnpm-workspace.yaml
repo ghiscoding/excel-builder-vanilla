@@ -15,3 +15,5 @@ minimumReleaseAge: 2880 # 2 days in minutes
 minimumReleaseAgeExclude:
   # exclude packages that I personally maintain and are safe to use on the same day
   - '@lerna-lite/*'
+  # Renovate security update: vite@8.0.16
+  - vite@8.0.16
