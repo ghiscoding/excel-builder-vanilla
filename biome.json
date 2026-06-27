@@ -45,6 +45,9 @@
     "enabled": true,
     "includes": ["**", "!**/.cache", "!**/dist/**", "!**/*.json", "!**/node_modules/**"],
     "rules": {
+      "a11y": {
+        "noSvgWithoutTitle": "off"
+      },
       "correctness": {
         "useImportExtensions": {
           "options": {
@@ -52,7 +55,8 @@
               "ts": "js",
               "tsx": "js"
             }
-          }
+          },
+          "level": "error"
         }
       },
       "recommended": true,
