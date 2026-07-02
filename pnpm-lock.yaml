@@ -45,8 +45,8 @@ importers:
         specifier: ^4.1.9
         version: 4.1.9(vitest@4.1.9)
       conventional-changelog-conventionalcommits:
-        specifier: ^9.3.1
-        version: 9.3.1
+        specifier: ^10.2.0
+        version: 10.2.0
       happy-dom:
         specifier: ^20.10.6
         version: 20.10.6
@@ -105,7 +105,7 @@ importers:
         version: 2.0.3
       remove-glob:
         specifier: 'catalog:'
-        version: 1.2.0
+        version: 1.2.1
       typescript:
         specifier: 'catalog:'
         version: 6.0.3
@@ -206,6 +206,10 @@ packages:
         optional: true
       conventional-commits-parser:
         optional: true
+
+  '@conventional-changelog/template@1.2.0':
+    resolution: {integrity: sha512-12qHxvlKjHmP0PQ+17EREgC7lWyLwbph1RKcZQZ7k7ZWGmrxfxC9gadHGfvzr0g0u8BhiBGg3tks93txodlyRQ==}
+    engines: {node: '>=22'}
 
   '@emnapi/core@1.11.1':
     resolution: {integrity: sha512-RSvbQmHzdKzNsLYa/wHrbc3KN4sYLKAdPZxqiM2HATqv/SBk2/ENSHpvXGaLOMcsAyz0poEGqkmmKYG3OWiJEQ==}
@@ -841,10 +845,6 @@ packages:
     resolution: {integrity: sha512-77PSwercCZU2Fc4sX94eF8k8Pxte6JAwL4/ICZLFjJLqegs7kCuAsqqj/70NQF6TvDpgFjkubQB2FW2ZZddvQg==}
     engines: {node: '>=8'}
 
-  cli-nano@1.2.2:
-    resolution: {integrity: sha512-qnfCzp8rdMdUpOGSSdAUhDRWjChKXiU28IyCvBncKfkr4oGG3dF5luHCt6n9eGPKcDIzUG7zhDFwJHtORCB4WQ==}
-    engines: {node: ^20.0.0 || >=22.0.0}
-
   cli-nano@1.4.0:
     resolution: {integrity: sha512-Yw59FA5MSenA3QPBJMJK96NOoqIv/4JLg1mSITy3Xusnyr2rAy70A+kspzsHs6ETvIxfZuSKQfRvXOfuiLzq+Q==}
     engines: {node: ^20.0.0 || >=22.0.0}
@@ -887,9 +887,9 @@ packages:
     resolution: {integrity: sha512-6gfI3otXK5Ph5DfCOI1dblr+kN3FAm5a97hYoQkqNZxOaYa5WKfXH+AnpsmS+iUH2mgVC2Cg2Qw9m5OKcmNrIg==}
     engines: {node: '>=18'}
 
-  conventional-changelog-conventionalcommits@9.3.1:
-    resolution: {integrity: sha512-dTYtpIacRpcZgrvBYvBfArMmK2xvIpv2TaxM0/ZI5CBtNUzvF2x0t15HsbRABWprS6UPmvj+PzHVjSx4qAVKyw==}
-    engines: {node: '>=18'}
+  conventional-changelog-conventionalcommits@10.2.0:
+    resolution: {integrity: sha512-UtlM9GqolY7OmlQh5L/UEVoKsTUpTgUVy1PU8JN5gl5Ydaejb7WRklGliG1SKPxxj7hzA173eG3Kt5fYWE2pmg==}
+    engines: {node: '>=22'}
 
   conventional-changelog-preset-loader@5.0.0:
     resolution: {integrity: sha512-SetDSntXLk8Jh1NOAl1Gu5uLiCNSYenB5tm0YVeZKePRIgDW9lQImromTwLa3c/Gae298tsgOM+/CYT9XAl0NA==}
@@ -1520,11 +1520,6 @@ packages:
     resolution: {integrity: sha512-9u/XQ1pvrQtYyMpZe7DXKv2p5CNvyVwzUB6uhLAnQwHMSgKMBR62lc7AHljaeteeHXn11XTAaLLUVZYVZyuRBQ==}
     engines: {node: '>= 20.19.0'}
 
-  remove-glob@1.2.0:
-    resolution: {integrity: sha512-rjpHF6eqAZ710qVXCQBQegsYzl+rw0fojaVf0+zgURruxjmsy7kKKawyevPt18lP6V1w3/vMGRnH0ojn6ZRdgA==}
-    engines: {node: ^22.17.0 || >=24.0.0}
-    hasBin: true
-
   remove-glob@1.2.1:
     resolution: {integrity: sha512-7eXR0BvZEmXdn0678OXTMNtfebt/Wh5ueHo+oB7MJc4YNM4jxKNXDtcAIN6/lxRxsCJI4abOyMe1MiVsmynzCQ==}
     engines: {node: ^22.17.0 || >=24.0.0}
@@ -1940,6 +1935,8 @@ snapshots:
     optionalDependencies:
       conventional-commits-filter: 5.0.0
       conventional-commits-parser: 6.4.0
+
+  '@conventional-changelog/template@1.2.0': {}
 
   '@emnapi/core@1.11.1':
     dependencies:
@@ -2633,8 +2630,6 @@ snapshots:
 
   ci-info@4.4.0: {}
 
-  cli-nano@1.2.2: {}
-
   cli-nano@1.4.0: {}
 
   cli-width@4.1.0: {}
@@ -2672,9 +2667,9 @@ snapshots:
     dependencies:
       compare-func: 2.0.0
 
-  conventional-changelog-conventionalcommits@9.3.1:
+  conventional-changelog-conventionalcommits@10.2.0:
     dependencies:
-      compare-func: 2.0.0
+      '@conventional-changelog/template': 1.2.0
 
   conventional-changelog-preset-loader@5.0.0: {}
 
@@ -3285,10 +3280,6 @@ snapshots:
   read-cmd-shim@6.0.0: {}
 
   readdirp@5.0.0: {}
-
-  remove-glob@1.2.0:
-    dependencies:
-      cli-nano: 1.2.2
 
   remove-glob@1.2.1:
     dependencies:
