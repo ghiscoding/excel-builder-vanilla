@@ -15,6 +15,12 @@
       matchPackagePatterns: ['^@lerna-lite/'],
       minimumReleaseAge: '0',
     },
+    // skip TypeScript 7 since it doesn't have an API yet and fails with dts-bundle-generator
+    // see https://github.com/timocov/dts-bundle-generator/issues/361
+    {
+      packageNames: ['typescript'],
+      allowedVersions: '< 7.0.0',
+    },
   ],
   ignoreDeps: ['node', 'pnpm'],
   schedule: ['every 3 months'],
