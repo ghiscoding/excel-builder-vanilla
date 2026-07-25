@@ -1,6 +1,9 @@
 packages:
   - 'packages/**'
 
+allowBuilds:
+  '@parcel/watcher': false
+
 # Define a catalog of version ranges.
 catalog:
   fflate: ^0.8.3
