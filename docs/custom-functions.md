@@ -57,6 +57,7 @@ The library validates these constraints:
 ### Notes
 
 - Workbook-defined custom functions rely on modern Excel support for `LAMBDA` (Excel 365/Excel for the web).
+- Excel 2019 does not support `LAMBDA`, so workbook-defined custom functions can evaluate as `#NAME?` there.
 - Some non-Excel spreadsheet engines may open the file but fail to evaluate workbook-defined custom functions.
 
 {% hint style="warning" %}
@@ -64,7 +65,9 @@ The library validates these constraints:
 
 Workbook-defined custom functions are serialized using modern Excel `LAMBDA` conventions (`_xlfn.LAMBDA` and `_xlpm.` argument tokens).
 
-LibreOffice/OpenOffice can open these files, but may return evaluation errors (for example `Err:509`) for formulas like `CUSTOMSUM(A2:C2)` because custom LAMBDA-style workbook functions are not guaranteed to be executed there.
+Excel 2019 can open these files, but may return `#NAME?` for formulas like `CUSTOMSUM(A2:C2)` because `LAMBDA` custom functions are not supported.
+
+LibreOffice/OpenOffice can open these files, but may return evaluation errors (for example `Err:509`) for the same reason.
 
 If you need cross-suite reliability, export precomputed scalar values (portable mode) instead of custom-function formulas.
 {% endhint %}
