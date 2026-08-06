@@ -261,3 +261,39 @@ describe('browserExcelStream base64ToUint8Array branch', () => {
     globalThis.window = originalWindow;
   });
 });
+
+describe('Boolean value handling in streaming', () => {
+  it('serializeRows correctly exports boolean values with t="b" attribute', () => {
+    const ws = new Worksheet({ name: 'TestSheet' });
+    ws.setSharedStringCollection({
+      strings: {},
+      stringArray: [],
+      addString: (_str: string) => 0,
+      exportData: () => ({ strings: {}, stringArray: [] }),
+    } as any);
+
+    const booleanRows = [
+      ['Name', 'Active', 'Verified'],
+      ['Item1', true, false],
+      ['Item2', false, true],
+    ];
+
+    const serialized = ws.serializeRows(booleanRows);
+
+    // Check that boolean cells have t="b" attribute
+    expect(serialized).toMatch(/t="b"/);
+
+    // Check that true is serialized as "1"
+    expect(serialized).toMatch(/<c[^>]*t="b"[^>]*><v>1<\/v><\/c>/);
+
+    // Check that false is serialized as "0"
+    expect(serialized).toMatch(/<c[^>]*t="b"[^>]*><v>0<\/v><\/c>/);
+
+    // Ensure there's no t="s" (string) type for boolean values
+    const booleanCellPattern = /<c[^>]*t="b"[^>]*><v>[01]<\/v><\/c>/g;
+    const matches = serialized.match(booleanCellPattern);
+    expect(matches).toBeDefined();
+    // Should have at least 4 boolean cells (2 per row after header)
+    expect(matches!.length).toBeGreaterThanOrEqual(4);
+  });
+});

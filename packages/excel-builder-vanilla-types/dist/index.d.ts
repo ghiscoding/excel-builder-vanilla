@@ -1139,6 +1139,7 @@ export declare class Worksheet {
 		date: XMLNode;
 		string: XMLNode;
 		formula: XMLNode;
+		boolean: XMLNode;
 	};
 	/**
 	 * Runs through the XML document and grabs all of the strings that will
