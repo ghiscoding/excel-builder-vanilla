@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.1](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.0...v5.2.1) (2026-08-06)
+
+### Bug Fixes
+
+* export boolean values as Excel boolean cells ([f03dfd4](https://github.com/ghiscoding/excel-builder-vanilla/commit/f03dfd4ba24e0d3bafbfff8c3fcad1e0bba90b18)) - by @ghiscoding
+
 ## [5.2.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.1.0...v5.2.0) (2026-08-06)
 
 ### Features
