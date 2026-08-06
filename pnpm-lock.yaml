@@ -27,6 +27,7 @@ catalogs:
 
 overrides:
   ip-address: ^10.4.0
+  undici: '>=6.28.0'
 
 importers:
 
