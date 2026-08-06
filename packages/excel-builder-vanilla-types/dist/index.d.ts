@@ -354,13 +354,8 @@ export interface CustomFunctionOptions {
 	comment?: string;
 	/** Hide the name from Excel Name Manager */
 	hidden?: boolean;
-	/** Add _xlfn. prefix to modern functions like LAMBDA for compatibility */
+	/** Add _xlfn. prefix to modern functions like LAMBDA for compatibility (enabled by default) */
 	autoPrefixXlfn?: boolean;
-	/**
-	 * modern-only: emit workbook-defined function through LAMBDA
-	 * legacy-fallback: do not emit function definition (formula text remains unchanged)
-	 */
-	compatibilityMode?: "modern-only" | "legacy-fallback";
 }
 export interface ExcelMargin {
 	/** Top margin in inches */
@@ -1284,10 +1279,6 @@ export declare class Workbook {
 	 */
 	validateDefinedName(name: string): void;
 	/**
-	 * Validate a refersTo formula/reference string.
-	 */
-	validateDefinedNameRefersTo(refersTo: string): void;
-	/**
 	 * Resolve scope into a worksheet localSheetId (0-based).
 	 */
 	resolveDefinedNameScope(scope?: number | string): number | undefined;
@@ -1303,6 +1294,10 @@ export declare class Workbook {
 	 * Example output: CUSTOMSUM -> =LAMBDA(values,SUM(values))
 	 */
 	addCustomFunction(name: string, args: string[], body: string, options?: CustomFunctionOptions): void;
+	/**
+	 * Qualify LAMBDA argument references with the `_xlpm.` prefix expected in workbook XML.
+	 */
+	qualifyLambdaBodyArgRefs(formulaBody: string, argNames: string[]): string;
 	createWorksheet(config?: any): Worksheet;
 	getStyleSheet(): StyleSheet$1;
 	addTable(table: Table): void;
