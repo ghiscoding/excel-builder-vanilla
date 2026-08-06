@@ -1,3 +1,4 @@
+import type { CustomFunctionOptions, WorkbookDefinedName } from '../interfaces.js';
 import { uniqueId } from '../utilities/uniqueId.js';
 import type { Chart } from './Drawing/Chart.js';
 import type { Drawings } from './Drawings.js';
@@ -9,7 +10,6 @@ import type { Table } from './Table.js';
 import { Util } from './Util.js';
 import { Worksheet } from './Worksheet.js';
 import { XMLDOM } from './XMLDOM.js';
-import type { CustomFunctionOptions, WorkbookDefinedName } from '../interfaces.js';
 
 export interface MediaMeta {
   id: string;
