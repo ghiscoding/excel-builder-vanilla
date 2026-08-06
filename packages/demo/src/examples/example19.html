@@ -28,7 +28,11 @@
   <div class="mb-2">
     <button id="export-custom-function" type="button" class="btn btn-success btn-sm">
       <i class="fa fa-download"></i>
-      Excel Export
+      Export For Excel (Custom Functions)
+    </button>
+    <button id="export-portable-values" type="button" class="btn btn-outline-secondary btn-sm ms-2">
+      <i class="fa fa-download"></i>
+      Export Portable (LibreOffice/OpenOffice)
     </button>
   </div>
 
@@ -124,7 +128,7 @@ SAFEAVERAGE(values) = IF(COUNT(values)=0,0,AVERAGE(values))</code></pre>
       </table>
 
       <p class="small text-muted mt-2 mb-0">
-        Export and open in Excel 365 to verify workbook-defined functions evaluate natively and match the expected results table.
+        Use the Excel export for native custom-function formulas. Use the portable export to write precomputed values for suites that do not support Excel LAMBDA custom functions.
       </p>
     </div>
   </div>
