@@ -49,3 +49,42 @@ fs.writeFileSync('output.xlsx', buffer);
 ```
 
 > **Note:** some NodeJS scripts can be found in the [packages/demo/node-examples/](https://github.com/ghiscoding/excel-builder-vanilla/tree/main/packages/demo/node-examples/) folder.
+
+---
+
+## Boolean Values
+
+Boolean values (`true`/`false`) are fully supported and are exported as Excel boolean cells with the proper type attribute. They are displayed as `TRUE` and `FALSE` (uppercase) in Excel.
+
+```ts
+const workbook = createWorkbook();
+const sheet = workbook.createWorksheet({ name: 'Demo' });
+
+const data = [
+  ['Product', 'Active', 'Taxable', 'Price', 'Tax Amount'],
+  ['Item A', true, true, 100, { value: 'IF(C2=TRUE,D2*0.075,0)', metadata: { type: 'formula' } }],
+  ['Item B', false, false, 50, { value: 'IF(C3=TRUE,D3*0.075,0)', metadata: { type: 'formula' } }],
+];
+
+sheet.setData(data);
+workbook.addWorksheet(sheet);
+```
+
+Boolean values can be used directly in cells and work seamlessly with Excel formulas like `IF()`. For example, `=IF(C2=TRUE,D2*0.075,0)` will correctly evaluate the boolean value and perform conditional calculations.
+
+### Formatting Boolean Cells
+
+You can apply custom formatting to boolean cells using the metadata style property:
+
+```ts
+const stylesheet = workbook.getStyleSheet();
+const centerFormat = stylesheet.createFormat({
+  alignment: { horizontal: 'center' },
+});
+
+const data = [
+  ['Active'],
+  [{ value: true, metadata: { style: centerFormat.id } }],
+  [{ value: false, metadata: { style: centerFormat.id } }],
+];
+```

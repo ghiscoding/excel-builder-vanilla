@@ -1035,4 +1035,60 @@ describe('Excel-Builder-Vanilla', () => {
       'xmlns:mc': 'http://schemas.openxmlformats.org/markup-compatibility/2006',
     });
   });
+
+  test('Boolean values are exported as Excel boolean cells', () => {
+    const artistWorkbook = createWorkbook();
+    const albumList = artistWorkbook.createWorksheet({ name: 'Album List' });
+
+    const booleanData = [
+      ['Product', 'Price', 'Taxable', 'Sub-Total', 'Taxes', 'Total'],
+      [
+        'Item A',
+        10.0,
+        true,
+        { value: 'B2', metadata: { type: 'formula' } },
+        { value: 'IF(C2=TRUE,D2*0.075,0)', metadata: { type: 'formula' } },
+        { value: 'D2+E2', metadata: { type: 'formula' } },
+      ],
+      [
+        'Item B',
+        20.0,
+        false,
+        { value: 'B3', metadata: { type: 'formula' } },
+        { value: 'IF(C3=TRUE,D3*0.075,0)', metadata: { type: 'formula' } },
+        { value: 'D3+E3', metadata: { type: 'formula' } },
+      ],
+    ];
+
+    albumList.setData(booleanData);
+    artistWorkbook.addWorksheet(albumList);
+
+    // Verify data was set correctly
+    expect(albumList.exportData().data).toEqual(booleanData);
+
+    // Verify boolean values are not added to shared strings
+    albumList.setSharedStringCollection(artistWorkbook.sharedStrings);
+    albumList.collectSharedStrings();
+    const sharedStrings = artistWorkbook.sharedStrings.exportData();
+
+    // Should not contain "true" or "false" as strings (sharedStrings is the strings object itself)
+    const stringKeys = Object.keys(sharedStrings);
+    expect(stringKeys).not.toContain('true');
+    expect(stringKeys).not.toContain('false');
+    expect(stringKeys).not.toContain('TRUE');
+    expect(stringKeys).not.toContain('FALSE');
+
+    // Verify XML output has correct boolean cell attributes
+    const wsXML = albumList.toXML();
+    const xmlString = wsXML.toString();
+
+    // Check that boolean cells have t="b" attribute
+    expect(xmlString).toMatch(/t="b"/);
+
+    // Check that true boolean is represented as "1"
+    expect(xmlString).toMatch(/<c[^>]*t="b"[^>]*><v>1<\/v><\/c>/);
+
+    // Check that false boolean is represented as "0"
+    expect(xmlString).toMatch(/<c[^>]*t="b"[^>]*><v>0<\/v><\/c>/);
+  });
 });

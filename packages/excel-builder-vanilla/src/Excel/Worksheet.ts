@@ -257,11 +257,18 @@ export class Worksheet {
     stringValue.appendChild(doc.createTextNode('--temp--'));
     stringNode.appendChild(stringValue);
 
+    const booleanNode = doc.createElement('c');
+    booleanNode.setAttribute('t', 'b');
+    const booleanValue = doc.createElement('v');
+    booleanValue.appendChild(doc.createTextNode('--temp--'));
+    booleanNode.appendChild(booleanValue);
+
     return {
       number: numberNode,
       date: numberNode,
       string: stringNode,
       formula: formulaNode,
+      boolean: booleanNode,
     };
   }
 
@@ -289,6 +296,8 @@ export class Worksheet {
         if (!metadata.type) {
           if (typeof cellValue === 'number') {
             metadata.type = 'number';
+          } else if (typeof cellValue === 'boolean') {
+            metadata.type = 'boolean';
           }
         }
         if (metadata.type === 'text' || !metadata.type) {
@@ -336,6 +345,8 @@ export class Worksheet {
         if (!metadata.type) {
           if (typeof cellValue === 'number') {
             metadata.type = 'number';
+          } else if (typeof cellValue === 'boolean') {
+            metadata.type = 'boolean';
           }
         }
 
@@ -350,6 +361,10 @@ export class Worksheet {
               cellValue = cellValue.getTime();
             }
             cell.firstChild.firstChild.nodeValue = 25569.0 + ((cellValue as number) - this._timezoneOffset) / (60 * 60 * 24 * 1000);
+            break;
+          case 'boolean':
+            cell = cellCache.boolean.cloneNode(true);
+            cell.firstChild.firstChild.nodeValue = cellValue ? '1' : '0';
             break;
           case 'formula':
             cell = cellCache.formula.cloneNode(true);
@@ -695,6 +710,9 @@ export class Worksheet {
         switch (cellType) {
           case 'number':
             cellXml = `<c${rAttr}><v>${cellValue}</v></c>`;
+            break;
+          case 'boolean':
+            cellXml = `<c${rAttr} t="b"><v>${cellValue ? '1' : '0'}</v></c>`;
             break;
           default: {
             let id: number | undefined;

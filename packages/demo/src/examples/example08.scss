@@ -3,8 +3,11 @@
     th {
       font-weight: normal;
     }
-    td:nth-last-child(-n + 3) {
+    td.currency {
       text-align: right;
+    }
+    td:nth-child(4) {
+      text-align: center;
     }
   }
 }
