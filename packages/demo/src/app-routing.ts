@@ -16,6 +16,7 @@ import Example15 from './examples/example15.js';
 import Example16 from './examples/example16.js';
 import Example17 from './examples/example17.js';
 import Example18 from './examples/example18.js';
+import Example19 from './examples/example19.js';
 import GettingStarted from './getting-started.js';
 
 export const navbarRouting = [
@@ -50,6 +51,7 @@ export const exampleRouting = [
       { name: 'example16', view: '/src/examples/example16.html', viewModel: Example16, title: '16- Streaming Features Demo' },
       { name: 'example17', view: '/src/examples/example17.html', viewModel: Example17, title: '17- Streaming Export with Images' },
       { name: 'example18', view: '/src/examples/example18.html', viewModel: Example18, title: '18- Charts' },
+      { name: 'example19', view: '/src/examples/example19.html', viewModel: Example19, title: '19- Custom Functions (LAMBDA)' },
     ],
   },
 ];

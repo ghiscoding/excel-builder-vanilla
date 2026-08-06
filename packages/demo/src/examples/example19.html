@@ -1,0 +1,131 @@
+<div class="example19">
+  <div class="row">
+    <div class="col-md-12 title-desc">
+      <h2 class="bd-title">
+        Example 19: Workbook Custom Functions (LAMBDA)
+        <span class="float-end links">
+          Code <span class="fa fa-link"></span>
+          <span class="small">
+            <a
+              target="_blank"
+              href="https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/demo/src/examples/example19.html"
+              >html</a
+            >
+            |
+            <a target="_blank" href="https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/demo/src/examples/example19.ts"
+              >ts</a
+            >
+          </span>
+        </span>
+      </h2>
+      <div class="demo-subtitle">
+        Define workbook names and Excel-native custom functions so formulas like
+        <code>CUSTOMSUM(A2:C2)</code> evaluate in Excel 365 without #NAME?.
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-2">
+    <button id="export-custom-function" type="button" class="btn btn-success btn-sm">
+      <i class="fa fa-download"></i>
+      Excel Export
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="table-container col-sm-10">
+      <h5 class="mb-2">Custom Function Logic</h5>
+      <div class="card mb-3">
+        <div class="card-body py-2">
+          <pre class="mb-0"><code>TaxRate = 0.08
+CUSTOMSUM(values) = SUM(values)
+SAFEAVERAGE(values) = IF(COUNT(values)=0,0,AVERAGE(values))</code></pre>
+        </div>
+      </div>
+
+      <h5 class="mb-2">1) Formula Text Exported To Excel</h5>
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Q1</th>
+            <th scope="col">Q2</th>
+            <th scope="col">Q3</th>
+            <th scope="col">Total Formula</th>
+            <th scope="col">Average Formula</th>
+            <th scope="col">Tax Formula</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>120</td>
+            <td>150</td>
+            <td>170</td>
+            <td>CUSTOMSUM(A2:C2)</td>
+            <td>SAFEAVERAGE(A2:C2)</td>
+            <td>D2*TaxRate</td>
+          </tr>
+          <tr>
+            <td>90</td>
+            <td>110</td>
+            <td>95</td>
+            <td>CUSTOMSUM(A3:C3)</td>
+            <td>SAFEAVERAGE(A3:C3)</td>
+            <td>D3*TaxRate</td>
+          </tr>
+          <tr>
+            <td>210</td>
+            <td>190</td>
+            <td>230</td>
+            <td>CUSTOMSUM(A4:C4)</td>
+            <td>SAFEAVERAGE(A4:C4)</td>
+            <td>D4*TaxRate</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h5 class="mb-2 mt-3">2) Expected Calculated Results In Excel</h5>
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Q1</th>
+            <th scope="col">Q2</th>
+            <th scope="col">Q3</th>
+            <th scope="col">Total</th>
+            <th scope="col">Average</th>
+            <th scope="col">Tax</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>120</td>
+            <td>150</td>
+            <td>170</td>
+            <td>440</td>
+            <td>146.6666667</td>
+            <td>35.2</td>
+          </tr>
+          <tr>
+            <td>90</td>
+            <td>110</td>
+            <td>95</td>
+            <td>295</td>
+            <td>98.33333333</td>
+            <td>23.6</td>
+          </tr>
+          <tr>
+            <td>210</td>
+            <td>190</td>
+            <td>230</td>
+            <td>630</td>
+            <td>210</td>
+            <td>50.4</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="small text-muted mt-2 mb-0">
+        Export and open in Excel 365 to verify workbook-defined functions evaluate natively and match the expected results table.
+      </p>
+    </div>
+  </div>
+</div>

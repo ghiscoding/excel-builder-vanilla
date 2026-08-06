@@ -14,6 +14,7 @@
 - [Alignment](alignment.md)
 - [Background Fillers](background-fillers.md)
 - [Formulas](formulas.md)
+- [Workbook Custom Functions (LAMBDA)](custom-functions.md)
 - [Tables](tables.md)
 - [Theming Tables](theming-tables.md)
 - [Tables Summaries](tables-summaries.md)

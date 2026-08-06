@@ -9,6 +9,7 @@ import type { Table } from './Table.js';
 import { Util } from './Util.js';
 import { Worksheet } from './Worksheet.js';
 import { XMLDOM } from './XMLDOM.js';
+import type { CustomFunctionOptions, WorkbookDefinedName } from '../interfaces.js';
 
 export interface MediaMeta {
   id: string;
@@ -33,6 +34,7 @@ export class Workbook {
   drawings: Drawings[] = [];
   media: { [filename: string]: MediaMeta } = {};
   printTitles?: Record<string, { top?: number; left?: string }>;
+  definedNames: WorkbookDefinedName[] = [];
 
   constructor() {
     this.initialize();
@@ -45,6 +47,112 @@ export class Workbook {
     this.relations = new RelationshipManager();
     this.relations.addRelation(this.styleSheet, 'stylesheet');
     this.relations.addRelation(this.sharedStrings, 'sharedStrings');
+    this.definedNames = [];
+  }
+
+  /**
+   * Validate an Excel defined name/function identifier.
+   * Excel names cannot be empty, cannot look like cell refs and cannot contain spaces.
+   */
+  validateDefinedName(name: string) {
+    if (typeof name !== 'string' || !name.trim()) {
+      throw new Error('Defined name must be a non-empty string.');
+    }
+    const candidate = name.trim();
+    if (candidate.length > 255) {
+      throw new Error(`Defined name "${candidate}" is too long (max 255 chars).`);
+    }
+    if (!/^[A-Za-z_\\][A-Za-z0-9_.\\]*$/.test(candidate)) {
+      throw new Error(
+        `Defined name "${candidate}" is invalid. Use letters/numbers/underscore/period and start with a letter, underscore, or backslash.`,
+      );
+    }
+    if (/^[A-Za-z]{1,3}[1-9][0-9]*$/i.test(candidate) || /^R[1-9][0-9]*C[1-9][0-9]*$/i.test(candidate)) {
+      throw new Error(`Defined name "${candidate}" is invalid because it looks like a cell reference.`);
+    }
+  }
+
+  /**
+   * Resolve scope into a worksheet localSheetId (0-based).
+   */
+  resolveDefinedNameScope(scope?: number | string) {
+    if (scope === undefined) {
+      return undefined;
+    }
+    if (typeof scope === 'number') {
+      if (!Number.isInteger(scope) || scope < 0 || scope >= this.worksheets.length) {
+        throw new Error(`Defined name scope index "${scope}" is out of range.`);
+      }
+      return scope;
+    }
+
+    const index = this.worksheets.findIndex(ws => ws.name === scope);
+    if (index < 0) {
+      throw new Error(`Defined name scope worksheet "${scope}" was not found.`);
+    }
+    return index;
+  }
+
+  /**
+   * Adds a workbook-level or sheet-scoped defined name.
+   */
+  addDefinedName(name: string, refersTo: string, scope?: number | string, options?: { comment?: string; hidden?: boolean }) {
+    this.validateDefinedName(name);
+    if (typeof refersTo !== 'string' || !refersTo.trim()) {
+      throw new Error('Defined name refersTo must be a non-empty string.');
+    }
+    const normalizedRefersTo = refersTo.trim();
+    if (!normalizedRefersTo.startsWith('=')) {
+      throw new Error(`Defined name refersTo "${refersTo}" must start with '='.`);
+    }
+
+    this.definedNames.push({
+      name: name.trim(),
+      refersTo: normalizedRefersTo,
+      scope,
+      comment: options?.comment,
+      hidden: options?.hidden,
+    });
+  }
+
+  /**
+   * Adds a custom workbook function as a named LAMBDA.
+   * Example output: CUSTOMSUM -> =LAMBDA(values,SUM(values))
+   */
+  addCustomFunction(name: string, args: string[], body: string, options?: CustomFunctionOptions) {
+    this.validateDefinedName(name);
+    if (!Array.isArray(args) || args.length === 0 || args.some(arg => typeof arg !== 'string' || !arg.trim())) {
+      throw new Error(`Custom function "${name}" must provide at least one argument name.`);
+    }
+    if (typeof body !== 'string' || !body.trim()) {
+      throw new Error(`Custom function "${name}" must provide a non-empty formula body.`);
+    }
+
+    const useExcelCompatibilityPrefixes = options?.autoPrefixXlfn ?? true;
+    const lambdaKeyword = useExcelCompatibilityPrefixes ? '_xlfn.LAMBDA' : 'LAMBDA';
+    const normalizedBody = body.trim().replace(/^=/, '');
+    const normalizedArgs = args.map(arg => arg.trim());
+    const lambdaArgs = useExcelCompatibilityPrefixes ? normalizedArgs.map(arg => `_xlpm.${arg}`) : normalizedArgs;
+    const lambdaBody = useExcelCompatibilityPrefixes ? this.qualifyLambdaBodyArgRefs(normalizedBody, normalizedArgs) : normalizedBody;
+    const refersTo = `=${lambdaKeyword}(${lambdaArgs.join(',')},${lambdaBody})`;
+    this.addDefinedName(name, refersTo, options?.scope, {
+      comment: options?.comment,
+      hidden: options?.hidden,
+    });
+  }
+
+  /**
+   * Qualify LAMBDA argument references with the `_xlpm.` prefix expected in workbook XML.
+   */
+  qualifyLambdaBodyArgRefs(formulaBody: string, argNames: string[]) {
+    const sortedArgs = [...argNames].sort((a, b) => b.length - a.length);
+    let qualifiedBody = formulaBody;
+    for (const argName of sortedArgs) {
+      const escapedArgName = argName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const argRefRegex = new RegExp(`(?<!_xlpm\\.)\\b${escapedArgName}\\b`, 'g');
+      qualifiedBody = qualifiedBody.replace(argRefRegex, `_xlpm.${argName}`);
+    }
+    return qualifiedBody;
   }
 
   createWorksheet(config?: any) {
@@ -250,31 +358,52 @@ export class Workbook {
     }
     wb.appendChild(sheets);
 
-    // now to add repeating rows
     const definedNames = Util.createElement(doc, 'definedNames');
-    let ctr = 0;
-    for (const name in this.printTitles) {
-      if (name in this.printTitles) {
-        const entry = this.printTitles[name];
-        const definedName = doc.createElement('definedName');
-        definedName.setAttribute('name', '_xlnm.Print_Titles');
-        definedName.setAttribute('localSheetId', ctr++);
+    let fallbackSheetCounter = 0;
+    const printTitles = this.printTitles || {};
 
-        let value = '';
-        if (entry.top) {
-          value += `${name}!$1:$${entry.top}`;
-          if (entry.left) {
-            value += ',';
-          }
-        }
+    // Existing print title behavior
+    for (const name in printTitles) {
+      const entry = printTitles[name];
+      const definedName = doc.createElement('definedName');
+      definedName.setAttribute('name', '_xlnm.Print_Titles');
+      const localSheetId = this.worksheets.findIndex(ws => ws.name === name);
+      definedName.setAttribute('localSheetId', localSheetId >= 0 ? localSheetId : fallbackSheetCounter++);
+
+      let value = '';
+      if (entry.top) {
+        value += `${name}!$1:$${entry.top}`;
         if (entry.left) {
-          value += `${name}!$A:$${entry.left}`;
+          value += ',';
         }
-
-        definedName.appendChild(doc.createTextNode(value));
-        definedNames.appendChild(definedName);
       }
+      if (entry.left) {
+        value += `${name}!$A:$${entry.left}`;
+      }
+
+      definedName.appendChild(doc.createTextNode(value));
+      definedNames.appendChild(definedName);
     }
+
+    // User-defined workbook names/functions
+    for (const item of this.definedNames) {
+      const definedName = doc.createElement('definedName');
+      definedName.setAttribute('name', item.name);
+      const localSheetId = this.resolveDefinedNameScope(item.scope);
+      if (localSheetId !== undefined) {
+        definedName.setAttribute('localSheetId', localSheetId);
+      }
+      if (item.comment) {
+        definedName.setAttribute('comment', item.comment);
+      }
+      if (item.hidden) {
+        definedName.setAttribute('hidden', '1');
+      }
+      // workbook.xml definedName content is stored without a leading '='
+      definedName.appendChild(doc.createTextNode(item.refersTo.replace(/^=/, '')));
+      definedNames.appendChild(definedName);
+    }
+
     wb.appendChild(definedNames);
 
     return doc;
