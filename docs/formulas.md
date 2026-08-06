@@ -28,3 +28,5 @@ downloader('Artist WB.xlsx', data);
 ```
 
 If you want to get the `R1C1` position, you can use the `util.positionToLetterRef(x, y)` method, which accepts the `X` position and the `Y` position, then returns an `R1C1` based off of that.
+
+For workbook-defined names and Excel-native custom functions (for example `CUSTOMSUM(B3:C3)` via `LAMBDA`), see [Workbook Custom Functions (LAMBDA)](custom-functions.md).

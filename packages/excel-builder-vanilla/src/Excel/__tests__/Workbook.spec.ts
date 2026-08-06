@@ -59,6 +59,16 @@ describe('Workbook', () => {
     expect(wb.media['pic.jpg']).toBe(meta);
   });
 
+  it('should keep provided contentType and deduplicate existing media records', () => {
+    const wb = new Workbook();
+    const first = wb.addMedia('image', 'logo.custom', 'data-a', 'image/custom');
+    const second = wb.addMedia('image', 'logo.custom', 'data-b', 'image/other');
+
+    expect(first.contentType).toBe('image/custom');
+    expect(second).toBe(first);
+    expect(wb.media['logo.custom'].data).toBe('data-a');
+  });
+
   it('should serialize header and footer', () => {
     const wb = new Workbook();
     expect(wb.serializeHeader()).toContain('<workbook>');
@@ -86,6 +96,125 @@ describe('Workbook', () => {
         expect.stringContaining('Microsoft Excel requires work sheet names to be less than 32 characters long'),
       );
       logSpy.mockRestore();
+    });
+
+    it('should serialize workbook defined names', () => {
+      const wb = new Workbook();
+      const ws = wb.createWorksheet({ name: 'Sales' });
+      wb.addWorksheet(ws);
+      wb.addDefinedName('TaxRate', '=0.08');
+
+      const xml = wb.toXML().toString();
+      expect(xml).toContain('<definedNames>');
+      expect(xml).toContain('<definedName name="TaxRate">0.08</definedName>');
+    });
+
+    it('should serialize sheet-scoped defined names', () => {
+      const wb = new Workbook();
+      const ws = wb.createWorksheet({ name: 'Data' });
+      wb.addWorksheet(ws);
+      wb.addDefinedName('LocalRate', '=0.12', 'Data');
+
+      const xml = wb.toXML().toString();
+      expect(xml).toContain('<definedName name="LocalRate" localSheetId="0">0.12</definedName>');
+    });
+
+    it('should add custom function as Excel-compatible LAMBDA defined name by default', () => {
+      const wb = new Workbook();
+      wb.addCustomFunction('CUSTOMSUM', ['values'], 'SUM(values)');
+
+      const xml = wb.toXML().toString();
+      expect(xml).toContain('<definedName name="CUSTOMSUM">_xlfn.LAMBDA(_xlpm.values,SUM(_xlpm.values))</definedName>');
+    });
+
+    it('should support xlfn prefix for custom function definitions', () => {
+      const wb = new Workbook();
+      wb.addCustomFunction('CUSTOMSUM', ['values'], 'SUM(values)', { autoPrefixXlfn: true });
+
+      const xml = wb.toXML().toString();
+      expect(xml).toContain('<definedName name="CUSTOMSUM">_xlfn.LAMBDA(_xlpm.values,SUM(_xlpm.values))</definedName>');
+    });
+
+    it('should allow non-prefixed lambda output when autoPrefixXlfn is disabled', () => {
+      const wb = new Workbook();
+      wb.addCustomFunction('CUSTOMSUM', ['values'], 'SUM(values)', { autoPrefixXlfn: false });
+
+      const xml = wb.toXML().toString();
+      expect(xml).toContain('<definedName name="CUSTOMSUM">LAMBDA(values,SUM(values))</definedName>');
+    });
+
+    it('should qualify multi-arg lambda bodies without partial arg collisions', () => {
+      const wb = new Workbook();
+      wb.addCustomFunction('CUSTOMCOMBO', ['value', 'values'], 'SUM(value)+SUM(values)');
+
+      const xml = wb.toXML().toString();
+      expect(xml).toContain(
+        '<definedName name="CUSTOMCOMBO">_xlfn.LAMBDA(_xlpm.value,_xlpm.values,SUM(_xlpm.value)+SUM(_xlpm.values))</definedName>',
+      );
+    });
+
+    it('should reject invalid defined names and refersTo values', () => {
+      const wb = new Workbook();
+      expect(() => wb.addDefinedName('A1', '=1')).toThrow('looks like a cell reference');
+      expect(() => wb.addDefinedName('Tax Rate', '=1')).toThrow('is invalid');
+      expect(() => wb.addDefinedName('TaxRate', '1')).toThrow("must start with '='");
+    });
+
+    it('should reject empty/too-long names and empty refersTo', () => {
+      const wb = new Workbook();
+      expect(() => wb.addDefinedName('', '=1')).toThrow('non-empty string');
+      expect(() => wb.addDefinedName('A'.repeat(256), '=1')).toThrow('too long');
+      expect(() => wb.addDefinedName('TaxRate', '')).toThrow('refersTo must be a non-empty string');
+    });
+
+    it('should reject invalid numeric scope and allow valid numeric scope', () => {
+      const wb = new Workbook();
+      const ws = wb.createWorksheet({ name: 'SheetA' });
+      wb.addWorksheet(ws);
+
+      expect(() => wb.addDefinedName('ScopedBad', '=1', 99)).not.toThrow();
+      expect(() => wb.toXML()).toThrow('scope index "99" is out of range');
+
+      const wb2 = new Workbook();
+      const ws2 = wb2.createWorksheet({ name: 'SheetB' });
+      wb2.addWorksheet(ws2);
+      wb2.addDefinedName('ScopedOk', '=2', 0);
+      const xml = wb2.toXML().toString();
+      expect(xml).toContain('<definedName name="ScopedOk" localSheetId="0">2</definedName>');
+    });
+
+    it('should reject invalid custom function args and body', () => {
+      const wb = new Workbook();
+      expect(() => wb.addCustomFunction('CUSTOMSUM', [], 'SUM(values)')).toThrow('at least one argument name');
+      expect(() => wb.addCustomFunction('CUSTOMSUM', ['values'], '')).toThrow('non-empty formula body');
+    });
+
+    it('should serialize custom defined name attributes comment and hidden', () => {
+      const wb = new Workbook();
+      wb.addDefinedName('INTERNAL_FLAG', '=1', undefined, { comment: 'Internal toggle', hidden: true });
+
+      const xml = wb.toXML().toString();
+      expect(xml).toContain('<definedName name="INTERNAL_FLAG" comment="Internal toggle" hidden="1">1</definedName>');
+    });
+
+    it('should reject unresolved defined name scope', () => {
+      const wb = new Workbook();
+      wb.addDefinedName('LocalOnly', '=1', 'MissingSheet');
+
+      expect(() => wb.toXML()).toThrow('scope worksheet "MissingSheet" was not found');
+    });
+
+    it('should serialize print titles for top-only and left-only definitions', () => {
+      const wb = new Workbook();
+      wb.addWorksheet(wb.createWorksheet({ name: 'TopOnly' }));
+      wb.addWorksheet(wb.createWorksheet({ name: 'LeftOnly' }));
+
+      wb.setPrintTitleTop('TopOnly', 3);
+      wb.setPrintTitleLeft('LeftOnly', 2);
+
+      const xml = wb.toXML().toString();
+      expect(xml).toContain('<definedName name="_xlnm.Print_Titles" localSheetId="0">TopOnly!$1:$3</definedName>');
+      expect(xml).toContain('<definedName name="_xlnm.Print_Titles" localSheetId="1">LeftOnly!$A:$B</definedName>');
     });
   });
 

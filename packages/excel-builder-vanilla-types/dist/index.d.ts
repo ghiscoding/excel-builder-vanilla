@@ -334,6 +334,29 @@ export interface ExcelColumnMetadata {
 	/** Optional metadata for the value */
 	metadata?: ExcelMetadata;
 }
+export type WorkbookDefinedNameScope = number | string;
+export interface WorkbookDefinedName {
+	/** Defined name identifier (e.g. TaxRate, CUSTOMSUM) */
+	name: string;
+	/** Formula or reference the name points to (must start with '=') */
+	refersTo: string;
+	/** Optional worksheet scope; omitted means workbook-global */
+	scope?: WorkbookDefinedNameScope;
+	/** Optional comment shown in name manager */
+	comment?: string;
+	/** Hide the name from Excel Name Manager */
+	hidden?: boolean;
+}
+export interface CustomFunctionOptions {
+	/** Optional worksheet scope; omitted means workbook-global */
+	scope?: WorkbookDefinedNameScope;
+	/** Optional comment shown in name manager */
+	comment?: string;
+	/** Hide the name from Excel Name Manager */
+	hidden?: boolean;
+	/** Add _xlfn. prefix to modern functions like LAMBDA for compatibility (enabled by default) */
+	autoPrefixXlfn?: boolean;
+}
 export interface ExcelMargin {
 	/** Top margin in inches */
 	top: number;
@@ -1247,8 +1270,34 @@ export declare class Workbook {
 		top?: number;
 		left?: string;
 	}>;
+	definedNames: WorkbookDefinedName[];
 	constructor();
 	initialize(): void;
+	/**
+	 * Validate an Excel defined name/function identifier.
+	 * Excel names cannot be empty, cannot look like cell refs and cannot contain spaces.
+	 */
+	validateDefinedName(name: string): void;
+	/**
+	 * Resolve scope into a worksheet localSheetId (0-based).
+	 */
+	resolveDefinedNameScope(scope?: number | string): number | undefined;
+	/**
+	 * Adds a workbook-level or sheet-scoped defined name.
+	 */
+	addDefinedName(name: string, refersTo: string, scope?: number | string, options?: {
+		comment?: string;
+		hidden?: boolean;
+	}): void;
+	/**
+	 * Adds a custom workbook function as a named LAMBDA.
+	 * Example output: CUSTOMSUM -> =LAMBDA(values,SUM(values))
+	 */
+	addCustomFunction(name: string, args: string[], body: string, options?: CustomFunctionOptions): void;
+	/**
+	 * Qualify LAMBDA argument references with the `_xlpm.` prefix expected in workbook XML.
+	 */
+	qualifyLambdaBodyArgRefs(formulaBody: string, argNames: string[]): string;
 	createWorksheet(config?: any): Worksheet;
 	getStyleSheet(): StyleSheet$1;
 	addTable(table: Table): void;
