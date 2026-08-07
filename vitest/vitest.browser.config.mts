@@ -22,7 +22,7 @@ const rootDir = fileURLToPath(new URL('..', import.meta.url));
 
 export default defineConfig({
   define: {
-    __EXCEL_DEMO_STREAMING_ROWS__: '10',
+    __EXCEL_DEMO_STREAMING_ROWS__: 10,
   },
   plugins: [base64Loader],
   resolve: {

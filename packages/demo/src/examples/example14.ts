@@ -1,6 +1,5 @@
 import { createWorkbook, Drawings, downloadExcelFile, Picture, Positioning } from 'excel-builder-vanilla';
 
-import strawberryImageData from '../images/strawberry.jpg?base64'; // images must be provided in the `base64` format, use a Vite loader plugin
 import strawberryUrl from '../images/strawberry.jpg?url';
 
 // jpg/png are all valid
@@ -11,6 +10,22 @@ import './example14.scss';
 
 export default class Example {
   exportBtnElm!: HTMLButtonElement;
+
+  private async fetchImageAsBase64(url: string) {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`[Example14] Failed to fetch image for export: ${response.status}`);
+    }
+
+    const bytes = new Uint8Array(await response.arrayBuffer());
+    const chunkSize = 0x8000;
+    let binary = '';
+    for (let i = 0; i < bytes.length; i += chunkSize) {
+      const chunk = bytes.subarray(i, i + chunkSize);
+      binary += String.fromCharCode(...chunk);
+    }
+    return btoa(binary);
+  }
 
   mount() {
     this.exportBtnElm = document.querySelector('#export') as HTMLButtonElement;
@@ -25,11 +40,12 @@ export default class Example {
     this.exportBtnElm.removeEventListener('click', this.startProcess.bind(this));
   }
 
-  startProcess() {
+  async startProcess() {
     const fruitWorkbook = createWorkbook();
     const berryList = fruitWorkbook.createWorksheet({ name: 'Berry List' });
 
     const drawings = new Drawings();
+    const strawberryImageData = await this.fetchImageAsBase64(strawberryUrl);
 
     const picRef = fruitWorkbook.addMedia('image', 'strawberry.jpg', strawberryImageData);
 
