@@ -181,32 +181,6 @@ export interface ExcelColumnMetadata {
   metadata?: ExcelMetadata;
 }
 
-export type WorkbookDefinedNameScope = number | string;
-
-export interface WorkbookDefinedName {
-  /** Defined name identifier (e.g. TaxRate, CUSTOMSUM) */
-  name: string;
-  /** Formula or reference the name points to (must start with '=') */
-  refersTo: string;
-  /** Optional worksheet scope; omitted means workbook-global */
-  scope?: WorkbookDefinedNameScope;
-  /** Optional comment shown in name manager */
-  comment?: string;
-  /** Hide the name from Excel Name Manager */
-  hidden?: boolean;
-}
-
-export interface CustomFunctionOptions {
-  /** Optional worksheet scope; omitted means workbook-global */
-  scope?: WorkbookDefinedNameScope;
-  /** Optional comment shown in name manager */
-  comment?: string;
-  /** Hide the name from Excel Name Manager */
-  hidden?: boolean;
-  /** Add _xlfn. prefix to modern functions like LAMBDA for compatibility (enabled by default) */
-  autoPrefixXlfn?: boolean;
-}
-
 export interface ExcelMargin {
   /** Top margin in inches */
   top: number;
@@ -347,6 +321,32 @@ export interface ChartOptions {
     /** Show series name (useful when multiple series and category/value alone is ambiguous) */
     showSeriesName?: boolean;
   };
+}
+
+export type WorkbookDefinedNameScope = number | string;
+
+export interface WorkbookDefinedName {
+  /** Defined name identifier (e.g. TaxRate, CUSTOMSUM) */
+  name: string;
+  /** Formula or reference the name points to (must start with '=') */
+  refersTo: string;
+  /** Optional worksheet scope; omitted means workbook-global */
+  scope?: WorkbookDefinedNameScope;
+  /** Optional comment shown in name manager */
+  comment?: string;
+  /** Hide the name from Excel Name Manager */
+  hidden?: boolean;
+}
+
+export interface CustomFunctionOptions {
+  /** Optional worksheet scope; omitted means workbook-global */
+  scope?: WorkbookDefinedNameScope;
+  /** Optional comment shown in name manager */
+  comment?: string;
+  /** Hide the name from Excel Name Manager */
+  hidden?: boolean;
+  /** Add _xlfn. prefix to modern functions like LAMBDA for compatibility (enabled by default) */
+  autoPrefixXlfn?: boolean;
 }
 
 // --
