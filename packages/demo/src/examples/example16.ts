@@ -2,9 +2,7 @@ import { createExcelFileStream, createWorkbook, type ExcelColumnMetadata } from 
 
 import './example16.scss';
 
-declare const __EXCEL_DEMO_STREAMING_ROWS__: number | undefined;
-
-const ROWS = typeof __EXCEL_DEMO_STREAMING_ROWS__ === 'number' ? __EXCEL_DEMO_STREAMING_ROWS__ : 50_000;
+const ROWS = 50_000;
 
 export default class Example {
   exportBtnElm!: HTMLButtonElement;
@@ -111,10 +109,7 @@ export default class Example {
       let processed = 0;
       const totalRows = ROWS;
 
-      const reader = (stream as ReadableStream<Uint8Array>).getReader();
-      while (true) {
-        const { done, value: chunk } = await reader.read();
-        if (done) break;
+      for await (const chunk of stream as AsyncIterable<Uint8Array>) {
         chunks.push(chunk);
         processed += chunk.length;
         if (progressElm && progressBar) {

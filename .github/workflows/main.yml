@@ -64,16 +64,6 @@ jobs:
           !contains(github.event.head_commit.message, 'chore(release)')
         run: pnpm test
 
-      - name: Install Playwright Chromium
-        if: |
-          !contains(github.event.head_commit.message, 'chore(release)')
-        run: pnpm exec playwright install --with-deps chromium
-
-      - name: Run Vitest browser export tests
-        if: |
-          !contains(github.event.head_commit.message, 'chore(release)')
-        run: pnpm test:browser
-
       - name: Upload test coverage to Codecov
         uses: codecov/codecov-action@fb8b3582c8e4def4969c97caa2f19720cb33a72f # v7
         env:

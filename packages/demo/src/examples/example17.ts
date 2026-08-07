@@ -65,10 +65,7 @@ export default class Example {
     // Streaming export
     const stream = createExcelFileStream(workbook, { chunkSize: 1024 });
     const chunks: Uint8Array[] = [];
-    const reader = (stream as ReadableStream<Uint8Array>).getReader();
-    while (true) {
-      const { done, value: chunk } = await reader.read();
-      if (done) break;
+    for await (const chunk of stream as AsyncIterable<Uint8Array>) {
       chunks.push(chunk);
     }
     const blob = new Blob(chunks as BlobPart[], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
