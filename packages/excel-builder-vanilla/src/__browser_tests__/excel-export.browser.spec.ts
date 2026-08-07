@@ -190,8 +190,8 @@ async function expectExportContract(file: Blob, contract: ExportContract) {
 function normalizeXmlSnapshot(content: string) {
   return content
     .replace(/\brId\d+\b/gu, 'rId0')
-    .replace(/<v>[-+]?\d+(?:\.\d+)?<\/v>/gu, '<v>0</v>')
-    .replace(/<c[^>]*>.*?<\/c>/gsu, match => match.replace(/<v>[-+]?\d+(?:\.\d+)?<\/v>/gu, '<v>0</v>'));
+    .replace(/<v>[-+]?\d+(?:\.\d+)?(?:e[-+]?\d+)?<\/v>/gu, '<v>0</v>')
+    .replace(/<c[^>]*>.*?<\/c>/gsu, match => match.replace(/<v>[-+]?\d+(?:\.\d+)?(?:e[-+]?\d+)?<\/v>/gu, '<v>0</v>'));
 }
 
 async function getXmlSnapshot(file: Blob) {
@@ -252,13 +252,10 @@ describe('Excel exports in a real browser', () => {
     expect(firstChunk.value).toBeInstanceOf(Uint8Array);
   });
 
-  it('normalizes relationship IDs before snapshotting XML content', () => {
-    const xml =
-      '<Relationships><Relationship Id="rId21"/><Relationship Id="rId22"/></Relationships><workbook><sheet r:id="rId24"/></workbook>';
+  it('normalizes relationship IDs and cell values before snapshotting', () => {
+    const xml = '<worksheet><c r="A1" s="2"><v>123.45</v></c><sheet r:id="rId21"/></worksheet>';
 
-    expect(normalizeXmlSnapshot(xml)).toBe(
-      '<Relationships><Relationship Id="rId0"/><Relationship Id="rId0"/></Relationships><workbook><sheet r:id="rId0"/></workbook>',
-    );
+    expect(normalizeXmlSnapshot(xml)).toBe('<worksheet><c r="A1" s="2"><v>0</v></c><sheet r:id="rId0"/></worksheet>');
   });
 
   for (const [modulePath, Demo] of Object.entries(demoModules).sort(([a], [b]) => a.localeCompare(b))) {
