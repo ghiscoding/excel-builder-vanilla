@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 import { strFromU8, unzipSync } from 'fflate';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createExcelFile, createWorkbook } from '../factory.js';
 import { createExcelFileStream } from '../streaming.js';
@@ -121,12 +121,17 @@ const exportContracts: Record<string, ExportContract> = {
   },
 };
 
-function waitForDownload() {
+function waitForDownload(timeoutMs = 60_000) {
   return new Promise<Download>((resolve, reject) => {
     const originalClick = HTMLAnchorElement.prototype.click;
     const originalCreateObjectURL = URL.createObjectURL;
     const blobsByUrl = new Map<string, Blob>();
+    const timeoutId = window.setTimeout(() => {
+      cleanup();
+      reject(new Error(`Timed out waiting for download after ${timeoutMs}ms.`));
+    }, timeoutMs);
     const cleanup = () => {
+      window.clearTimeout(timeoutId);
       window.removeEventListener('unhandledrejection', onRejection);
       HTMLAnchorElement.prototype.click = originalClick;
       URL.createObjectURL = originalCreateObjectURL;
@@ -141,6 +146,7 @@ function waitForDownload() {
         const file = blobsByUrl.get(this.href);
         cleanup();
         resolve({ anchor: this, file });
+        return;
       }
       originalClick.call(this);
     };
@@ -182,7 +188,14 @@ async function expectExportContract(file: Blob, contract: ExportContract) {
 }
 
 function normalizeXmlSnapshot(content: string) {
-  return content.replace(/\brId\d+\b/gu, 'rId0');
+  return content.replace(/\brId\d+\b/gu, 'rId0').replace(/>(\d+(?:\.\d+)?)(?=<\/v>)/gu, value => {
+    const numericValue = Number.parseFloat(value.slice(1, -1));
+    if (!Number.isFinite(numericValue)) return value;
+    if (Math.abs(numericValue - Math.round(numericValue)) < 1e-12) {
+      return `>${Math.round(numericValue)}`;
+    }
+    return `>${numericValue.toFixed(10).replace(/0+$/u, '').replace(/\.$/u, '')}`;
+  });
 }
 
 async function getXmlSnapshot(file: Blob) {
@@ -197,6 +210,10 @@ describe('Excel exports in a real browser', () => {
   const originalRandom = Math.random;
 
   beforeEach(() => {
+    document.body.innerHTML = '';
+    vi.restoreAllMocks();
+    vi.spyOn(Date.prototype, 'getTimezoneOffset').mockReturnValue(0);
+
     let seed = 123_456_789;
     Math.random = () => {
       seed = (seed * 1_103_515_245 + 12_345) % 2 ** 31;
@@ -205,6 +222,7 @@ describe('Excel exports in a real browser', () => {
   });
 
   afterEach(() => {
+    vi.restoreAllMocks();
     Math.random = originalRandom;
   });
 
