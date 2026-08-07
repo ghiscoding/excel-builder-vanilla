@@ -25,13 +25,6 @@ interface ExportContract {
   paths?: string[];
 }
 
-interface DownloadWaiter {
-  cleanup: () => void;
-  reject: (reason?: unknown) => void;
-}
-
-let activeDownloadWaiter: DownloadWaiter | null = null;
-
 const demoModules = import.meta.glob('../../../demo/src/examples/example*.ts', {
   eager: true,
   import: 'default',
@@ -128,12 +121,7 @@ const exportContracts: Record<string, ExportContract> = {
   },
 };
 
-function waitForDownload(timeoutMs = 300_000) {
-  if (activeDownloadWaiter) {
-    activeDownloadWaiter.cleanup();
-    activeDownloadWaiter.reject(new Error('A previous download waiter was replaced before it resolved.'));
-  }
-
+function waitForDownload(timeoutMs = 60_000) {
   return new Promise<Download>((resolve, reject) => {
     const originalClick = HTMLAnchorElement.prototype.click;
     const originalCreateObjectURL = URL.createObjectURL;
@@ -142,24 +130,12 @@ function waitForDownload(timeoutMs = 300_000) {
       cleanup();
       reject(new Error(`Timed out waiting for download after ${timeoutMs}ms.`));
     }, timeoutMs);
-
     const cleanup = () => {
       window.clearTimeout(timeoutId);
       window.removeEventListener('unhandledrejection', onRejection);
       HTMLAnchorElement.prototype.click = originalClick;
       URL.createObjectURL = originalCreateObjectURL;
-      if (activeDownloadWaiter === waiter) {
-        activeDownloadWaiter = null;
-      }
     };
-
-    const waiter: DownloadWaiter = {
-      cleanup,
-      reject,
-    };
-
-    activeDownloadWaiter = waiter;
-
     URL.createObjectURL = value => {
       const url = originalCreateObjectURL.call(URL, value);
       if (value instanceof Blob) blobsByUrl.set(url, value);
@@ -313,6 +289,6 @@ describe('Excel exports in a real browser', () => {
       } finally {
         demo.unmount();
       }
-    }, 300_000);
+    });
   }
 });
