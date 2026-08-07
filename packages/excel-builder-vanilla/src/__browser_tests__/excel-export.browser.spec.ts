@@ -181,12 +181,16 @@ async function expectExportContract(file: Blob, contract: ExportContract) {
   for (const path of contract.paths ?? []) expect(files[path]).toBeInstanceOf(Uint8Array);
 }
 
+function normalizeXmlSnapshot(content: string) {
+  return content.replace(/\brId\d+\b/gu, 'rId0');
+}
+
 async function getXmlSnapshot(file: Blob) {
   const files = unzipSync(new Uint8Array(await file.arrayBuffer()));
   return Object.entries(files)
     .filter(([path]) => path.endsWith('.xml') || path.endsWith('.rels'))
     .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
-    .map(([path, content]) => ({ path, content: strFromU8(content) }));
+    .map(([path, content]) => ({ path, content: normalizeXmlSnapshot(strFromU8(content)) }));
 }
 
 describe('Excel exports in a real browser', () => {
@@ -232,6 +236,14 @@ describe('Excel exports in a real browser', () => {
 
     expect(firstChunk.done).toBe(false);
     expect(firstChunk.value).toBeInstanceOf(Uint8Array);
+  });
+
+  it('normalizes relationship IDs before snapshotting XML content', () => {
+    const xml = '<Relationships><Relationship Id="rId21"/><Relationship Id="rId22"/></Relationships><workbook><sheet r:id="rId24"/></workbook>';
+
+    expect(normalizeXmlSnapshot(xml)).toBe(
+      '<Relationships><Relationship Id="rId0"/><Relationship Id="rId0"/></Relationships><workbook><sheet r:id="rId0"/></workbook>'
+    );
   });
 
   for (const [modulePath, Demo] of Object.entries(demoModules).sort(([a], [b]) => a.localeCompare(b))) {
