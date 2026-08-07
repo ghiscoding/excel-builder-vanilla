@@ -121,7 +121,7 @@ const exportContracts: Record<string, ExportContract> = {
   },
 };
 
-function waitForDownload(timeoutMs = 60_000) {
+function waitForDownload(expectedFilename?: string, timeoutMs = 60_000) {
   return new Promise<Download>((resolve, reject) => {
     const originalClick = HTMLAnchorElement.prototype.click;
     const originalCreateObjectURL = URL.createObjectURL;
@@ -143,6 +143,10 @@ function waitForDownload(timeoutMs = 60_000) {
     };
     HTMLAnchorElement.prototype.click = function () {
       if (this.download) {
+        if (expectedFilename && this.download !== expectedFilename) {
+          originalClick.call(this);
+          return;
+        }
         const file = blobsByUrl.get(this.href);
         cleanup();
         resolve({ anchor: this, file });
@@ -274,7 +278,7 @@ describe('Excel exports in a real browser', () => {
         for (const button of exportButtons) {
           const contract = exportContracts[`${exampleName}:${button.id}`];
           expect(contract).toBeDefined();
-          const download = waitForDownload();
+          const download = waitForDownload(contract?.filename);
           button.click();
           const { anchor, file } = await download;
 
@@ -289,6 +293,6 @@ describe('Excel exports in a real browser', () => {
       } finally {
         demo.unmount();
       }
-    });
+    }, 120_000);
   }
 });

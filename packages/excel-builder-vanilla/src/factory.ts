@@ -18,10 +18,16 @@ export function createWorkbook() {
  * @returns {Uint8Array} - returns a Uint8Array output
  */
 export function base64ToUint8Array(base64String: string) {
-  const base64url = base64String.replace(/-/g, '+').replace(/_/g, '/');
+  const normalizedBase64 = base64String.replace(/^data:[^;]+;base64,/u, '').replace(/\s+/gu, '');
+  const base64url = normalizedBase64.replace(/-/g, '+').replace(/_/g, '/');
   const missingPadding = '='.repeat((4 - (base64url.length % 4)) % 4);
   const base64 = base64url + missingPadding;
-  const base64decoded = atob(base64);
+  let base64decoded = '';
+  try {
+    base64decoded = atob(base64);
+  } catch {
+    throw new Error('[Excel-Builder-Vanilla] Invalid base64 payload while creating Excel media.');
+  }
   return Uint8Array.from(base64decoded, char => char.charCodeAt(0));
 }
 

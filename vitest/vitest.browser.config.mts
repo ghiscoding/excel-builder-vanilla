@@ -7,8 +7,12 @@ import { defineConfig } from 'vitest/config';
 const base64Loader = {
   name: 'base64-loader',
   transform(_: unknown, id: string) {
-    const [path, query] = id.split('?');
-    if (query !== 'base64') return null;
+    const [path, query = ''] = id.split('?');
+    const hasBase64Query = query
+      .split('&')
+      .map(part => part.split('=')[0])
+      .includes('base64');
+    if (!hasBase64Query) return null;
 
     return `export default '${readFileSync(path).toString('base64')}'`;
   },
