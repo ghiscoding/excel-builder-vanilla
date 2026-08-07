@@ -1,7 +1,7 @@
 import { strFromU8 } from 'fflate';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { createExcelFile, createWorkbook, downloadExcelFile } from '../factory.js';
+import { base64ToUint8Array, createExcelFile, createWorkbook, downloadExcelFile } from '../factory.js';
 
 // Patch global Blob and URL.createObjectURL to always use window.Blob and a mock for Vitest 4 compatibility
 // Directly mock URL.createObjectURL to bypass Blob instanceof issues in Vitest 4
@@ -15,6 +15,22 @@ describe('ExcelExportService', () => {
     });
 
     describe('createExcelFile() method', () => {
+      it('should convert data URL base64 payload to Uint8Array', () => {
+        const onePixelPngDataUrl =
+          'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
+
+        const bytes = base64ToUint8Array(onePixelPngDataUrl);
+
+        expect(bytes).toBeInstanceOf(Uint8Array);
+        expect(bytes.length).toBeGreaterThan(0);
+      });
+
+      it('should throw a descriptive error when base64 payload is invalid', () => {
+        expect(() => base64ToUint8Array('not_base64!!!')).toThrow(
+          '[Excel-Builder-Vanilla] Invalid base64 payload while creating Excel media.',
+        );
+      });
+
       it('should return a Blob instance with .xlsx default mime type when calling the method without any type', async () => {
         const workbook = createWorkbook();
         const file = await createExcelFile(workbook);

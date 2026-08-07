@@ -2,7 +2,9 @@ import { createExcelFileStream, createWorkbook, type ExcelColumnMetadata } from 
 
 import './example15.scss';
 
-const ROWS = 100_000;
+declare const __EXCEL_DEMO_STREAMING_ROWS__: number | undefined;
+
+const ROWS = typeof __EXCEL_DEMO_STREAMING_ROWS__ === 'number' ? __EXCEL_DEMO_STREAMING_ROWS__ : 100_000;
 
 export default class Example {
   exportBtnElm!: HTMLButtonElement;
@@ -62,8 +64,10 @@ export default class Example {
     const chunks: Uint8Array[] = [];
     let processed = 0;
 
-    // Use async iterator for both browser and Node
-    for await (const chunk of stream as AsyncIterable<Uint8Array>) {
+    const reader = (stream as ReadableStream<Uint8Array>).getReader();
+    while (true) {
+      const { done, value: chunk } = await reader.read();
+      if (done) break;
       chunks.push(chunk);
       processed += 1000;
       this.progressElm.textContent = `Exported ${Math.min(processed, ROWS)} / ${ROWS} rows...`;
