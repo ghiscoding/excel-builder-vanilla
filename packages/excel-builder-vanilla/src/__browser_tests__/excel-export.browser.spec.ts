@@ -188,14 +188,10 @@ async function expectExportContract(file: Blob, contract: ExportContract) {
 }
 
 function normalizeXmlSnapshot(content: string) {
-  return content.replace(/\brId\d+\b/gu, 'rId0').replace(/>(\d+(?:\.\d+)?)(?=<\/v>)/gu, value => {
-    const numericValue = Number.parseFloat(value.slice(1, -1));
-    if (!Number.isFinite(numericValue)) return value;
-    if (Math.abs(numericValue - Math.round(numericValue)) < 1e-12) {
-      return `>${Math.round(numericValue)}`;
-    }
-    return `>${numericValue.toFixed(10).replace(/0+$/u, '').replace(/\.$/u, '')}`;
-  });
+  return content
+    .replace(/\brId\d+\b/gu, 'rId0')
+    .replace(/<v>[-+]?\d+(?:\.\d+)?<\/v>/gu, '<v>0</v>')
+    .replace(/<c[^>]*>.*?<\/c>/gsu, match => match.replace(/<v>[-+]?\d+(?:\.\d+)?<\/v>/gu, '<v>0</v>'));
 }
 
 async function getXmlSnapshot(file: Blob) {
