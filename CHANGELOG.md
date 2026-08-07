@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.3](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.2...v5.2.3) (2026-08-07)
+
+### Bug Fixes
+
+* align version between types and lib ([340218e](https://github.com/ghiscoding/excel-builder-vanilla/commit/340218e5fc3e8c8f388636b493b0e15a3ee354d0)) - by @ghiscoding
+
 ## [5.2.2](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.1...v5.2.2) (2026-08-07)
 
 ### Reverts
