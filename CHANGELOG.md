@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.2](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.1...v5.2.2) (2026-08-07)
+
+### Reverts
+
+* Revert "chore(tests): add Vitest Browser Mode to test exported files" ([301b3fd](https://github.com/ghiscoding/excel-builder-vanilla/commit/301b3fdb382d5115d421bca8dcdfe6b116b4e6ab)) - by @ghiscoding
+
 ## [5.2.1](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.0...v5.2.1) (2026-08-06)
 
 ### Bug Fixes
