@@ -239,10 +239,11 @@ describe('Excel exports in a real browser', () => {
   });
 
   it('normalizes relationship IDs before snapshotting XML content', () => {
-    const xml = '<Relationships><Relationship Id="rId21"/><Relationship Id="rId22"/></Relationships><workbook><sheet r:id="rId24"/></workbook>';
+    const xml =
+      '<Relationships><Relationship Id="rId21"/><Relationship Id="rId22"/></Relationships><workbook><sheet r:id="rId24"/></workbook>';
 
     expect(normalizeXmlSnapshot(xml)).toBe(
-      '<Relationships><Relationship Id="rId0"/><Relationship Id="rId0"/></Relationships><workbook><sheet r:id="rId0"/></workbook>'
+      '<Relationships><Relationship Id="rId0"/><Relationship Id="rId0"/></Relationships><workbook><sheet r:id="rId0"/></workbook>',
     );
   });
 
