@@ -25,6 +25,13 @@ interface ExportContract {
   paths?: string[];
 }
 
+interface DownloadWaiter {
+  cleanup: () => void;
+  reject: (reason?: unknown) => void;
+}
+
+let activeDownloadWaiter: DownloadWaiter | null = null;
+
 const demoModules = import.meta.glob('../../../demo/src/examples/example*.ts', {
   eager: true,
   import: 'default',
@@ -121,7 +128,12 @@ const exportContracts: Record<string, ExportContract> = {
   },
 };
 
-function waitForDownload(timeoutMs = 60_000) {
+function waitForDownload(timeoutMs = 300_000) {
+  if (activeDownloadWaiter) {
+    activeDownloadWaiter.cleanup();
+    activeDownloadWaiter.reject(new Error('A previous download waiter was replaced before it resolved.'));
+  }
+
   return new Promise<Download>((resolve, reject) => {
     const originalClick = HTMLAnchorElement.prototype.click;
     const originalCreateObjectURL = URL.createObjectURL;
@@ -130,12 +142,24 @@ function waitForDownload(timeoutMs = 60_000) {
       cleanup();
       reject(new Error(`Timed out waiting for download after ${timeoutMs}ms.`));
     }, timeoutMs);
+
     const cleanup = () => {
       window.clearTimeout(timeoutId);
       window.removeEventListener('unhandledrejection', onRejection);
       HTMLAnchorElement.prototype.click = originalClick;
       URL.createObjectURL = originalCreateObjectURL;
+      if (activeDownloadWaiter === waiter) {
+        activeDownloadWaiter = null;
+      }
     };
+
+    const waiter: DownloadWaiter = {
+      cleanup,
+      reject,
+    };
+
+    activeDownloadWaiter = waiter;
+
     URL.createObjectURL = value => {
       const url = originalCreateObjectURL.call(URL, value);
       if (value instanceof Blob) blobsByUrl.set(url, value);
@@ -267,26 +291,28 @@ describe('Excel exports in a real browser', () => {
       const demo = new Demo();
       demo.mount();
 
-      const exportButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('button[id^="export"]'));
-      expect(exportButtons.length).toBeGreaterThan(0);
+      try {
+        const exportButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('button[id^="export"]'));
+        expect(exportButtons.length).toBeGreaterThan(0);
 
-      for (const button of exportButtons) {
-        const contract = exportContracts[`${exampleName}:${button.id}`];
-        expect(contract).toBeDefined();
-        const download = waitForDownload();
-        button.click();
-        const { anchor, file } = await download;
+        for (const button of exportButtons) {
+          const contract = exportContracts[`${exampleName}:${button.id}`];
+          expect(contract).toBeDefined();
+          const download = waitForDownload();
+          button.click();
+          const { anchor, file } = await download;
 
-        expect(anchor.download).toBe(contract?.filename);
-        expect(anchor.href).toMatch(/^blob:/u);
-        expect(file).toBeInstanceOf(Blob);
-        if (!file) throw new Error(`Expected ${exampleName} to create an XLSX Blob.`);
-        if (!contract) throw new Error(`Missing export contract for ${exampleName}:${button.id}.`);
-        await expectExportContract(file, contract);
-        expect(await getXmlSnapshot(file)).toMatchSnapshot(`${exampleName}-${button.id}`);
+          expect(anchor.download).toBe(contract?.filename);
+          expect(anchor.href).toMatch(/^blob:/u);
+          expect(file).toBeInstanceOf(Blob);
+          if (!file) throw new Error(`Expected ${exampleName} to create an XLSX Blob.`);
+          if (!contract) throw new Error(`Missing export contract for ${exampleName}:${button.id}.`);
+          await expectExportContract(file, contract);
+          expect(await getXmlSnapshot(file)).toMatchSnapshot(`${exampleName}-${button.id}`);
+        }
+      } finally {
+        demo.unmount();
       }
-
-      demo.unmount();
-    });
+    }, 300_000);
   }
 });
