@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.5](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.4...v5.2.5) (2026-08-21)
+
+### Bug Fixes
+
+* **package:** include TypeScript sources in published package ([25a3f99](https://github.com/ghiscoding/excel-builder-vanilla/commit/25a3f99029542d7df96a77b782731d76e6d76b42)) - by @ghiscoding
+
 ## [5.2.4](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.3...v5.2.4) (2026-08-21)
 
 ### Bug Fixes
