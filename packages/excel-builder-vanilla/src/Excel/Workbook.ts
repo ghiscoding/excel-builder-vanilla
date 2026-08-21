@@ -188,12 +188,12 @@ export class Workbook {
    */
   setPrintTitleTop(inSheet: string, inRowCount: number) {
     if (this.printTitles == null) {
-      this.printTitles = {};
+      this.printTitles = Object.create(null);
     }
-    if (this.printTitles[inSheet] == null) {
-      this.printTitles[inSheet] = {};
+    if (this.printTitles![inSheet] == null) {
+      this.printTitles![inSheet] = {};
     }
-    this.printTitles[inSheet].top = inRowCount;
+    this.printTitles![inSheet].top = inRowCount;
   }
 
   /**
@@ -205,13 +205,13 @@ export class Workbook {
    */
   setPrintTitleLeft(inSheet: string, inRowCount: number) {
     if (this.printTitles == null) {
-      this.printTitles = {};
+      this.printTitles = Object.create(null);
     }
-    if (this.printTitles[inSheet] == null) {
-      this.printTitles[inSheet] = {};
+    if (this.printTitles![inSheet] == null) {
+      this.printTitles![inSheet] = {};
     }
     // WARN: this does not handle AA, AB, etc.
-    this.printTitles[inSheet].left = String.fromCharCode(64 + inRowCount);
+    this.printTitles![inSheet].left = String.fromCharCode(64 + inRowCount);
   }
 
   addMedia(_type: string, fileName: string, fileData: any, contentType?: string | null) {
