@@ -8,7 +8,7 @@
 
 [![NPM downloads](https://img.shields.io/npm/dy/excel-builder-vanilla)](https://npmjs.org/package/excel-builder-vanilla)
 [![npm](https://img.shields.io/npm/v/excel-builder-vanilla.svg?logo=npm&logoColor=fff&label=npm)](https://www.npmjs.com/package/excel-builder-vanilla)
-[![npm bundle size](https://img.shields.io/badge/gzip-20.7kB-1183c4)](https://bundlejs.com/?q=excel-builder-vanilla)
+[![npm bundle size](https://img.shields.io/badge/gzip-20.8kB-1183c4)](https://bundlejs.com/?q=excel-builder-vanilla)
 
 ## Documentation
 
@@ -24,7 +24,7 @@ This project was originally created by Stephen Liberty and `excel-builder-vanill
 
 ### Comparison to other similar libraries
 
-Excel-builder-vanilla is at the minimum 7-13x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 20.7Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates to these 2 major differences:
+Excel-builder-vanilla is at the minimum 7-13x times smaller than the most popular libraries (we used `Bundlephobia` to compare), excel-builder-vanilla is 20.8Kb gzip while [XLSX](https://bundlephobia.com/package/xlsx) is 136Kb and [ExcelJS](https://bundlephobia.com/package/exceljs) is 251Kb gzip. The reason as to why it's much smaller is very simple and relates to these 2 major differences:
 - excel-builder-vanilla is ESM-Only (tree shakable) and all other libraries are still just offering CJS (CommonJS) which increases their download/install size (not tree shakable)
 - excel-builder-vanilla is only offering Excel export (writer) but without any reading capabilities making the project very lightweight
 
