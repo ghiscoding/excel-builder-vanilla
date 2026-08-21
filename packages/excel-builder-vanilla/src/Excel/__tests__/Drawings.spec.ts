@@ -2,6 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { createWorkbook } from '../../factory.js';
 import { Chart } from '../Drawing/Chart.js';
+import { Drawing } from '../Drawing/Drawing.js';
 import { Picture } from '../Drawing/Picture.js';
 import { Drawings } from '../Drawings.js';
 import { Positioning } from '../Positioning.js';
@@ -64,9 +65,12 @@ describe('Drawings', () => {
 
     const file = await fruitWorkbook.generateFiles();
     const dwgs = fruitWorkbook.drawings;
+    const drawingRelations = Object.values(drawings.relations.relations);
 
     expect(file).toBeTruthy();
     expect(dwgs[0].drawings.length).toBe(3);
+    expect(drawingRelations).toHaveLength(1);
+    expect(drawingRelations[0].object).toBe(picRef1);
 
     // print titles offset of 2 => left B and top 2
     fruitWorkbook.setPrintTitleLeft('sheet1', 2);
@@ -92,6 +96,13 @@ describe('Drawings', () => {
     expect(() => d.toXML()).not.toThrow();
   });
 
+  test('toXML ignores unsupported base drawings', () => {
+    const d = new Drawings();
+    d.addDrawing(new Drawing());
+
+    expect(d.toXML().documentElement.children).toHaveLength(0);
+  });
+
   test('toXML chart branch assigns relationship and appends XML', () => {
     const d = new Drawings();
     const chart = new Chart({
@@ -104,6 +115,7 @@ describe('Drawings', () => {
     d.addDrawing(chart);
     const xmlDoc = d.toXML();
     expect(chart.relId).toMatch(/^rId\d+$/);
+    expect(Object.values(d.relations.relations)[0].object).toBe(chart);
     const xmlStr = xmlDoc.toString();
     expect(xmlStr).toContain('ChartRel');
     expect(xmlStr).toContain('<c:chart '); // chart branch executed

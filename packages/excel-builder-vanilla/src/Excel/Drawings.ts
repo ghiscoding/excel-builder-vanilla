@@ -1,9 +1,16 @@
 import { uniqueId } from '../utilities/uniqueId.js';
-import { Chart } from './Drawing/Chart.js';
 import type { Drawing } from './Drawing/Drawing.js';
-import { Picture } from './Drawing/Picture.js';
 import { RelationshipManager } from './RelationshipManager.js';
 import { Util } from './Util.js';
+import type { XMLDOM, XMLNode } from './XMLDOM.js';
+
+type RelationshipTarget = Parameters<RelationshipManager['getRelationshipId']>[0];
+type RelationshipDrawing = Drawing & {
+  getMediaData?: () => RelationshipTarget;
+  getMediaType: () => Parameters<RelationshipManager['addRelation']>[1];
+  setRelationshipId: (rId: string) => void;
+  toXML: (doc: XMLDOM) => XMLNode;
+};
 
 /**
  * @module Excel/Drawings
@@ -36,22 +43,15 @@ export class Drawings {
     drawings.setAttribute('xmlns:xdr', Util.schemas.spreadsheetDrawing);
 
     for (let i = 0, l = this.drawings.length; i < l; i++) {
-      const item = this.drawings[i];
-      if (item instanceof Picture) {
-        let rId = this.relations.getRelationshipId(item.getMediaData());
-        if (!rId) {
-          rId = this.relations.addRelation(item.getMediaData(), item.getMediaType());
-        }
-        item.setRelationshipId(rId);
-        drawings.appendChild(item.toXML(doc));
-      } else if (item instanceof Chart) {
-        let rId = this.relations.getRelationshipId(item);
-        if (!rId) {
-          rId = this.relations.addRelation(item, item.getMediaType());
-        }
-        item.setRelationshipId(rId);
-        drawings.appendChild(item.toXML(doc));
+      const item = this.drawings[i] as Partial<RelationshipDrawing>;
+      if (!item.getMediaType || !item.setRelationshipId || !item.toXML) {
+        continue;
       }
+      const target = (item.getMediaData?.() ?? item) as RelationshipTarget;
+      const mediaType = item.getMediaType();
+      const rId = this.relations.getRelationshipId(target) || this.relations.addRelation(target, mediaType);
+      item.setRelationshipId(rId);
+      drawings.appendChild(item.toXML(doc));
     }
     return doc;
   }
