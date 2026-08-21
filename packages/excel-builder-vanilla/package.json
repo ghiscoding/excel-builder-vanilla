@@ -31,6 +31,9 @@
     "access": "public"
   },
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "main": "./dist/index.js",
   "exports": {
     ".": {
