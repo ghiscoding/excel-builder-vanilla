@@ -4,6 +4,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.4](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.3...v5.2.4) (2026-08-21)
+
+### Bug Fixes
+
+* **security:** prevent print title prototype pollution ([9ad6e93](https://github.com/ghiscoding/excel-builder-vanilla/commit/9ad6e9312b50b347f61ecc5c132c5a2f8ab4579c)) - by @ghiscoding
+
+### Performance Improvements
+
+* reduce package and drawing bundle size ([83a109f](https://github.com/ghiscoding/excel-builder-vanilla/commit/83a109f811bd0dbadb130cefcfc59c661ea2a893)) - by @ghiscoding
+
 ## [5.2.3](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.2...v5.2.3) (2026-08-07)
 
 ### Bug Fixes
