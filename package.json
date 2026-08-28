@@ -62,14 +62,14 @@
     "@lerna-lite/cli": "^5.6.1",
     "@lerna-lite/publish": "^5.6.1",
     "@types/node": "^26.2.0",
-    "@vitest/browser-playwright": "^4.1.11",
-    "@vitest/coverage-v8": "^4.1.11",
-    "@vitest/ui": "4.1.11",
+    "@vitest/browser-playwright": "^5.0.0-rc.2",
+    "@vitest/coverage-v8": "^5.0.0-rc.2",
+    "@vitest/ui": "^5.0.0-rc.2",
     "conventional-changelog-conventionalcommits": "^10.4.0",
     "happy-dom": "^20.11.2",
     "playwright": "^1.62.1",
     "remove-glob": "catalog:",
     "typescript": "catalog:",
-    "vitest": "^4.1.11"
+    "vitest": "^5.0.0-rc.2"
   }
 }
