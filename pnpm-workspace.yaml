@@ -7,18 +7,20 @@ allowBuilds:
 # Define a catalog of version ranges.
 catalog:
   fflate: ^0.8.3
-  native-copyfiles: ^2.0.3
-  remove-glob: ^1.2.1
-  sass: ^1.102.0
+  native-copyfiles: ^2.1.0
+  remove-glob: ^1.2.3
+  sass: ^1.105.1
   typescript: ^6.0.3 # can't upgrade to TS7 because dts-bundle-generator
-  vite: ^8.2.0
+  vite: ^8.3.2
 
 minimumReleaseAge: 2880 # 2 days in minutes
 
 minimumReleaseAgeExclude:
   # exclude packages that I personally maintain and are safe to use on the same day
   - '@lerna-lite/*'
+  - native-copyfiles
+  - remove-glob
 
 overrides:
-  ip-address: ^10.5.0
-  undici: ^7.29.0
+  ip-address: ^10.7.3
+  undici: ^8.11.2
