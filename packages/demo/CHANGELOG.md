@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.5...v5.3.0) (2026-10-04)
+
+### Features
+
+* reduce Excel export memory and add incremental ZIP streaming ([#221](https://github.com/ghiscoding/excel-builder-vanilla/issues/221)) ([8123ba6](https://github.com/ghiscoding/excel-builder-vanilla/commit/8123ba6b277bc18f2a1d835f2a837154cb3515b2)) - by @ghiscoding
+
 ## [5.2.5](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.4...v5.2.5) (2026-08-21)
 
 **Note:** Version bump only for package excel-builder-vanilla-demo
