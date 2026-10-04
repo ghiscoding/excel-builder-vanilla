@@ -85,6 +85,12 @@ albumList.setData([
 ]);
 ```
 
+### Export validation
+
+Normal and streaming ZIP exports reject entry paths containing `.` or `..` segments, empty segments, backslashes, colons, or control characters. A single leading package slash is accepted. This also applies to media filenames and custom `generateFiles()` output; validation happens when exporting, not in `addMedia()`.
+
+XML serialization rejects element and attribute names containing markup delimiters or control characters, including malformed style keys. `XMLNode.setAttribute()` rejects names that would overwrite node members, such as `__proto__`, `children`, or `toString`. Ordinary attribute updates and removal with `null` remain supported. These checks do not validate the full XML/OOXML schema or sanitize custom XML strings supplied by exporters.
+
 ## Changelog
 
 [CHANGELOG](https://github.com/ghiscoding/excel-builder-vanilla/blob/main/packages/excel-builder-vanilla/CHANGELOG.md)

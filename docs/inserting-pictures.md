@@ -67,6 +67,8 @@ const data = createExcelFile(fruitWorkbook);
 downloader('Fruit WB.xlsx', data);
 ```
 
+Use a plain media filename such as `strawberry.jpg`. Normal and streaming exports reject ZIP paths containing parent/current-directory segments, empty segments, backslashes, colons, or control characters. Unsafe names are rejected during export, not by `addMedia()`.
+
 ### Vite `base64` loader plugin
 
 For loading an image as `base64` with ViteJS, you could do it easily with a custom Vite loader plugin.

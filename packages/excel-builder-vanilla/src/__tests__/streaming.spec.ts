@@ -79,6 +79,21 @@ describe('Streaming API', () => {
         expect(Object.keys(files)).toContain('xl/worksheet.xml');
         expect(Object.keys(files)).toContain('xl/media/image.png');
       });
+
+      it('rejects unsafe ZIP entry paths from custom workbook exporters', async () => {
+        const workbook: any = {
+          async generateFiles() {
+            return { '/xl/media/../../../outside.png': 'AA==' };
+          },
+        };
+        const { nodeExcelStream } = await import('../streaming.js');
+
+        await expect(async () => {
+          for await (const _chunk of nodeExcelStream(workbook)) {
+            // Consume the stream to trigger ZIP entry validation.
+          }
+        }).rejects.toThrow('Invalid ZIP entry path');
+      });
     });
 
     it('throws on unsupported environment', () => {
