@@ -230,6 +230,25 @@ describe('Workbook', () => {
     });
   });
 
+  describe('generateFiles()', () => {
+    it('yields to the event loop while collecting XML chunks after its time budget expires', async () => {
+      const wb = new Workbook();
+      vi.spyOn(wb, 'generateFileEntries').mockImplementation(function* () {
+        yield ['/xl/test.xml', ['<test/>']];
+      });
+      const now = vi.spyOn(Date, 'now').mockReturnValueOnce(0).mockReturnValueOnce(8).mockReturnValueOnce(8);
+
+      try {
+        const files = await wb.generateFiles();
+
+        expect(files['/xl/test.xml']).toBe('<test/>');
+        expect(now).toHaveBeenCalledTimes(3);
+      } finally {
+        now.mockRestore();
+      }
+    });
+  });
+
   describe('_prepareFilesForPackaging()', () => {
     it('should use .xml property if present in _prepareFilesForPackaging', () => {
       const wb = new Workbook();
