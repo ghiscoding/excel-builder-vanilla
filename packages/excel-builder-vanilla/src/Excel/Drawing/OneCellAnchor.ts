@@ -44,21 +44,7 @@ export class OneCellAnchor {
 
   toXML(xmlDoc: XMLDOM, content: any) {
     const root = Util.createElement(xmlDoc, 'xdr:oneCellAnchor');
-    const from = Util.createElement(xmlDoc, 'xdr:from');
-    const fromCol = Util.createElement(xmlDoc, 'xdr:col');
-    fromCol.appendChild(xmlDoc.createTextNode(String(this.x)));
-    const fromColOff = Util.createElement(xmlDoc, 'xdr:colOff');
-    fromColOff.appendChild(xmlDoc.createTextNode(String(this.xOff || 0)));
-    const fromRow = Util.createElement(xmlDoc, 'xdr:row');
-    fromRow.appendChild(xmlDoc.createTextNode(String(this.y)));
-    const fromRowOff = Util.createElement(xmlDoc, 'xdr:rowOff');
-    fromRowOff.appendChild(xmlDoc.createTextNode(String(this.yOff || 0)));
-    from.appendChild(fromCol);
-    from.appendChild(fromColOff);
-    from.appendChild(fromRow);
-    from.appendChild(fromRowOff);
-
-    root.appendChild(from);
+    root.appendChild(Util.createAnchorPosition(xmlDoc, 'xdr:from', this));
 
     const dimensions = Util.createElement(xmlDoc, 'xdr:ext');
     dimensions.setAttribute('cx', String(this.width));

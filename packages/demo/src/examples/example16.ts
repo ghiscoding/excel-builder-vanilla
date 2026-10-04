@@ -106,10 +106,15 @@ export default class Example {
       artistWorkbook.addWorksheet(albumList);
 
       // Streaming export with progress bar
-      const stream = createExcelFileStream(artistWorkbook, { chunkSize: 10 });
+      const stream = createExcelFileStream(artistWorkbook);
       const chunks: Uint8Array[] = [];
       let processed = 0;
-      const totalRows = ROWS;
+      if (progressElm && progressBar) {
+        progressElm.removeAttribute('aria-valuenow');
+        progressBar.style.width = '100%';
+        progressBar.classList.add('progress-bar-striped', 'progress-bar-animated');
+        progressBar.textContent = 'Exporting...';
+      }
 
       const reader = (stream as ReadableStream<Uint8Array>).getReader();
       while (true) {
@@ -117,16 +122,12 @@ export default class Example {
         if (done) break;
         chunks.push(chunk);
         processed += chunk.length;
-        if (progressElm && progressBar) {
-          const percent = Math.min((processed / totalRows) * 100, 100);
-          progressBar.style.width = `${percent}%`;
-          progressElm.setAttribute('aria-valuenow', percent.toString());
-          progressBar.textContent = `${percent.toFixed(1)}%`;
-          void progressBar.offsetWidth;
-        }
-        // Artificial delay for demo purposes ONLY. Remove this in production for best performance.
-        // In a real implementation, use: await new Promise(requestAnimationFrame);
-        await new Promise(resolve => setTimeout(resolve, 30));
+        if (progressBar) progressBar.textContent = `Exporting ${(processed / 1024).toFixed(0)} KiB...`;
+      }
+      if (progressElm && progressBar) {
+        progressElm.setAttribute('aria-valuenow', '100');
+        progressBar.classList.remove('progress-bar-striped', 'progress-bar-animated');
+        progressBar.textContent = 'Complete';
       }
       // Combine chunks and trigger download
       const blob = new Blob(

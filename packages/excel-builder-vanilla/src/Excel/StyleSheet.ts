@@ -3,7 +3,7 @@ import { isObject, isString } from '../utilities/isTypeOf.js';
 import { pick } from '../utilities/pick.js';
 import { uniqueId } from '../utilities/uniqueId.js';
 import { Util } from './Util.js';
-import type { XMLDOM } from './XMLDOM.js';
+import type { XMLDOM, XMLNode } from './XMLDOM.js';
 
 /**
  * @module Excel/StyleSheet
@@ -268,14 +268,14 @@ export class StyleSheet {
     return fontStyle;
   }
 
-  exportBorders(doc: XMLDOM) {
-    const borders = doc.createElement('borders');
-    borders.setAttribute('count', this.borders.length);
+  private exportCollection<T>(doc: XMLDOM, name: string, values: T[], exportItem: (doc: XMLDOM, value: T) => XMLNode) {
+    const collection = Util.createElement(doc, name, [['count', values.length]]);
+    for (const value of values) collection.appendChild(exportItem.call(this, doc, value));
+    return collection;
+  }
 
-    for (let i = 0, l = this.borders.length; i < l; i++) {
-      borders.appendChild(this.exportBorder(doc, this.borders[i]));
-    }
-    return borders;
+  exportBorders(doc: XMLDOM) {
+    return this.exportCollection(doc, 'borders', this.borders, this.exportBorder);
   }
 
   exportBorder(doc: XMLDOM, data: any) {
@@ -319,21 +319,11 @@ export class StyleSheet {
   }
 
   exportMasterCellFormats(doc: XMLDOM) {
-    const cellFormats = Util.createElement(doc, 'cellXfs', [['count', this.masterCellFormats.length]]);
-    for (let i = 0, l = this.masterCellFormats.length; i < l; i++) {
-      const mformat = this.masterCellFormats[i];
-      cellFormats.appendChild(this.exportCellFormatElement(doc, mformat));
-    }
-    return cellFormats;
+    return this.exportCollection(doc, 'cellXfs', this.masterCellFormats, this.exportCellFormatElement);
   }
 
   exportMasterCellStyles(doc: XMLDOM) {
-    const records = Util.createElement(doc, 'cellStyleXfs', [['count', this.masterCellStyles.length]]);
-    for (let i = 0, l = this.masterCellStyles.length; i < l; i++) {
-      const mstyle = this.masterCellStyles[i];
-      records.appendChild(this.exportCellFormatElement(doc, mstyle));
-    }
-    return records;
+    return this.exportCollection(doc, 'cellStyleXfs', this.masterCellStyles, this.exportCellFormatElement);
   }
 
   exportCellFormatElement(doc: XMLDOM, styleInstructions: ExcelStyleInstruction) {
@@ -398,13 +388,7 @@ export class StyleSheet {
   }
 
   exportFonts(doc: XMLDOM) {
-    const fonts = doc.createElement('fonts');
-    fonts.setAttribute('count', String(this.fonts.length));
-    for (let i = 0, l = this.fonts.length; i < l; i++) {
-      const fd = this.fonts[i];
-      fonts.appendChild(this.exportFont(doc, fd));
-    }
-    return fonts;
+    return this.exportCollection(doc, 'fonts', this.fonts, this.exportFont);
   }
 
   exportFont(doc: XMLDOM, fd: any) {
@@ -455,13 +439,7 @@ export class StyleSheet {
   }
 
   exportFills(doc: XMLDOM) {
-    const fills = doc.createElement('fills');
-    fills.setAttribute('count', String(this.fills.length));
-    for (let i = 0, l = this.fills.length; i < l; i++) {
-      const fd = this.fills[i];
-      fills.appendChild(this.exportFill(doc, fd));
-    }
-    return fills;
+    return this.exportCollection(doc, 'fills', this.fills, this.exportFill);
   }
 
   exportFill(doc: XMLDOM, fd: any) {
@@ -552,13 +530,7 @@ export class StyleSheet {
   }
 
   exportNumberFormatters(doc: XMLDOM) {
-    const formatters = doc.createElement('numFmts');
-    formatters.setAttribute('count', String(this.numberFormatters.length));
-    for (let i = 0, l = this.numberFormatters.length; i < l; i++) {
-      const fd = this.numberFormatters[i];
-      formatters.appendChild(this.exportNumberFormatter(doc, fd));
-    }
-    return formatters;
+    return this.exportCollection(doc, 'numFmts', this.numberFormatters, this.exportNumberFormatter);
   }
 
   exportNumberFormatter(doc: XMLDOM, fd: any) {
@@ -588,15 +560,7 @@ export class StyleSheet {
   }
 
   exportDifferentialStyles(doc: XMLDOM) {
-    const dxfs = doc.createElement('dxfs');
-    dxfs.setAttribute('count', String(this.differentialStyles.length));
-
-    for (let i = 0, l = this.differentialStyles.length; i < l; i++) {
-      const style = this.differentialStyles[i];
-      dxfs.appendChild(this.exportDFX(doc, style));
-    }
-
-    return dxfs;
+    return this.exportCollection(doc, 'dxfs', this.differentialStyles, this.exportDFX);
   }
 
   exportDFX(doc: XMLDOM, style: any) {

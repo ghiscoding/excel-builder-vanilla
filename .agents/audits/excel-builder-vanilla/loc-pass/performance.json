@@ -1,0 +1,74 @@
+{
+  "node": "v24.16.0",
+  "methodology": "Five fresh processes per variant, alternating order; restore only changed pre-pass method bodies; 300 warmup calls and GC; serialization plus XML stringification; exclude input construction.",
+  "workloads": {
+    "charts": "6000 charts across six chart types",
+    "contentTypes": "300 exports of 4000 part overrides"
+  },
+  "runs": {
+    "before": [
+      {
+        "chartMs": 121.95191799999998,
+        "contentTypesMs": 770.6655400000002,
+        "checksum": 320809800
+      },
+      {
+        "chartMs": 116.14457499999997,
+        "contentTypesMs": 704.5332449999999,
+        "checksum": 320809800
+      },
+      {
+        "chartMs": 115.034536,
+        "contentTypesMs": 735.6956520000001,
+        "checksum": 320809800
+      },
+      {
+        "chartMs": 144.51957099999993,
+        "contentTypesMs": 1022.2006500000002,
+        "checksum": 320809800
+      },
+      {
+        "chartMs": 184.41753300000005,
+        "contentTypesMs": 852.7864249999998,
+        "checksum": 320809800
+      }
+    ],
+    "after": [
+      {
+        "chartMs": 110.79503299999999,
+        "contentTypesMs": 727.898576,
+        "checksum": 320809800
+      },
+      {
+        "chartMs": 125.07028000000003,
+        "contentTypesMs": 736.720298,
+        "checksum": 320809800
+      },
+      {
+        "chartMs": 118.43862999999999,
+        "contentTypesMs": 710.0581629999999,
+        "checksum": 320809800
+      },
+      {
+        "chartMs": 116.04578900000001,
+        "contentTypesMs": 743.779986,
+        "checksum": 320809800
+      },
+      {
+        "chartMs": 112.86356,
+        "contentTypesMs": 710.623636,
+        "checksum": 320809800
+      }
+    ]
+  },
+  "medians": {
+    "before": {
+      "chartMs": 121.95191799999998,
+      "contentTypesMs": 770.6655400000002
+    },
+    "after": {
+      "chartMs": 116.04578900000001,
+      "contentTypesMs": 727.898576
+    }
+  }
+}

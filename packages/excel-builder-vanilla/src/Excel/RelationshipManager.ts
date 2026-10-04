@@ -24,7 +24,8 @@ type Relation = {
  * @module Excel/RelationshipManager
  */
 export class RelationshipManager {
-  relations: Relation = {};
+  relations: Relation = Object.create(null);
+  paths?: Record<string, string>;
   lastId = 1;
 
   constructor() {
@@ -45,7 +46,7 @@ export class RelationshipManager {
 
   addRelation(object: { id: string; target?: string | null; targetMode?: string }, type: keyof typeof Util.schemas) {
     this.relations[object.id] = {
-      id: uniqueId('rId'),
+      id: this.getRelationshipId(object) || uniqueId('rId'),
       schema: Util.schemas[type],
       object,
     };
@@ -53,7 +54,7 @@ export class RelationshipManager {
   }
 
   getRelationshipId(object: { id: string; target?: string | null; targetMode?: string }) {
-    return this.relations[object.id] ? this.relations[object.id].id : null;
+    return Object.prototype.hasOwnProperty.call(this.relations, object.id) ? this.relations[object.id].id : null;
   }
 
   toXML() {
@@ -64,7 +65,7 @@ export class RelationshipManager {
       const relationship = Util.createElement(doc, 'Relationship', [
         ['Id', data.id],
         ['Type', data.schema],
-        ['Target', data.object.target || Paths[id]],
+        ['Target', data.object.target || this.paths?.[id] || Paths[id]],
       ]);
       if (data.object.targetMode) {
         relationship.setAttribute('TargetMode', data.object.targetMode);

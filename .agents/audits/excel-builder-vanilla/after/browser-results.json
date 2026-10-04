@@ -1,0 +1,140 @@
+{
+  "browser": "151.0.7922.34",
+  "methodology": "Fresh page per run, 500-row warmup, bundled browser dependency, three runs; no forced browser GC.",
+  "results": [
+    {
+      "config": {
+        "name": "numeric-100k",
+        "kind": "numeric",
+        "rows": 10000
+      },
+      "runs": [
+        {
+          "totalMs": 344.29999999981374,
+          "generateMs": 82.70000000018626,
+          "firstTimerMs": 8.400000000372529,
+          "bytes": 299079,
+          "chunks": 0
+        },
+        {
+          "totalMs": 352.20000000018626,
+          "generateMs": 67.70000000018626,
+          "firstTimerMs": 9.400000000372529,
+          "bytes": 299079,
+          "chunks": 0
+        },
+        {
+          "totalMs": 318.09999999962747,
+          "generateMs": 68.69999999925494,
+          "firstTimerMs": 8.199999999254942,
+          "bytes": 299079,
+          "chunks": 0
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "unique-100k",
+        "kind": "unique",
+        "rows": 10000
+      },
+      "runs": [
+        {
+          "totalMs": 646.5999999996275,
+          "generateMs": 303.09999999962747,
+          "firstTimerMs": 9.700000000186265,
+          "bytes": 546439,
+          "chunks": 0
+        },
+        {
+          "totalMs": 626.1999999992549,
+          "generateMs": 312.90000000037253,
+          "firstTimerMs": 7.8999999994412065,
+          "bytes": 546439,
+          "chunks": 0
+        },
+        {
+          "totalMs": 512.2999999998137,
+          "generateMs": 224.90000000037253,
+          "firstTimerMs": 8.599999999627471,
+          "bytes": 546439,
+          "chunks": 0
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "stream-100k",
+        "kind": "numeric",
+        "rows": 10000,
+        "stream": true
+      },
+      "runs": [
+        {
+          "totalMs": 381.90000000037253,
+          "firstTimerMs": 10.200000000186265,
+          "firstChunkMs": 9.600000000558794,
+          "bytes": 300224,
+          "chunks": 368,
+          "firstBackingBytes": 54
+        },
+        {
+          "totalMs": 383,
+          "firstTimerMs": 12.200000000186265,
+          "firstChunkMs": 6.3999999994412065,
+          "bytes": 300224,
+          "chunks": 368,
+          "firstBackingBytes": 54
+        },
+        {
+          "totalMs": 397.20000000018626,
+          "firstTimerMs": 12.5,
+          "firstChunkMs": 6.7000000001862645,
+          "bytes": 300224,
+          "chunks": 368,
+          "firstBackingBytes": 54
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "stream-500k",
+        "kind": "numeric",
+        "rows": 50000,
+        "stream": true
+      },
+      "runs": [
+        {
+          "totalMs": 2198.7000000001863,
+          "firstTimerMs": 13.100000000558794,
+          "firstChunkMs": 7.5,
+          "bytes": 1493068,
+          "chunks": 1581,
+          "firstBackingBytes": 54
+        },
+        {
+          "totalMs": 2123.5,
+          "firstTimerMs": 8.5,
+          "firstChunkMs": 8.199999999254942,
+          "bytes": 1493068,
+          "chunks": 1581,
+          "firstBackingBytes": 54
+        },
+        {
+          "totalMs": 2158.5,
+          "firstTimerMs": 13,
+          "firstChunkMs": 7.400000000372529,
+          "bytes": 1493068,
+          "chunks": 1581,
+          "firstBackingBytes": 54
+        }
+      ]
+    }
+  ],
+  "noReaderProbe": {
+    "enqueues": 0,
+    "bytes": 0,
+    "closed": false,
+    "generateCalls": 0
+  }
+}

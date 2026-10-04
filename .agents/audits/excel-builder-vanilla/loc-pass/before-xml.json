@@ -1,0 +1,1282 @@
+{
+  "charts": [
+    {
+      "options": {
+        "type": "column",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"clustered\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "column",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"clustered\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "column",
+        "stacking": "stacked",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"stacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "column",
+        "stacking": "stacked",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"stacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "column",
+        "stacking": "percent",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"percentStacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "column",
+        "stacking": "percent",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"percentStacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "bar",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"bar\"/><c:grouping val=\"clustered\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "bar",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"bar\"/><c:grouping val=\"clustered\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "bar",
+        "stacking": "stacked",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"bar\"/><c:grouping val=\"stacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "bar",
+        "stacking": "stacked",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"bar\"/><c:grouping val=\"stacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "bar",
+        "stacking": "percent",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"bar\"/><c:grouping val=\"percentStacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "bar",
+        "stacking": "percent",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"bar\"/><c:grouping val=\"percentStacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "line",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:lineChart><c:grouping val=\"standard\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:lineChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "line",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:lineChart><c:grouping val=\"standard\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:ln><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></a:ln></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:lineChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "line",
+        "stacking": "stacked",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:lineChart><c:grouping val=\"stacked\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:lineChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "line",
+        "stacking": "stacked",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:lineChart><c:grouping val=\"stacked\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:ln><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></a:ln></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:lineChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "line",
+        "stacking": "percent",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:lineChart><c:grouping val=\"percentStacked\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:lineChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "line",
+        "stacking": "percent",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:lineChart><c:grouping val=\"percentStacked\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:ln><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></a:ln></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:lineChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "pie",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:pieChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser></c:pieChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "pie",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:pieChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls></c:pieChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "pie",
+        "stacking": "stacked",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:pieChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser></c:pieChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "pie",
+        "stacking": "stacked",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:pieChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls></c:pieChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "pie",
+        "stacking": "percent",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:pieChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser></c:pieChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "pie",
+        "stacking": "percent",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:pieChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls></c:pieChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "doughnut",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:doughnutChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:holeSize val=\"50\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser></c:doughnutChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "doughnut",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:doughnutChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:holeSize val=\"50\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls></c:doughnutChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "doughnut",
+        "stacking": "stacked",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:doughnutChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:holeSize val=\"50\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser></c:doughnutChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "doughnut",
+        "stacking": "stacked",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:doughnutChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:holeSize val=\"50\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls></c:doughnutChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "doughnut",
+        "stacking": "percent",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:doughnutChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:holeSize val=\"50\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser></c:doughnutChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "doughnut",
+        "stacking": "percent",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:doughnutChart><c:grouping val=\"clustered\"/><c:varyColors val=\"1\"/><c:holeSize val=\"50\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls></c:doughnutChart></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "scatter",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:scatterChart><c:scatterStyle val=\"marker\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:xVal><c:numLit><c:ptCount val=\"0\"/></c:numLit></c:xVal><c:yVal><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:yVal></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:scatterChart><c:valAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "scatter",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:scatterChart><c:scatterStyle val=\"marker\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:xVal><c:numRef><c:f>Data!$A$2:$A$4</c:f></c:numRef></c:xVal><c:yVal><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:yVal><c:spPr><a:ln><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></a:ln></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:scatterChart><c:valAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"-5\"/><c:max val=\"5\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "scatter",
+        "stacking": "stacked",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:scatterChart><c:scatterStyle val=\"marker\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:xVal><c:numLit><c:ptCount val=\"0\"/></c:numLit></c:xVal><c:yVal><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:yVal></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:scatterChart><c:valAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "scatter",
+        "stacking": "stacked",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:scatterChart><c:scatterStyle val=\"marker\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:xVal><c:numRef><c:f>Data!$A$2:$A$4</c:f></c:numRef></c:xVal><c:yVal><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:yVal><c:spPr><a:ln><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></a:ln></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:scatterChart><c:valAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"-5\"/><c:max val=\"5\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "scatter",
+        "stacking": "percent",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:scatterChart><c:scatterStyle val=\"marker\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:xVal><c:numLit><c:ptCount val=\"0\"/></c:numLit></c:xVal><c:yVal><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:yVal></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:scatterChart><c:valAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "scatter",
+        "stacking": "percent",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:scatterChart><c:scatterStyle val=\"marker\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:xVal><c:numRef><c:f>Data!$A$2:$A$4</c:f></c:numRef></c:xVal><c:yVal><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:yVal><c:spPr><a:ln><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></a:ln></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:scatterChart><c:valAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"-5\"/><c:max val=\"5\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "unknown",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"standard\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "unknown",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"standard\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "unknown",
+        "stacking": "stacked",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"standard\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "unknown",
+        "stacking": "stacked",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"standard\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "unknown",
+        "stacking": "percent",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"standard\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "type": "unknown",
+        "stacking": "percent",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"standard\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"clustered\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"clustered\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "stacking": "stacked",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"stacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "stacking": "stacked",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"stacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "stacking": "percent",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4"
+          }
+        ]
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:autoTitleDeleted val=\"1\"/><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"percentStacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val></c:ser><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    },
+    {
+      "options": {
+        "stacking": "percent",
+        "title": "Revenue <&> 😀",
+        "series": [
+          {
+            "name": "Q1 & Q2",
+            "valuesRange": "Data!$B$2:$B$4",
+            "scatterXRange": "Data!$A$2:$A$4",
+            "color": "#80abcdef"
+          }
+        ],
+        "categoriesRange": "Data!$A$2:$A$4",
+        "axis": {
+          "x": {
+            "title": "X",
+            "showGridLines": true,
+            "minimum": -5,
+            "maximum": 5
+          },
+          "y": {
+            "title": "Y",
+            "showGridLines": true,
+            "minimum": 0,
+            "maximum": 500
+          }
+        },
+        "legend": {
+          "show": true,
+          "position": "topRight",
+          "overlay": true
+        },
+        "dataLabels": {
+          "showValue": true,
+          "showPercent": true
+        }
+      },
+      "xml": "<c:chartSpace xmlns=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:c=\"http://schemas.openxmlformats.org/drawingml/2006/chart\" xmlns:a=\"http://schemas.openxmlformats.org/drawingml/2006/main\" xmlns:r=\"http://schemas.openxmlformats.org/officeDocument/2006/relationships\"><c:chart><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Revenue &lt;&amp;&gt; 😀</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title><c:autoTitleDeleted val=\"0\"/><c:legend><c:legendPos val=\"tr\"/><c:layout/><c:overlay val=\"1\"/></c:legend><c:plotArea><c:barChart><c:barDir val=\"col\"/><c:grouping val=\"percentStacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/><c:ser><c:idx val=\"0\"/><c:order val=\"0\"/><c:tx><c:v>Q1 &amp; Q2</c:v></c:tx><c:cat><c:strRef><c:f>Data!$A$2:$A$4</c:f></c:strRef></c:cat><c:val><c:numRef><c:f>Data!$B$2:$B$4</c:f></c:numRef></c:val><c:spPr><a:solidFill><a:srgbClr val=\"ABCDEF\"/></a:solidFill></c:spPr></c:ser><c:dLbls><c:showVal val=\"1\"/><c:showCatName val=\"0\"/><c:showPercent val=\"1\"/><c:showSerName val=\"0\"/></c:dLbls><c:axId val=\"5001\"/><c:axId val=\"5002\"/></c:barChart><c:catAx><c:axId val=\"5001\"/><c:scaling><c:orientation val=\"minMax\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"b\"/><c:tickLblPos val=\"nextTo\"/><c:crossAx val=\"5002\"/><c:crosses val=\"autoZero\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>X</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:catAx><c:valAx><c:axId val=\"5002\"/><c:scaling><c:orientation val=\"minMax\"/><c:min val=\"0\"/><c:max val=\"500\"/></c:scaling><c:delete val=\"0\"/><c:axPos val=\"l\"/><c:crossAx val=\"5001\"/><c:crosses val=\"autoZero\"/><c:crossBetween val=\"between\"/><c:majorGridlines/><c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:r><a:rPr lang=\"en-US\"/><a:t>Y</a:t></a:r><a:endParaRPr lang=\"en-US\"/></a:p></c:rich></c:tx><c:layout/><c:overlay val=\"0\"/></c:title></c:valAx></c:plotArea><c:plotVisOnly val=\"1\"/></c:chart><c:printSettings/></c:chartSpace>"
+    }
+  ],
+  "contentTypes": [
+    {
+      "count": 0,
+      "xml": "<Types xmlns=\"http://schemas.openxmlformats.org/package/2006/content-types\"><Default ContentType=\"application/vnd.openxmlformats-package.relationships+xml\" Extension=\"rels\"/><Default ContentType=\"application/xml\" Extension=\"xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml\" PartName=\"/xl/workbook.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml\" PartName=\"/xl/sharedStrings.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml\" PartName=\"/xl/styles.xml\"/></Types>"
+    },
+    {
+      "count": 1,
+      "xml": "<Types xmlns=\"http://schemas.openxmlformats.org/package/2006/content-types\"><Default ContentType=\"application/vnd.openxmlformats-package.relationships+xml\" Extension=\"rels\"/><Default ContentType=\"application/xml\" Extension=\"xml\"/><Default ContentType=\"image/png\" Extension=\"png\"/><Default ContentType=\"image/jpeg\" Extension=\"jpg\"/><Default ContentType=\"application/octet-stream\" Extension=\"bin\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml\" PartName=\"/xl/workbook.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml\" PartName=\"/xl/sharedStrings.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml\" PartName=\"/xl/styles.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml\" PartName=\"/xl/worksheets/sheet1.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml\" PartName=\"/xl/tables/table1.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.drawing+xml\" PartName=\"/xl/drawings/drawing1.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.drawingml.chart+xml\" PartName=\"/xl/charts/chart1.xml\"/></Types>"
+    },
+    {
+      "count": 3,
+      "xml": "<Types xmlns=\"http://schemas.openxmlformats.org/package/2006/content-types\"><Default ContentType=\"application/vnd.openxmlformats-package.relationships+xml\" Extension=\"rels\"/><Default ContentType=\"application/xml\" Extension=\"xml\"/><Default ContentType=\"image/png\" Extension=\"png\"/><Default ContentType=\"image/jpeg\" Extension=\"jpg\"/><Default ContentType=\"application/octet-stream\" Extension=\"bin\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml\" PartName=\"/xl/workbook.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml\" PartName=\"/xl/sharedStrings.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml\" PartName=\"/xl/styles.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml\" PartName=\"/xl/worksheets/sheet1.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml\" PartName=\"/xl/worksheets/sheet2.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml\" PartName=\"/xl/worksheets/sheet3.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml\" PartName=\"/xl/tables/table1.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml\" PartName=\"/xl/tables/table2.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml\" PartName=\"/xl/tables/table3.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.drawing+xml\" PartName=\"/xl/drawings/drawing1.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.drawing+xml\" PartName=\"/xl/drawings/drawing2.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.drawing+xml\" PartName=\"/xl/drawings/drawing3.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.drawingml.chart+xml\" PartName=\"/xl/charts/chart1.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.drawingml.chart+xml\" PartName=\"/xl/charts/chart2.xml\"/><Override ContentType=\"application/vnd.openxmlformats-officedocument.drawingml.chart+xml\" PartName=\"/xl/charts/chart3.xml\"/></Types>"
+    }
+  ],
+  "fallbacks": [
+    {
+      "type": "unknown",
+      "xml": "<c:barChart><c:barDir val=\"col\"/><c:grouping val=\"standard\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/></c:barChart>"
+    },
+    {
+      "type": "column",
+      "xml": "<c:barChart><c:barDir val=\"col\"/><c:grouping val=\"stacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/></c:barChart>"
+    },
+    {
+      "type": "bar",
+      "xml": "<c:barChart><c:barDir val=\"bar\"/><c:grouping val=\"stacked\"/><c:overlap val=\"100\"/><c:varyColors val=\"0\"/></c:barChart>"
+    }
+  ]
+}

@@ -10,6 +10,7 @@ export type XMLNodeOption = {
 	type?: string;
 };
 export declare class XMLDOM {
+	static readonly declaration = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
 	documentElement: XMLNode;
 	constructor(ns: string | null, rootNodeName: string);
 	createElement(name: string): XMLNode;
@@ -571,6 +572,13 @@ export declare class Util {
 	static setAttributesOnDoc(doc: XMLNode, attrs: {
 		[key: string]: any;
 	}): void;
+	/** Shared DrawingML cell position writer used by one- and two-cell anchors. */
+	static createAnchorPosition(doc: XMLDOM, name: string, position: {
+		x: number | null;
+		y: number | null;
+		xOff?: boolean | null;
+		yOff?: boolean | null;
+	}): XMLNode;
 	static LETTER_REFS: any;
 	static positionToLetterRef(x: number, y: number | string): any;
 	static schemas: {
@@ -627,6 +635,7 @@ export declare class Chart extends Drawing {
 		scatterXRange?: string;
 		color?: string;
 	}, idx: number, type: string, categoriesRange: string): XMLNode;
+	private _createRangeRef;
 	/** @private Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
 	_applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string): void;
 	/** @private Create legend node honoring position + overlay */
@@ -673,6 +682,7 @@ export type Relation = {
  */
 export declare class RelationshipManager {
 	relations: Relation;
+	paths?: Record<string, string>;
 	lastId: number;
 	constructor();
 	importData(data: {
@@ -733,6 +743,8 @@ export declare class SharedStrings {
 		[key: string]: number;
 	};
 	toXML(): XMLDOM;
+	/** Serialize without allocating an XML node tree for every unique string. */
+	getXmlChunks(chunkSize?: number): Generator<string, void, unknown>;
 }
 /**
  * @module Excel/StyleSheet
@@ -791,6 +803,7 @@ declare class StyleSheet$1 {
 	 * @param {Object} instructions
 	 */
 	createFontStyle(instructions: ExcelFontStyle): any;
+	private exportCollection;
 	exportBorders(doc: XMLDOM): XMLNode;
 	exportBorder(doc: XMLDOM, data: any): XMLNode;
 	exportColor(doc: XMLDOM, color: any): XMLNode;
@@ -950,6 +963,7 @@ export declare class SheetView {
 	freezePane(column: number, row: number, cell: string): void;
 	exportXML(doc: XMLDOM): XMLNode;
 }
+export type Cell = number | string | boolean | Date | null | ExcelColumnMetadata;
 export interface CharType {
 	font?: string;
 	bold?: boolean;
@@ -1125,21 +1139,13 @@ export declare class Worksheet {
 	 * @returns {XML Node}
 	 */
 	exportFooter(doc: XMLDOM): XMLNode;
-	/**
-	 * This creates some nodes ahead of time, which cuts down on generation time due to
-	 * most cell definitions being essentially the same, but having multiple nodes that need
-	 * to be created. Cloning takes less time than creation.
-	 *
-	 * @private
-	 * @param {XML Doc} doc
-	 * @returns {_L8.Anonym$0._buildCache.Anonym$2}
-	 */
+	/** Legacy XML cell templates retained for callers of _buildCache(). */
 	_buildCache(doc: XMLDOM): {
-		number: XMLNode;
 		date: XMLNode;
 		string: XMLNode;
-		formula: XMLNode;
+		number: XMLNode;
 		boolean: XMLNode;
+		formula: XMLNode;
 	};
 	/**
 	 * Runs through the XML document and grabs all of the strings that will
@@ -1148,7 +1154,11 @@ export declare class Worksheet {
 	 * @returns {Array}
 	 */
 	collectSharedStrings(): string[];
+	/** Interpret cells once for both the DOM compatibility API and direct XML exports. */
+	private forEachCell;
+	private serializeRow;
 	toXML(): XMLDOM;
+	private createWorksheetDocument;
 	/**
 	 *
 	 * @param {XML Doc} doc
@@ -1239,10 +1249,10 @@ export declare class Worksheet {
 	 * Returns worksheet XML footer (everything after </sheetData>)
 	 */
 	getWorksheetXmlFooter(): string;
-	/**
-	 * Serialize a chunk of rows to XML (same logic as in toXML)
-	 */
-	serializeRows(rows: (number | string | boolean | Date | null | ExcelColumnMetadata)[][], startRow?: number): string;
+	/** Serialize rows with the same metadata, references, and escaping as toXML(). */
+	serializeRows(rows: Cell[][], startRow?: number): string;
+	/** Yield complete rows in bounded batches; input data remains owned by the worksheet. */
+	getXmlChunks(chunkSize?: number): Generator<string, void, unknown>;
 }
 export interface MediaMeta {
 	id: string;
@@ -1325,10 +1335,17 @@ export declare class Workbook {
 	createContentTypes(): XMLDOM;
 	toXML(): XMLDOM;
 	createWorkbookRelationship(): XMLDOM;
-	_generateCorePaths(files: any): void;
+	_generateCorePaths(files: any, paths?: Record<string, string>): void;
+	private packageXml;
+	private metadataFiles;
 	_prepareFilesForPackaging(files: {
 		[path: string]: XMLDOM | string;
 	}): void;
+	/** Generate XML entries in order, populating shared strings before writing their table. */
+	generateFileEntries(): Generator<[
+		string,
+		string | Iterable<string>
+	]>;
 	generateFiles(): Promise<{
 		[path: string]: string;
 	}>;
@@ -1412,6 +1429,7 @@ export declare function downloadExcelFile(workbook: Workbook, filename: string, 
 	zipOptions?: ZipOptions;
 }): Promise<void>;
 export interface ExcelFileStreamOptions {
+	/** Maximum output chunk size in bytes (default 64 KiB). */
 	chunkSize?: number;
 	outputType?: "Blob" | "Uint8Array" | "stream";
 	fileFormat?: "xlsx" | "xls";
@@ -1419,11 +1437,8 @@ export interface ExcelFileStreamOptions {
 	zipOptions?: ZipOptions;
 	downloadType?: "browser" | "node";
 }
-/**
- * Environment-aware streaming Excel file generator.
- * Yields zipped chunks for browser (ReadableStream) or NodeJS (async generator).
- */
-export declare function createExcelFileStream(workbook: Workbook, options?: ExcelFileStreamOptions): ReadableStream<Uint8Array<ArrayBufferLike>> | AsyncGenerator<Uint8Array<ArrayBufferLike>, void, unknown>;
+/** Incremental XLSX output. Input rows and shared strings remain owned by the workbook. */
+export declare function createExcelFileStream(workbook: Workbook, options?: ExcelFileStreamOptions): AsyncGenerator<Uint8Array<ArrayBuffer>, void, unknown> | ReadableStream<Uint8Array<ArrayBufferLike>>;
 /**
  * Converts the characters "&", "<", ">", '"', and "'" in `string` to their
  * corresponding HTML entities.

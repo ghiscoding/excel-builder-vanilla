@@ -1,4 +1,5 @@
 import type { ExcelColumn, ExcelColumnMetadata, ExcelMargin, ExcelStyleInstruction } from '../interfaces.js';
+import { htmlEscape } from '../utilities/escape.js';
 import { isObject, isString } from '../utilities/isTypeOf.js';
 import { uniqueId } from '../utilities/uniqueId.js';
 import type { Drawings } from './Drawings.js';
@@ -7,7 +8,9 @@ import type { SharedStrings } from './SharedStrings.js';
 import { SheetView } from './SheetView.js';
 import type { Table } from './Table.js';
 import { Util } from './Util.js';
-import type { XMLDOM, XMLNode } from './XMLDOM.js';
+import { XMLDOM, type XMLNode } from './XMLDOM.js';
+
+type Cell = number | string | boolean | Date | null | ExcelColumnMetadata;
 
 interface CharType {
   font?: string;
@@ -231,45 +234,23 @@ export class Worksheet {
     return oddFooter;
   }
 
-  /**
-   * This creates some nodes ahead of time, which cuts down on generation time due to
-   * most cell definitions being essentially the same, but having multiple nodes that need
-   * to be created. Cloning takes less time than creation.
-   *
-   * @private
-   * @param {XML Doc} doc
-   * @returns {_L8.Anonym$0._buildCache.Anonym$2}
-   */
+  /** Legacy XML cell templates retained for callers of _buildCache(). */
   _buildCache(doc: XMLDOM) {
-    const numberNode = doc.createElement('c');
-    const value = doc.createElement('v');
-    value.appendChild(doc.createTextNode('--temp--'));
-    numberNode.appendChild(value);
-
-    const formulaNode = doc.createElement('c');
-    const formulaValue = doc.createElement('f');
-    formulaValue.appendChild(doc.createTextNode('--temp--'));
-    formulaNode.appendChild(formulaValue);
-
-    const stringNode = doc.createElement('c');
-    stringNode.setAttribute('t', 's');
-    const stringValue = doc.createElement('v');
-    stringValue.appendChild(doc.createTextNode('--temp--'));
-    stringNode.appendChild(stringValue);
-
-    const booleanNode = doc.createElement('c');
-    booleanNode.setAttribute('t', 'b');
-    const booleanValue = doc.createElement('v');
-    booleanValue.appendChild(doc.createTextNode('--temp--'));
-    booleanNode.appendChild(booleanValue);
-
-    return {
-      number: numberNode,
-      date: numberNode,
-      string: stringNode,
-      formula: formulaNode,
-      boolean: booleanNode,
-    };
+    const cache = {} as Record<'number' | 'formula' | 'string' | 'boolean', XMLNode>;
+    for (const [type, tag, cellType] of [
+      ['number', 'v', ''],
+      ['formula', 'f', ''],
+      ['string', 'v', 's'],
+      ['boolean', 'v', 'b'],
+    ] as const) {
+      const cell = doc.createElement('c');
+      if (cellType) cell.setAttribute('t', cellType);
+      const value = doc.createElement(tag);
+      value.appendChild(doc.createTextNode('--temp--'));
+      cell.appendChild(value);
+      cache[type] = cell;
+    }
+    return { ...cache, date: cache.number };
   }
 
   /**
@@ -279,141 +260,112 @@ export class Worksheet {
    * @returns {Array}
    */
   collectSharedStrings() {
-    const data = this.data;
-    let maxX = 0;
-    const strings: any = {};
-    for (let row = 0, l = data.length; row < l; row++) {
-      const dataRow = data[row];
-      const cellCount = dataRow.length;
-      maxX = cellCount > maxX ? cellCount : maxX;
-      for (let c = 0; c < cellCount; c++) {
-        let cellValue = dataRow[c];
-        const metadata = (cellValue as ExcelColumnMetadata)?.metadata || {};
-        if (cellValue && typeof cellValue === 'object') {
-          cellValue = (cellValue as ExcelColumnMetadata).value;
-        }
-
-        if (!metadata.type) {
-          if (typeof cellValue === 'number') {
-            metadata.type = 'number';
-          } else if (typeof cellValue === 'boolean') {
-            metadata.type = 'boolean';
-          }
-        }
-        if (metadata.type === 'text' || !metadata.type) {
-          if (typeof strings[cellValue as string] === 'undefined') {
-            strings[cellValue as string] = true;
-          }
-        }
-      }
+    const strings = new Set<string>();
+    for (const row of this.data) {
+      this.forEachCell(row, -1, (value, type) => {
+        if (type === 'text') strings.add(String(value));
+      });
     }
-    return Object.keys(strings);
+    return [...strings];
+  }
+
+  /** Interpret cells once for both the DOM compatibility API and direct XML exports. */
+  private forEachCell(
+    row: Cell[],
+    rowIndex: number,
+    write: (value: string | number, type: string, style: number | undefined, column: number) => void,
+  ) {
+    for (let column = 0; column < row.length; column++) {
+      const raw = row[column];
+      const wrapped = raw !== null && typeof raw === 'object' && !(raw instanceof Date);
+      const metadata = wrapped ? (raw as ExcelColumnMetadata).metadata : undefined;
+      let value = wrapped ? (raw as ExcelColumnMetadata).value : raw;
+      let type = metadata?.type || (value instanceof Date ? 'date' : typeof value);
+      switch (type) {
+        case 'date':
+          value = 25569 + ((value instanceof Date ? value.getTime() : Number(value)) - this._timezoneOffset) / 86400000;
+          break;
+        case 'boolean':
+          value = value ? '1' : '0';
+          break;
+        case 'number':
+        case 'formula':
+          break;
+        default:
+          type = 'text';
+          value = String(value);
+      }
+      write(value as string | number, type, metadata?.style ?? this._rowInstructions[rowIndex]?.style, column);
+    }
+  }
+
+  private serializeRow(row: Cell[], rowIndex: number): string;
+  private serializeRow(row: Cell[], rowIndex: number, doc: XMLDOM): XMLNode;
+  private serializeRow(row: Cell[], rowIndex: number, doc?: XMLDOM): string | XMLNode {
+    const rowNode = doc?.createElement('row');
+    let xml = '';
+    this.forEachCell(row, rowIndex, (value, type, style, column) => {
+      if (type === 'text') {
+        const strings = this.sharedStrings?.strings;
+        value =
+          strings && Object.prototype.hasOwnProperty.call(strings, value)
+            ? strings[value]
+            : (this.sharedStrings?.addString(String(value)) as number);
+      }
+      const tag = type === 'formula' ? 'f' : 'v';
+      const cellType = type === 'text' ? 's' : type === 'boolean' ? 'b' : undefined;
+      const reference = Util.positionToLetterRef(column + 1, rowIndex + 1);
+      if (doc && rowNode) {
+        const cell = doc.createElement('c');
+        if (cellType) cell.setAttribute('t', cellType);
+        if (style !== undefined) cell.setAttribute('s', style);
+        cell.setAttribute('r', reference);
+        const content = doc.createElement(tag);
+        content.appendChild(doc.createTextNode(String(value)));
+        cell.appendChild(content);
+        rowNode.appendChild(cell);
+      } else {
+        const typeAttr = cellType ? ` t="${cellType}"` : '';
+        const styleAttr = style !== undefined ? ` s="${htmlEscape(String(style))}"` : '';
+        const content = value === '' ? `<${tag}/>` : `<${tag}>${htmlEscape(String(value))}</${tag}>`;
+        xml += `<c${typeAttr}${styleAttr} r="${reference}">${content}</c>`;
+      }
+    });
+    const instructions = this._rowInstructions[rowIndex];
+    const attributes: [string, string | number][] = [['r', rowIndex + 1]];
+    if (instructions?.height !== undefined) attributes.push(['customHeight', '1'], ['ht', instructions.height]);
+    if (instructions?.style !== undefined) attributes.push(['customFormat', '1'], ['s', instructions.style]);
+    if (rowNode) {
+      for (const [name, value] of attributes) rowNode.setAttribute(name, value);
+      return rowNode;
+    }
+    const rowAttrs = attributes.map(([name, value]) => ` ${name}="${htmlEscape(String(value))}"`).join('');
+    return xml ? `<row${rowAttrs}>${xml}</row>` : `<row${rowAttrs}/>`;
   }
 
   toXML() {
-    const data = this.data;
-    const columns = this.columns || [];
+    return this.createWorksheetDocument(true);
+  }
+
+  private createWorksheetDocument(includeRows: boolean) {
     const doc = Util.createXmlDoc(Util.schemas.spreadsheetml, 'worksheet');
     const worksheet = doc.documentElement;
     let i: number;
     let l: number;
-    let row: number;
     worksheet.setAttribute('xmlns:r', Util.schemas.relationships);
     worksheet.setAttribute('xmlns:mc', Util.schemas.markupCompat);
-
-    let maxX = 0;
     const sheetData = Util.createElement(doc, 'sheetData');
-
-    const cellCache = this._buildCache(doc);
-
-    for (row = 0, l = data.length; row < l; row++) {
-      const dataRow = data[row];
-      const cellCount = dataRow.length;
-      maxX = cellCount > maxX ? cellCount : maxX;
-      const rowNode = doc.createElement('row');
-
-      for (let c = 0; c < cellCount; c++) {
-        columns[c] = columns[c] || {};
-        let cellValue = dataRow[c];
-        let cell: any;
-        const metadata = (cellValue as ExcelColumnMetadata)?.metadata || {};
-
-        if (cellValue && typeof cellValue === 'object') {
-          cellValue = (cellValue as ExcelColumnMetadata).value;
-        }
-
-        if (!metadata.type) {
-          if (typeof cellValue === 'number') {
-            metadata.type = 'number';
-          } else if (typeof cellValue === 'boolean') {
-            metadata.type = 'boolean';
-          }
-        }
-
-        switch (metadata.type) {
-          case 'number':
-            cell = cellCache.number.cloneNode(true);
-            cell.firstChild.firstChild.nodeValue = cellValue;
-            break;
-          case 'date':
-            cell = cellCache.date.cloneNode(true);
-            if (cellValue instanceof Date) {
-              cellValue = cellValue.getTime();
-            }
-            cell.firstChild.firstChild.nodeValue = 25569.0 + ((cellValue as number) - this._timezoneOffset) / (60 * 60 * 24 * 1000);
-            break;
-          case 'boolean':
-            cell = cellCache.boolean.cloneNode(true);
-            cell.firstChild.firstChild.nodeValue = cellValue ? '1' : '0';
-            break;
-          case 'formula':
-            cell = cellCache.formula.cloneNode(true);
-            cell.firstChild.firstChild.nodeValue = cellValue as string;
-            break;
-          /*falls through, text type */
-          default: {
-            let id: number | undefined;
-            if (typeof this.sharedStrings?.strings[cellValue as string] !== 'undefined') {
-              id = this.sharedStrings.strings[cellValue as string];
-            } else {
-              id = this.sharedStrings?.addString(cellValue as string);
-            }
-            cell = cellCache.string.cloneNode(true);
-            cell.firstChild.firstChild.nodeValue = id;
-            break;
-          }
-        }
-        if (metadata.style) {
-          cell.setAttribute('s', metadata.style);
-        } else if (this._rowInstructions[row]?.style !== undefined) {
-          cell.setAttribute('s', this._rowInstructions[row].style);
-        }
-        cell.setAttribute('r', Util.positionToLetterRef(c + 1, String(row + 1)));
-        rowNode.appendChild(cell);
-      }
-      rowNode.setAttribute('r', row + 1);
-
-      if (this._rowInstructions[row]) {
-        const rowInst = this._rowInstructions[row];
-
-        if (rowInst.height !== undefined) {
-          rowNode.setAttribute('customHeight', '1');
-          rowNode.setAttribute('ht', rowInst.height);
-        }
-
-        if (rowInst.style !== undefined) {
-          rowNode.setAttribute('customFormat', '1');
-          rowNode.setAttribute('s', rowInst.style);
-        }
-      }
-
-      sheetData.appendChild(rowNode);
+    let maxX = 0;
+    for (let row = 0; row < this.data.length; row++) {
+      maxX = Math.max(maxX, this.data[row].length);
+      if (includeRows) sheetData.appendChild(this.serializeRow(this.data[row], row, doc));
     }
+    for (let column = 0; column < maxX; column++) this.columns[column] ||= {};
 
     if (maxX !== 0) {
       worksheet.appendChild(
         Util.createElement(doc, 'dimension', [
-          ['ref', `${Util.positionToLetterRef(1, 1)}:${Util.positionToLetterRef(maxX, String(data.length))}`],
+          ['ref', `${Util.positionToLetterRef(1, 1)}:${Util.positionToLetterRef(maxX, String(this.data.length))}`],
         ]),
       );
     } else {
@@ -435,6 +387,12 @@ export class Worksheet {
     /**
      * Doing this a bit differently, as hyperlinks could be as populous as rows. Looping twice would be bad.
      */
+    if (this.relations) {
+      const ids = new Set(this.hyperlinks.map(link => (link.id ||= uniqueId('hyperlink'))));
+      for (const [id, relation] of Object.entries(this.relations.relations)) {
+        if (relation.schema === Util.schemas.hyperlink && !ids.has(id)) delete this.relations.relations[id];
+      }
+    }
     if (this.hyperlinks.length > 0) {
       const hyperlinksEl = doc.createElement('hyperlinks');
       const hyperlinks = this.hyperlinks;
@@ -442,7 +400,7 @@ export class Worksheet {
         const hyperlinkEl = doc.createElement('hyperlink');
         const hyperlink: any = hyperlinks[i];
         hyperlinkEl.setAttribute('ref', String(hyperlink.cell));
-        hyperlink.id = Util.uniqueId('hyperlink');
+        hyperlink.id ||= uniqueId('hyperlink');
         if (this.relations) {
           this.relations.addRelation(
             {
@@ -679,57 +637,35 @@ export class Worksheet {
    * Returns worksheet XML footer (everything after </sheetData>)
    */
   getWorksheetXmlFooter(): string {
-    if (this._headers.length > 0 || this._footers.length > 0) {
-      let xml = '<headerFooter>';
-      if (this._headers.length > 0) {
-        xml += `<oddHeader>${this.compilePageDetailPackage(this._headers)}</oddHeader>`;
-      }
-      if (this._footers.length > 0) {
-        xml += `<oddFooter>${this.compilePageDetailPackage(this._footers)}</oddFooter>`;
-      }
-      xml += '</headerFooter>';
-      return xml;
-    }
-    return '';
+    if (!this._headers.length && !this._footers.length) return '';
+    const header = this._headers.length ? `<oddHeader>${htmlEscape(this.compilePageDetailPackage(this._headers))}</oddHeader>` : '';
+    const footer = this._footers.length ? `<oddFooter>${htmlEscape(this.compilePageDetailPackage(this._footers))}</oddFooter>` : '';
+    return `<headerFooter>${header}${footer}</headerFooter>`;
   }
 
-  /**
-   * Serialize a chunk of rows to XML (same logic as in toXML)
-   */
-  serializeRows(rows: (number | string | boolean | Date | null | ExcelColumnMetadata)[][], startRow = 0): string {
-    let xml = '';
-    for (let row = 0, l = rows.length; row < l; row++) {
-      const dataRow = rows[row];
-      const cellCount = dataRow.length;
-      let rowXml = `<row r="${startRow + row + 1}">`;
-      for (let c = 0; c < cellCount; c++) {
-        const cellValue = dataRow[c];
-        const cellType: any = typeof cellValue || 'text';
-        let cellXml = '';
-        const rAttr = ` r="${String.fromCharCode(65 + c)}${startRow + row + 1}"`;
-        switch (cellType) {
-          case 'number':
-            cellXml = `<c${rAttr}><v>${cellValue}</v></c>`;
-            break;
-          case 'boolean':
-            cellXml = `<c${rAttr} t="b"><v>${cellValue ? '1' : '0'}</v></c>`;
-            break;
-          default: {
-            let id: number | undefined;
-            if (typeof this.sharedStrings?.strings[cellValue as string] !== 'undefined') {
-              id = this.sharedStrings.strings[cellValue as string];
-            } else {
-              id = this.sharedStrings?.addString(cellValue as string);
-            }
-            cellXml = `<c${rAttr} t="s"><v>${id}</v></c>`;
-            break;
-          }
-        }
-        rowXml += cellXml;
-      }
-      rowXml += '</row>';
-      xml += rowXml;
+  /** Serialize rows with the same metadata, references, and escaping as toXML(). */
+  serializeRows(rows: Cell[][], startRow = 0): string {
+    return rows.map((row, index) => this.serializeRow(row, startRow + index)).join('');
+  }
+
+  /** Yield complete rows in bounded batches; input data remains owned by the worksheet. */
+  *getXmlChunks(chunkSize = 32768) {
+    const xml = this.createWorksheetDocument(false).toString();
+    if (!this.data.length) {
+      yield `${XMLDOM.declaration}\n${xml}`;
+      return;
     }
-    return xml;
+    const marker = xml.indexOf('<sheetData/>');
+    yield `${XMLDOM.declaration}\n${xml.slice(0, marker)}<sheetData>`;
+    let chunk = '';
+    for (let row = 0; row < this.data.length; row++) {
+      chunk += this.serializeRow(this.data[row], row);
+      if (chunk.length >= chunkSize) {
+        yield chunk;
+        chunk = '';
+      }
+    }
+    if (chunk) yield chunk;
+    yield `</sheetData>${xml.slice(marker + '<sheetData/>'.length)}`;
   }
 }

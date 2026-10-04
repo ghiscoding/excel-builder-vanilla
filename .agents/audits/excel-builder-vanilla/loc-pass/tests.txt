@@ -1,0 +1,22 @@
+
+ RUN  v5.0.0-rc.2 /home/ghislainb/sourcecode/excel-builder-vanilla
+      Coverage enabled with v8
+
+
+ Test Files  23 passed (23)
+      Tests  292 passed (292)
+   Start at  22:34:42
+   Duration  4.06s (environment 73%, transform 11%, tests 6%, worker 5%, import 3%, setup 2%)
+
+Environment  happy-dom was created 23 times · 20.90s total, 73% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+ % Coverage report from v8
+
+=============================== Coverage summary ===============================
+Statements   : 98.96% ( 1631/1648 )
+Branches     : 92.8% ( 774/834 )
+Functions    : 99.55% ( 226/227 )
+Lines        : 99.29% ( 1557/1568 )
+================================================================================

@@ -177,18 +177,13 @@ export class Chart extends Drawing {
         node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
         break;
       }
-      case 'pie': {
-        node = Util.createElement(doc, 'c:pieChart');
-        node.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
-        node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '1']]));
-        break;
-      }
+      case 'pie':
       case 'doughnut': {
-        node = Util.createElement(doc, 'c:doughnutChart');
+        const chartType = type === 'pie' ? 'c:pieChart' : 'c:doughnutChart';
+        node = Util.createElement(doc, chartType);
         node.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
         node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '1']]));
-        // Add a default holeSize (50%) to visualize doughnut; Excel defaults to 50 if absent but explicit for clarity
-        node.appendChild(Util.createElement(doc, 'c:holeSize', [['val', '50']]));
+        if (type === 'doughnut') node.appendChild(Util.createElement(doc, 'c:holeSize', [['val', '50']]));
         break;
       }
       case 'scatter': {
@@ -197,21 +192,11 @@ export class Chart extends Drawing {
         node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
         break;
       }
-      case 'bar': {
-        node = Util.createElement(doc, 'c:barChart');
-        node.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'bar']]));
-        node.appendChild(Util.createElement(doc, 'c:grouping', [['val', groupingValue]]));
-        if (stacking) {
-          // Ensure stacked bars/columns align in same category slot
-          node.appendChild(Util.createElement(doc, 'c:overlap', [['val', '100']]));
-        }
-        node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
-        break;
-      }
+      case 'bar':
       case 'column':
       default: {
         node = Util.createElement(doc, 'c:barChart');
-        node.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'col']]));
+        node.appendChild(Util.createElement(doc, 'c:barDir', [['val', type === 'bar' ? 'bar' : 'col']]));
         node.appendChild(Util.createElement(doc, 'c:grouping', [['val', groupingValue]]));
         if (stacking) {
           node.appendChild(Util.createElement(doc, 'c:overlap', [['val', '100']]));
@@ -247,11 +232,7 @@ export class Chart extends Drawing {
       // xVal
       const xVal = Util.createElement(doc, 'c:xVal');
       if (s.scatterXRange) {
-        const numRefX = Util.createElement(doc, 'c:numRef');
-        const fNodeX = Util.createElement(doc, 'c:f');
-        fNodeX.appendChild(doc.createTextNode(s.scatterXRange));
-        numRefX.appendChild(fNodeX);
-        xVal.appendChild(numRefX);
+        xVal.appendChild(this._createRangeRef(doc, 'c:numRef', s.scatterXRange));
       } else {
         const numLitX = Util.createElement(doc, 'c:numLit');
         numLitX.appendChild(Util.createElement(doc, 'c:ptCount', [['val', '0']]));
@@ -260,29 +241,17 @@ export class Chart extends Drawing {
       ser.appendChild(xVal);
       // yVal
       const yVal = Util.createElement(doc, 'c:yVal');
-      const numRefY = Util.createElement(doc, 'c:numRef');
-      const fNodeY = Util.createElement(doc, 'c:f');
-      fNodeY.appendChild(doc.createTextNode(s.valuesRange));
-      numRefY.appendChild(fNodeY);
-      yVal.appendChild(numRefY);
+      yVal.appendChild(this._createRangeRef(doc, 'c:numRef', s.valuesRange));
       ser.appendChild(yVal);
     } else {
       if (categoriesRange) {
         const cat = Util.createElement(doc, 'c:cat');
-        const strRef = Util.createElement(doc, 'c:strRef');
-        const fNodeCat = Util.createElement(doc, 'c:f');
-        fNodeCat.appendChild(doc.createTextNode(categoriesRange));
-        strRef.appendChild(fNodeCat);
-        cat.appendChild(strRef);
+        cat.appendChild(this._createRangeRef(doc, 'c:strRef', categoriesRange));
         ser.appendChild(cat);
       }
       if (s.valuesRange) {
         const val = Util.createElement(doc, 'c:val');
-        const numRef = Util.createElement(doc, 'c:numRef');
-        const fNodeVal = Util.createElement(doc, 'c:f');
-        fNodeVal.appendChild(doc.createTextNode(s.valuesRange));
-        numRef.appendChild(fNodeVal);
-        val.appendChild(numRef);
+        val.appendChild(this._createRangeRef(doc, 'c:numRef', s.valuesRange));
         ser.appendChild(val);
       }
     }
@@ -290,6 +259,14 @@ export class Chart extends Drawing {
     // Optional per-series color
     this._applySeriesColor(doc, ser, type, s.color);
     return ser;
+  }
+
+  private _createRangeRef(doc: XMLDOM, name: string, range: string) {
+    const reference = Util.createElement(doc, name);
+    const formula = Util.createElement(doc, 'c:f');
+    formula.appendChild(doc.createTextNode(range));
+    reference.appendChild(formula);
+    return reference;
   }
 
   /** @private Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
@@ -423,15 +400,10 @@ export class Chart extends Drawing {
     if (type === 'pie' || type === 'doughnut') {
       return 'clustered'; // required but cosmetic
     }
-    if (type === 'line') {
+    if (type === 'line' || type === 'bar' || type === 'column') {
       if (stacking === 'stacked') return 'stacked';
       if (stacking === 'percent') return 'percentStacked';
-      return 'standard';
-    }
-    if (type === 'bar' || type === 'column') {
-      if (stacking === 'stacked') return 'stacked';
-      if (stacking === 'percent') return 'percentStacked';
-      return 'clustered';
+      return type === 'line' ? 'standard' : 'clustered';
     }
     // scatter doesn't use grouping; still return default for structural consistency
     return 'standard';

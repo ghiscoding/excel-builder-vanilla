@@ -1,0 +1,41 @@
+
+ RUN  v5.0.0-rc.2 /home/ghislainb/sourcecode/excel-builder-vanilla
+      Coverage enabled with v8
+
+
+ Test Files  22 passed (22)
+      Tests  270 passed (270)
+   Start at  16:45:32
+   Duration  2.18s (environment 68%, transform 14%, worker 10%, import 3%, tests 3%, setup 1%)
+
+Environment  happy-dom was created 22 times · 11.71s total, 68% of tracked time
+             create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
+             learn more: https://vitest.dev/guide/improving-performance#test-environments
+
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |     100 |    93.22 |     100 |     100 |                   
+ src               |     100 |    93.47 |     100 |     100 |                   
+  factory.ts       |     100 |     90.9 |     100 |     100 | 110-128           
+  streaming.ts     |     100 |    95.83 |     100 |     100 | 70                
+ src/Excel         |     100 |    93.26 |     100 |     100 |                   
+  StyleSheet.ts    |     100 |    95.38 |     100 |     100 | ...03-504,625,658 
+  Table.ts         |     100 |    86.66 |     100 |     100 | 124,155,171,173   
+  Util.ts          |     100 |    90.47 |     100 |     100 | 36,71             
+  Worksheet.ts     |     100 |    87.86 |     100 |     100 | ...61,684-687,707 
+  XMLDOM.ts        |     100 |    93.33 |     100 |     100 | 97                
+ src/Excel/Drawing |     100 |    91.66 |     100 |     100 |                   
+  ...luteAnchor.ts |     100 |       50 |     100 |     100 | 21-23             
+  Chart.ts         |     100 |    95.41 |     100 |     100 | ...79,302,330,418 
+  OneCellAnchor.ts |     100 |    78.57 |     100 |     100 | 23-25             
+  TwoCellAnchor.ts |     100 |       90 |     100 |     100 | 10                
+-------------------|---------|----------|---------|---------|-------------------
+
+=============================== Coverage summary ===============================
+Statements   : 100% ( 1700/1700 )
+Branches     : 93.22% ( 716/768 )
+Functions    : 100% ( 205/205 )
+Lines        : 100% ( 1640/1640 )
+================================================================================

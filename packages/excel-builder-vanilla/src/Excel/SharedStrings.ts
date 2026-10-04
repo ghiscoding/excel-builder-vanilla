@@ -1,11 +1,13 @@
+import { htmlEscape } from '../utilities/escape.js';
 import { uniqueId } from '../utilities/uniqueId.js';
 import { Util } from './Util.js';
+import { XMLDOM } from './XMLDOM.js';
 
 /**
  * @module Excel/SharedStrings
  */
 export class SharedStrings {
-  strings: { [key: string]: number } = {};
+  strings: { [key: string]: number } = Object.create(null);
   stringArray: string[] = [];
   id = uniqueId('SharedStrings');
 
@@ -17,6 +19,8 @@ export class SharedStrings {
    * @return int
    */
   addString(str: string) {
+    str = String(str);
+    if (Object.prototype.hasOwnProperty.call(this.strings, str)) return this.strings[str];
     this.strings[str] = this.stringArray.length;
     this.stringArray[this.stringArray.length] = str;
     return this.strings[str];
@@ -29,8 +33,7 @@ export class SharedStrings {
   toXML() {
     const doc = Util.createXmlDoc(Util.schemas.spreadsheetml, 'sst');
     const sharedStringTable = doc.documentElement;
-    this.stringArray.reverse();
-    let l = this.stringArray.length;
+    const l = this.stringArray.length;
     sharedStringTable.setAttribute('count', l);
     sharedStringTable.setAttribute('uniqueCount', l);
 
@@ -40,15 +43,37 @@ export class SharedStrings {
     template.appendChild(templateValue);
     const strings = this.stringArray;
 
-    while (l--) {
+    for (let i = 0; i < l; i++) {
       const clone = template.cloneNode(true);
-      if (typeof strings[l] === 'string' && strings[l].match(/\s+/)) {
+      if (typeof strings[i] === 'string' && /\s/u.test(strings[i])) {
         clone.firstChild!.setAttribute('xml:space', 'preserve');
       }
-      clone.firstChild!.firstChild!.nodeValue = strings[l];
+      clone.firstChild!.firstChild!.nodeValue = strings[i];
       sharedStringTable.appendChild(clone);
     }
 
     return doc;
+  }
+
+  /** Serialize without allocating an XML node tree for every unique string. */
+  *getXmlChunks(chunkSize = 32768) {
+    const header = `${XMLDOM.declaration}\n<sst xmlns="${Util.schemas.spreadsheetml}" count="${this.stringArray.length}" uniqueCount="${this.stringArray.length}"`;
+    if (!this.stringArray.length) {
+      yield `${header}/>`;
+      return;
+    }
+    yield `${header}>`;
+    let chunk = '';
+    for (const value of this.stringArray) {
+      const space = /\s/u.test(value) ? ' xml:space="preserve"' : '';
+      const content = htmlEscape(value);
+      chunk += `<si><t${space}${content ? `>${content}</t>` : '/>'}</si>`;
+      if (chunk.length >= chunkSize) {
+        yield chunk;
+        chunk = '';
+      }
+    }
+    if (chunk) yield chunk;
+    yield '</sst>';
   }
 }

@@ -1,10 +1,11 @@
-import { strToU8, zipSync } from 'fflate';
+import { strToU8, Zip, ZipDeflate, ZipPassThrough } from 'fflate';
 
-import type { Workbook } from './Excel/Workbook.js';
-import { base64ToUint8Array } from './factory.js';
+import { Workbook } from './Excel/Workbook.js';
 import type { ZipOptions } from './interfaces.js';
+import { toZipData, zipPath } from './utilities/zip.js';
 
 export interface ExcelFileStreamOptions {
+  /** Maximum output chunk size in bytes (default 64 KiB). */
   chunkSize?: number;
   outputType?: 'Blob' | 'Uint8Array' | 'stream';
   fileFormat?: 'xlsx' | 'xls';
@@ -13,75 +14,102 @@ export interface ExcelFileStreamOptions {
   downloadType?: 'browser' | 'node';
 }
 
-/**
- * Environment-aware streaming Excel file generator.
- * Yields zipped chunks for browser (ReadableStream) or NodeJS (async generator).
- */
+function chunkSize(options?: ExcelFileStreamOptions) {
+  const size = options?.chunkSize ?? 65536;
+  if (!Number.isSafeInteger(size) || size <= 0) throw new RangeError('chunkSize must be a positive safe integer.');
+  return size;
+}
+
+/** Incremental XLSX output. Input rows and shared strings remain owned by the workbook. */
 export function createExcelFileStream(workbook: Workbook, options?: ExcelFileStreamOptions) {
+  chunkSize(options);
   if (typeof window !== 'undefined' && typeof window.ReadableStream !== 'undefined') {
-    return browserExcelStream(workbook, options); // Browser environment
+    const iterator = nodeExcelStream(workbook, options);
+    let cancelled = false;
+    return new ReadableStream<Uint8Array>(
+      {
+        async pull(controller) {
+          try {
+            const { value, done } = await iterator.next();
+            if (!cancelled) {
+              if (done) controller.close();
+              else controller.enqueue(value);
+            }
+          } catch (error) {
+            if (!cancelled) controller.error(error);
+          }
+        },
+        async cancel() {
+          cancelled = true;
+          await iterator.return(undefined);
+        },
+      },
+      { highWaterMark: 0 },
+    );
   }
-  if (typeof process !== 'undefined' && process.versions?.node) {
-    return nodeExcelStream(workbook, options); // NodeJS environment
-  }
+  if (typeof process !== 'undefined' && process.versions?.node) return nodeExcelStream(workbook, options);
   throw new Error('Streaming is only supported in browser or NodeJS environments.');
 }
 
-/**
- * Browser: returns a ReadableStream of zipped Excel file chunks.
- */
-function browserExcelStream(workbook: Workbook, options?: ExcelFileStreamOptions) {
-  const stream = new ReadableStream<Uint8Array>({
-    async start(controller) {
-      // Use workbook.generateFiles() to get all required files
-      const files = await workbook.generateFiles();
-      const zipObj: { [name: string]: Uint8Array } = {};
-      for (const [path, content] of Object.entries(files)) {
-        const outPath = path.startsWith('/') ? path.substr(1) : path;
-        if (path.indexOf('.xml') !== -1 || path.indexOf('.rel') !== -1) {
-          zipObj[outPath] = strToU8(String(content));
-        } else {
-          zipObj[outPath] = base64ToUint8Array(String(content));
-        }
-      }
-      // Synchronous zip for browser, split into chunks
-      const zipped: Uint8Array = zipSync(zipObj, options?.zipOptions || {});
-      const chunkByteSize = 64 * 1024; // 64KB per chunk
-      let offset = 0;
-      while (offset < zipped.length) {
-        const chunk = zipped.subarray(offset, offset + chunkByteSize);
-        controller.enqueue(chunk);
-        offset += chunkByteSize;
-        await new Promise(r => setTimeout(r, 0));
-      }
-      controller.close();
-    },
-  });
-  return stream;
+async function* entries(workbook: Workbook) {
+  if (
+    typeof workbook.generateFileEntries === 'function' &&
+    (workbook.generateFileEntries !== Workbook.prototype.generateFileEntries || workbook.generateFiles === Workbook.prototype.generateFiles)
+  ) {
+    yield* workbook.generateFileEntries();
+  } else {
+    // Preserve support for custom exporters implementing the original generateFiles contract.
+    yield* Object.entries(await workbook.generateFiles());
+  }
 }
 
-/**
- * NodeJS: returns an async generator yielding zipped Excel file chunks.
- */
-export async function* nodeExcelStream(workbook: Workbook, options?: ExcelFileStreamOptions) {
-  const files = await workbook.generateFiles();
-  const zipObj: { [name: string]: Uint8Array } = {};
-  for (const [path, content] of Object.entries(files)) {
-    const outPath = path.startsWith('/') ? path.substr(1) : path;
-    if (path.indexOf('.xml') !== -1 || path.indexOf('.rel') !== -1) {
-      zipObj[outPath] = strToU8(String(content));
-    } else {
-      zipObj[outPath] = base64ToUint8Array(String(content));
-    }
+function* outputChunks(queue: Uint8Array[], size: number) {
+  while (queue.length) {
+    const data = queue.shift()!;
+    for (let start = 0; start < data.length; start += size) yield data.slice(start, start + size);
   }
-  // Synchronous zip for Node, split into chunks
-  const zipped: Uint8Array = zipSync(zipObj, options?.zipOptions || {});
-  const chunkByteSize = 64 * 1024; // 64KB per chunk
-  let offset = 0;
-  while (offset < zipped.length) {
-    const chunk = zipped.subarray(offset, offset + chunkByteSize);
-    yield chunk;
-    offset += chunkByteSize;
-    await new Promise(r => setTimeout(r, 0));
+}
+
+/** ZIP entries are compressed serially so a slow consumer cannot queue the rest of the workbook. */
+export async function* nodeExcelStream(workbook: Workbook, options?: ExcelFileStreamOptions) {
+  const size = chunkSize(options);
+  const queue: Uint8Array[] = [];
+  let failure: Error | undefined;
+  const zip = new Zip((error, data) => {
+    if (error) failure = error;
+    else if (data.length) queue.push(data);
+  });
+  let deadline = Date.now() + 8;
+  try {
+    for await (const [path, content] of entries(workbook)) {
+      const entry =
+        options?.zipOptions?.level === 0 ? new ZipPassThrough(zipPath(path)) : new ZipDeflate(zipPath(path), options?.zipOptions);
+      const { mtime, os, attrs, extra, comment } = options?.zipOptions || {};
+      Object.assign(entry, { mtime, os, attrs, extra, comment });
+      zip.add(entry);
+      const source = typeof content === 'string' ? [toZipData(path, content)] : content;
+      for (const piece of source) {
+        const bytes = typeof piece === 'string' ? strToU8(piece) : piece;
+        // Also bound compression work for large binary entries and custom string exporters.
+        for (let offset = 0; offset < bytes.length; offset += 32768) {
+          entry.push(bytes.subarray(offset, offset + 32768), false);
+          if (failure) throw failure;
+          yield* outputChunks(queue, size);
+          if (Date.now() >= deadline) {
+            await new Promise(resolve => setTimeout(resolve, 0));
+            deadline = Date.now() + 8;
+          }
+        }
+      }
+      entry.push(new Uint8Array(0), true);
+      if (failure) throw failure;
+      yield* outputChunks(queue, size);
+    }
+    zip.end();
+    if (failure) throw failure;
+    yield* outputChunks(queue, size);
+  } finally {
+    zip.terminate();
+    queue.length = 0;
   }
 }

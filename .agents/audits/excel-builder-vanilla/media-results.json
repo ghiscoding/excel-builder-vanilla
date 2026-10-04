@@ -1,0 +1,60 @@
+{
+  "node": "v24.16.0",
+  "methodology": "Decode only; valid canonical base64; input construction and byte equality verification outside timer. Node Buffer omits normalization and strict invalid-input semantics; atobLoop retains normalization and atob validation but not the library error wrapper.",
+  "results": [
+    {
+      "size": 1048576,
+      "name": "library",
+      "times": [
+        106.03842300000002,
+        99.604219,
+        98.69672299999996
+      ]
+    },
+    {
+      "size": 1048576,
+      "name": "nodeBuffer",
+      "times": [
+        0.29929600000002665,
+        0.3624899999999798,
+        0.34155200000009245
+      ]
+    },
+    {
+      "size": 1048576,
+      "name": "atobLoop",
+      "times": [
+        4.427098000000001,
+        4.5357870000000275,
+        4.580535000000054
+      ]
+    },
+    {
+      "size": 8388608,
+      "name": "library",
+      "times": [
+        836.1501489999999,
+        789.7180290000001,
+        792.6079789999999
+      ]
+    },
+    {
+      "size": 8388608,
+      "name": "nodeBuffer",
+      "times": [
+        4.091963999999734,
+        2.028542000000016,
+        1.7614539999999579
+      ]
+    },
+    {
+      "size": 8388608,
+      "name": "atobLoop",
+      "times": [
+        30.27263300000004,
+        34.78703099999984,
+        25.607488999999987
+      ]
+    }
+  ]
+}

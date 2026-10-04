@@ -11,6 +11,7 @@ type XMLNodeOption = {
 };
 
 export class XMLDOM {
+  static readonly declaration = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
   documentElement: XMLNode;
 
   constructor(ns: string | null, rootNodeName: string) {
@@ -94,7 +95,7 @@ export class XMLNode {
   toString() {
     let string = `<${this.nodeName}`;
     for (const attr in this.attributes) {
-      if (this.attributes.hasOwnProperty(attr)) {
+      if (Object.prototype.hasOwnProperty.call(this.attributes, attr)) {
         string = `${string} ${attr}="${htmlEscape(this.attributes[attr])}"`;
       }
     }

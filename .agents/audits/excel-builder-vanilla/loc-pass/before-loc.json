@@ -1,0 +1,796 @@
+{
+  "totals": {
+    "production": {
+      "files": 28,
+      "physical": 3881,
+      "code": 2966,
+      "commentOnly": 571,
+      "blank": 344,
+      "bytes": 131856,
+      "anyCount": 82
+    },
+    "unit tests": {
+      "files": 23,
+      "physical": 4561,
+      "code": 4028,
+      "commentOnly": 111,
+      "blank": 422,
+      "bytes": 174077,
+      "anyCount": 184
+    },
+    "browser tests": {
+      "files": 2,
+      "physical": 389,
+      "code": 351,
+      "commentOnly": 1,
+      "blank": 37,
+      "bytes": 15153,
+      "anyCount": 0
+    },
+    "types": {
+      "files": 2,
+      "physical": 389,
+      "code": 202,
+      "commentOnly": 162,
+      "blank": 25,
+      "bytes": 12815,
+      "anyCount": 1
+    }
+  },
+  "inventory": [
+    {
+      "file": "Excel/Drawing/AbsoluteAnchor.ts",
+      "group": "production",
+      "physical": 68,
+      "code": 37,
+      "commentOnly": 23,
+      "blank": 8,
+      "bytes": 1702,
+      "anyCount": 1
+    },
+    {
+      "file": "Excel/Drawing/Chart.ts",
+      "group": "production",
+      "physical": 431,
+      "code": 355,
+      "commentOnly": 44,
+      "blank": 32,
+      "bytes": 18461,
+      "anyCount": 0
+    },
+    {
+      "file": "Excel/Drawing/Drawing.ts",
+      "group": "production",
+      "physical": 67,
+      "code": 41,
+      "commentOnly": 22,
+      "blank": 4,
+      "bytes": 2125,
+      "anyCount": 0
+    },
+    {
+      "file": "Excel/Drawing/OneCellAnchor.ts",
+      "group": "production",
+      "physical": 58,
+      "code": 42,
+      "commentOnly": 9,
+      "blank": 7,
+      "bytes": 1716,
+      "anyCount": 1
+    },
+    {
+      "file": "Excel/Drawing/Picture.ts",
+      "group": "production",
+      "physical": 115,
+      "code": 76,
+      "commentOnly": 22,
+      "blank": 17,
+      "bytes": 3756,
+      "anyCount": 2
+    },
+    {
+      "file": "Excel/Drawing/TwoCellAnchor.ts",
+      "group": "production",
+      "physical": 49,
+      "code": 41,
+      "commentOnly": 0,
+      "blank": 8,
+      "bytes": 1330,
+      "anyCount": 3
+    },
+    {
+      "file": "Excel/Drawing/__tests__/Chart.spec.ts",
+      "group": "unit tests",
+      "physical": 795,
+      "code": 702,
+      "commentOnly": 31,
+      "blank": 62,
+      "bytes": 27977,
+      "anyCount": 1
+    },
+    {
+      "file": "Excel/Drawing/__tests__/OneCellAnchor.spec.ts",
+      "group": "unit tests",
+      "physical": 69,
+      "code": 59,
+      "commentOnly": 4,
+      "blank": 6,
+      "bytes": 2460,
+      "anyCount": 5
+    },
+    {
+      "file": "Excel/Drawing/__tests__/Picture.spec.ts",
+      "group": "unit tests",
+      "physical": 73,
+      "code": 66,
+      "commentOnly": 1,
+      "blank": 6,
+      "bytes": 2778,
+      "anyCount": 9
+    },
+    {
+      "file": "Excel/Drawing/__tests__/TwoCellAnchor.spec.ts",
+      "group": "unit tests",
+      "physical": 76,
+      "code": 69,
+      "commentOnly": 3,
+      "blank": 4,
+      "bytes": 3048,
+      "anyCount": 5
+    },
+    {
+      "file": "Excel/Drawings.ts",
+      "group": "production",
+      "physical": 58,
+      "code": 42,
+      "commentOnly": 9,
+      "blank": 7,
+      "bytes": 1938,
+      "anyCount": 0
+    },
+    {
+      "file": "Excel/Pane.ts",
+      "group": "production",
+      "physical": 33,
+      "code": 23,
+      "commentOnly": 5,
+      "blank": 5,
+      "bytes": 1008,
+      "anyCount": 0
+    },
+    {
+      "file": "Excel/Paths.ts",
+      "group": "production",
+      "physical": 8,
+      "code": 3,
+      "commentOnly": 5,
+      "blank": 0,
+      "bytes": 203,
+      "anyCount": 0
+    },
+    {
+      "file": "Excel/Positioning.ts",
+      "group": "production",
+      "physical": 14,
+      "code": 5,
+      "commentOnly": 9,
+      "blank": 0,
+      "bytes": 424,
+      "anyCount": 0
+    },
+    {
+      "file": "Excel/RelationshipManager.ts",
+      "group": "production",
+      "physical": 77,
+      "code": 65,
+      "commentOnly": 3,
+      "blank": 9,
+      "bytes": 2005,
+      "anyCount": 2
+    },
+    {
+      "file": "Excel/SharedStrings.ts",
+      "group": "production",
+      "physical": 79,
+      "code": 60,
+      "commentOnly": 11,
+      "blank": 8,
+      "bytes": 2551,
+      "anyCount": 0
+    },
+    {
+      "file": "Excel/SheetView.ts",
+      "group": "production",
+      "physical": 85,
+      "code": 64,
+      "commentOnly": 14,
+      "blank": 7,
+      "bytes": 3019,
+      "anyCount": 3
+    },
+    {
+      "file": "Excel/StyleSheet.ts",
+      "group": "production",
+      "physical": 645,
+      "code": 563,
+      "commentOnly": 34,
+      "blank": 48,
+      "bytes": 19751,
+      "anyCount": 25
+    },
+    {
+      "file": "Excel/Table.ts",
+      "group": "production",
+      "physical": 180,
+      "code": 136,
+      "commentOnly": 29,
+      "blank": 15,
+      "bytes": 5654,
+      "anyCount": 4
+    },
+    {
+      "file": "Excel/Util.ts",
+      "group": "production",
+      "physical": 147,
+      "code": 100,
+      "commentOnly": 37,
+      "blank": 10,
+      "bytes": 5294,
+      "anyCount": 3
+    },
+    {
+      "file": "Excel/Workbook.ts",
+      "group": "production",
+      "physical": 555,
+      "code": 458,
+      "commentOnly": 46,
+      "blank": 51,
+      "bytes": 19923,
+      "anyCount": 5
+    },
+    {
+      "file": "Excel/Worksheet.ts",
+      "group": "production",
+      "physical": 671,
+      "code": 463,
+      "commentOnly": 153,
+      "blank": 55,
+      "bytes": 22513,
+      "anyCount": 20
+    },
+    {
+      "file": "Excel/XMLDOM.ts",
+      "group": "production",
+      "physical": 149,
+      "code": 126,
+      "commentOnly": 0,
+      "blank": 23,
+      "bytes": 3224,
+      "anyCount": 9
+    },
+    {
+      "file": "Excel/__tests__/Drawings.spec.ts",
+      "group": "unit tests",
+      "physical": 123,
+      "code": 103,
+      "commentOnly": 1,
+      "blank": 19,
+      "bytes": 4223,
+      "anyCount": 2
+    },
+    {
+      "file": "Excel/__tests__/Pane.spec.ts",
+      "group": "unit tests",
+      "physical": 26,
+      "code": 21,
+      "commentOnly": 1,
+      "blank": 4,
+      "bytes": 790,
+      "anyCount": 1
+    },
+    {
+      "file": "Excel/__tests__/RelationshipManager.spec.ts",
+      "group": "unit tests",
+      "physical": 11,
+      "code": 9,
+      "commentOnly": 0,
+      "blank": 2,
+      "bytes": 415,
+      "anyCount": 1
+    },
+    {
+      "file": "Excel/__tests__/SharedStrings.spec.ts",
+      "group": "unit tests",
+      "physical": 17,
+      "code": 14,
+      "commentOnly": 0,
+      "blank": 3,
+      "bytes": 481,
+      "anyCount": 0
+    },
+    {
+      "file": "Excel/__tests__/SheetView.spec.ts",
+      "group": "unit tests",
+      "physical": 29,
+      "code": 27,
+      "commentOnly": 0,
+      "blank": 2,
+      "bytes": 910,
+      "anyCount": 1
+    },
+    {
+      "file": "Excel/__tests__/StyleSheet.spec.ts",
+      "group": "unit tests",
+      "physical": 518,
+      "code": 468,
+      "commentOnly": 6,
+      "blank": 44,
+      "bytes": 20395,
+      "anyCount": 75
+    },
+    {
+      "file": "Excel/__tests__/Table.spec.ts",
+      "group": "unit tests",
+      "physical": 184,
+      "code": 158,
+      "commentOnly": 8,
+      "blank": 18,
+      "bytes": 6024,
+      "anyCount": 6
+    },
+    {
+      "file": "Excel/__tests__/Util.spec.ts",
+      "group": "unit tests",
+      "physical": 17,
+      "code": 14,
+      "commentOnly": 0,
+      "blank": 3,
+      "bytes": 584,
+      "anyCount": 0
+    },
+    {
+      "file": "Excel/__tests__/Workbook.security.spec.ts",
+      "group": "unit tests",
+      "physical": 36,
+      "code": 28,
+      "commentOnly": 0,
+      "blank": 8,
+      "bytes": 1445,
+      "anyCount": 8
+    },
+    {
+      "file": "Excel/__tests__/Workbook.spec.ts",
+      "group": "unit tests",
+      "physical": 309,
+      "code": 263,
+      "commentOnly": 2,
+      "blank": 44,
+      "bytes": 11972,
+      "anyCount": 11
+    },
+    {
+      "file": "Excel/__tests__/Worksheet.spec.ts",
+      "group": "unit tests",
+      "physical": 380,
+      "code": 323,
+      "commentOnly": 21,
+      "blank": 36,
+      "bytes": 15120,
+      "anyCount": 36
+    },
+    {
+      "file": "Excel/__tests__/XMLDOM.spec.ts",
+      "group": "unit tests",
+      "physical": 65,
+      "code": 52,
+      "commentOnly": 0,
+      "blank": 13,
+      "bytes": 2001,
+      "anyCount": 2
+    },
+    {
+      "file": "__browser_tests__/excel-export.browser.spec.ts",
+      "group": "browser tests",
+      "physical": 298,
+      "code": 265,
+      "commentOnly": 1,
+      "blank": 32,
+      "bytes": 11089,
+      "anyCount": 0
+    },
+    {
+      "file": "__browser_tests__/export-regressions.browser.spec.ts",
+      "group": "browser tests",
+      "physical": 91,
+      "code": 86,
+      "commentOnly": 0,
+      "blank": 5,
+      "bytes": 4064,
+      "anyCount": 0
+    },
+    {
+      "file": "__tests__/excel-builder.spec.ts",
+      "group": "unit tests",
+      "physical": 1094,
+      "code": 1023,
+      "commentOnly": 7,
+      "blank": 64,
+      "bytes": 42809,
+      "anyCount": 0
+    },
+    {
+      "file": "__tests__/export-regressions.spec.ts",
+      "group": "unit tests",
+      "physical": 204,
+      "code": 190,
+      "commentOnly": 0,
+      "blank": 14,
+      "bytes": 9548,
+      "anyCount": 0
+    },
+    {
+      "file": "__tests__/factory.spec.ts",
+      "group": "unit tests",
+      "physical": 114,
+      "code": 88,
+      "commentOnly": 4,
+      "blank": 22,
+      "bytes": 6033,
+      "anyCount": 1
+    },
+    {
+      "file": "__tests__/streaming.spec.ts",
+      "group": "unit tests",
+      "physical": 300,
+      "code": 251,
+      "commentOnly": 22,
+      "blank": 27,
+      "bytes": 11062,
+      "anyCount": 15
+    },
+    {
+      "file": "factory.ts",
+      "group": "production",
+      "physical": 112,
+      "code": 60,
+      "commentOnly": 40,
+      "blank": 12,
+      "bytes": 5088,
+      "anyCount": 1
+    },
+    {
+      "file": "index.ts",
+      "group": "production",
+      "physical": 26,
+      "code": 26,
+      "commentOnly": 0,
+      "blank": 0,
+      "bytes": 1407,
+      "anyCount": 0
+    },
+    {
+      "file": "interfaces.ts",
+      "group": "types",
+      "physical": 388,
+      "code": 202,
+      "commentOnly": 161,
+      "blank": 25,
+      "bytes": 12777,
+      "anyCount": 1
+    },
+    {
+      "file": "streaming.ts",
+      "group": "production",
+      "physical": 119,
+      "code": 103,
+      "commentOnly": 9,
+      "blank": 7,
+      "bytes": 4651,
+      "anyCount": 0
+    },
+    {
+      "file": "utilities/__tests__/escape.spec.ts",
+      "group": "unit tests",
+      "physical": 40,
+      "code": 33,
+      "commentOnly": 0,
+      "blank": 7,
+      "bytes": 1525,
+      "anyCount": 4
+    },
+    {
+      "file": "utilities/__tests__/isTypeOf.spec.ts",
+      "group": "unit tests",
+      "physical": 61,
+      "code": 50,
+      "commentOnly": 0,
+      "blank": 11,
+      "bytes": 1766,
+      "anyCount": 1
+    },
+    {
+      "file": "utilities/__tests__/uniqueId.spec.ts",
+      "group": "unit tests",
+      "physical": 20,
+      "code": 17,
+      "commentOnly": 0,
+      "blank": 3,
+      "bytes": 711,
+      "anyCount": 0
+    },
+    {
+      "file": "utilities/base64.ts",
+      "group": "production",
+      "physical": 17,
+      "code": 16,
+      "commentOnly": 1,
+      "blank": 0,
+      "bytes": 653,
+      "anyCount": 0
+    },
+    {
+      "file": "utilities/escape.ts",
+      "group": "production",
+      "physical": 42,
+      "code": 13,
+      "commentOnly": 28,
+      "blank": 1,
+      "bytes": 1356,
+      "anyCount": 0
+    },
+    {
+      "file": "utilities/isTypeOf.ts",
+      "group": "production",
+      "physical": 30,
+      "code": 24,
+      "commentOnly": 1,
+      "blank": 5,
+      "bytes": 880,
+      "anyCount": 1
+    },
+    {
+      "file": "utilities/pick.ts",
+      "group": "production",
+      "physical": 8,
+      "code": 8,
+      "commentOnly": 0,
+      "blank": 0,
+      "bytes": 205,
+      "anyCount": 2
+    },
+    {
+      "file": "utilities/uniqueId.ts",
+      "group": "production",
+      "physical": 31,
+      "code": 11,
+      "commentOnly": 17,
+      "blank": 3,
+      "bytes": 666,
+      "anyCount": 0
+    },
+    {
+      "file": "utilities/zip.ts",
+      "group": "production",
+      "physical": 7,
+      "code": 5,
+      "commentOnly": 0,
+      "blank": 2,
+      "bytes": 353,
+      "anyCount": 0
+    },
+    {
+      "file": "vite-env.d.ts",
+      "group": "types",
+      "physical": 1,
+      "code": 0,
+      "commentOnly": 1,
+      "blank": 0,
+      "bytes": 38,
+      "anyCount": 0
+    }
+  ],
+  "ancillary": [
+    {
+      "file": ".npmignore",
+      "physical": 8,
+      "bytes": 119
+    },
+    {
+      "file": "CHANGELOG.md",
+      "physical": 231,
+      "bytes": 12207
+    },
+    {
+      "file": "LICENSE.md",
+      "physical": 21,
+      "bytes": 1084
+    },
+    {
+      "file": "README.md",
+      "physical": 100,
+      "bytes": 3715
+    },
+    {
+      "file": "copy-types.mjs",
+      "physical": 14,
+      "bytes": 463
+    },
+    {
+      "file": "package.json",
+      "physical": 71,
+      "bytes": 1753
+    },
+    {
+      "file": "src/__browser_tests__/__snapshots__/excel-export.browser.spec.ts.snap",
+      "physical": 1246,
+      "bytes": 190235
+    },
+    {
+      "file": "src/utilities/README.md",
+      "physical": 3,
+      "bytes": 237
+    },
+    {
+      "file": "tsconfig.json",
+      "physical": 26,
+      "bytes": 688
+    },
+    {
+      "file": "vite.config.mts",
+      "physical": 32,
+      "bytes": 682
+    }
+  ],
+  "largestFunctions": [
+    {
+      "file": "Excel/Worksheet.ts",
+      "name": "createWorksheetDocument",
+      "line": 350,
+      "lines": 119
+    },
+    {
+      "file": "Excel/Workbook.ts",
+      "name": "createContentTypes",
+      "line": 248,
+      "lines": 88
+    },
+    {
+      "file": "Excel/Drawing/Chart.ts",
+      "name": "toChartSpaceXML",
+      "line": 41,
+      "lines": 81
+    },
+    {
+      "file": "Excel/Workbook.ts",
+      "name": "toXML",
+      "line": 337,
+      "lines": 75
+    },
+    {
+      "file": "Excel/Drawing/Picture.ts",
+      "name": "toXML",
+      "line": 49,
+      "lines": 66
+    },
+    {
+      "file": "Excel/StyleSheet.ts",
+      "name": "createFormat",
+      "line": 99,
+      "lines": 60
+    },
+    {
+      "file": "Excel/Drawing/Chart.ts",
+      "name": "_createPrimaryChartNode",
+      "line": 170,
+      "lines": 55
+    },
+    {
+      "file": "Excel/Drawing/Chart.ts",
+      "name": "_createSeriesNode",
+      "line": 227,
+      "lines": 51
+    },
+    {
+      "file": "Excel/StyleSheet.ts",
+      "name": "exportCellFormatElement",
+      "line": 329,
+      "lines": 51
+    },
+    {
+      "file": "Excel/StyleSheet.ts",
+      "name": "createFontStyle",
+      "line": 222,
+      "lines": 48
+    },
+    {
+      "file": "Excel/StyleSheet.ts",
+      "name": "exportFont",
+      "line": 394,
+      "lines": 46
+    },
+    {
+      "file": "Excel/Drawing/Chart.ts",
+      "name": "_createGraphicFrame",
+      "line": 126,
+      "lines": 42
+    },
+    {
+      "file": "streaming.ts",
+      "name": "nodeExcelStream",
+      "line": 78,
+      "lines": 42
+    },
+    {
+      "file": "Excel/Worksheet.ts",
+      "name": "serializeRow",
+      "line": 304,
+      "lines": 41
+    },
+    {
+      "file": "Excel/Workbook.ts",
+      "name": "_generateCorePaths",
+      "line": 426,
+      "lines": 36
+    },
+    {
+      "file": "Excel/StyleSheet.ts",
+      "name": "exportPatternFill",
+      "line": 497,
+      "lines": 34
+    },
+    {
+      "file": "Excel/StyleSheet.ts",
+      "name": "exportGradientFill",
+      "line": 458,
+      "lines": 33
+    },
+    {
+      "file": "Excel/Table.ts",
+      "name": "toXML",
+      "line": 100,
+      "lines": 33
+    },
+    {
+      "file": "Excel/Drawing/Chart.ts",
+      "name": "_createValueAxis",
+      "line": 375,
+      "lines": 32
+    },
+    {
+      "file": "Excel/StyleSheet.ts",
+      "name": "createDifferentialStyle",
+      "line": 160,
+      "lines": 32
+    },
+    {
+      "file": "Excel/SheetView.ts",
+      "name": "exportXML",
+      "line": 54,
+      "lines": 31
+    },
+    {
+      "file": "Excel/Drawing/Chart.ts",
+      "name": "_applySeriesColor",
+      "line": 288,
+      "lines": 29
+    },
+    {
+      "file": "streaming.ts",
+      "name": "createExcelFileStream",
+      "line": 28,
+      "lines": 29
+    },
+    {
+      "file": "Excel/Worksheet.ts",
+      "name": "compilePageDetailPiece",
+      "line": 182,
+      "lines": 28
+    },
+    {
+      "file": "Excel/Worksheet.ts",
+      "name": "forEachCell",
+      "line": 273,
+      "lines": 28
+    }
+  ]
+}
