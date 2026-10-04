@@ -28,10 +28,12 @@ export class SharedStrings {
     return this.strings[str];
   }
 
+  /** Returns the string-to-index lookup used by worksheet cells. */
   exportData() {
     return this.strings;
   }
 
+  /** Serializes the shared string table as an OOXML document. */
   toXML() {
     const doc = Util.createXmlDoc(Util.schemas.spreadsheetml, 'sst');
     const sharedStringTable = doc.documentElement;

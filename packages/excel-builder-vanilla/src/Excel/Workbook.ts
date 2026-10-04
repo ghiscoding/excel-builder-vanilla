@@ -37,10 +37,12 @@ export class Workbook {
   printTitles?: Record<string, { top?: number; left?: string }>;
   definedNames: WorkbookDefinedName[] = [];
 
+  /** Creates a workbook with an empty worksheet and style collection. */
   constructor() {
     this.initialize();
   }
 
+  /** Resets workbook state and creates its shared style and string collections. */
   initialize() {
     this.id = uniqueId('Workbook');
     this.styleSheet = new StyleSheet();
@@ -73,9 +75,7 @@ export class Workbook {
     }
   }
 
-  /**
-   * Resolve scope into a worksheet localSheetId (0-based).
-   */
+  /** Resolve scope into a worksheet localSheetId (0-based). */
   resolveDefinedNameScope(scope?: number | string) {
     if (scope === undefined) {
       return undefined;
@@ -94,9 +94,7 @@ export class Workbook {
     return index;
   }
 
-  /**
-   * Adds a workbook-level or sheet-scoped defined name.
-   */
+  /** Adds a workbook-level or sheet-scoped defined name. */
   addDefinedName(name: string, refersTo: string, scope?: number | string, options?: { comment?: string; hidden?: boolean }) {
     this.validateDefinedName(name);
     if (typeof refersTo !== 'string' || !refersTo.trim()) {
@@ -142,9 +140,7 @@ export class Workbook {
     });
   }
 
-  /**
-   * Qualify LAMBDA argument references with the `_xlpm.` prefix expected in workbook XML.
-   */
+  /** Qualify LAMBDA argument references with the `_xlpm.` prefix expected in workbook XML. */
   qualifyLambdaBodyArgRefs(formulaBody: string, argNames: string[]) {
     const sortedArgs = [...argNames].sort((a, b) => b.length - a.length);
     let qualifiedBody = formulaBody;
@@ -156,23 +152,28 @@ export class Workbook {
     return qualifiedBody;
   }
 
+  /** Creates a worksheet with a generated default name when none is supplied. */
   createWorksheet(config?: any) {
     config = Object.assign({}, { name: `Sheet ${this.worksheets.length + 1}` }, config);
     return new Worksheet(config);
   }
 
+  /** Returns the workbook style sheet used to register cell formats. */
   getStyleSheet() {
     return this.styleSheet;
   }
 
+  /** Registers a table with this workbook. */
   addTable(table: Table) {
     this.tables.push(table);
   }
 
+  /** Registers a worksheet drawing collection with this workbook. */
   addDrawings(drawings: Drawings) {
     this.drawings.push(drawings);
   }
 
+  /** Registers a chart and assigns its package index and target path. */
   addChart(chart: Chart) {
     // Assign 1-based index & relative target for drawing relationship
     chart.index = this.charts.length + 1;
@@ -182,7 +183,6 @@ export class Workbook {
 
   /**
    * Set number of rows to repeat for this sheet.
-   *
    * @param {String} sheet name
    * @param {int} number of rows to repeat from the top
    * @returns {undefined}
@@ -199,7 +199,6 @@ export class Workbook {
 
   /**
    * Set number of rows to repeat for this sheet.
-   *
    * @param {String} sheet name
    * @param {int} number of columns to repeat from the left
    * @returns {undefined}
@@ -215,6 +214,7 @@ export class Workbook {
     this.printTitles![inSheet].left = String.fromCharCode(64 + inRowCount);
   }
 
+  /** Registers media bytes and returns the workbook media record for the file. */
   addMedia(_type: string, fileName: string, fileData: any, contentType?: string | null) {
     const fileNamePieces = fileName.split('.');
     const extension = fileNamePieces[fileNamePieces.length - 1];
@@ -239,12 +239,14 @@ export class Workbook {
     return this.media[fileName];
   }
 
+  /** Adds a worksheet and connects it to the workbook's shared strings. */
   addWorksheet(worksheet: Worksheet) {
     this.relations.addRelation(worksheet, 'worksheet');
     worksheet.setSharedStringCollection(this.sharedStrings);
     this.worksheets.push(worksheet);
   }
 
+  /** Creates the package content types document for workbook parts. */
   createContentTypes() {
     const doc = Util.createXmlDoc(Util.schemas.contentTypes, 'Types');
     const types = doc.documentElement;
@@ -307,6 +309,7 @@ export class Workbook {
     return doc;
   }
 
+  /** Serializes workbook sheets, defined names, and workbook settings as OOXML. */
   toXML() {
     const doc = Util.createXmlDoc(Util.schemas.spreadsheetml, 'workbook');
     const wb = doc.documentElement;
@@ -383,6 +386,7 @@ export class Workbook {
     return doc;
   }
 
+  /** Creates the package-level relationship pointing to the workbook part. */
   createWorkbookRelationship() {
     const doc = Util.createXmlDoc(Util.schemas.relationshipPackage, 'Relationships');
     const relationships = doc.documentElement;
@@ -396,6 +400,7 @@ export class Workbook {
     return doc;
   }
 
+  /** Assigns package paths and adds shared workbook parts to the file map. */
   _generateCorePaths(files: any, paths: Record<string, string> = Paths) {
     this.relations.paths = paths;
     for (let i = 0; i < this.worksheets.length; i++) {
@@ -464,6 +469,7 @@ export class Workbook {
     yield ['/xl/_rels/workbook.xml.rels', this.packageXml(this.relations.toXML())];
   }
 
+  /** Adds metadata parts and serializes XML values in the package file map. */
   _prepareFilesForPackaging(files: { [path: string]: XMLDOM | string }) {
     for (const [path, value] of this.metadataFiles()) {
       files[path] = typeof value === 'string' ? value : [...value].join('');

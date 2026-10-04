@@ -57,6 +57,7 @@ export class Worksheet {
 
   showZeros: any = null;
 
+  /** Creates a worksheet from its name, columns, and view configuration. */
   constructor(config: WorksheetOption) {
     this._timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
     this.sheetView = config.sheetView || new SheetView();
@@ -64,6 +65,7 @@ export class Worksheet {
     this.initialize(config);
   }
 
+  /** Initializes worksheet identity, columns, and relationship state. */
   initialize(config: any) {
     config = config || {};
     this.name = config.name;
@@ -77,6 +79,7 @@ export class Worksheet {
   }
 
   /**
+   * Exports worksheet state for transfer to another worksheet or worker.
    * Returns an object that can be consumed by a Worksheet/Export/Worker
    * @returns {Object}
    */
@@ -98,7 +101,7 @@ export class Worksheet {
   }
 
   /**
-   * Imports data - to be used while inside of a WorksheetExportWorker.
+   * Imports worksheet state, including its relationship data.
    * @param {Object} data
    */
   importData(data: any) {
@@ -107,30 +110,33 @@ export class Worksheet {
     Object.assign(this, data);
   }
 
+  /** Sets the shared string table used when worksheet cells are serialized. */
   setSharedStringCollection(stringCollection: SharedStrings) {
     this.sharedStrings = stringCollection;
   }
 
+  /** Adds a table to this worksheet and registers its relationship. */
   addTable(table: Table) {
     this._tables.push(table);
     this.relations?.addRelation(table, 'table');
   }
 
+  /** Adds drawings to this worksheet and registers their relationship. */
   addDrawings(drawings: Drawings) {
     this._drawings.push(drawings);
     this.relations?.addRelation(drawings, 'drawingRelationship');
   }
 
+  /** Sets style and layout instructions for a zero-based row index. */
   setRowInstructions(rowIndex: number, instructions: ExcelStyleInstruction) {
     this._rowInstructions[rowIndex] = instructions;
   }
 
   /**
+   * Sets the left, center, and right print header instructions.
    * Expects an array length of three.
-   *
    * @see Excel/Worksheet compilePageDetailPiece
    * @see <a href='/cookbook/addingHeadersAndFooters.html'>Adding headers and footers to a worksheet</a>
-   *
    * @param {Array} headers [left, center, right]
    */
   setHeader(headers: [left: any, center: any, right: any]) {
@@ -141,11 +147,10 @@ export class Worksheet {
   }
 
   /**
+   * Sets the left, center, and right print footer instructions.
    * Expects an array length of three.
-   *
    * @see Excel/Worksheet compilePageDetailPiece
    * @see <a href='/cookbook/addingHeadersAndFooters.html'>Adding headers and footers to a worksheet</a>
-   *
    * @param {Array} footers [left, center, right]
    */
   setFooter(footers: [left: any, center: any, right: any]) {
@@ -173,9 +178,7 @@ export class Worksheet {
   }
 
   /**
-   * Turns instructions on page header/footer details into something
-   * usable by Excel.
-   *
+   * Turns instructions on page header/footer details into something usable by Excel.
    * @param {type} data
    * @returns {String|@exp;_@call;reduce}
    */
@@ -210,7 +213,6 @@ export class Worksheet {
 
   /**
    * Creates the header node.
-   *
    * @todo implement the ability to do even/odd headers
    * @param {XML Doc} doc
    * @returns {XML Node}
@@ -223,7 +225,6 @@ export class Worksheet {
 
   /**
    * Creates the footer node.
-   *
    * @todo implement the ability to do even/odd footers
    * @param {XML Doc} doc
    * @returns {XML Node}
@@ -258,7 +259,6 @@ export class Worksheet {
   /**
    * Runs through the XML document and grabs all of the strings that will
    * be sent to the 'shared strings' document.
-   *
    * @returns {Array}
    */
   collectSharedStrings() {
@@ -357,6 +357,7 @@ export class Worksheet {
     return xml ? `<row${rowAttrs}>${xml}</row>` : `<row${rowAttrs}/>`;
   }
 
+  /** Serializes the worksheet and all of its rows as an OOXML document. */
   toXML() {
     return this.createWorksheetDocument(true);
   }
@@ -402,9 +403,7 @@ export class Worksheet {
       worksheet.appendChild(this.sheetProtection.exportXML(doc));
     }
 
-    /**
-     * Doing this a bit differently, as hyperlinks could be as populous as rows. Looping twice would be bad.
-     */
+    // Doing this a bit differently, as hyperlinks could be as populous as rows. Looping twice would be bad.
     if (this.relations) {
       const ids = new Set(this.hyperlinks.map(link => (link.id ||= uniqueId('hyperlink'))));
       for (const [id, relation] of Object.entries(this.relations.relations)) {
@@ -488,7 +487,7 @@ export class Worksheet {
   }
 
   /**
-   *
+   * Creates the OOXML column definitions from this worksheet's column settings.
    * @param {XML Doc} doc
    * @returns {XML Node}
    */
@@ -522,7 +521,6 @@ export class Worksheet {
 
   /**
    * Sets the page settings on a worksheet node.
-   *
    * @param {XML Doc} doc
    * @param {XML Node} worksheet
    * @returns {undefined}
@@ -555,10 +553,9 @@ export class Worksheet {
   }
 
   /**
+   * Sets the worksheet's printed page orientation.
    * http://www.schemacentral.com/sc/ooxml/t-ssml_ST_Orientation.html
-   *
    * Can be one of 'portrait' or 'landscape'.
-   *
    * @param {'default' | 'portrait' | 'landscape'} orientation
    * @returns {undefined}
    */
@@ -567,17 +564,9 @@ export class Worksheet {
   }
 
   /**
-   * Set page details in inches.
+   * Sets the worksheet's page margins for printing (in inches).
    * use this structure:
-   * {
-   *   top: 0.7
-   *   , bottom: 0.7
-   *   , left: 0.7
-   *   , right: 0.7
-   *   , header: 0.3
-   *   , footer: 0.3
-   * }
-   *
+   * { top: 0.7, bottom: 0.7, left: 0.7, right: 0.7, header: 0.3, footer: 0.3 }
    * @returns {undefined}
    */
   setPageMargin(input: ExcelMargin) {
@@ -586,7 +575,6 @@ export class Worksheet {
 
   /**
    * Expects an array of column definitions. Each column definition needs to have a width assigned to it.
-   *
    * @param {Array} columns
    */
   setColumns(columns: ExcelColumn[]) {
@@ -595,7 +583,6 @@ export class Worksheet {
 
   /**
    * Expects an array of data to be translated into cells.
-   *
    * @param {Array} data Two dimensional array - [ [A1, A2], [B1, B2] ]
    * @see <a href='/cookbook/addingDataToAWorksheet.html'>Adding data to a worksheet</a>
    */
@@ -605,7 +592,6 @@ export class Worksheet {
 
   /**
    * Merge cells in given range
-   *
    * @param cell1 - A1, A2...
    * @param cell2 - A2, A3...
    */
@@ -627,25 +613,23 @@ export class Worksheet {
   /**
    * Expects an array containing an object full of column format definitions.
    * http://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.column.aspx
-   * bestFit
-   * collapsed
-   * customWidth
-   * hidden
-   * max
-   * min
-   * outlineLevel
-   * phonetic
-   * style
-   * width
+   * - bestFit
+   * - collapsed
+   * - customWidth
+   * - hidden
+   * - max
+   * - min
+   * - outlineLevel
+   * - phonetic
+   * - style
+   * - width
    * @param {Array} columnFormats
    */
   setColumnFormats(columnFormats: ExcelColumn[]) {
     this.columnFormats = columnFormats;
   }
 
-  /**
-   * Returns worksheet XML header (everything before <sheetData>)
-   */
+  /** Returns worksheet XML header (everything before <sheetData>) */
   getWorksheetXmlHeader(): string {
     return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <worksheet xmlns="${Util.schemas.spreadsheetml}"
@@ -653,9 +637,7 @@ export class Worksheet {
            xmlns:mc="${Util.schemas.markupCompat}">`;
   }
 
-  /**
-   * Returns worksheet XML footer (everything after </sheetData>)
-   */
+  /** Returns worksheet XML footer (everything after </sheetData>) */
   getWorksheetXmlFooter(): string {
     if (!this._headers.length && !this._footers.length) {
       return '';

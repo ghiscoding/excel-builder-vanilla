@@ -1,8 +1,10 @@
+/** Checks whether a value is a non-null object or function. */
 export function isObject(value: unknown): value is object {
   const type = typeof value;
   return value != null && (type === 'object' || type === 'function');
 }
 
+/** Checks whether a value is a plain object with the standard object prototype. */
 export function isPlainObject(value: unknown) {
   if (typeof value !== 'object' || value === null) {
     return false;
@@ -22,6 +24,7 @@ export function isPlainObject(value: unknown) {
   return typeof Ctor === 'function' && Ctor instanceof Ctor && Function.prototype.call(Ctor) === Function.prototype.call(value);
 }
 
+/** Checks whether a value or boxed string can be treated as a string. */
 export function isString(value: any): value is string {
   if (value != null && typeof value.valueOf() === 'string') {
     return true;

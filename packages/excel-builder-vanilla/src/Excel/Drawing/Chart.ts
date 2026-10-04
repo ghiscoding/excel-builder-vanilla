@@ -17,6 +17,7 @@ export class Chart extends Drawing {
   target: string | null = null; // relative target path (`../charts/chartN.xml`)
   options: ChartOptions;
 
+  /** Creates a chart drawing from series, ranges, and display options. */
   constructor(options: ChartOptions) {
     super();
     this.options = options;
@@ -122,7 +123,10 @@ export class Chart extends Drawing {
 
   // -- private functions
 
-  /** @private Creates the graphicFrame container that goes inside an anchor in drawing part */
+  /**
+   * Creates the drawing frame that positions the chart in the worksheet.
+   * @private
+   */
   _createGraphicFrame(xmlDoc: XMLDOM) {
     const graphicFrame = Util.createElement(xmlDoc, 'xdr:graphicFrame');
     const nvGraphicFramePr = Util.createElement(xmlDoc, 'xdr:nvGraphicFramePr');
@@ -166,7 +170,10 @@ export class Chart extends Drawing {
     return graphicFrame;
   }
 
-  /** @private Create the primary chart node based on type and stacking */
+  /**
+   * Creates the primary chart element and applies its chart type and grouping.
+   * @private
+   */
   _createPrimaryChartNode(doc: XMLDOM, type: string, stacking?: 'stacked' | 'percent'): XMLNode {
     let node: XMLNode;
     const groupingValue = this._resolveGrouping(type, stacking);
@@ -210,7 +217,10 @@ export class Chart extends Drawing {
     return node;
   }
 
-  /** @private Build a <c:ser> node */
+  /**
+   * Creates one chart series with its name, values, categories, and formatting.
+   * @private
+   */
   _createSeriesNode(
     doc: XMLDOM,
     s: { name: string; valuesRange: string; scatterXRange?: string; color?: string },
@@ -271,7 +281,10 @@ export class Chart extends Drawing {
     return reference;
   }
 
-  /** @private Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
+  /**
+   * Applies the configured series color to the chart series markup.
+   * @private
+   */
   _applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string) {
     if (!color || typeof color !== 'string') {
       return;
@@ -304,7 +317,10 @@ export class Chart extends Drawing {
     serNode.appendChild(spPr);
   }
 
-  /** @private Create legend node honoring position + overlay */
+  /**
+   * Creates the chart legend element from its position and overlay options.
+   * @private
+   */
   _createLegendNode(doc: XMLDOM, legendOpts?: { position?: string; overlay?: boolean }): XMLNode {
     const legend = Util.createElement(doc, 'c:legend');
     const posMap: Record<string, string> = { right: 'r', left: 'l', top: 't', bottom: 'b', topRight: 'tr' };
@@ -315,7 +331,10 @@ export class Chart extends Drawing {
     return legend;
   }
 
-  /** @private Create a c:title node with minimal rich text required for Excel to render */
+  /**
+   * Creates a chart title element containing the supplied text.
+   * @private
+   */
   _createTitleNode(doc: XMLDOM, text: string): XMLNode {
     const title = Util.createElement(doc, 'c:title');
     const tx = Util.createElement(doc, 'c:tx');
@@ -339,7 +358,10 @@ export class Chart extends Drawing {
     return title;
   }
 
-  /** @private Create a category axis (catAx) */
+  /**
+   * Creates a category axis and configures its title and gridlines.
+   * @private
+   */
   _createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string, opts?: { showGridLines?: boolean }): XMLNode {
     const catAx = Util.createElement(doc, 'c:catAx');
     catAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axId)]]));
@@ -360,7 +382,10 @@ export class Chart extends Drawing {
     return catAx;
   }
 
-  /** @private Create a value axis (valAx) */
+  /**
+   * Creates a value axis and configures its title, bounds, and gridlines.
+   * @private
+   */
   _createValueAxis(
     doc: XMLDOM,
     axId: number,
@@ -394,12 +419,18 @@ export class Chart extends Drawing {
     return valAx;
   }
 
-  /** @private Simple axis id base using index plus a constant offset */
+  /**
+   * Allocates the next base ID used to identify a chart's axes.
+   * @private
+   */
   _nextAxisIdBase(): number {
     return (this.index || 1) * 1000;
   }
 
-  /** @private Resolve grouping value based on chart type and stacking */
+  /**
+   * Resolves the OOXML grouping value for a chart type and stacking mode.
+   * @private
+   */
   _resolveGrouping(type: string, stacking?: 'stacked' | 'percent') {
     if (type === 'pie' || type === 'doughnut') {
       return 'clustered'; // required but cosmetic

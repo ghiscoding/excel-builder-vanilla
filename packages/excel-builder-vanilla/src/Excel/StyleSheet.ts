@@ -58,6 +58,7 @@ export class StyleSheet {
   ];
   tableStyles: any[] = [];
 
+  /** Creates a cell format using a built-in formatter such as `date`. */
   createSimpleFormatter(type: string) {
     const sid = this.masterCellFormats.length;
     const style: { [id: string]: number } = {
@@ -72,6 +73,7 @@ export class StyleSheet {
     return style;
   }
 
+  /** Registers a fill definition and returns it with its generated style ID. */
   createFill(fillInstructions: any) {
     const id = this.fills.length;
     const fill = fillInstructions;
@@ -80,6 +82,7 @@ export class StyleSheet {
     return fill;
   }
 
+  /** Registers a custom number format and returns its generated format ID. */
   createNumberFormatter(formatInstructions: any) {
     const id = this.numberFormatters.length + 100;
     const format = {
@@ -91,10 +94,12 @@ export class StyleSheet {
   }
 
   /**
-   * alignment: {
-   *  horizontal: http://www.schemacentral.com/sc/ooxml/t-ssml_ST_HorizontalAlignment.html
-   *  vertical: http://www.schemacentral.com/sc/ooxml/t-ssml_ST_VerticalAlignment.html
-   *  @param {Object} styleInstructions
+   * Creates a cell format from font, number, border, fill, alignment, and protection instructions.
+   * `alignment: {
+   *    horizontal: http://www.schemacentral.com/sc/ooxml/t-ssml_ST_HorizontalAlignment.html
+   *    vertical: http://www.schemacentral.com/sc/ooxml/t-ssml_ST_VerticalAlignment.html
+   *  }`
+   * @param {Object} styleInstructions
    */
   createFormat(styleInstructions: ExcelStyleInstruction) {
     const sid = this.masterCellFormats.length;
@@ -157,6 +162,7 @@ export class StyleSheet {
     return style;
   }
 
+  /** Creates a differential style for conditional formatting or table styles. */
   createDifferentialStyle(styleInstructions: ExcelStyleInstruction) {
     const id = this.differentialStyles.length;
     const style: ExcelStyleInstruction = {
@@ -191,6 +197,7 @@ export class StyleSheet {
   }
 
   /**
+   * Registers a table style whose elements reference differential format IDs.
    * Should be an object containing keys that match with one of the keys from this list:
    * http://www.schemacentral.com/sc/ooxml/t-ssml_ST_TableStyleType.html
    *
@@ -202,6 +209,7 @@ export class StyleSheet {
   }
 
   /**
+   * Registers a border definition and returns it with its generated style ID.
    * All params optional. each border should follow:
    * {
    * style: styleString, http://www.schemacentral.com/sc/ooxml/t-ssml_ST_BorderStyle.html
@@ -216,6 +224,7 @@ export class StyleSheet {
   }
 
   /**
+   * Registers a font definition and returns it with its generated style ID.
    * Font styles, color is a future goal - at the moment it's looking a bit complicated
    * @param {Object} instructions
    */
@@ -276,10 +285,12 @@ export class StyleSheet {
     return collection;
   }
 
+  /** Creates the OOXML borders collection. */
   exportBorders(doc: XMLDOM) {
     return this.exportCollection(doc, 'borders', this.borders, this.exportBorder);
   }
 
+  /** Creates an OOXML border element from one border definition. */
   exportBorder(doc: XMLDOM, data: any) {
     const border = doc.createElement('border');
     const borderGenerator = (name: string) => {
@@ -300,6 +311,7 @@ export class StyleSheet {
     return border;
   }
 
+  /** Creates an OOXML color element from an RGB, theme, tint, or automatic color. */
   exportColor(doc: XMLDOM, color: any) {
     const colorEl = doc.createElement('color');
     if (isString(color)) {
@@ -320,14 +332,17 @@ export class StyleSheet {
     return colorEl;
   }
 
+  /** Creates the OOXML cell formats collection. */
   exportMasterCellFormats(doc: XMLDOM) {
     return this.exportCollection(doc, 'cellXfs', this.masterCellFormats, this.exportCellFormatElement);
   }
 
+  /** Creates the OOXML base cell styles collection. */
   exportMasterCellStyles(doc: XMLDOM) {
     return this.exportCollection(doc, 'cellStyleXfs', this.masterCellStyles, this.exportCellFormatElement);
   }
 
+  /** Creates an OOXML format element from cell style instructions. */
   exportCellFormatElement(doc: XMLDOM, styleInstructions: ExcelStyleInstruction) {
     const xf = doc.createElement('xf');
     const allowed = [
@@ -380,6 +395,7 @@ export class StyleSheet {
     return xf;
   }
 
+  /** Creates an OOXML alignment element from the supplied alignment properties. */
   exportAlignment(doc: XMLDOM, alignmentData: any) {
     const alignment = doc.createElement('alignment');
     const someKeys = Object.keys(alignmentData);
@@ -389,10 +405,12 @@ export class StyleSheet {
     return alignment;
   }
 
+  /** Creates the OOXML fonts collection. */
   exportFonts(doc: XMLDOM) {
     return this.exportCollection(doc, 'fonts', this.fonts, this.exportFont);
   }
 
+  /** Creates an OOXML font element from one font definition. */
   exportFont(doc: XMLDOM, fd: any) {
     const font = doc.createElement('font');
     if (fd.size) {
@@ -440,10 +458,12 @@ export class StyleSheet {
     return font;
   }
 
+  /** Creates the OOXML fills collection. */
   exportFills(doc: XMLDOM) {
     return this.exportCollection(doc, 'fills', this.fills, this.exportFill);
   }
 
+  /** Creates an OOXML fill element from one pattern or gradient definition. */
   exportFill(doc: XMLDOM, fd: any) {
     let fillDef: any;
     const fill = doc.createElement('fill');
@@ -457,6 +477,7 @@ export class StyleSheet {
     return fill;
   }
 
+  /** Creates an OOXML gradient fill from its direction and color stops. */
   exportGradientFill(doc: XMLDOM, data: any) {
     const fillDef = doc.createElement('gradientFill');
     if (data.degree) {
@@ -492,6 +513,7 @@ export class StyleSheet {
   }
 
   /**
+   * Creates an OOXML pattern fill from its pattern type and foreground/background colors.
    * Pattern types: http://www.schemacentral.com/sc/ooxml/t-ssml_ST_PatternType.html
    * @param {XMLDoc} doc
    * @param {Object} data
@@ -531,10 +553,12 @@ export class StyleSheet {
     return fillDef;
   }
 
+  /** Creates the OOXML custom number formats collection. */
   exportNumberFormatters(doc: XMLDOM) {
     return this.exportCollection(doc, 'numFmts', this.numberFormatters, this.exportNumberFormatter);
   }
 
+  /** Creates an OOXML number format element. */
   exportNumberFormatter(doc: XMLDOM, fd: any) {
     const numFmt = doc.createElement('numFmt');
     numFmt.setAttribute('numFmtId', fd.id);
@@ -542,6 +566,7 @@ export class StyleSheet {
     return numFmt;
   }
 
+  /** Creates the OOXML named cell styles collection. */
   exportCellStyles(doc: XMLDOM) {
     const cellStyles = doc.createElement('cellStyles');
     cellStyles.setAttribute('count', String(this.cellStyles.length));
@@ -561,10 +586,12 @@ export class StyleSheet {
     return cellStyles;
   }
 
+  /** Creates the OOXML differential styles collection. */
   exportDifferentialStyles(doc: XMLDOM) {
     return this.exportCollection(doc, 'dxfs', this.differentialStyles, this.exportDFX);
   }
 
+  /** Creates an OOXML differential format element from one style definition. */
   exportDFX(doc: XMLDOM, style: any) {
     const dxf = doc.createElement('dxf');
     if (style.font) {
@@ -585,6 +612,7 @@ export class StyleSheet {
     return dxf;
   }
 
+  /** Creates the OOXML table styles collection. */
   exportTableStyles(doc: XMLDOM) {
     const tableStyles = doc.createElement('tableStyles');
     tableStyles.setAttribute('count', String(this.tableStyles.length));
@@ -597,6 +625,7 @@ export class StyleSheet {
     return tableStyles;
   }
 
+  /** Creates an OOXML table style and its differential format references. */
   exportTableStyle(doc: XMLDOM, style: { name: string; wholeTable?: number; headerRow?: number }) {
     const tableStyle = doc.createElement('tableStyle');
     tableStyle.setAttribute('name', style.name);
@@ -617,6 +646,7 @@ export class StyleSheet {
     return tableStyle;
   }
 
+  /** Creates an OOXML protection element from the supplied properties. */
   exportProtection(doc: XMLDOM, protectionData: any) {
     const node = doc.createElement('protection');
     // eslint-disable-next-line no-restricted-syntax
@@ -628,6 +658,7 @@ export class StyleSheet {
     return node;
   }
 
+  /** Serializes all registered cell, number, border, fill, and table styles. */
   toXML() {
     const doc = Util.createXmlDoc(Util.schemas.spreadsheetml, 'styleSheet');
     const styleSheet = doc.documentElement;

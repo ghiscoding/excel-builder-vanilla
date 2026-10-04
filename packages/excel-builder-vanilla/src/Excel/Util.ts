@@ -103,6 +103,7 @@ export class Util {
 
   static LETTER_REFS: any = {};
 
+  /** Converts a one-based column number and row label to an Excel cell reference. */
   static positionToLetterRef(x: number, y: number | string) {
     let digit = 1;
     let index: number;

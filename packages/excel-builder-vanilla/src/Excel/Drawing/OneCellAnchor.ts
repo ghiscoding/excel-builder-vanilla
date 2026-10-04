@@ -3,7 +3,7 @@ import type { XMLDOM } from '../XMLDOM.js';
 import type { AnchorOption } from './Drawing.js';
 
 /**
- *
+ * Anchors drawing content to one worksheet cell with a fixed size.
  * @param {Object} config
  * @param {Number} config.x The cell column number that the top left of the picture will start in
  * @param {Number} config.y The cell row number that the top left of the picture will start in
@@ -26,6 +26,7 @@ export class OneCellAnchor {
     }
   }
 
+  /** Sets the anchor cell and optional offsets within that cell. */
   setPos(x: number, y: number, xOff?: boolean, yOff?: boolean) {
     this.x = x;
     this.y = y;
@@ -37,11 +38,13 @@ export class OneCellAnchor {
     }
   }
 
+  /** Sets the anchored drawing's width and height in EMUs. */
   setDimensions(width: number, height: number) {
     this.width = width;
     this.height = height;
   }
 
+  /** Serializes the cell position, dimensions, drawing content, and client data. */
   toXML(xmlDoc: XMLDOM, content: any) {
     const root = Util.createElement(xmlDoc, 'xdr:oneCellAnchor');
     root.appendChild(Util.createAnchorPosition(xmlDoc, 'xdr:from', this));

@@ -32,6 +32,7 @@ export class SheetView {
   zoomScalePageLayoutView: any = null;
   zoomScaleSheetLayoutView: any = null;
 
+  /** Creates a sheet view with the supplied pane or a default pane. */
   constructor(config?: SheetViewOption) {
     const conf = config || {};
     this.pane = conf.pane || new Pane();
@@ -51,6 +52,7 @@ export class SheetView {
     this.pane.topLeftCell = cell;
   }
 
+  /** Serializes the sheet view settings and pane as OOXML. */
   exportXML(doc: XMLDOM) {
     const sheetViews = doc.createElement('sheetViews');
     const sheetView = doc.createElement('sheetView');

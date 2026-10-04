@@ -37,10 +37,12 @@ export class Table {
     showRowStripes?: boolean;
   } = {};
 
+  /** Creates a table and applies the supplied table configuration. */
   constructor(config?: any) {
     this.initialize(config);
   }
 
+  /** Resets generated table identifiers and applies configuration values. */
   initialize(config: any) {
     this.displayName = uniqueId('Table');
     this.name = this.displayName;
@@ -51,10 +53,12 @@ export class Table {
     }
   }
 
+  /** Sets the table's inclusive start and end cell coordinates. */
   setReferenceRange(start: number[], end: number[]) {
     this.ref = [start, end];
   }
 
+  /** Adds each supplied name or column definition to the table. */
   setTableColumns(columns: Array<ExcelTableColumn | string>) {
     columns.forEach(column => {
       this.addTableColumn(column);
@@ -62,20 +66,21 @@ export class Table {
   }
 
   /**
+   * Adds a column definition by name or full table column configuration.
    * Expects an object with the following optional properties:
-   * name (required)
-   * dataCellStyle
-   * dataDxfId
-   * headerRowCellStyle
-   * headerRowDxfId
-   * totalsRowCellStyle
-   * totalsRowDxfId
-   * totalsRowFunction
-   * totalsRowLabel
-   * columnFormula
-   * columnFormulaIsArrayType (boolean)
-   * totalFormula
-   * totalFormulaIsArrayType (boolean)
+   * - name (required)
+   * - dataCellStyle
+   * - dataDxfId
+   * - headerRowCellStyle
+   * - headerRowDxfId
+   * - totalsRowCellStyle
+   * - totalsRowDxfId
+   * - totalsRowFunction
+   * - totalsRowLabel
+   * - columnFormula
+   * - columnFormulaIsArrayType (boolean)
+   * - totalFormula
+   * - totalFormulaIsArrayType (boolean)
    */
   addTableColumn(column: ExcelTableColumn | string) {
     const col = isString(column) ? ({ name: column } as ExcelTableColumn) : column;
@@ -86,17 +91,19 @@ export class Table {
   }
 
   /**
+   * Configures sorting for the table's data range.
    * Expects an object with the following properties:
-   * caseSensitive (boolean)
-   * dataRange
-   * columnSort (assumes true)
-   * sortDirection
-   * sortRange (defaults to dataRange)
+   * - caseSensitive (boolean)
+   * - dataRange
+   * - columnSort (assumes true)
+   * - sortDirection
+   * - sortRange (defaults to dataRange)
    */
   setSortState(state: ExcelSortState) {
     this.sortState = state;
   }
 
+  /** Serializes the table definition, filter, columns, and style as OOXML. */
   toXML() {
     if (!this.ref) {
       throw new Error('Needs at least a reference range');
@@ -131,6 +138,7 @@ export class Table {
     return doc;
   }
 
+  /** Creates the OOXML tableColumns element from the configured columns. */
   exportTableColumns(doc: XMLDOM) {
     const tableColumns = doc.createElement('tableColumns');
     tableColumns.setAttribute('count', String(this.tableColumns.length));
@@ -150,6 +158,7 @@ export class Table {
     return tableColumns;
   }
 
+  /** Creates the OOXML autoFilter element for the configured filter range. */
   exportAutoFilter(doc: XMLDOM) {
     const autoFilter = doc.createElement('autoFilter');
     if (this.autoFilter) {
@@ -163,6 +172,7 @@ export class Table {
     return autoFilter;
   }
 
+  /** Creates the OOXML tableStyleInfo element from the configured style flags. */
   exportTableStyleInfo(doc: XMLDOM) {
     const ts = this.styleInfo;
     const tableStyle = doc.createElement('tableStyleInfo');
@@ -174,6 +184,7 @@ export class Table {
     return tableStyle;
   }
 
+  /** Sets the table's auto-filter start and end coordinates. */
   addAutoFilter(startRef: any, endRef: any) {
     this.autoFilter = [startRef, endRef];
   }

@@ -11,6 +11,7 @@ export class Picture extends Drawing {
   mediaData: MediaMeta | null = null;
   description = '';
 
+  /** Creates a picture drawing with generated identifiers. */
   constructor() {
     super();
     // Picture.prototype = new Drawing();
@@ -18,34 +19,42 @@ export class Picture extends Drawing {
     this.pictureId = Util.uniqueId('Picture');
   }
 
+  /** Associates this picture with media registered in the workbook. */
   setMedia(mediaRef: MediaMeta) {
     this.mediaData = mediaRef;
   }
 
+  /** Sets the alternative text description written to the drawing markup. */
   setDescription(description: string) {
     this.description = description;
   }
 
+  /** Sets the picture fill mode. */
   setFillType(type: string) {
     this.fill.type = type;
   }
 
+  /** Merges additional options into the picture fill configuration. */
   setFillConfig(config: any) {
     Object.assign(this.fill, config);
   }
 
+  /** Returns the relationship schema key used for picture media. */
   getMediaType(): keyof typeof Util.schemas {
     return 'image';
   }
 
+  /** Returns the workbook media record associated with this picture. */
   getMediaData() {
     return this.mediaData as MediaMeta;
   }
 
+  /** Assigns the package relationship ID used to reference the picture media. */
   setRelationshipId(rId: string) {
     this.mediaData!.rId = rId;
   }
 
+  /** Serializes the picture markup and its anchor as OOXML. */
   toXML(xmlDoc: XMLDOM) {
     const pictureNode = Util.createElement(xmlDoc, 'xdr:pic');
 
