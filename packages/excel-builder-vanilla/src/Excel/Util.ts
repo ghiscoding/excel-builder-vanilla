@@ -81,8 +81,29 @@ export class Util {
     }
   }
 
+  /** Shared DrawingML cell position writer used by one- and two-cell anchors. */
+  static createAnchorPosition(
+    doc: XMLDOM,
+    name: string,
+    position: { x: number | null; y: number | null; xOff?: boolean | null; yOff?: boolean | null },
+  ) {
+    const node = Util.createElement(doc, name);
+    for (const [tag, value] of [
+      ['col', position.x],
+      ['colOff', position.xOff || 0],
+      ['row', position.y],
+      ['rowOff', position.yOff || 0],
+    ]) {
+      const child = Util.createElement(doc, `xdr:${tag}`);
+      child.appendChild(doc.createTextNode(String(value)));
+      node.appendChild(child);
+    }
+    return node;
+  }
+
   static LETTER_REFS: any = {};
 
+  /** Converts a one-based column number and row label to an Excel cell reference. */
   static positionToLetterRef(x: number, y: number | string) {
     let digit = 1;
     let index: number;

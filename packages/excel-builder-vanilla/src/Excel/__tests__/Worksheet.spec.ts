@@ -93,6 +93,17 @@ describe('Excel/Worksheet', () => {
     expect(ws.data.length).toBe(0);
   });
 
+  test('builds the legacy XML cell templates for compatibility callers', () => {
+    const ws = new Worksheet({ name: 'LegacyCache' });
+    const cache = ws._buildCache(new XMLDOM(null, 'root'));
+
+    expect(cache.number.toString()).toBe('<c><v>--temp--</v></c>');
+    expect(cache.formula.toString()).toBe('<c><f>--temp--</f></c>');
+    expect(cache.string.toString()).toBe('<c t="s"><v>--temp--</v></c>');
+    expect(cache.boolean.toString()).toBe('<c t="b"><v>--temp--</v></c>');
+    expect(cache.date).toBe(cache.number);
+  });
+
   test('mergeCells with invalid range', () => {
     const ws = new Worksheet({ name: 'Test' });
     expect(() => ws.mergeCells('A1', 'A0')).not.toThrow();

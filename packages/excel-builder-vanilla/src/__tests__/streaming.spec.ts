@@ -115,6 +115,7 @@ describe('Streaming API', () => {
       workbook.addWorksheet(ws);
       const chunks: Uint8Array[] = [];
       for await (const chunk of createExcelFileStream(workbook, { chunkSize: 1 })) {
+        expect(chunk.length).toBe(1);
         chunks.push(chunk);
       }
       expect(chunks.length).toBeGreaterThan(0);
@@ -197,8 +198,8 @@ describe('Streaming API', () => {
       ];
       const xml = ws.serializeRows(rows);
       expect(xml).toContain('<row r="1">');
-      expect(xml).toContain('<c r="A1" t="s"><v>0</v></c>');
-      expect(xml).toContain('<c r="B2" t="s"><v>0</v></c>');
+      expect(xml).toContain('<c t="s" r="A1"><v>0</v></c>');
+      expect(xml).toContain('<c t="s" r="B2"><v>0</v></c>');
     });
 
     it('serializes formula cells', () => {
@@ -209,7 +210,7 @@ describe('Streaming API', () => {
         [{ value: 'A2+B2', metadata: { type: 'formula' } }, 42],
       ];
       const xml = ws.serializeRows(rows);
-      expect(xml).toContain('<c r="A2" t="s"><v>0</v></c>');
+      expect(xml).toContain('<c r="A2"><f>A2+B2</f></c>');
       expect(xml).toContain('<c r="B2"><v>42</v></c>');
     });
   });
@@ -249,7 +250,9 @@ describe('browserExcelStream base64ToUint8Array branch', () => {
       let gotChunk = false;
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
+        if (done) {
+          break;
+        }
         expect(value).toBeInstanceOf(Uint8Array);
         gotChunk = true;
       }

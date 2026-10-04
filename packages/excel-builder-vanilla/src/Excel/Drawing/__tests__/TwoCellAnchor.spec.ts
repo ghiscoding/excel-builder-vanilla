@@ -1,9 +1,17 @@
 import { describe, expect, it } from 'vitest';
 
 import { Util } from '../../Util.js';
+import { XMLDOM } from '../../XMLDOM.js';
 import { TwoCellAnchor } from '../TwoCellAnchor.js';
 
 describe('TwoCellAnchor', () => {
+  it('writes each endpoint with its own offsets', () => {
+    const anchor = new TwoCellAnchor({ from: { x: 1, y: 2, xOff: true }, to: { x: 3, y: 4, yOff: true } });
+    const doc = new XMLDOM(null, 'root');
+    const xml = anchor.toXML(doc, doc.createElement('content')).toString();
+    expect(xml).toContain('<xdr:from><xdr:col>1</xdr:col><xdr:colOff>true</xdr:colOff><xdr:row>2</xdr:row><xdr:rowOff>0</xdr:rowOff>');
+    expect(xml).toContain('<xdr:to><xdr:col>3</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>4</xdr:row><xdr:rowOff>true</xdr:rowOff>');
+  });
   it('should set from and to positions and offsets via constructor', () => {
     const anchor = new TwoCellAnchor({
       from: { x: 1, y: 2, xOff: true, yOff: false, width: 10, height: 20 },

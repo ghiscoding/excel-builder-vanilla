@@ -2,7 +2,6 @@ import { uniqueId } from '../../utilities/uniqueId.js';
 import { AbsoluteAnchor } from './AbsoluteAnchor.js';
 import { OneCellAnchor } from './OneCellAnchor.js';
 import { TwoCellAnchor } from './TwoCellAnchor.js';
-// import { Picture } from './Picture.js';
 
 export interface AnchorOption {
   /** X offset in EMUs (English Metric Units) */
@@ -40,7 +39,7 @@ export class Drawing {
   id = uniqueId('Drawing');
 
   /**
-   *
+   * Creates and assigns an absolute, one-cell, or two-cell anchor for this drawing.
    * @param {String} type Can be 'absoluteAnchor', 'oneCellAnchor', or 'twoCellAnchor'.
    * @param {Object} config Shorthand - pass the created anchor coords that can normally be used to construct it.
    * @returns {Anchor}

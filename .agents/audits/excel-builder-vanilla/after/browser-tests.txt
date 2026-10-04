@@ -1,0 +1,10 @@
+
+ RUN  v5.0.0-rc.2 /home/ghislainb/sourcecode/excel-builder-vanilla
+      API started at http://localhost:63315/
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  22:24:15
+   Duration  793ms (tests 42%, worker 40%, import 18%)
+

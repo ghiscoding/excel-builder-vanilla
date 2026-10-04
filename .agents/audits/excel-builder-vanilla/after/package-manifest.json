@@ -1,0 +1,201 @@
+{
+  "excel-builder-vanilla": {
+    "id": "excel-builder-vanilla@5.2.5",
+    "name": "excel-builder-vanilla",
+    "version": "5.2.5",
+    "size": 115791,
+    "unpackedSize": 459386,
+    "shasum": "8be0f2106d947277e7aa1750f0ae4e0672d56ebc",
+    "integrity": "sha512-rXnGswlM+ziyLCHpFAjAPbLfLZ7fWfcB3J2OFvUijeac3+Cm/HgBFDt82UwL966Jea/KWziJkxa06L7GsTYVTw==",
+    "filename": "excel-builder-vanilla-5.2.5.tgz",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "size": 1084,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 3715,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.d.ts",
+        "size": 46252,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.js",
+        "size": 68079,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.js.map",
+        "size": 193595,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 1753,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/AbsoluteAnchor.ts",
+        "size": 1702,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/Chart.ts",
+        "size": 18461,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/Drawing.ts",
+        "size": 2125,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/OneCellAnchor.ts",
+        "size": 1716,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/Picture.ts",
+        "size": 3756,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/TwoCellAnchor.ts",
+        "size": 1330,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawings.ts",
+        "size": 1938,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Pane.ts",
+        "size": 1008,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Paths.ts",
+        "size": 203,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Positioning.ts",
+        "size": 424,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/RelationshipManager.ts",
+        "size": 2005,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/SharedStrings.ts",
+        "size": 2551,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/SheetView.ts",
+        "size": 3019,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/StyleSheet.ts",
+        "size": 19751,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Table.ts",
+        "size": 5654,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Util.ts",
+        "size": 5294,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Workbook.ts",
+        "size": 19923,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Worksheet.ts",
+        "size": 22513,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/XMLDOM.ts",
+        "size": 3224,
+        "mode": 420
+      },
+      {
+        "path": "src/factory.ts",
+        "size": 5088,
+        "mode": 420
+      },
+      {
+        "path": "src/index.ts",
+        "size": 1407,
+        "mode": 420
+      },
+      {
+        "path": "src/interfaces.ts",
+        "size": 12777,
+        "mode": 420
+      },
+      {
+        "path": "src/streaming.ts",
+        "size": 4651,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/base64.ts",
+        "size": 653,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/escape.ts",
+        "size": 1356,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/isTypeOf.ts",
+        "size": 880,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/pick.ts",
+        "size": 205,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/README.md",
+        "size": 237,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/uniqueId.ts",
+        "size": 666,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/zip.ts",
+        "size": 353,
+        "mode": 420
+      },
+      {
+        "path": "src/vite-env.d.ts",
+        "size": 38,
+        "mode": 420
+      }
+    ],
+    "entryCount": 37,
+    "bundled": []
+  }
+}

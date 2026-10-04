@@ -31,10 +31,12 @@ export class Drawings {
     this.drawings.push(drawing);
   }
 
+  /** Returns the number of drawings attached to this worksheet. */
   getCount() {
     return this.drawings.length;
   }
 
+  /** Serializes the worksheet drawings and their media relationships. */
   toXML() {
     const doc = Util.createXmlDoc(Util.schemas.spreadsheetDrawing, 'xdr:wsDr');
     const drawings = doc.documentElement;

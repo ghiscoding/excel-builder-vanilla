@@ -31,6 +31,7 @@ Read `CONTRIBUTING.md`, the relevant package scripts, and the affected code befo
 ## Code and compatibility
 
 - Follow `biome.json`: two-space indentation, single quotes, semicolons, LF endings, and `.js` extensions in relative TypeScript imports. Use type-only imports where appropriate.
+- Always use curly braces around conditional and loop bodies, even when the body has one statement. Biome enforces this with `style/useBlockStatements`.
 - Keep changes human readable. Reduce LOC only when behavior, performance, maintainability, and readability are preserved. Do not compress code merely to improve line counts.
 - Keep runtime dependencies minimal. Use the existing XML and ZIP utilities where they fit, and avoid browser-only globals in Node execution paths.
 - Treat public exports, option signatures, generated types, existing helpers, and custom exporter overrides as compatibility contracts. Preserve observable IDs, ordering, and repeat-export behavior unless a change is explicitly intended and disclosed.

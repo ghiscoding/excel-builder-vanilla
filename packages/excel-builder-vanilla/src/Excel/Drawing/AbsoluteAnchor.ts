@@ -3,7 +3,7 @@ import type { XMLDOM } from '../XMLDOM.js';
 import type { AnchorOption } from './Drawing.js';
 
 /**
- *
+ * Anchors drawing content at fixed worksheet offsets and dimensions.
  * @param {Object} config
  * @param {Number} config.x X offset in EMU's
  * @param {Number} config.y Y offset in EMU's
@@ -26,7 +26,6 @@ export class AbsoluteAnchor {
 
   /**
    * Sets the X and Y offsets.
-   *
    * @param {Number} x
    * @param {Number} y
    * @returns {undefined}
@@ -38,7 +37,6 @@ export class AbsoluteAnchor {
 
   /**
    * Sets the width and height of the image.
-   *
    * @param {Number} width
    * @param {Number} height
    * @returns {undefined}
@@ -48,6 +46,7 @@ export class AbsoluteAnchor {
     this.height = height;
   }
 
+  /** Serializes the fixed position, dimensions, drawing content, and client data. */
   toXML(xmlDoc: XMLDOM, content: any) {
     const root = Util.createElement(xmlDoc, 'xdr:absoluteAnchor');
     const pos = Util.createElement(xmlDoc, 'xdr:pos');

@@ -3,7 +3,7 @@ import type { XMLDOM } from '../XMLDOM.js';
 import type { AnchorOption } from './Drawing.js';
 
 /**
- *
+ * Anchors drawing content to one worksheet cell with a fixed size.
  * @param {Object} config
  * @param {Number} config.x The cell column number that the top left of the picture will start in
  * @param {Number} config.y The cell row number that the top left of the picture will start in
@@ -26,6 +26,7 @@ export class OneCellAnchor {
     }
   }
 
+  /** Sets the anchor cell and optional offsets within that cell. */
   setPos(x: number, y: number, xOff?: boolean, yOff?: boolean) {
     this.x = x;
     this.y = y;
@@ -37,28 +38,16 @@ export class OneCellAnchor {
     }
   }
 
+  /** Sets the anchored drawing's width and height in EMUs. */
   setDimensions(width: number, height: number) {
     this.width = width;
     this.height = height;
   }
 
+  /** Serializes the cell position, dimensions, drawing content, and client data. */
   toXML(xmlDoc: XMLDOM, content: any) {
     const root = Util.createElement(xmlDoc, 'xdr:oneCellAnchor');
-    const from = Util.createElement(xmlDoc, 'xdr:from');
-    const fromCol = Util.createElement(xmlDoc, 'xdr:col');
-    fromCol.appendChild(xmlDoc.createTextNode(String(this.x)));
-    const fromColOff = Util.createElement(xmlDoc, 'xdr:colOff');
-    fromColOff.appendChild(xmlDoc.createTextNode(String(this.xOff || 0)));
-    const fromRow = Util.createElement(xmlDoc, 'xdr:row');
-    fromRow.appendChild(xmlDoc.createTextNode(String(this.y)));
-    const fromRowOff = Util.createElement(xmlDoc, 'xdr:rowOff');
-    fromRowOff.appendChild(xmlDoc.createTextNode(String(this.yOff || 0)));
-    from.appendChild(fromCol);
-    from.appendChild(fromColOff);
-    from.appendChild(fromRow);
-    from.appendChild(fromRowOff);
-
-    root.appendChild(from);
+    root.appendChild(Util.createAnchorPosition(xmlDoc, 'xdr:from', this));
 
     const dimensions = Util.createElement(xmlDoc, 'xdr:ext');
     dimensions.setAttribute('cx', String(this.width));

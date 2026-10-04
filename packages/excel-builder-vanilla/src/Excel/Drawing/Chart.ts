@@ -17,6 +17,7 @@ export class Chart extends Drawing {
   target: string | null = null; // relative target path (`../charts/chartN.xml`)
   options: ChartOptions;
 
+  /** Creates a chart drawing from series, ranges, and display options. */
   constructor(options: ChartOptions) {
     super();
     this.options = options;
@@ -122,7 +123,10 @@ export class Chart extends Drawing {
 
   // -- private functions
 
-  /** @private Creates the graphicFrame container that goes inside an anchor in drawing part */
+  /**
+   * Creates the drawing frame that positions the chart in the worksheet.
+   * @private
+   */
   _createGraphicFrame(xmlDoc: XMLDOM) {
     const graphicFrame = Util.createElement(xmlDoc, 'xdr:graphicFrame');
     const nvGraphicFramePr = Util.createElement(xmlDoc, 'xdr:nvGraphicFramePr');
@@ -166,7 +170,10 @@ export class Chart extends Drawing {
     return graphicFrame;
   }
 
-  /** @private Create the primary chart node based on type and stacking */
+  /**
+   * Creates the primary chart element and applies its chart type and grouping.
+   * @private
+   */
   _createPrimaryChartNode(doc: XMLDOM, type: string, stacking?: 'stacked' | 'percent'): XMLNode {
     let node: XMLNode;
     const groupingValue = this._resolveGrouping(type, stacking);
@@ -177,18 +184,15 @@ export class Chart extends Drawing {
         node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
         break;
       }
-      case 'pie': {
-        node = Util.createElement(doc, 'c:pieChart');
-        node.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
-        node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '1']]));
-        break;
-      }
+      case 'pie':
       case 'doughnut': {
-        node = Util.createElement(doc, 'c:doughnutChart');
+        const chartType = type === 'pie' ? 'c:pieChart' : 'c:doughnutChart';
+        node = Util.createElement(doc, chartType);
         node.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
         node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '1']]));
-        // Add a default holeSize (50%) to visualize doughnut; Excel defaults to 50 if absent but explicit for clarity
-        node.appendChild(Util.createElement(doc, 'c:holeSize', [['val', '50']]));
+        if (type === 'doughnut') {
+          node.appendChild(Util.createElement(doc, 'c:holeSize', [['val', '50']]));
+        }
         break;
       }
       case 'scatter': {
@@ -197,21 +201,11 @@ export class Chart extends Drawing {
         node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
         break;
       }
-      case 'bar': {
-        node = Util.createElement(doc, 'c:barChart');
-        node.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'bar']]));
-        node.appendChild(Util.createElement(doc, 'c:grouping', [['val', groupingValue]]));
-        if (stacking) {
-          // Ensure stacked bars/columns align in same category slot
-          node.appendChild(Util.createElement(doc, 'c:overlap', [['val', '100']]));
-        }
-        node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '0']]));
-        break;
-      }
+      case 'bar':
       case 'column':
       default: {
         node = Util.createElement(doc, 'c:barChart');
-        node.appendChild(Util.createElement(doc, 'c:barDir', [['val', 'col']]));
+        node.appendChild(Util.createElement(doc, 'c:barDir', [['val', type === 'bar' ? 'bar' : 'col']]));
         node.appendChild(Util.createElement(doc, 'c:grouping', [['val', groupingValue]]));
         if (stacking) {
           node.appendChild(Util.createElement(doc, 'c:overlap', [['val', '100']]));
@@ -223,7 +217,10 @@ export class Chart extends Drawing {
     return node;
   }
 
-  /** @private Build a <c:ser> node */
+  /**
+   * Creates one chart series with its name, values, categories, and formatting.
+   * @private
+   */
   _createSeriesNode(
     doc: XMLDOM,
     s: { name: string; valuesRange: string; scatterXRange?: string; color?: string },
@@ -247,11 +244,7 @@ export class Chart extends Drawing {
       // xVal
       const xVal = Util.createElement(doc, 'c:xVal');
       if (s.scatterXRange) {
-        const numRefX = Util.createElement(doc, 'c:numRef');
-        const fNodeX = Util.createElement(doc, 'c:f');
-        fNodeX.appendChild(doc.createTextNode(s.scatterXRange));
-        numRefX.appendChild(fNodeX);
-        xVal.appendChild(numRefX);
+        xVal.appendChild(this._createRangeRef(doc, 'c:numRef', s.scatterXRange));
       } else {
         const numLitX = Util.createElement(doc, 'c:numLit');
         numLitX.appendChild(Util.createElement(doc, 'c:ptCount', [['val', '0']]));
@@ -260,29 +253,17 @@ export class Chart extends Drawing {
       ser.appendChild(xVal);
       // yVal
       const yVal = Util.createElement(doc, 'c:yVal');
-      const numRefY = Util.createElement(doc, 'c:numRef');
-      const fNodeY = Util.createElement(doc, 'c:f');
-      fNodeY.appendChild(doc.createTextNode(s.valuesRange));
-      numRefY.appendChild(fNodeY);
-      yVal.appendChild(numRefY);
+      yVal.appendChild(this._createRangeRef(doc, 'c:numRef', s.valuesRange));
       ser.appendChild(yVal);
     } else {
       if (categoriesRange) {
         const cat = Util.createElement(doc, 'c:cat');
-        const strRef = Util.createElement(doc, 'c:strRef');
-        const fNodeCat = Util.createElement(doc, 'c:f');
-        fNodeCat.appendChild(doc.createTextNode(categoriesRange));
-        strRef.appendChild(fNodeCat);
-        cat.appendChild(strRef);
+        cat.appendChild(this._createRangeRef(doc, 'c:strRef', categoriesRange));
         ser.appendChild(cat);
       }
       if (s.valuesRange) {
         const val = Util.createElement(doc, 'c:val');
-        const numRef = Util.createElement(doc, 'c:numRef');
-        const fNodeVal = Util.createElement(doc, 'c:f');
-        fNodeVal.appendChild(doc.createTextNode(s.valuesRange));
-        numRef.appendChild(fNodeVal);
-        val.appendChild(numRef);
+        val.appendChild(this._createRangeRef(doc, 'c:numRef', s.valuesRange));
         ser.appendChild(val);
       }
     }
@@ -292,9 +273,22 @@ export class Chart extends Drawing {
     return ser;
   }
 
-  /** @private Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
+  private _createRangeRef(doc: XMLDOM, name: string, range: string) {
+    const reference = Util.createElement(doc, name);
+    const formula = Util.createElement(doc, 'c:f');
+    formula.appendChild(doc.createTextNode(range));
+    reference.appendChild(formula);
+    return reference;
+  }
+
+  /**
+   * Applies the configured series color to the chart series markup.
+   * @private
+   */
   _applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string) {
-    if (!color || typeof color !== 'string') return;
+    if (!color || typeof color !== 'string') {
+      return;
+    }
     let hex = color.trim().replace(/^#/, '').toUpperCase();
     // Accept 6 (RGB) or 8 (ARGB) hex chars; strip leading alpha if present
     if (/^[0-9A-F]{8}$/.test(hex)) {
@@ -323,7 +317,10 @@ export class Chart extends Drawing {
     serNode.appendChild(spPr);
   }
 
-  /** @private Create legend node honoring position + overlay */
+  /**
+   * Creates the chart legend element from its position and overlay options.
+   * @private
+   */
   _createLegendNode(doc: XMLDOM, legendOpts?: { position?: string; overlay?: boolean }): XMLNode {
     const legend = Util.createElement(doc, 'c:legend');
     const posMap: Record<string, string> = { right: 'r', left: 'l', top: 't', bottom: 'b', topRight: 'tr' };
@@ -334,7 +331,10 @@ export class Chart extends Drawing {
     return legend;
   }
 
-  /** @private Create a c:title node with minimal rich text required for Excel to render */
+  /**
+   * Creates a chart title element containing the supplied text.
+   * @private
+   */
   _createTitleNode(doc: XMLDOM, text: string): XMLNode {
     const title = Util.createElement(doc, 'c:title');
     const tx = Util.createElement(doc, 'c:tx');
@@ -358,7 +358,10 @@ export class Chart extends Drawing {
     return title;
   }
 
-  /** @private Create a category axis (catAx) */
+  /**
+   * Creates a category axis and configures its title and gridlines.
+   * @private
+   */
   _createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string, opts?: { showGridLines?: boolean }): XMLNode {
     const catAx = Util.createElement(doc, 'c:catAx');
     catAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axId)]]));
@@ -379,7 +382,10 @@ export class Chart extends Drawing {
     return catAx;
   }
 
-  /** @private Create a value axis (valAx) */
+  /**
+   * Creates a value axis and configures its title, bounds, and gridlines.
+   * @private
+   */
   _createValueAxis(
     doc: XMLDOM,
     axId: number,
@@ -413,25 +419,30 @@ export class Chart extends Drawing {
     return valAx;
   }
 
-  /** @private Simple axis id base using index plus a constant offset */
+  /**
+   * Allocates the next base ID used to identify a chart's axes.
+   * @private
+   */
   _nextAxisIdBase(): number {
     return (this.index || 1) * 1000;
   }
 
-  /** @private Resolve grouping value based on chart type and stacking */
+  /**
+   * Resolves the OOXML grouping value for a chart type and stacking mode.
+   * @private
+   */
   _resolveGrouping(type: string, stacking?: 'stacked' | 'percent') {
     if (type === 'pie' || type === 'doughnut') {
       return 'clustered'; // required but cosmetic
     }
-    if (type === 'line') {
-      if (stacking === 'stacked') return 'stacked';
-      if (stacking === 'percent') return 'percentStacked';
-      return 'standard';
-    }
-    if (type === 'bar' || type === 'column') {
-      if (stacking === 'stacked') return 'stacked';
-      if (stacking === 'percent') return 'percentStacked';
-      return 'clustered';
+    if (type === 'line' || type === 'bar' || type === 'column') {
+      if (stacking === 'stacked') {
+        return 'stacked';
+      }
+      if (stacking === 'percent') {
+        return 'percentStacked';
+      }
+      return type === 'line' ? 'standard' : 'clustered';
     }
     // scatter doesn't use grouping; still return default for structural consistency
     return 'standard';

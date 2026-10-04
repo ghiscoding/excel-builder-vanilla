@@ -1,0 +1,311 @@
+{
+  "excel-builder-vanilla": {
+    "id": "excel-builder-vanilla@5.2.5",
+    "name": "excel-builder-vanilla",
+    "version": "5.2.5",
+    "size": 148589,
+    "unpackedSize": 817095,
+    "shasum": "895ae2c23f299b987bda175cd3bdd8e165b88bea",
+    "integrity": "sha512-4wtppLOMYHRKbj1Z376uEf1zGxBl9nC0JmcZqK3JRE04w2+YZlZp5uwg0CP7Mx4PmiiCqyQahQFJpRF9ikyXPQ==",
+    "filename": "excel-builder-vanilla-5.2.5.tgz",
+    "files": [
+      {
+        "path": "LICENSE.md",
+        "size": 1084,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 1528,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.d.ts",
+        "size": 45043,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.js",
+        "size": 67341,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.js.map",
+        "size": 191482,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 1753,
+        "mode": 420
+      },
+      {
+        "path": "src/__browser_tests__/__snapshots__/excel-export.browser.spec.ts.snap",
+        "size": 190235,
+        "mode": 420
+      },
+      {
+        "path": "src/__browser_tests__/excel-export.browser.spec.ts",
+        "size": 11089,
+        "mode": 420
+      },
+      {
+        "path": "src/__tests__/excel-builder.spec.ts",
+        "size": 42809,
+        "mode": 420
+      },
+      {
+        "path": "src/__tests__/factory.spec.ts",
+        "size": 6033,
+        "mode": 420
+      },
+      {
+        "path": "src/__tests__/streaming.spec.ts",
+        "size": 11026,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/Drawings.spec.ts",
+        "size": 4223,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/Pane.spec.ts",
+        "size": 790,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/RelationshipManager.spec.ts",
+        "size": 415,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/SharedStrings.spec.ts",
+        "size": 481,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/SheetView.spec.ts",
+        "size": 910,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/StyleSheet.spec.ts",
+        "size": 20395,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/Table.spec.ts",
+        "size": 6024,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/Util.spec.ts",
+        "size": 584,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/Workbook.security.spec.ts",
+        "size": 1445,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/Workbook.spec.ts",
+        "size": 11972,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/Worksheet.spec.ts",
+        "size": 15120,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/__tests__/XMLDOM.spec.ts",
+        "size": 2001,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/__tests__/Chart.spec.ts",
+        "size": 27977,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/__tests__/OneCellAnchor.spec.ts",
+        "size": 2460,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/__tests__/Picture.spec.ts",
+        "size": 2778,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/__tests__/TwoCellAnchor.spec.ts",
+        "size": 2446,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/AbsoluteAnchor.ts",
+        "size": 1702,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/Chart.ts",
+        "size": 18853,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/Drawing.ts",
+        "size": 2125,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/OneCellAnchor.ts",
+        "size": 2383,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/Picture.ts",
+        "size": 3756,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawing/TwoCellAnchor.ts",
+        "size": 2574,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Drawings.ts",
+        "size": 1938,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Pane.ts",
+        "size": 1008,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Paths.ts",
+        "size": 203,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Positioning.ts",
+        "size": 424,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/RelationshipManager.ts",
+        "size": 1862,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/SharedStrings.ts",
+        "size": 1559,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/SheetView.ts",
+        "size": 3019,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/StyleSheet.ts",
+        "size": 20872,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Table.ts",
+        "size": 5654,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Util.ts",
+        "size": 4642,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Workbook.ts",
+        "size": 17622,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/Worksheet.ts",
+        "size": 23380,
+        "mode": 420
+      },
+      {
+        "path": "src/Excel/XMLDOM.ts",
+        "size": 3110,
+        "mode": 420
+      },
+      {
+        "path": "src/factory.ts",
+        "size": 6063,
+        "mode": 420
+      },
+      {
+        "path": "src/index.ts",
+        "size": 1407,
+        "mode": 420
+      },
+      {
+        "path": "src/interfaces.ts",
+        "size": 12777,
+        "mode": 420
+      },
+      {
+        "path": "src/streaming.ts",
+        "size": 3334,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/__tests__/escape.spec.ts",
+        "size": 1525,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/__tests__/isTypeOf.spec.ts",
+        "size": 1766,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/__tests__/uniqueId.spec.ts",
+        "size": 711,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/escape.ts",
+        "size": 1356,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/isTypeOf.ts",
+        "size": 880,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/pick.ts",
+        "size": 205,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/README.md",
+        "size": 237,
+        "mode": 420
+      },
+      {
+        "path": "src/utilities/uniqueId.ts",
+        "size": 666,
+        "mode": 420
+      },
+      {
+        "path": "src/vite-env.d.ts",
+        "size": 38,
+        "mode": 420
+      }
+    ],
+    "entryCount": 59,
+    "bundled": []
+  }
+}

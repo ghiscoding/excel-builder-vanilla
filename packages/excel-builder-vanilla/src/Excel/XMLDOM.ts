@@ -11,23 +11,28 @@ type XMLNodeOption = {
 };
 
 export class XMLDOM {
+  static readonly declaration = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
   documentElement: XMLNode;
 
+  /** Creates a lightweight XML document with a namespaced root element. */
   constructor(ns: string | null, rootNodeName: string) {
     this.documentElement = this.createElement(rootNodeName);
     this.documentElement.setAttribute('xmlns', ns);
   }
 
+  /** Creates an empty element node in this document. */
   createElement(name: string) {
     return new XMLNode({
       nodeName: name,
     });
   }
 
+  /** Creates a text node that will be escaped when serialized. */
   createTextNode(text: string) {
     return new TextNode(text);
   }
 
+  /** Serializes the document root and its descendants to XML. */
   toString() {
     return this.documentElement.toString();
   }
@@ -72,6 +77,7 @@ export class XMLNode {
   attributes: { [key: string]: any };
   firstChild?: XMLNode;
 
+  /** Creates an XML element from its name, attributes, and child nodes. */
   constructor(config: XMLNodeOption) {
     this.nodeName = config.nodeName;
     this.children = [];
@@ -91,10 +97,11 @@ export class XMLNode {
     }
   }
 
+  /** Serializes this element, its attributes, and children to XML. */
   toString() {
     let string = `<${this.nodeName}`;
     for (const attr in this.attributes) {
-      if (this.attributes.hasOwnProperty(attr)) {
+      if (Object.prototype.hasOwnProperty.call(this.attributes, attr)) {
         string = `${string} ${attr}="${htmlEscape(this.attributes[attr])}"`;
       }
     }
@@ -113,6 +120,7 @@ export class XMLNode {
     return string;
   }
 
+  /** Converts this node and its descendants to the serializable node format. */
   toJSON() {
     const children: any[] = [];
     for (let i = 0, l = this.children.length; i < l; i++) {
@@ -127,6 +135,7 @@ export class XMLNode {
     };
   }
 
+  /** Sets an attribute, or removes it when the value is `null`. */
   setAttribute(name: string, val: any) {
     if (val === null) {
       delete this.attributes[name];
@@ -137,11 +146,13 @@ export class XMLNode {
     (this as any)[name] = val;
   }
 
+  /** Appends a child node and updates the first-child reference. */
   appendChild(child: any) {
     this.children.push(child);
     this.firstChild = this.children[0];
   }
 
+  /** Creates a copy of this node and its descendants. */
   cloneNode(_deep?: boolean) {
     return new XMLNode(this.toJSON());
   }

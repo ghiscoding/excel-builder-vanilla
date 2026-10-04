@@ -10,10 +10,15 @@ export type XMLNodeOption = {
 	type?: string;
 };
 export declare class XMLDOM {
+	static readonly declaration = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
 	documentElement: XMLNode;
+	/** Creates a lightweight XML document with a namespaced root element. */
 	constructor(ns: string | null, rootNodeName: string);
+	/** Creates an empty element node in this document. */
 	createElement(name: string): XMLNode;
+	/** Creates a text node that will be escaped when serialized. */
 	createTextNode(text: string): TextNode;
+	/** Serializes the document root and its descendants to XML. */
 	toString(): string;
 	static Node: {
 		Create: (config: any) => XMLNode | TextNode | null;
@@ -36,8 +41,11 @@ export declare class XMLNode {
 		[key: string]: any;
 	};
 	firstChild?: XMLNode;
+	/** Creates an XML element from its name, attributes, and child nodes. */
 	constructor(config: XMLNodeOption);
+	/** Serializes this element, its attributes, and children to XML. */
 	toString(): string;
+	/** Converts this node and its descendants to the serializable node format. */
 	toJSON(): {
 		nodeName: string;
 		children: any[];
@@ -47,12 +55,15 @@ export declare class XMLNode {
 		};
 		type: string;
 	};
+	/** Sets an attribute, or removes it when the value is `null`. */
 	setAttribute(name: string, val: any): void;
+	/** Appends a child node and updates the first-child reference. */
 	appendChild(child: any): void;
+	/** Creates a copy of this node and its descendants. */
 	cloneNode(_deep?: boolean): XMLNode;
 }
 /**
- *
+ * Anchors drawing content to one worksheet cell with a fixed size.
  * @param {Object} config
  * @param {Number} config.x The cell column number that the top left of the picture will start in
  * @param {Number} config.y The cell row number that the top left of the picture will start in
@@ -68,16 +79,23 @@ export declare class OneCellAnchor {
 	width: number | null;
 	height: number | null;
 	constructor(config: AnchorOption);
+	/** Sets the anchor cell and optional offsets within that cell. */
 	setPos(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
+	/** Sets the anchored drawing's width and height in EMUs. */
 	setDimensions(width: number, height: number): void;
+	/** Serializes the cell position, dimensions, drawing content, and client data. */
 	toXML(xmlDoc: XMLDOM, content: any): XMLNode;
 }
 export declare class TwoCellAnchor {
 	from: any;
 	to: any;
+	/** Initializes the anchor's start and end cell positions. */
 	constructor(config: DualAnchorOption);
+	/** Sets the anchor's starting cell and optional offsets. */
 	setFrom(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
+	/** Sets the anchor's ending cell and optional offsets. */
 	setTo(x: number, y: number, xOff?: boolean, yOff?: boolean): void;
+	/** Serializes the start and end positions, drawing content, and client data. */
 	toXML(xmlDoc: XMLDOM, content: any): XMLNode;
 }
 export interface AnchorOption {
@@ -113,7 +131,7 @@ export declare class Drawing {
 	anchor: AbsoluteAnchor | OneCellAnchor | TwoCellAnchor;
 	id: string;
 	/**
-	 *
+	 * Creates and assigns an absolute, one-cell, or two-cell anchor for this drawing.
 	 * @param {String} type Can be 'absoluteAnchor', 'oneCellAnchor', or 'twoCellAnchor'.
 	 * @param {Object} config Shorthand - pass the created anchor coords that can normally be used to construct it.
 	 * @returns {Anchor}
@@ -121,7 +139,7 @@ export declare class Drawing {
 	createAnchor(type: "absoluteAnchor" | "oneCellAnchor" | "twoCellAnchor", config: Partial<AnchorOption | DualAnchorOption>): AbsoluteAnchor | OneCellAnchor | TwoCellAnchor;
 }
 /**
- *
+ * Anchors drawing content at fixed worksheet offsets and dimensions.
  * @param {Object} config
  * @param {Number} config.x X offset in EMU's
  * @param {Number} config.y Y offset in EMU's
@@ -137,7 +155,6 @@ export declare class AbsoluteAnchor {
 	constructor(config: AnchorOption);
 	/**
 	 * Sets the X and Y offsets.
-	 *
 	 * @param {Number} x
 	 * @param {Number} y
 	 * @returns {undefined}
@@ -145,12 +162,12 @@ export declare class AbsoluteAnchor {
 	setPos(x: number, y: number): void;
 	/**
 	 * Sets the width and height of the image.
-	 *
 	 * @param {Number} width
 	 * @param {Number} height
 	 * @returns {undefined}
 	 */
 	setDimensions(width: number, height: number): void;
+	/** Serializes the fixed position, dimensions, drawing content, and client data. */
 	toXML(xmlDoc: XMLDOM, content: any): XMLNode;
 }
 /**
@@ -571,7 +588,15 @@ export declare class Util {
 	static setAttributesOnDoc(doc: XMLNode, attrs: {
 		[key: string]: any;
 	}): void;
+	/** Shared DrawingML cell position writer used by one- and two-cell anchors. */
+	static createAnchorPosition(doc: XMLDOM, name: string, position: {
+		x: number | null;
+		y: number | null;
+		xOff?: boolean | null;
+		yOff?: boolean | null;
+	}): XMLNode;
 	static LETTER_REFS: any;
+	/** Converts a one-based column number and row label to an Excel cell reference. */
 	static positionToLetterRef(x: number, y: number | string): any;
 	static schemas: {
 		worksheet: string;
@@ -607,6 +632,7 @@ export declare class Chart extends Drawing {
 	index: number | null;
 	target: string | null;
 	options: ChartOptions;
+	/** Creates a chart drawing from series, ranges, and display options. */
 	constructor(options: ChartOptions);
 	/** Return relationship type for this drawing */
 	getMediaType(): keyof typeof Util.schemas;
@@ -616,39 +642,70 @@ export declare class Chart extends Drawing {
 	toXML(xmlDoc: XMLDOM): XMLNode;
 	/** Chart part XML: `/xl/charts/chartN.xml` */
 	toChartSpaceXML(): XMLDOM;
-	/** @private Creates the graphicFrame container that goes inside an anchor in drawing part */
+	/**
+	 * Creates the drawing frame that positions the chart in the worksheet.
+	 * @private
+	 */
 	_createGraphicFrame(xmlDoc: XMLDOM): XMLNode;
-	/** @private Create the primary chart node based on type and stacking */
+	/**
+	 * Creates the primary chart element and applies its chart type and grouping.
+	 * @private
+	 */
 	_createPrimaryChartNode(doc: XMLDOM, type: string, stacking?: "stacked" | "percent"): XMLNode;
-	/** @private Build a <c:ser> node */
+	/**
+	 * Creates one chart series with its name, values, categories, and formatting.
+	 * @private
+	 */
 	_createSeriesNode(doc: XMLDOM, s: {
 		name: string;
 		valuesRange: string;
 		scatterXRange?: string;
 		color?: string;
 	}, idx: number, type: string, categoriesRange: string): XMLNode;
-	/** @private Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
+	private _createRangeRef;
+	/**
+	 * Applies the configured series color to the chart series markup.
+	 * @private
+	 */
 	_applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string): void;
-	/** @private Create legend node honoring position + overlay */
+	/**
+	 * Creates the chart legend element from its position and overlay options.
+	 * @private
+	 */
 	_createLegendNode(doc: XMLDOM, legendOpts?: {
 		position?: string;
 		overlay?: boolean;
 	}): XMLNode;
-	/** @private Create a c:title node with minimal rich text required for Excel to render */
+	/**
+	 * Creates a chart title element containing the supplied text.
+	 * @private
+	 */
 	_createTitleNode(doc: XMLDOM, text: string): XMLNode;
-	/** @private Create a category axis (catAx) */
+	/**
+	 * Creates a category axis and configures its title and gridlines.
+	 * @private
+	 */
 	_createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string, opts?: {
 		showGridLines?: boolean;
 	}): XMLNode;
-	/** @private Create a value axis (valAx) */
+	/**
+	 * Creates a value axis and configures its title, bounds, and gridlines.
+	 * @private
+	 */
 	_createValueAxis(doc: XMLDOM, axId: number, crossAx: number, pos: "l" | "b", title?: string, opts?: {
 		minimum?: number;
 		maximum?: number;
 		showGridLines?: boolean;
 	}): XMLNode;
-	/** @private Simple axis id base using index plus a constant offset */
+	/**
+	 * Allocates the next base ID used to identify a chart's axes.
+	 * @private
+	 */
 	_nextAxisIdBase(): number;
-	/** @private Resolve grouping value based on chart type and stacking */
+	/**
+	 * Resolves the OOXML grouping value for a chart type and stacking mode.
+	 * @private
+	 */
 	_resolveGrouping(type: string, stacking?: "stacked" | "percent"): "standard" | "stacked" | "clustered" | "percentStacked";
 }
 export type Relation = {
@@ -673,26 +730,33 @@ export type Relation = {
  */
 export declare class RelationshipManager {
 	relations: Relation;
+	paths?: Record<string, string>;
 	lastId: number;
+	/** Creates an empty relationship registry. */
 	constructor();
+	/** Restores relationship state previously returned by {@link exportData}. */
 	importData(data: {
 		relations: Relation;
 		lastId: number;
 	}): void;
+	/** Returns the relationship state for persistence or transfer. */
 	exportData(): {
 		relations: Relation;
 		lastId: number;
 	};
+	/** Adds a relationship for an object and returns its package relationship ID. */
 	addRelation(object: {
 		id: string;
 		target?: string | null;
 		targetMode?: string;
 	}, type: keyof typeof Util.schemas): string;
+	/** Returns an object's existing relationship ID, or `null` if none exists. */
 	getRelationshipId(object: {
 		id: string;
 		target?: string | null;
 		targetMode?: string;
 	}): string | null;
+	/** Serializes all registered relationships as an OOXML relationships document. */
 	toXML(): XMLDOM;
 }
 /**
@@ -709,7 +773,9 @@ export declare class Drawings {
 	 * @returns {undefined}
 	 */
 	addDrawing(drawing: Drawing): void;
+	/** Returns the number of drawings attached to this worksheet. */
 	getCount(): number;
+	/** Serializes the worksheet drawings and their media relationships. */
 	toXML(): XMLDOM;
 }
 /**
@@ -729,10 +795,14 @@ export declare class SharedStrings {
 	 * @return int
 	 */
 	addString(str: string): number;
+	/** Returns the string-to-index lookup used by worksheet cells. */
 	exportData(): {
 		[key: string]: number;
 	};
+	/** Serializes the shared string table as an OOXML document. */
 	toXML(): XMLDOM;
+	/** Serialize without allocating an XML node tree for every unique string. */
+	getXmlChunks(chunkSize?: number): Generator<string, void, unknown>;
 }
 /**
  * @module Excel/StyleSheet
@@ -753,23 +823,30 @@ declare class StyleSheet$1 {
 	fills: any[];
 	borders: any[];
 	tableStyles: any[];
+	/** Creates a cell format using a built-in formatter such as `date`. */
 	createSimpleFormatter(type: string): {
 		[id: string]: number;
 	};
+	/** Registers a fill definition and returns it with its generated style ID. */
 	createFill(fillInstructions: any): any;
+	/** Registers a custom number format and returns its generated format ID. */
 	createNumberFormatter(formatInstructions: any): {
 		id: number;
 		formatCode: any;
 	};
 	/**
-	 * alignment: {
-	 *  horizontal: http://www.schemacentral.com/sc/ooxml/t-ssml_ST_HorizontalAlignment.html
-	 *  vertical: http://www.schemacentral.com/sc/ooxml/t-ssml_ST_VerticalAlignment.html
-	 *  @param {Object} styleInstructions
+	 * Creates a cell format from font, number, border, fill, alignment, and protection instructions.
+	 * `alignment: {
+	 *    horizontal: http://www.schemacentral.com/sc/ooxml/t-ssml_ST_HorizontalAlignment.html
+	 *    vertical: http://www.schemacentral.com/sc/ooxml/t-ssml_ST_VerticalAlignment.html
+	 *  }`
+	 * @param {Object} styleInstructions
 	 */
 	createFormat(styleInstructions: ExcelStyleInstruction): any;
+	/** Creates a differential style for conditional formatting or table styles. */
 	createDifferentialStyle(styleInstructions: ExcelStyleInstruction): ExcelStyleInstruction;
 	/**
+	 * Registers a table style whose elements reference differential format IDs.
 	 * Should be an object containing keys that match with one of the keys from this list:
 	 * http://www.schemacentral.com/sc/ooxml/t-ssml_ST_TableStyleType.html
 	 *
@@ -778,6 +855,7 @@ declare class StyleSheet$1 {
 	 */
 	createTableStyle(instructions: any): void;
 	/**
+	 * Registers a border definition and returns it with its generated style ID.
 	 * All params optional. each border should follow:
 	 * {
 	 * style: styleString, http://www.schemacentral.com/sc/ooxml/t-ssml_ST_BorderStyle.html
@@ -787,40 +865,64 @@ declare class StyleSheet$1 {
 	 */
 	createBorderFormatter(border: BorderInstruction): BorderInstruction;
 	/**
+	 * Registers a font definition and returns it with its generated style ID.
 	 * Font styles, color is a future goal - at the moment it's looking a bit complicated
 	 * @param {Object} instructions
 	 */
 	createFontStyle(instructions: ExcelFontStyle): any;
+	private exportCollection;
+	/** Creates the OOXML borders collection. */
 	exportBorders(doc: XMLDOM): XMLNode;
+	/** Creates an OOXML border element from one border definition. */
 	exportBorder(doc: XMLDOM, data: any): XMLNode;
+	/** Creates an OOXML color element from an RGB, theme, tint, or automatic color. */
 	exportColor(doc: XMLDOM, color: any): XMLNode;
+	/** Creates the OOXML cell formats collection. */
 	exportMasterCellFormats(doc: XMLDOM): XMLNode;
+	/** Creates the OOXML base cell styles collection. */
 	exportMasterCellStyles(doc: XMLDOM): XMLNode;
+	/** Creates an OOXML format element from cell style instructions. */
 	exportCellFormatElement(doc: XMLDOM, styleInstructions: ExcelStyleInstruction): XMLNode;
+	/** Creates an OOXML alignment element from the supplied alignment properties. */
 	exportAlignment(doc: XMLDOM, alignmentData: any): XMLNode;
+	/** Creates the OOXML fonts collection. */
 	exportFonts(doc: XMLDOM): XMLNode;
+	/** Creates an OOXML font element from one font definition. */
 	exportFont(doc: XMLDOM, fd: any): XMLNode;
+	/** Creates the OOXML fills collection. */
 	exportFills(doc: XMLDOM): XMLNode;
+	/** Creates an OOXML fill element from one pattern or gradient definition. */
 	exportFill(doc: XMLDOM, fd: any): XMLNode;
+	/** Creates an OOXML gradient fill from its direction and color stops. */
 	exportGradientFill(doc: XMLDOM, data: any): XMLNode;
 	/**
+	 * Creates an OOXML pattern fill from its pattern type and foreground/background colors.
 	 * Pattern types: http://www.schemacentral.com/sc/ooxml/t-ssml_ST_PatternType.html
 	 * @param {XMLDoc} doc
 	 * @param {Object} data
 	 */
 	exportPatternFill(doc: XMLDOM, data: any): XMLNode;
+	/** Creates the OOXML custom number formats collection. */
 	exportNumberFormatters(doc: XMLDOM): XMLNode;
+	/** Creates an OOXML number format element. */
 	exportNumberFormatter(doc: XMLDOM, fd: any): XMLNode;
+	/** Creates the OOXML named cell styles collection. */
 	exportCellStyles(doc: XMLDOM): XMLNode;
+	/** Creates the OOXML differential styles collection. */
 	exportDifferentialStyles(doc: XMLDOM): XMLNode;
+	/** Creates an OOXML differential format element from one style definition. */
 	exportDFX(doc: XMLDOM, style: any): XMLNode;
+	/** Creates the OOXML table styles collection. */
 	exportTableStyles(doc: XMLDOM): XMLNode;
+	/** Creates an OOXML table style and its differential format references. */
 	exportTableStyle(doc: XMLDOM, style: {
 		name: string;
 		wholeTable?: number;
 		headerRow?: number;
 	}): XMLNode;
+	/** Creates an OOXML protection element from the supplied properties. */
 	exportProtection(doc: XMLDOM, protectionData: any): XMLNode;
+	/** Serializes all registered cell, number, border, fill, and table styles. */
 	toXML(): XMLDOM;
 }
 /**
@@ -861,40 +963,51 @@ export declare class Table {
 		showColumnStripes?: boolean;
 		showRowStripes?: boolean;
 	};
+	/** Creates a table and applies the supplied table configuration. */
 	constructor(config?: any);
+	/** Resets generated table identifiers and applies configuration values. */
 	initialize(config: any): void;
+	/** Sets the table's inclusive start and end cell coordinates. */
 	setReferenceRange(start: number[], end: number[]): void;
+	/** Adds each supplied name or column definition to the table. */
 	setTableColumns(columns: Array<ExcelTableColumn | string>): void;
 	/**
+	 * Adds a column definition by name or full table column configuration.
 	 * Expects an object with the following optional properties:
-	 * name (required)
-	 * dataCellStyle
-	 * dataDxfId
-	 * headerRowCellStyle
-	 * headerRowDxfId
-	 * totalsRowCellStyle
-	 * totalsRowDxfId
-	 * totalsRowFunction
-	 * totalsRowLabel
-	 * columnFormula
-	 * columnFormulaIsArrayType (boolean)
-	 * totalFormula
-	 * totalFormulaIsArrayType (boolean)
+	 * - name (required)
+	 * - dataCellStyle
+	 * - dataDxfId
+	 * - headerRowCellStyle
+	 * - headerRowDxfId
+	 * - totalsRowCellStyle
+	 * - totalsRowDxfId
+	 * - totalsRowFunction
+	 * - totalsRowLabel
+	 * - columnFormula
+	 * - columnFormulaIsArrayType (boolean)
+	 * - totalFormula
+	 * - totalFormulaIsArrayType (boolean)
 	 */
 	addTableColumn(column: ExcelTableColumn | string): void;
 	/**
+	 * Configures sorting for the table's data range.
 	 * Expects an object with the following properties:
-	 * caseSensitive (boolean)
-	 * dataRange
-	 * columnSort (assumes true)
-	 * sortDirection
-	 * sortRange (defaults to dataRange)
+	 * - caseSensitive (boolean)
+	 * - dataRange
+	 * - columnSort (assumes true)
+	 * - sortDirection
+	 * - sortRange (defaults to dataRange)
 	 */
 	setSortState(state: ExcelSortState): void;
+	/** Serializes the table definition, filter, columns, and style as OOXML. */
 	toXML(): XMLDOM;
+	/** Creates the OOXML tableColumns element from the configured columns. */
 	exportTableColumns(doc: XMLDOM): XMLNode;
+	/** Creates the OOXML autoFilter element for the configured filter range. */
 	exportAutoFilter(doc: XMLDOM): XMLNode;
+	/** Creates the OOXML tableStyleInfo element from the configured style flags. */
 	exportTableStyleInfo(doc: XMLDOM): XMLNode;
+	/** Sets the table's auto-filter start and end coordinates. */
 	addAutoFilter(startRef: any, endRef: any): void;
 }
 export declare class Pane {
@@ -908,7 +1021,9 @@ export declare class Pane {
 		ySplit: number;
 		cell: string;
 	};
+	/** Configures the frozen pane boundaries and the first visible cell. */
 	freezePane(column: number, row: number, cell: string): void;
+	/** Creates the OOXML pane element when a frozen pane is configured. */
 	exportXML(doc: XMLDOM): XMLNode;
 }
 export interface SheetViewOption {
@@ -939,6 +1054,7 @@ export declare class SheetView {
 	zoomScaleNormal: any;
 	zoomScalePageLayoutView: any;
 	zoomScaleSheetLayoutView: any;
+	/** Creates a sheet view with the supplied pane or a default pane. */
 	constructor(config?: SheetViewOption);
 	/**
 	 * Added froze pane
@@ -948,8 +1064,10 @@ export declare class SheetView {
 	 * @deprecated
 	 */
 	freezePane(column: number, row: number, cell: string): void;
+	/** Serializes the sheet view settings and pane as OOXML. */
 	exportXML(doc: XMLDOM): XMLNode;
 }
+export type Cell = number | string | boolean | Date | null | ExcelColumnMetadata;
 export interface CharType {
 	font?: string;
 	bold?: boolean;
@@ -1009,9 +1127,12 @@ export declare class Worksheet {
 	}>;
 	sheetView: SheetView;
 	showZeros: any;
+	/** Creates a worksheet from its name, columns, and view configuration. */
 	constructor(config: WorksheetOption);
+	/** Initializes worksheet identity, columns, and relationship state. */
 	initialize(config: any): void;
 	/**
+	 * Exports worksheet state for transfer to another worksheet or worker.
 	 * Returns an object that can be consumed by a Worksheet/Export/Worker
 	 * @returns {Object}
 	 */
@@ -1061,20 +1182,23 @@ export declare class Worksheet {
 		id: string;
 	};
 	/**
-	 * Imports data - to be used while inside of a WorksheetExportWorker.
+	 * Imports worksheet state, including its relationship data.
 	 * @param {Object} data
 	 */
 	importData(data: any): void;
+	/** Sets the shared string table used when worksheet cells are serialized. */
 	setSharedStringCollection(stringCollection: SharedStrings): void;
+	/** Adds a table to this worksheet and registers its relationship. */
 	addTable(table: Table): void;
+	/** Adds drawings to this worksheet and registers their relationship. */
 	addDrawings(drawings: Drawings): void;
+	/** Sets style and layout instructions for a zero-based row index. */
 	setRowInstructions(rowIndex: number, instructions: ExcelStyleInstruction): void;
 	/**
+	 * Sets the left, center, and right print header instructions.
 	 * Expects an array length of three.
-	 *
 	 * @see Excel/Worksheet compilePageDetailPiece
 	 * @see <a href='/cookbook/addingHeadersAndFooters.html'>Adding headers and footers to a worksheet</a>
-	 *
 	 * @param {Array} headers [left, center, right]
 	 */
 	setHeader(headers: [
@@ -1083,11 +1207,10 @@ export declare class Worksheet {
 		right: any
 	]): void;
 	/**
+	 * Sets the left, center, and right print footer instructions.
 	 * Expects an array length of three.
-	 *
 	 * @see Excel/Worksheet compilePageDetailPiece
 	 * @see <a href='/cookbook/addingHeadersAndFooters.html'>Adding headers and footers to a worksheet</a>
-	 *
 	 * @param {Array} footers [left, center, right]
 	 */
 	setFooter(footers: [
@@ -1102,16 +1225,13 @@ export declare class Worksheet {
 	 */
 	compilePageDetailPackage(data: any): string;
 	/**
-	 * Turns instructions on page header/footer details into something
-	 * usable by Excel.
-	 *
+	 * Turns instructions on page header/footer details into something usable by Excel.
 	 * @param {type} data
 	 * @returns {String|@exp;_@call;reduce}
 	 */
 	compilePageDetailPiece(data: string | CharType | any[]): any;
 	/**
 	 * Creates the header node.
-	 *
 	 * @todo implement the ability to do even/odd headers
 	 * @param {XML Doc} doc
 	 * @returns {XML Node}
@@ -1119,90 +1239,72 @@ export declare class Worksheet {
 	exportHeader(doc: XMLDOM): XMLNode;
 	/**
 	 * Creates the footer node.
-	 *
 	 * @todo implement the ability to do even/odd footers
 	 * @param {XML Doc} doc
 	 * @returns {XML Node}
 	 */
 	exportFooter(doc: XMLDOM): XMLNode;
-	/**
-	 * This creates some nodes ahead of time, which cuts down on generation time due to
-	 * most cell definitions being essentially the same, but having multiple nodes that need
-	 * to be created. Cloning takes less time than creation.
-	 *
-	 * @private
-	 * @param {XML Doc} doc
-	 * @returns {_L8.Anonym$0._buildCache.Anonym$2}
-	 */
+	/** Legacy XML cell templates retained for callers of _buildCache(). */
 	_buildCache(doc: XMLDOM): {
-		number: XMLNode;
 		date: XMLNode;
 		string: XMLNode;
-		formula: XMLNode;
+		number: XMLNode;
 		boolean: XMLNode;
+		formula: XMLNode;
 	};
 	/**
 	 * Runs through the XML document and grabs all of the strings that will
 	 * be sent to the 'shared strings' document.
-	 *
 	 * @returns {Array}
 	 */
 	collectSharedStrings(): string[];
+	/** Interpret cells once for both the DOM compatibility API and direct XML exports. */
+	private forEachCell;
+	private serializeRow;
+	/** Serializes the worksheet and all of its rows as an OOXML document. */
 	toXML(): XMLDOM;
+	private createWorksheetDocument;
 	/**
-	 *
+	 * Creates the OOXML column definitions from this worksheet's column settings.
 	 * @param {XML Doc} doc
 	 * @returns {XML Node}
 	 */
 	exportColumns(doc: XMLDOM): XMLNode;
 	/**
 	 * Sets the page settings on a worksheet node.
-	 *
 	 * @param {XML Doc} doc
 	 * @param {XML Node} worksheet
 	 * @returns {undefined}
 	 */
 	exportPageSettings(doc: XMLDOM, worksheet: XMLNode): void;
 	/**
+	 * Sets the worksheet's printed page orientation.
 	 * http://www.schemacentral.com/sc/ooxml/t-ssml_ST_Orientation.html
-	 *
 	 * Can be one of 'portrait' or 'landscape'.
-	 *
 	 * @param {'default' | 'portrait' | 'landscape'} orientation
 	 * @returns {undefined}
 	 */
 	setPageOrientation(orientation: "default" | "portrait" | "landscape"): void;
 	/**
-	 * Set page details in inches.
+	 * Sets the worksheet's page margins for printing (in inches).
 	 * use this structure:
-	 * {
-	 *   top: 0.7
-	 *   , bottom: 0.7
-	 *   , left: 0.7
-	 *   , right: 0.7
-	 *   , header: 0.3
-	 *   , footer: 0.3
-	 * }
-	 *
+	 * { top: 0.7, bottom: 0.7, left: 0.7, right: 0.7, header: 0.3, footer: 0.3 }
 	 * @returns {undefined}
 	 */
 	setPageMargin(input: ExcelMargin): void;
 	/**
 	 * Expects an array of column definitions. Each column definition needs to have a width assigned to it.
-	 *
 	 * @param {Array} columns
 	 */
 	setColumns(columns: ExcelColumn[]): void;
 	/**
 	 * Expects an array of data to be translated into cells.
-	 *
 	 * @param {Array} data Two dimensional array - [ [A1, A2], [B1, B2] ]
 	 * @see <a href='/cookbook/addingDataToAWorksheet.html'>Adding data to a worksheet</a>
 	 */
 	setData(data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][]): void;
 	/**
 	 * Merge cells in given range
-	 *
 	 * @param cell1 - A1, A2...
 	 * @param cell2 - A2, A3...
 	 */
@@ -1218,31 +1320,27 @@ export declare class Worksheet {
 	/**
 	 * Expects an array containing an object full of column format definitions.
 	 * http://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.column.aspx
-	 * bestFit
-	 * collapsed
-	 * customWidth
-	 * hidden
-	 * max
-	 * min
-	 * outlineLevel
-	 * phonetic
-	 * style
-	 * width
+	 * - bestFit
+	 * - collapsed
+	 * - customWidth
+	 * - hidden
+	 * - max
+	 * - min
+	 * - outlineLevel
+	 * - phonetic
+	 * - style
+	 * - width
 	 * @param {Array} columnFormats
 	 */
 	setColumnFormats(columnFormats: ExcelColumn[]): void;
-	/**
-	 * Returns worksheet XML header (everything before <sheetData>)
-	 */
+	/** Returns worksheet XML header (everything before <sheetData>) */
 	getWorksheetXmlHeader(): string;
-	/**
-	 * Returns worksheet XML footer (everything after </sheetData>)
-	 */
+	/** Returns worksheet XML footer (everything after </sheetData>) */
 	getWorksheetXmlFooter(): string;
-	/**
-	 * Serialize a chunk of rows to XML (same logic as in toXML)
-	 */
-	serializeRows(rows: (number | string | boolean | Date | null | ExcelColumnMetadata)[][], startRow?: number): string;
+	/** Serialize rows with the same metadata, references, and escaping as toXML(). */
+	serializeRows(rows: Cell[][], startRow?: number): string;
+	/** Yield complete rows in bounded batches; input data remains owned by the worksheet. */
+	getXmlChunks(chunkSize?: number): Generator<string, void, unknown>;
 }
 export interface MediaMeta {
 	id: string;
@@ -1272,20 +1370,18 @@ export declare class Workbook {
 		left?: string;
 	}>;
 	definedNames: WorkbookDefinedName[];
+	/** Creates a workbook with an empty worksheet and style collection. */
 	constructor();
+	/** Resets workbook state and creates its shared style and string collections. */
 	initialize(): void;
 	/**
 	 * Validate an Excel defined name/function identifier.
 	 * Excel names cannot be empty, cannot look like cell refs and cannot contain spaces.
 	 */
 	validateDefinedName(name: string): void;
-	/**
-	 * Resolve scope into a worksheet localSheetId (0-based).
-	 */
+	/** Resolve scope into a worksheet localSheetId (0-based). */
 	resolveDefinedNameScope(scope?: number | string): number | undefined;
-	/**
-	 * Adds a workbook-level or sheet-scoped defined name.
-	 */
+	/** Adds a workbook-level or sheet-scoped defined name. */
 	addDefinedName(name: string, refersTo: string, scope?: number | string, options?: {
 		comment?: string;
 		hidden?: boolean;
@@ -1295,18 +1391,20 @@ export declare class Workbook {
 	 * Example output: CUSTOMSUM -> =LAMBDA(values,SUM(values))
 	 */
 	addCustomFunction(name: string, args: string[], body: string, options?: CustomFunctionOptions): void;
-	/**
-	 * Qualify LAMBDA argument references with the `_xlpm.` prefix expected in workbook XML.
-	 */
+	/** Qualify LAMBDA argument references with the `_xlpm.` prefix expected in workbook XML. */
 	qualifyLambdaBodyArgRefs(formulaBody: string, argNames: string[]): string;
+	/** Creates a worksheet with a generated default name when none is supplied. */
 	createWorksheet(config?: any): Worksheet;
+	/** Returns the workbook style sheet used to register cell formats. */
 	getStyleSheet(): StyleSheet$1;
+	/** Registers a table with this workbook. */
 	addTable(table: Table): void;
+	/** Registers a worksheet drawing collection with this workbook. */
 	addDrawings(drawings: Drawings): void;
+	/** Registers a chart and assigns its package index and target path. */
 	addChart(chart: Chart): void;
 	/**
 	 * Set number of rows to repeat for this sheet.
-	 *
 	 * @param {String} sheet name
 	 * @param {int} number of rows to repeat from the top
 	 * @returns {undefined}
@@ -1314,21 +1412,34 @@ export declare class Workbook {
 	setPrintTitleTop(inSheet: string, inRowCount: number): void;
 	/**
 	 * Set number of rows to repeat for this sheet.
-	 *
 	 * @param {String} sheet name
 	 * @param {int} number of columns to repeat from the left
 	 * @returns {undefined}
 	 */
 	setPrintTitleLeft(inSheet: string, inRowCount: number): void;
+	/** Registers media bytes and returns the workbook media record for the file. */
 	addMedia(_type: string, fileName: string, fileData: any, contentType?: string | null): MediaMeta;
+	/** Adds a worksheet and connects it to the workbook's shared strings. */
 	addWorksheet(worksheet: Worksheet): void;
+	/** Creates the package content types document for workbook parts. */
 	createContentTypes(): XMLDOM;
+	/** Serializes workbook sheets, defined names, and workbook settings as OOXML. */
 	toXML(): XMLDOM;
+	/** Creates the package-level relationship pointing to the workbook part. */
 	createWorkbookRelationship(): XMLDOM;
-	_generateCorePaths(files: any): void;
+	/** Assigns package paths and adds shared workbook parts to the file map. */
+	_generateCorePaths(files: any, paths?: Record<string, string>): void;
+	private packageXml;
+	private metadataFiles;
+	/** Adds metadata parts and serializes XML values in the package file map. */
 	_prepareFilesForPackaging(files: {
 		[path: string]: XMLDOM | string;
 	}): void;
+	/** Generate XML entries in order, populating shared strings before writing their table. */
+	generateFileEntries(): Generator<[
+		string,
+		string | Iterable<string>
+	]>;
 	generateFiles(): Promise<{
 		[path: string]: string;
 	}>;
@@ -1343,14 +1454,23 @@ export declare class Picture extends Drawing {
 	fill: any;
 	mediaData: MediaMeta | null;
 	description: string;
+	/** Creates a picture drawing with generated identifiers. */
 	constructor();
+	/** Associates this picture with media registered in the workbook. */
 	setMedia(mediaRef: MediaMeta): void;
+	/** Sets the alternative text description written to the drawing markup. */
 	setDescription(description: string): void;
+	/** Sets the picture fill mode. */
 	setFillType(type: string): void;
+	/** Merges additional options into the picture fill configuration. */
 	setFillConfig(config: any): void;
+	/** Returns the relationship schema key used for picture media. */
 	getMediaType(): keyof typeof Util.schemas;
+	/** Returns the workbook media record associated with this picture. */
 	getMediaData(): MediaMeta;
+	/** Assigns the package relationship ID used to reference the picture media. */
 	setRelationshipId(rId: string): void;
+	/** Serializes the picture markup and its anchor as OOXML. */
 	toXML(xmlDoc: XMLDOM): XMLNode;
 }
 /**
@@ -1412,6 +1532,7 @@ export declare function downloadExcelFile(workbook: Workbook, filename: string, 
 	zipOptions?: ZipOptions;
 }): Promise<void>;
 export interface ExcelFileStreamOptions {
+	/** Maximum output chunk size in bytes (default 64 KiB). */
 	chunkSize?: number;
 	outputType?: "Blob" | "Uint8Array" | "stream";
 	fileFormat?: "xlsx" | "xls";
@@ -1419,11 +1540,8 @@ export interface ExcelFileStreamOptions {
 	zipOptions?: ZipOptions;
 	downloadType?: "browser" | "node";
 }
-/**
- * Environment-aware streaming Excel file generator.
- * Yields zipped chunks for browser (ReadableStream) or NodeJS (async generator).
- */
-export declare function createExcelFileStream(workbook: Workbook, options?: ExcelFileStreamOptions): ReadableStream<Uint8Array<ArrayBufferLike>> | AsyncGenerator<Uint8Array<ArrayBufferLike>, void, unknown>;
+/** Incremental XLSX output. Input rows and shared strings remain owned by the workbook. */
+export declare function createExcelFileStream(workbook: Workbook, options?: ExcelFileStreamOptions): AsyncGenerator<Uint8Array<ArrayBuffer>, void, unknown> | ReadableStream<Uint8Array<ArrayBufferLike>>;
 /**
  * Converts the characters "&", "<", ">", '"', and "'" in `string` to their
  * corresponding HTML entities.
@@ -1452,9 +1570,13 @@ export declare function createExcelFileStream(workbook: Workbook, options?: Exce
  * // => 'fred, barney, &amp; pebbles'
  */
 export declare const htmlEscape: (str: string) => string;
+/** Checks whether a value is a non-null object or function. */
 export declare function isObject(value: unknown): value is object;
+/** Checks whether a value is a plain object with the standard object prototype. */
 export declare function isPlainObject(value: unknown): boolean;
+/** Checks whether a value or boxed string can be treated as a string. */
 export declare function isString(value: any): value is string;
+/** Copies the requested own properties from an object into a new object. */
 export declare function pick(object: any, keys: string[]): any;
 /**
  * Generates a unique ID. If `prefix` is given, the ID is appended to it.

@@ -43,6 +43,11 @@ describe('basic DOM simulator for web workers', () => {
       const result = XMLDOM.Node.Create({ type: 'UNKNOWN' });
       expect(result).toBeNull();
     });
+
+    it('restores attributes when cloning XML nodes', () => {
+      const node = XMLDOM.Node.Create({ type: 'XML', nodeName: 'item', attributes: { id: 'sample' } });
+      expect(node?.toString()).toBe('<item id="sample"/>');
+    });
   });
 
   describe('XMLDOM.XMLNode', () => {

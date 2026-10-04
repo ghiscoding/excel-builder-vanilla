@@ -14,10 +14,12 @@ export class Pane {
   topLeftCell: number | string | null = null;
   _freezePane!: { xSplit: number; ySplit: number; cell: string };
 
+  /** Configures the frozen pane boundaries and the first visible cell. */
   freezePane(column: number, row: number, cell: string) {
     this._freezePane = { xSplit: column, ySplit: row, cell };
   }
 
+  /** Creates the OOXML pane element when a frozen pane is configured. */
   exportXML(doc: XMLDOM) {
     const pane = doc.createElement('pane');
 

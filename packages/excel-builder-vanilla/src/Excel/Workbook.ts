@@ -1,5 +1,6 @@
 import type { CustomFunctionOptions, WorkbookDefinedName } from '../interfaces.js';
 import { uniqueId } from '../utilities/uniqueId.js';
+import { isXmlPath } from '../utilities/zip.js';
 import type { Chart } from './Drawing/Chart.js';
 import type { Drawings } from './Drawings.js';
 import { Paths } from './Paths.js';
@@ -32,14 +33,16 @@ export class Workbook {
   charts: Chart[] = [];
   tables: Table[] = [];
   drawings: Drawings[] = [];
-  media: { [filename: string]: MediaMeta } = {};
+  media: { [filename: string]: MediaMeta } = Object.create(null);
   printTitles?: Record<string, { top?: number; left?: string }>;
   definedNames: WorkbookDefinedName[] = [];
 
+  /** Creates a workbook with an empty worksheet and style collection. */
   constructor() {
     this.initialize();
   }
 
+  /** Resets workbook state and creates its shared style and string collections. */
   initialize() {
     this.id = uniqueId('Workbook');
     this.styleSheet = new StyleSheet();
@@ -72,9 +75,7 @@ export class Workbook {
     }
   }
 
-  /**
-   * Resolve scope into a worksheet localSheetId (0-based).
-   */
+  /** Resolve scope into a worksheet localSheetId (0-based). */
   resolveDefinedNameScope(scope?: number | string) {
     if (scope === undefined) {
       return undefined;
@@ -93,9 +94,7 @@ export class Workbook {
     return index;
   }
 
-  /**
-   * Adds a workbook-level or sheet-scoped defined name.
-   */
+  /** Adds a workbook-level or sheet-scoped defined name. */
   addDefinedName(name: string, refersTo: string, scope?: number | string, options?: { comment?: string; hidden?: boolean }) {
     this.validateDefinedName(name);
     if (typeof refersTo !== 'string' || !refersTo.trim()) {
@@ -141,9 +140,7 @@ export class Workbook {
     });
   }
 
-  /**
-   * Qualify LAMBDA argument references with the `_xlpm.` prefix expected in workbook XML.
-   */
+  /** Qualify LAMBDA argument references with the `_xlpm.` prefix expected in workbook XML. */
   qualifyLambdaBodyArgRefs(formulaBody: string, argNames: string[]) {
     const sortedArgs = [...argNames].sort((a, b) => b.length - a.length);
     let qualifiedBody = formulaBody;
@@ -155,23 +152,28 @@ export class Workbook {
     return qualifiedBody;
   }
 
+  /** Creates a worksheet with a generated default name when none is supplied. */
   createWorksheet(config?: any) {
     config = Object.assign({}, { name: `Sheet ${this.worksheets.length + 1}` }, config);
     return new Worksheet(config);
   }
 
+  /** Returns the workbook style sheet used to register cell formats. */
   getStyleSheet() {
     return this.styleSheet;
   }
 
+  /** Registers a table with this workbook. */
   addTable(table: Table) {
     this.tables.push(table);
   }
 
+  /** Registers a worksheet drawing collection with this workbook. */
   addDrawings(drawings: Drawings) {
     this.drawings.push(drawings);
   }
 
+  /** Registers a chart and assigns its package index and target path. */
   addChart(chart: Chart) {
     // Assign 1-based index & relative target for drawing relationship
     chart.index = this.charts.length + 1;
@@ -181,7 +183,6 @@ export class Workbook {
 
   /**
    * Set number of rows to repeat for this sheet.
-   *
    * @param {String} sheet name
    * @param {int} number of rows to repeat from the top
    * @returns {undefined}
@@ -198,7 +199,6 @@ export class Workbook {
 
   /**
    * Set number of rows to repeat for this sheet.
-   *
    * @param {String} sheet name
    * @param {int} number of columns to repeat from the left
    * @returns {undefined}
@@ -214,6 +214,7 @@ export class Workbook {
     this.printTitles![inSheet].left = String.fromCharCode(64 + inRowCount);
   }
 
+  /** Registers media bytes and returns the workbook media record for the file. */
   addMedia(_type: string, fileName: string, fileData: any, contentType?: string | null) {
     const fileNamePieces = fileName.split('.');
     const extension = fileNamePieces[fileNamePieces.length - 1];
@@ -238,15 +239,25 @@ export class Workbook {
     return this.media[fileName];
   }
 
+  /** Adds a worksheet and connects it to the workbook's shared strings. */
   addWorksheet(worksheet: Worksheet) {
     this.relations.addRelation(worksheet, 'worksheet');
     worksheet.setSharedStringCollection(this.sharedStrings);
     this.worksheets.push(worksheet);
   }
 
+  /** Creates the package content types document for workbook parts. */
   createContentTypes() {
     const doc = Util.createXmlDoc(Util.schemas.contentTypes, 'Types');
     const types = doc.documentElement;
+    const appendOverride = (partName: string, contentType: string) => {
+      types.appendChild(
+        Util.createElement(doc, 'Override', [
+          ['PartName', partName],
+          ['ContentType', contentType],
+        ]),
+      );
+    };
     let i: number;
     let l: number;
 
@@ -276,63 +287,29 @@ export class Workbook {
       );
     }
 
-    types.appendChild(
-      Util.createElement(doc, 'Override', [
-        ['PartName', '/xl/workbook.xml'],
-        ['ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml'],
-      ]),
-    );
-    types.appendChild(
-      Util.createElement(doc, 'Override', [
-        ['PartName', '/xl/sharedStrings.xml'],
-        ['ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml'],
-      ]),
-    );
-    types.appendChild(
-      Util.createElement(doc, 'Override', [
-        ['PartName', '/xl/styles.xml'],
-        ['ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml'],
-      ]),
-    );
+    appendOverride('/xl/workbook.xml', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml');
+    appendOverride('/xl/sharedStrings.xml', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sharedStrings+xml');
+    appendOverride('/xl/styles.xml', 'application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml');
 
     for (i = 0, l = this.worksheets.length; i < l; i++) {
-      types.appendChild(
-        Util.createElement(doc, 'Override', [
-          ['PartName', `/xl/worksheets/sheet${i + 1}.xml`],
-          ['ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml'],
-        ]),
-      );
+      appendOverride(`/xl/worksheets/sheet${i + 1}.xml`, 'application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml');
     }
     for (i = 0, l = this.tables.length; i < l; i++) {
-      types.appendChild(
-        Util.createElement(doc, 'Override', [
-          ['PartName', `/xl/tables/table${i + 1}.xml`],
-          ['ContentType', 'application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml'],
-        ]),
-      );
+      appendOverride(`/xl/tables/table${i + 1}.xml`, 'application/vnd.openxmlformats-officedocument.spreadsheetml.table+xml');
     }
 
     for (i = 0, l = this.drawings.length; i < l; i++) {
-      types.appendChild(
-        Util.createElement(doc, 'Override', [
-          ['PartName', `/xl/drawings/drawing${i + 1}.xml`],
-          ['ContentType', 'application/vnd.openxmlformats-officedocument.drawing+xml'],
-        ]),
-      );
+      appendOverride(`/xl/drawings/drawing${i + 1}.xml`, 'application/vnd.openxmlformats-officedocument.drawing+xml');
     }
 
     for (i = 0, l = this.charts.length; i < l; i++) {
-      types.appendChild(
-        Util.createElement(doc, 'Override', [
-          ['PartName', `/xl/charts/chart${i + 1}.xml`],
-          ['ContentType', 'application/vnd.openxmlformats-officedocument.drawingml.chart+xml'],
-        ]),
-      );
+      appendOverride(`/xl/charts/chart${i + 1}.xml`, 'application/vnd.openxmlformats-officedocument.drawingml.chart+xml');
     }
 
     return doc;
   }
 
+  /** Serializes workbook sheets, defined names, and workbook settings as OOXML. */
   toXML() {
     const doc = Util.createXmlDoc(Util.schemas.spreadsheetml, 'workbook');
     const wb = doc.documentElement;
@@ -409,6 +386,7 @@ export class Workbook {
     return doc;
   }
 
+  /** Creates the package-level relationship pointing to the workbook part. */
   createWorkbookRelationship() {
     const doc = Util.createXmlDoc(Util.schemas.relationshipPackage, 'Relationships');
     const relationships = doc.documentElement;
@@ -422,75 +400,130 @@ export class Workbook {
     return doc;
   }
 
-  _generateCorePaths(files: any) {
+  /** Assigns package paths and adds shared workbook parts to the file map. */
+  _generateCorePaths(files: any, paths: Record<string, string> = Paths) {
+    this.relations.paths = paths;
+    for (let i = 0; i < this.worksheets.length; i++) {
+      const worksheet = this.worksheets[i];
+      paths[worksheet.id] = `worksheets/sheet${i + 1}.xml`;
+      if (worksheet.relations) {
+        worksheet.relations.paths = paths;
+      }
+    }
     let i: number;
     let l: number;
-    Paths[this.styleSheet.id] = 'styles.xml';
-    Paths[this.sharedStrings.id] = 'sharedStrings.xml';
-    Paths[this.id] = '/xl/workbook.xml';
+    paths[this.styleSheet.id] = 'styles.xml';
+    paths[this.sharedStrings.id] = 'sharedStrings.xml';
+    paths[this.id] = '/xl/workbook.xml';
 
     for (i = 0, l = this.tables.length; i < l; i++) {
       files[`/xl/tables/table${i + 1}.xml`] = this.tables[i].toXML();
-      Paths[this.tables[i].id] = `/xl/tables/table${i + 1}.xml`;
+      paths[this.tables[i].id] = `/xl/tables/table${i + 1}.xml`;
     }
 
     for (const fileName in this.media) {
       const media = this.media[fileName];
       files[`/xl/media/${fileName}`] = media.data;
-      Paths[fileName] = `/xl/media/${fileName}`;
+      paths[fileName] = `/xl/media/${fileName}`;
     }
 
     for (i = 0, l = this.drawings.length; i < l; i++) {
+      this.drawings[i].relations.paths = paths;
       files[`/xl/drawings/drawing${i + 1}.xml`] = this.drawings[i].toXML();
-      Paths[this.drawings[i].id] = `/xl/drawings/drawing${i + 1}.xml`;
+      paths[this.drawings[i].id] = `/xl/drawings/drawing${i + 1}.xml`;
       files[`/xl/drawings/_rels/drawing${i + 1}.xml.rels`] = this.drawings[i].relations.toXML();
     }
 
     for (i = 0, l = this.charts.length; i < l; i++) {
       files[`/xl/charts/chart${i + 1}.xml`] = this.charts[i].toChartSpaceXML();
-      Paths[this.charts[i].id] = `/xl/charts/chart${i + 1}.xml`;
+      paths[this.charts[i].id] = `/xl/charts/chart${i + 1}.xml`;
     }
   }
 
-  _prepareFilesForPackaging(files: { [path: string]: XMLDOM | string }) {
-    Object.assign(files, {
-      '/[Content_Types].xml': this.createContentTypes(),
-      '/_rels/.rels': this.createWorkbookRelationship(),
-      '/xl/styles.xml': this.styleSheet.toXML(),
-      '/xl/workbook.xml': this.toXML(),
-      '/xl/sharedStrings.xml': this.sharedStrings.toXML(),
-      '/xl/_rels/workbook.xml.rels': this.relations.toXML(),
-    });
+  private packageXml(value: XMLDOM | string): string {
+    let content: string;
+    if (typeof value === 'string' || value instanceof XMLDOM) {
+      content = String(value);
+    } else {
+      // Compatibility with custom DOM exporters. Our own XML never needs namespace cleanup.
+      content = (value as any).xml || new window.XMLSerializer().serializeToString(value as any);
+      content = content
+        .replace(/xmlns=""/g, '')
+        .replace(/NS[\d]+:/g, '')
+        .replace(/xmlns:NS[\d]+=""/g, '');
+    }
+    return content.startsWith('<?xml') ? content : `${XMLDOM.declaration}\n${content}`;
+  }
 
-    for (const [key, value] of Object.entries(files)) {
-      if (key.indexOf('.xml') !== -1 || key.indexOf('.rels') !== -1) {
-        if (value instanceof XMLDOM) {
-          files[key] = value.toString();
-        } else {
-          files[key] = (value as any).xml || new window.XMLSerializer().serializeToString(value as any);
-        }
-        let content = (files[key] as string).replace(/xmlns=""/g, '');
-        content = content.replace(/NS[\d]+:/g, '');
-        content = content.replace(/xmlns:NS[\d]+=""/g, '');
-        files[key] = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n${content}`;
+  private *metadataFiles(): Generator<[string, string | Iterable<string>]> {
+    yield ['/[Content_Types].xml', this.packageXml(this.createContentTypes())];
+    yield ['/_rels/.rels', this.packageXml(this.createWorkbookRelationship())];
+    yield ['/xl/styles.xml', this.packageXml(this.styleSheet.toXML())];
+    yield ['/xl/workbook.xml', this.packageXml(this.toXML())];
+    yield [
+      '/xl/sharedStrings.xml',
+      this.sharedStrings.toXML !== SharedStrings.prototype.toXML && this.sharedStrings.getXmlChunks === SharedStrings.prototype.getXmlChunks
+        ? this.packageXml(this.sharedStrings.toXML())
+        : this.sharedStrings.getXmlChunks(),
+    ];
+    yield ['/xl/_rels/workbook.xml.rels', this.packageXml(this.relations.toXML())];
+  }
+
+  /** Adds metadata parts and serializes XML values in the package file map. */
+  _prepareFilesForPackaging(files: { [path: string]: XMLDOM | string }) {
+    for (const [path, value] of this.metadataFiles()) {
+      files[path] = typeof value === 'string' ? value : [...value].join('');
+    }
+    for (const path of Object.keys(files)) {
+      if (isXmlPath(path)) {
+        files[path] = this.packageXml(files[path]);
       }
     }
   }
 
-  generateFiles(): Promise<{ [path: string]: string }> {
-    const files: any = {};
-    this._generateCorePaths(files);
-
-    for (let i = 0, l = this.worksheets.length; i < l; i++) {
-      const xml = this.worksheets[i].toXML();
-      files[`/xl/worksheets/sheet${i + 1}.xml`] = xml;
-      Paths[this.worksheets[i].id] = `worksheets/sheet${i + 1}.xml`;
-      files[`/xl/worksheets/_rels/sheet${i + 1}.xml.rels`] = this.worksheets[i].relations?.toXML();
+  /** Generate XML entries in order, populating shared strings before writing their table. */
+  *generateFileEntries(): Generator<[string, string | Iterable<string>]> {
+    const files: Record<string, XMLDOM | string> = Object.create(null);
+    // Keep relationship paths local; the exported Paths object remains available to legacy callers.
+    this._generateCorePaths(files, Object.create(null));
+    for (const path of Object.keys(files)) {
+      yield [path, isXmlPath(path) ? this.packageXml(files[path]) : String(files[path])];
+      delete files[path];
     }
+    for (let i = 0; i < this.worksheets.length; i++) {
+      const worksheet = this.worksheets[i];
+      yield [
+        `/xl/worksheets/sheet${i + 1}.xml`,
+        worksheet.toXML !== Worksheet.prototype.toXML && worksheet.getXmlChunks === Worksheet.prototype.getXmlChunks
+          ? this.packageXml(worksheet.toXML())
+          : worksheet.getXmlChunks(),
+      ];
+      if (worksheet.relations) {
+        yield [`/xl/worksheets/_rels/sheet${i + 1}.xml.rels`, this.packageXml(worksheet.relations.toXML())];
+      }
+    }
+    yield* this.metadataFiles();
+  }
 
-    this._prepareFilesForPackaging(files);
-
-    return Promise.resolve(files);
+  async generateFiles(): Promise<{ [path: string]: string }> {
+    const files: Record<string, string> = Object.create(null);
+    let deadline = Date.now() + 8;
+    for (const [path, content] of this.generateFileEntries()) {
+      if (typeof content === 'string') {
+        files[path] = content;
+      } else {
+        const chunks: string[] = [];
+        for (const chunk of content) {
+          chunks.push(chunk);
+          if (Date.now() >= deadline) {
+            await new Promise(resolve => setTimeout(resolve, 0));
+            deadline = Date.now() + 8;
+          }
+        }
+        files[path] = chunks.join('');
+      }
+    }
+    return files;
   }
 
   /** Return workbook XML header */

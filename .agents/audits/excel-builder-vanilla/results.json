@@ -1,0 +1,4468 @@
+{
+  "metadata": {
+    "revision": "6ce5a7537b6ef2bf17997d36bab2eeeaebbc8f67",
+    "node": "v24.16.0",
+    "platform": "linux",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz",
+    "logicalCPUs": 12,
+    "totalRAMGiB": 15.46285629272461,
+    "typescript": "6.0.3",
+    "fflate": "0.8.3",
+    "repetitions": 3,
+    "warmup": "500 rows per fresh child process",
+    "build": "package Vite production config; output redirected to temporary directory",
+    "bundleBytes": 67572,
+    "bundleGzipBytes": 16189,
+    "sourceMapBytes": 193542
+  },
+  "results": [
+    {
+      "config": {
+        "name": "numeric-10k",
+        "kind": "numeric",
+        "rows": 1000,
+        "cols": 10
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "numeric-10k",
+            "kind": "numeric",
+            "rows": 1000,
+            "cols": 10
+          },
+          "setupMs": 1.4538939999999911,
+          "totalMs": 130.638166,
+          "firstTimerMs": 37.20909300000001,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 15.217407999999992,
+            "styleTreeMs": 0.05879799999999591,
+            "sharedStringsTreeMs": 0.007011000000005652,
+            "serializeAndPackageMs": 11.805153999999987,
+            "generateFilesMs": 27.169451999999993
+          },
+          "memoryStart": {
+            "rss": 76283904,
+            "heapTotal": 22753280,
+            "heapUsed": 5336328,
+            "external": 2160936,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 109395968,
+            "heapTotal": 41103360,
+            "heapUsed": 5879152,
+            "external": 2575869,
+            "arrayBuffers": 947060
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 76283904,
+              "heapTotal": 22753280,
+              "heapUsed": 5336328,
+              "external": 2160936,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 85508096,
+              "heapTotal": 43724800,
+              "heapUsed": 14864224,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 85639168,
+              "heapTotal": 43724800,
+              "heapUsed": 14889584,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 85639168,
+              "heapTotal": 43724800,
+              "heapUsed": 14895000,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 90103808,
+              "heapTotal": 44015616,
+              "heapUsed": 23578752,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 90103808,
+              "heapTotal": 44015616,
+              "heapUsed": 23325816,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 165.80859375,
+          "zipBytes": 32016,
+          "rawBytes": 290545,
+          "cells": 10000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-10k",
+            "kind": "numeric",
+            "rows": 1000,
+            "cols": 10
+          },
+          "setupMs": 1.6238050000000044,
+          "totalMs": 121.702991,
+          "firstTimerMs": 39.23125300000001,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 17.195665000000005,
+            "styleTreeMs": 0.057718000000008374,
+            "sharedStringsTreeMs": 0.006843000000003485,
+            "serializeAndPackageMs": 12.26312999999999,
+            "generateFilesMs": 29.60650799999999
+          },
+          "memoryStart": {
+            "rss": 75845632,
+            "heapTotal": 23015424,
+            "heapUsed": 5340320,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 109924352,
+            "heapTotal": 41627648,
+            "heapUsed": 5776168,
+            "external": 2575869,
+            "arrayBuffers": 947060
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 75845632,
+              "heapTotal": 23015424,
+              "heapUsed": 5340320,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 85618688,
+              "heapTotal": 43986944,
+              "heapUsed": 14681408,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 85618688,
+              "heapTotal": 43986944,
+              "heapUsed": 14706768,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 85618688,
+              "heapTotal": 43986944,
+              "heapUsed": 14712184,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 90873856,
+              "heapTotal": 44277760,
+              "heapUsed": 23135904,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 90873856,
+              "heapTotal": 44277760,
+              "heapUsed": 23136848,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 165.80859375,
+          "zipBytes": 32016,
+          "rawBytes": 290545,
+          "cells": 10000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-10k",
+            "kind": "numeric",
+            "rows": 1000,
+            "cols": 10
+          },
+          "setupMs": 1.506370000000004,
+          "totalMs": 121.57064600000001,
+          "firstTimerMs": 38.43292300000002,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 16.890158,
+            "styleTreeMs": 0.06386500000000694,
+            "sharedStringsTreeMs": 0.007344000000003348,
+            "serializeAndPackageMs": 11.484831999999997,
+            "generateFilesMs": 28.527846999999994
+          },
+          "memoryStart": {
+            "rss": 75640832,
+            "heapTotal": 23277568,
+            "heapUsed": 5340104,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 109252608,
+            "heapTotal": 41627648,
+            "heapUsed": 5829456,
+            "external": 2575869,
+            "arrayBuffers": 947060
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 75640832,
+              "heapTotal": 23277568,
+              "heapUsed": 5340104,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 86306816,
+              "heapTotal": 43724800,
+              "heapUsed": 14829936,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 86306816,
+              "heapTotal": 43724800,
+              "heapUsed": 14855296,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 86306816,
+              "heapTotal": 43724800,
+              "heapUsed": 14860712,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 90472448,
+              "heapTotal": 44015616,
+              "heapUsed": 23512576,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 90472448,
+              "heapTotal": 44015616,
+              "heapUsed": 23306032,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 165.80859375,
+          "zipBytes": 32016,
+          "rawBytes": 290545,
+          "cells": 10000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "numeric-100k",
+        "kind": "numeric",
+        "rows": 10000,
+        "cols": 10
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "numeric-100k",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 8.509136999999996,
+          "totalMs": 504.106169,
+          "firstTimerMs": 267.419132,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 110.888038,
+            "styleTreeMs": 0.06606800000000135,
+            "sharedStringsTreeMs": 0.009761999999994941,
+            "serializeAndPackageMs": 132.83454600000002,
+            "generateFilesMs": 243.866443
+          },
+          "memoryStart": {
+            "rss": 78090240,
+            "heapTotal": 24850432,
+            "heapUsed": 6563960,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 315826176,
+            "heapTotal": 228929536,
+            "heapUsed": 140293472,
+            "external": 7154704,
+            "arrayBuffers": 5258832
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 78090240,
+              "heapTotal": 24850432,
+              "heapUsed": 6563960,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 187068416,
+              "heapTotal": 188428288,
+              "heapUsed": 106267112,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 187199488,
+              "heapTotal": 188428288,
+              "heapUsed": 106292472,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 187199488,
+              "heapTotal": 188428288,
+              "heapUsed": 106297888,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 283144192,
+              "heapTotal": 225325056,
+              "heapUsed": 136537984,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 283144192,
+              "heapTotal": 225325056,
+              "heapUsed": 136429080,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 301.1953125,
+          "zipBytes": 299079,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-100k",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 8.446928,
+          "totalMs": 508.60871999999995,
+          "firstTimerMs": 264.725268,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 109.98553600000001,
+            "styleTreeMs": 0.06723999999999819,
+            "sharedStringsTreeMs": 0.007069000000001324,
+            "serializeAndPackageMs": 131.45590299999998,
+            "generateFilesMs": 241.59038100000004
+          },
+          "memoryStart": {
+            "rss": 77754368,
+            "heapTotal": 24850432,
+            "heapUsed": 6564048,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 315736064,
+            "heapTotal": 229191680,
+            "heapUsed": 140255744,
+            "external": 7154704,
+            "arrayBuffers": 5258832
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 77754368,
+              "heapTotal": 24850432,
+              "heapUsed": 6564048,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 186736640,
+              "heapTotal": 188166144,
+              "heapUsed": 106248624,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 186736640,
+              "heapTotal": 188166144,
+              "heapUsed": 106273984,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 186736640,
+              "heapTotal": 188166144,
+              "heapUsed": 106279400,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 282943488,
+              "heapTotal": 225062912,
+              "heapUsed": 136457192,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 282943488,
+              "heapTotal": 225062912,
+              "heapUsed": 136391224,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 301.109375,
+          "zipBytes": 299079,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-100k",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 8.861153000000002,
+          "totalMs": 523.1355639999999,
+          "firstTimerMs": 261.797278,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 105.78966899999999,
+            "styleTreeMs": 0.07110099999999875,
+            "sharedStringsTreeMs": 0.007040000000017699,
+            "serializeAndPackageMs": 132.357373,
+            "generateFilesMs": 238.295155
+          },
+          "memoryStart": {
+            "rss": 78184448,
+            "heapTotal": 24850432,
+            "heapUsed": 6563488,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 316407808,
+            "heapTotal": 229191680,
+            "heapUsed": 140423976,
+            "external": 7154704,
+            "arrayBuffers": 5258832
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 78184448,
+              "heapTotal": 24850432,
+              "heapUsed": 6563488,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 187338752,
+              "heapTotal": 188166144,
+              "heapUsed": 106388456,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 187338752,
+              "heapTotal": 188166144,
+              "heapUsed": 106413816,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 187338752,
+              "heapTotal": 188166144,
+              "heapUsed": 106419232,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 282890240,
+              "heapTotal": 225325056,
+              "heapUsed": 136775280,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 282890240,
+              "heapTotal": 225325056,
+              "heapUsed": 136557456,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 301.75,
+          "zipBytes": 299079,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "numeric-500k",
+        "kind": "numeric",
+        "rows": 50000,
+        "cols": 10
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "numeric-500k",
+            "kind": "numeric",
+            "rows": 50000,
+            "cols": 10
+          },
+          "setupMs": 50.66399800000001,
+          "totalMs": 2628.5848379999998,
+          "firstTimerMs": 1652.858411,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 466.19400200000007,
+            "styleTreeMs": 0.0618410000000722,
+            "sharedStringsTreeMs": 0.007094000000051892,
+            "serializeAndPackageMs": 1101.429446,
+            "generateFilesMs": 1567.7644520000001
+          },
+          "memoryStart": {
+            "rss": 84742144,
+            "heapTotal": 46747648,
+            "heapUsed": 12048216,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 821858304,
+            "heapTotal": 708939776,
+            "heapUsed": 600024304,
+            "external": 22754788,
+            "arrayBuffers": 19480139
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 84742144,
+              "heapTotal": 46747648,
+              "heapUsed": 12048216,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 548376576,
+              "heapTotal": 483823616,
+              "heapUsed": 400634496,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 548376576,
+              "heapTotal": 483823616,
+              "heapUsed": 400659856,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 548376576,
+              "heapTotal": 483823616,
+              "heapUsed": 400665272,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 760266752,
+              "heapTotal": 692097024,
+              "heapUsed": 582922024,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 760266752,
+              "heapTotal": 692097024,
+              "heapUsed": 582916920,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 803.453125,
+          "zipBytes": 1479121,
+          "rawBytes": 16320557,
+          "cells": 500000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-500k",
+            "kind": "numeric",
+            "rows": 50000,
+            "cols": 10
+          },
+          "setupMs": 51.24562999999999,
+          "totalMs": 2624.96218,
+          "firstTimerMs": 1639.97272,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 522.8727240000001,
+            "styleTreeMs": 0.06394600000010087,
+            "sharedStringsTreeMs": 0.0070699999999987995,
+            "serializeAndPackageMs": 1030.7957569999999,
+            "generateFilesMs": 1553.811825
+          },
+          "memoryStart": {
+            "rss": 85090304,
+            "heapTotal": 46485504,
+            "heapUsed": 12047840,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 777457664,
+            "heapTotal": 685281280,
+            "heapUsed": 549293504,
+            "external": 21517974,
+            "arrayBuffers": 18243325
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 85090304,
+              "heapTotal": 46485504,
+              "heapUsed": 12047840,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 549421056,
+              "heapTotal": 484610048,
+              "heapUsed": 400196016,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 549421056,
+              "heapTotal": 484610048,
+              "heapUsed": 400221376,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 549421056,
+              "heapTotal": 484610048,
+              "heapUsed": 400226792,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 731738112,
+              "heapTotal": 684756992,
+              "heapUsed": 613213056,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 731738112,
+              "heapTotal": 684756992,
+              "heapUsed": 613208728,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 761.53125,
+          "zipBytes": 1479121,
+          "rawBytes": 16320557,
+          "cells": 500000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-500k",
+            "kind": "numeric",
+            "rows": 50000,
+            "cols": 10
+          },
+          "setupMs": 54.561471,
+          "totalMs": 2677.038458,
+          "firstTimerMs": 1725.203881,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 552.65455,
+            "styleTreeMs": 0.07835899999997764,
+            "sharedStringsTreeMs": 0.007538999999951557,
+            "serializeAndPackageMs": 1086.92038,
+            "generateFilesMs": 1639.744864
+          },
+          "memoryStart": {
+            "rss": 84754432,
+            "heapTotal": 47009792,
+            "heapUsed": 12048376,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 777383936,
+            "heapTotal": 685281280,
+            "heapUsed": 548856408,
+            "external": 21517974,
+            "arrayBuffers": 18243325
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 84754432,
+              "heapTotal": 47009792,
+              "heapUsed": 12048376,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 549715968,
+              "heapTotal": 485134336,
+              "heapUsed": 400918008,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 549715968,
+              "heapTotal": 485134336,
+              "heapUsed": 400943368,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 549715968,
+              "heapTotal": 485134336,
+              "heapUsed": 400948784,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 732020736,
+              "heapTotal": 685019136,
+              "heapUsed": 613740848,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 732020736,
+              "heapTotal": 685019136,
+              "heapUsed": 613633536,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 761.9375,
+          "zipBytes": 1479121,
+          "rawBytes": 16320557,
+          "cells": 500000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "repeated-100k",
+        "kind": "repeated",
+        "rows": 10000,
+        "cols": 10
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "repeated-100k",
+            "kind": "repeated",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 13.817371000000009,
+          "totalMs": 504.097672,
+          "firstTimerMs": 344.226179,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 151.412894,
+            "styleTreeMs": 0.06603599999999687,
+            "sharedStringsTreeMs": 0.12914100000000417,
+            "serializeAndPackageMs": 149.078819,
+            "generateFilesMs": 300.637968
+          },
+          "memoryStart": {
+            "rss": 88100864,
+            "heapTotal": 27996160,
+            "heapUsed": 9395248,
+            "external": 2425149,
+            "arrayBuffers": 612481
+          },
+          "memoryEnd": {
+            "rss": 320208896,
+            "heapTotal": 232411136,
+            "heapUsed": 141843544,
+            "external": 7596917,
+            "arrayBuffers": 5512299
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 88100864,
+              "heapTotal": 27996160,
+              "heapUsed": 9395248,
+              "external": 2425149,
+              "arrayBuffers": 612481
+            },
+            "worksheetTreesMs": {
+              "rss": 224575488,
+              "heapTotal": 179253248,
+              "heapUsed": 91863848,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "styleTreeMs": {
+              "rss": 224575488,
+              "heapTotal": 179253248,
+              "heapUsed": 91887672,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "sharedStringsTreeMs": {
+              "rss": 224706560,
+              "heapTotal": 179253248,
+              "heapUsed": 92030408,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "serializeAndPackageMs": {
+              "rss": 292470784,
+              "heapTotal": 229031936,
+              "heapUsed": 138034976,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "generateFilesMs": {
+              "rss": 292470784,
+              "heapTotal": 229031936,
+              "heapUsed": 138035920,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            }
+          },
+          "peakRSSMiB": 305.375,
+          "zipBytes": 274584,
+          "rawBytes": 3384066,
+          "cells": 100000,
+          "sharedStrings": 100,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "repeated-100k",
+            "kind": "repeated",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 14.50432600000002,
+          "totalMs": 547.530416,
+          "firstTimerMs": 388.0759019999999,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 165.614817,
+            "styleTreeMs": 0.06083699999999226,
+            "sharedStringsTreeMs": 0.13420200000001614,
+            "serializeAndPackageMs": 179.20690000000002,
+            "generateFilesMs": 344.96252599999997
+          },
+          "memoryStart": {
+            "rss": 88854528,
+            "heapTotal": 28258304,
+            "heapUsed": 9395320,
+            "external": 2425149,
+            "arrayBuffers": 612481
+          },
+          "memoryEnd": {
+            "rss": 326402048,
+            "heapTotal": 237916160,
+            "heapUsed": 124735144,
+            "external": 7596917,
+            "arrayBuffers": 5512299
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 88854528,
+              "heapTotal": 28258304,
+              "heapUsed": 9395320,
+              "external": 2425149,
+              "arrayBuffers": 612481
+            },
+            "worksheetTreesMs": {
+              "rss": 203411456,
+              "heapTotal": 189739008,
+              "heapUsed": 114895272,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "styleTreeMs": {
+              "rss": 203411456,
+              "heapTotal": 189739008,
+              "heapUsed": 114919096,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "sharedStringsTreeMs": {
+              "rss": 203542528,
+              "heapTotal": 189739008,
+              "heapUsed": 115061736,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "serializeAndPackageMs": {
+              "rss": 299094016,
+              "heapTotal": 234012672,
+              "heapUsed": 120926592,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "generateFilesMs": {
+              "rss": 299094016,
+              "heapTotal": 234012672,
+              "heapUsed": 120927536,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            }
+          },
+          "peakRSSMiB": 311.28125,
+          "zipBytes": 274584,
+          "rawBytes": 3384066,
+          "cells": 100000,
+          "sharedStrings": 100,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "repeated-100k",
+            "kind": "repeated",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 13.278652999999991,
+          "totalMs": 519.0605770000001,
+          "firstTimerMs": 362.14235600000006,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 141.00132699999997,
+            "styleTreeMs": 0.06006800000000112,
+            "sharedStringsTreeMs": 0.12143200000002707,
+            "serializeAndPackageMs": 177.05572899999999,
+            "generateFilesMs": 318.20387100000005
+          },
+          "memoryStart": {
+            "rss": 89169920,
+            "heapTotal": 28258304,
+            "heapUsed": 9395344,
+            "external": 2425149,
+            "arrayBuffers": 612481
+          },
+          "memoryEnd": {
+            "rss": 326610944,
+            "heapTotal": 237391872,
+            "heapUsed": 124851392,
+            "external": 7596917,
+            "arrayBuffers": 5512299
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 89169920,
+              "heapTotal": 28258304,
+              "heapUsed": 9395344,
+              "external": 2425149,
+              "arrayBuffers": 612481
+            },
+            "worksheetTreesMs": {
+              "rss": 205037568,
+              "heapTotal": 188952576,
+              "heapUsed": 114942672,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "styleTreeMs": {
+              "rss": 205037568,
+              "heapTotal": 188952576,
+              "heapUsed": 114966496,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "sharedStringsTreeMs": {
+              "rss": 205168640,
+              "heapTotal": 188952576,
+              "heapUsed": 115109136,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "serializeAndPackageMs": {
+              "rss": 300326912,
+              "heapTotal": 233750528,
+              "heapUsed": 121042824,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            },
+            "generateFilesMs": {
+              "rss": 300326912,
+              "heapTotal": 233750528,
+              "heapUsed": 121043768,
+              "external": 2425189,
+              "arrayBuffers": 612481
+            }
+          },
+          "peakRSSMiB": 311.48046875,
+          "zipBytes": 274584,
+          "rawBytes": 3384066,
+          "cells": 100000,
+          "sharedStrings": 100,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "unique-100k",
+        "kind": "unique",
+        "rows": 10000,
+        "cols": 10
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "unique-100k",
+            "kind": "unique",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 26.28998100000001,
+          "totalMs": 855.092113,
+          "firstTimerMs": 646.3989,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 226.92037800000003,
+            "styleTreeMs": 0.05979400000001078,
+            "sharedStringsTreeMs": 113.446503,
+            "serializeAndPackageMs": 376.888768,
+            "generateFilesMs": 603.955082
+          },
+          "memoryStart": {
+            "rss": 116637696,
+            "heapTotal": 88752128,
+            "heapUsed": 19912712,
+            "external": 2673103,
+            "arrayBuffers": 846527
+          },
+          "memoryEnd": {
+            "rss": 430600192,
+            "heapTotal": 324661248,
+            "heapUsed": 234462072,
+            "external": 12895177,
+            "arrayBuffers": 10524414
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 116637696,
+              "heapTotal": 88752128,
+              "heapUsed": 19912712,
+              "external": 2673103,
+              "arrayBuffers": 846527
+            },
+            "worksheetTreesMs": {
+              "rss": 297799680,
+              "heapTotal": 224976896,
+              "heapUsed": 119005280,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "styleTreeMs": {
+              "rss": 297799680,
+              "heapTotal": 224976896,
+              "heapUsed": 119030408,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "sharedStringsTreeMs": {
+              "rss": 337514496,
+              "heapTotal": 281784320,
+              "heapUsed": 195123592,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "serializeAndPackageMs": {
+              "rss": 390074368,
+              "heapTotal": 316592128,
+              "heapUsed": 225910512,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "generateFilesMs": {
+              "rss": 390074368,
+              "heapTotal": 316592128,
+              "heapUsed": 225911456,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            }
+          },
+          "peakRSSMiB": 422.51953125,
+          "zipBytes": 546439,
+          "rawBytes": 8069472,
+          "cells": 100000,
+          "sharedStrings": 100000,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "unique-100k",
+            "kind": "unique",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 26.378581999999994,
+          "totalMs": 900.2846639999999,
+          "firstTimerMs": 684.294172,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 213.58051000000003,
+            "styleTreeMs": 0.0693920000000503,
+            "sharedStringsTreeMs": 179.288946,
+            "serializeAndPackageMs": 429.483911,
+            "generateFilesMs": 643.217619
+          },
+          "memoryStart": {
+            "rss": 118075392,
+            "heapTotal": 88227840,
+            "heapUsed": 19957120,
+            "external": 2673103,
+            "arrayBuffers": 846527
+          },
+          "memoryEnd": {
+            "rss": 432164864,
+            "heapTotal": 323735552,
+            "heapUsed": 187725264,
+            "external": 11834700,
+            "arrayBuffers": 9662672
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 118075392,
+              "heapTotal": 88227840,
+              "heapUsed": 19957120,
+              "external": 2673103,
+              "arrayBuffers": 846527
+            },
+            "worksheetTreesMs": {
+              "rss": 269574144,
+              "heapTotal": 200335360,
+              "heapUsed": 130820464,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "styleTreeMs": {
+              "rss": 269574144,
+              "heapTotal": 200335360,
+              "heapUsed": 130845592,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "sharedStringsTreeMs": {
+              "rss": 318128128,
+              "heapTotal": 268996608,
+              "heapUsed": 171184536,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "serializeAndPackageMs": {
+              "rss": 391528448,
+              "heapTotal": 320057344,
+              "heapUsed": 245742448,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "generateFilesMs": {
+              "rss": 391528448,
+              "heapTotal": 320057344,
+              "heapUsed": 245743392,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            }
+          },
+          "peakRSSMiB": 420.70703125,
+          "zipBytes": 546439,
+          "rawBytes": 8069472,
+          "cells": 100000,
+          "sharedStrings": 100000,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "unique-100k",
+            "kind": "unique",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 25.483592000000016,
+          "totalMs": 849.772028,
+          "firstTimerMs": 641.0493399999999,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 222.56187699999998,
+            "styleTreeMs": 0.06173000000001139,
+            "sharedStringsTreeMs": 116.67323799999997,
+            "serializeAndPackageMs": 376.542869,
+            "generateFilesMs": 599.2491809999999
+          },
+          "memoryStart": {
+            "rss": 118034432,
+            "heapTotal": 88489984,
+            "heapUsed": 19911272,
+            "external": 2673103,
+            "arrayBuffers": 846527
+          },
+          "memoryEnd": {
+            "rss": 432775168,
+            "heapTotal": 325971968,
+            "heapUsed": 235083888,
+            "external": 12895177,
+            "arrayBuffers": 10723149
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 118034432,
+              "heapTotal": 88489984,
+              "heapUsed": 19911272,
+              "external": 2673103,
+              "arrayBuffers": 846527
+            },
+            "worksheetTreesMs": {
+              "rss": 296452096,
+              "heapTotal": 224452608,
+              "heapUsed": 119349448,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "styleTreeMs": {
+              "rss": 296452096,
+              "heapTotal": 224452608,
+              "heapUsed": 119374576,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "sharedStringsTreeMs": {
+              "rss": 337076224,
+              "heapTotal": 283881472,
+              "heapUsed": 195106056,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "serializeAndPackageMs": {
+              "rss": 391733248,
+              "heapTotal": 317902848,
+              "heapUsed": 226535136,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "generateFilesMs": {
+              "rss": 391733248,
+              "heapTotal": 317902848,
+              "heapUsed": 226536080,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            }
+          },
+          "peakRSSMiB": 421.5078125,
+          "zipBytes": 546439,
+          "rawBytes": 8069472,
+          "cells": 100000,
+          "sharedStrings": 100000,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "mixed-100k",
+        "kind": "mixed",
+        "rows": 10000,
+        "cols": 10
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "mixed-100k",
+            "kind": "mixed",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 17.507310000000018,
+          "totalMs": 548.024324,
+          "firstTimerMs": 352.92510899999996,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 136.155013,
+            "styleTreeMs": 0.06056299999994508,
+            "sharedStringsTreeMs": 0.13295800000003055,
+            "serializeAndPackageMs": 172.930998,
+            "generateFilesMs": 309.225985
+          },
+          "memoryStart": {
+            "rss": 94904320,
+            "heapTotal": 47656960,
+            "heapUsed": 12927280,
+            "external": 2440803,
+            "arrayBuffers": 621289
+          },
+          "memoryEnd": {
+            "rss": 331649024,
+            "heapTotal": 241496064,
+            "heapUsed": 140880656,
+            "external": 7987439,
+            "arrayBuffers": 5949059
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 94904320,
+              "heapTotal": 47656960,
+              "heapUsed": 12927280,
+              "external": 2440803,
+              "arrayBuffers": 621289
+            },
+            "worksheetTreesMs": {
+              "rss": 208420864,
+              "heapTotal": 204943360,
+              "heapUsed": 105947784,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "styleTreeMs": {
+              "rss": 208420864,
+              "heapTotal": 204943360,
+              "heapUsed": 105971608,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "sharedStringsTreeMs": {
+              "rss": 208551936,
+              "heapTotal": 204943360,
+              "heapUsed": 106114288,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "serializeAndPackageMs": {
+              "rss": 304889856,
+              "heapTotal": 238030848,
+              "heapUsed": 136988560,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "generateFilesMs": {
+              "rss": 304889856,
+              "heapTotal": 238030848,
+              "heapUsed": 136989504,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            }
+          },
+          "peakRSSMiB": 316.28515625,
+          "zipBytes": 420235,
+          "rawBytes": 3467632,
+          "cells": 100000,
+          "sharedStrings": 100,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "mixed-100k",
+            "kind": "mixed",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 17.418905999999993,
+          "totalMs": 527.504265,
+          "firstTimerMs": 328.312959,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 151.773813,
+            "styleTreeMs": 0.06105200000001787,
+            "sharedStringsTreeMs": 0.06778000000002748,
+            "serializeAndPackageMs": 132.49298700000003,
+            "generateFilesMs": 284.41010000000006
+          },
+          "memoryStart": {
+            "rss": 92950528,
+            "heapTotal": 47656960,
+            "heapUsed": 12928144,
+            "external": 2440803,
+            "arrayBuffers": 621289
+          },
+          "memoryEnd": {
+            "rss": 311623680,
+            "heapTotal": 227545088,
+            "heapUsed": 92578952,
+            "external": 6748694,
+            "arrayBuffers": 4710314
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 92950528,
+              "heapTotal": 47656960,
+              "heapUsed": 12928144,
+              "external": 2440803,
+              "arrayBuffers": 621289
+            },
+            "worksheetTreesMs": {
+              "rss": 239996928,
+              "heapTotal": 216215552,
+              "heapUsed": 94592568,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "styleTreeMs": {
+              "rss": 239996928,
+              "heapTotal": 216215552,
+              "heapUsed": 94616392,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "sharedStringsTreeMs": {
+              "rss": 239996928,
+              "heapTotal": 216215552,
+              "heapUsed": 94758952,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "serializeAndPackageMs": {
+              "rss": 281677824,
+              "heapTotal": 219942912,
+              "heapUsed": 146818824,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "generateFilesMs": {
+              "rss": 281677824,
+              "heapTotal": 219942912,
+              "heapUsed": 146819768,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            }
+          },
+          "peakRSSMiB": 297.1875,
+          "zipBytes": 420235,
+          "rawBytes": 3467632,
+          "cells": 100000,
+          "sharedStrings": 100,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "mixed-100k",
+            "kind": "mixed",
+            "rows": 10000,
+            "cols": 10
+          },
+          "setupMs": 17.539375000000007,
+          "totalMs": 542.742973,
+          "firstTimerMs": 339.933754,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 159.446792,
+            "styleTreeMs": 0.057013999999981024,
+            "sharedStringsTreeMs": 0.06720899999999119,
+            "serializeAndPackageMs": 135.421827,
+            "generateFilesMs": 295.00877299999996
+          },
+          "memoryStart": {
+            "rss": 93937664,
+            "heapTotal": 47656960,
+            "heapUsed": 12927504,
+            "external": 2440803,
+            "arrayBuffers": 621289
+          },
+          "memoryEnd": {
+            "rss": 311353344,
+            "heapTotal": 227545088,
+            "heapUsed": 92582336,
+            "external": 6748694,
+            "arrayBuffers": 4710314
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 93937664,
+              "heapTotal": 47656960,
+              "heapUsed": 12927504,
+              "external": 2440803,
+              "arrayBuffers": 621289
+            },
+            "worksheetTreesMs": {
+              "rss": 235945984,
+              "heapTotal": 215429120,
+              "heapUsed": 95553072,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "styleTreeMs": {
+              "rss": 235945984,
+              "heapTotal": 215429120,
+              "heapUsed": 95576896,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "sharedStringsTreeMs": {
+              "rss": 235945984,
+              "heapTotal": 215429120,
+              "heapUsed": 95719472,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "serializeAndPackageMs": {
+              "rss": 282083328,
+              "heapTotal": 219156480,
+              "heapUsed": 148037904,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            },
+            "generateFilesMs": {
+              "rss": 282083328,
+              "heapTotal": 219156480,
+              "heapUsed": 148038848,
+              "external": 2440843,
+              "arrayBuffers": 621289
+            }
+          },
+          "peakRSSMiB": 297.25390625,
+          "zipBytes": 420235,
+          "rawBytes": 3467632,
+          "cells": 100000,
+          "sharedStrings": 100,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "wide-100k",
+        "kind": "numeric",
+        "rows": 1000,
+        "cols": 100
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "wide-100k",
+            "kind": "numeric",
+            "rows": 1000,
+            "cols": 100
+          },
+          "setupMs": 7.006004999999959,
+          "totalMs": 395.853129,
+          "firstTimerMs": 229.72384100000005,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 85.34871700000002,
+            "styleTreeMs": 0.05961300000001302,
+            "sharedStringsTreeMs": 0.007422999999960211,
+            "serializeAndPackageMs": 107.95205599999997,
+            "generateFilesMs": 193.44514199999998
+          },
+          "memoryStart": {
+            "rss": 191168512,
+            "heapTotal": 142815232,
+            "heapUsed": 6737584,
+            "external": 3939435,
+            "arrayBuffers": 2000855
+          },
+          "memoryEnd": {
+            "rss": 304414720,
+            "heapTotal": 148582400,
+            "heapUsed": 6540736,
+            "external": 5665868,
+            "arrayBuffers": 3786091
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 191168512,
+              "heapTotal": 142815232,
+              "heapUsed": 6737584,
+              "external": 3939435,
+              "arrayBuffers": 2000855
+            },
+            "worksheetTreesMs": {
+              "rss": 259194880,
+              "heapTotal": 177680384,
+              "heapUsed": 98389376,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "styleTreeMs": {
+              "rss": 259194880,
+              "heapTotal": 177680384,
+              "heapUsed": 98415048,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "sharedStringsTreeMs": {
+              "rss": 259194880,
+              "heapTotal": 177680384,
+              "heapUsed": 98420576,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "serializeAndPackageMs": {
+              "rss": 293273600,
+              "heapTotal": 221192192,
+              "heapUsed": 124186288,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "generateFilesMs": {
+              "rss": 293273600,
+              "heapTotal": 221192192,
+              "heapUsed": 123921408,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            }
+          },
+          "peakRSSMiB": 291.46484375,
+          "zipBytes": 282984,
+          "rawBytes": 2878608,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "wide-100k",
+            "kind": "numeric",
+            "rows": 1000,
+            "cols": 100
+          },
+          "setupMs": 6.855325999999991,
+          "totalMs": 384.68624400000004,
+          "firstTimerMs": 223.53144200000003,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 82.36961100000002,
+            "styleTreeMs": 0.05539299999998093,
+            "sharedStringsTreeMs": 0.007068000000003849,
+            "serializeAndPackageMs": 105.62482799999998,
+            "generateFilesMs": 188.14071900000005
+          },
+          "memoryStart": {
+            "rss": 189878272,
+            "heapTotal": 142290944,
+            "heapUsed": 6737008,
+            "external": 3939435,
+            "arrayBuffers": 2000855
+          },
+          "memoryEnd": {
+            "rss": 305328128,
+            "heapTotal": 147271680,
+            "heapUsed": 6535216,
+            "external": 5665868,
+            "arrayBuffers": 3786091
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 189878272,
+              "heapTotal": 142290944,
+              "heapUsed": 6737008,
+              "external": 3939435,
+              "arrayBuffers": 2000855
+            },
+            "worksheetTreesMs": {
+              "rss": 257773568,
+              "heapTotal": 177156096,
+              "heapUsed": 98383456,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "styleTreeMs": {
+              "rss": 257773568,
+              "heapTotal": 177156096,
+              "heapUsed": 98409128,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "sharedStringsTreeMs": {
+              "rss": 257773568,
+              "heapTotal": 177156096,
+              "heapUsed": 98414656,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "serializeAndPackageMs": {
+              "rss": 292376576,
+              "heapTotal": 221192192,
+              "heapUsed": 124131240,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "generateFilesMs": {
+              "rss": 292376576,
+              "heapTotal": 221192192,
+              "heapUsed": 123902552,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            }
+          },
+          "peakRSSMiB": 291.609375,
+          "zipBytes": 282984,
+          "rawBytes": 2878608,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "wide-100k",
+            "kind": "numeric",
+            "rows": 1000,
+            "cols": 100
+          },
+          "setupMs": 6.513181999999972,
+          "totalMs": 391.796332,
+          "firstTimerMs": 230.283594,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 85.45739900000001,
+            "styleTreeMs": 0.0589989999999716,
+            "sharedStringsTreeMs": 0.007309999999961292,
+            "serializeAndPackageMs": 108.88890599999996,
+            "generateFilesMs": 194.48848300000003
+          },
+          "memoryStart": {
+            "rss": 190820352,
+            "heapTotal": 142815232,
+            "heapUsed": 6737584,
+            "external": 3939435,
+            "arrayBuffers": 2000855
+          },
+          "memoryEnd": {
+            "rss": 304713728,
+            "heapTotal": 147533824,
+            "heapUsed": 6542784,
+            "external": 5665868,
+            "arrayBuffers": 3786091
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 190820352,
+              "heapTotal": 142815232,
+              "heapUsed": 6737584,
+              "external": 3939435,
+              "arrayBuffers": 2000855
+            },
+            "worksheetTreesMs": {
+              "rss": 258846720,
+              "heapTotal": 177418240,
+              "heapUsed": 98445328,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "styleTreeMs": {
+              "rss": 258846720,
+              "heapTotal": 177418240,
+              "heapUsed": 98471000,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "sharedStringsTreeMs": {
+              "rss": 258846720,
+              "heapTotal": 177418240,
+              "heapUsed": 98476528,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "serializeAndPackageMs": {
+              "rss": 293187584,
+              "heapTotal": 221454336,
+              "heapUsed": 124229880,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            },
+            "generateFilesMs": {
+              "rss": 293187584,
+              "heapTotal": 221454336,
+              "heapUsed": 123937216,
+              "external": 3939475,
+              "arrayBuffers": 2000855
+            }
+          },
+          "peakRSSMiB": 290.60546875,
+          "zipBytes": 282984,
+          "rawBytes": 2878608,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "multi-100k",
+        "kind": "numeric",
+        "rows": 1000,
+        "cols": 10,
+        "sheets": 10
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "multi-100k",
+            "kind": "numeric",
+            "rows": 1000,
+            "cols": 10,
+            "sheets": 10
+          },
+          "setupMs": 8.955708000000001,
+          "totalMs": 425.16891799999996,
+          "firstTimerMs": 258.031126,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 105.65836500000003,
+            "styleTreeMs": 0.06901700000000233,
+            "sharedStringsTreeMs": 0.007745999999997366,
+            "serializeAndPackageMs": 119.58322399999997,
+            "generateFilesMs": 226.037677
+          },
+          "memoryStart": {
+            "rss": 77086720,
+            "heapTotal": 24588288,
+            "heapUsed": 6584992,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 389337088,
+            "heapTotal": 229896192,
+            "heapUsed": 106830760,
+            "external": 8550812,
+            "arrayBuffers": 6854401
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 77086720,
+              "heapTotal": 24588288,
+              "heapUsed": 6584992,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 176488448,
+              "heapTotal": 199700480,
+              "heapUsed": 105413352,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 176488448,
+              "heapTotal": 199700480,
+              "heapUsed": 105443640,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 176488448,
+              "heapTotal": 199700480,
+              "heapUsed": 105451424,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 283836416,
+              "heapTotal": 226463744,
+              "heapUsed": 102104824,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 283836416,
+              "heapTotal": 226463744,
+              "heapUsed": 102105784,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 409.28515625,
+          "zipBytes": 302043,
+          "rawBytes": 2882567,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "multi-100k",
+            "kind": "numeric",
+            "rows": 1000,
+            "cols": 10,
+            "sheets": 10
+          },
+          "setupMs": 8.622087000000008,
+          "totalMs": 407.18369199999995,
+          "firstTimerMs": 259.270589,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 104.839338,
+            "styleTreeMs": 0.07106500000000437,
+            "sharedStringsTreeMs": 0.007196999999990794,
+            "serializeAndPackageMs": 120.520297,
+            "generateFilesMs": 226.202699
+          },
+          "memoryStart": {
+            "rss": 76976128,
+            "heapTotal": 24850432,
+            "heapUsed": 6585464,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 404086784,
+            "heapTotal": 229371904,
+            "heapUsed": 106354224,
+            "external": 8550812,
+            "arrayBuffers": 7450606
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 76976128,
+              "heapTotal": 24850432,
+              "heapUsed": 6585464,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 176992256,
+              "heapTotal": 199438336,
+              "heapUsed": 105187040,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 176992256,
+              "heapTotal": 199438336,
+              "heapUsed": 105217328,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 176992256,
+              "heapTotal": 199438336,
+              "heapUsed": 105224904,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 284602368,
+              "heapTotal": 226201600,
+              "heapUsed": 101665864,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 284602368,
+              "heapTotal": 226201600,
+              "heapUsed": 101666824,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 409.93359375,
+          "zipBytes": 302043,
+          "rawBytes": 2882567,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "multi-100k",
+            "kind": "numeric",
+            "rows": 1000,
+            "cols": 10,
+            "sheets": 10
+          },
+          "setupMs": 8.957944000000012,
+          "totalMs": 446.284841,
+          "firstTimerMs": 275.13142999999997,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 114.27092100000013,
+            "styleTreeMs": 0.0701530000000048,
+            "sharedStringsTreeMs": 0.010439999999988459,
+            "serializeAndPackageMs": 125.417937,
+            "generateFilesMs": 240.80624400000002
+          },
+          "memoryStart": {
+            "rss": 77971456,
+            "heapTotal": 24588288,
+            "heapUsed": 6585264,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 392732672,
+            "heapTotal": 228847616,
+            "heapUsed": 105606296,
+            "external": 8550812,
+            "arrayBuffers": 7053136
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 77971456,
+              "heapTotal": 24588288,
+              "heapUsed": 6585264,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 176943104,
+              "heapTotal": 199700480,
+              "heapUsed": 104699512,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 176943104,
+              "heapTotal": 199700480,
+              "heapUsed": 104729800,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 176943104,
+              "heapTotal": 199700480,
+              "heapUsed": 104737376,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 284028928,
+              "heapTotal": 225677312,
+              "heapUsed": 100897128,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 284028928,
+              "heapTotal": 225677312,
+              "heapUsed": 100898088,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 411.23828125,
+          "zipBytes": 302043,
+          "rawBytes": 2882567,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "stream-100k",
+        "kind": "numeric",
+        "rows": 10000,
+        "cols": 10,
+        "stream": true
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "stream-100k",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "stream": true
+          },
+          "setupMs": 8.776295000000005,
+          "totalMs": 470.915947,
+          "firstTimerMs": 464.522363,
+          "firstChunkMs": 464.375605,
+          "firstBackingBytes": 299079,
+          "chunks": 5,
+          "phases": {
+            "worksheetTreesMs": 108.70191,
+            "styleTreeMs": 0.07962700000001632,
+            "sharedStringsTreeMs": 0.012786999999974569,
+            "serializeAndPackageMs": 144.130812,
+            "generateFilesMs": 252.976857
+          },
+          "memoryStart": {
+            "rss": 77832192,
+            "heapTotal": 24588288,
+            "heapUsed": 6527696,
+            "external": 2160936,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 292323328,
+            "heapTotal": 228143104,
+            "heapUsed": 140782512,
+            "external": 12780415,
+            "arrayBuffers": 11061279
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 77832192,
+              "heapTotal": 24588288,
+              "heapUsed": 6527696,
+              "external": 2160936,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 187858944,
+              "heapTotal": 187117568,
+              "heapUsed": 106465112,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 187990016,
+              "heapTotal": 187117568,
+              "heapUsed": 106490488,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 187990016,
+              "heapTotal": 187117568,
+              "heapUsed": 106495936,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 281706496,
+              "heapTotal": 224800768,
+              "heapUsed": 137253048,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 281706496,
+              "heapTotal": 224800768,
+              "heapUsed": 137010872,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 278.78125,
+          "zipBytes": 299079,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "stream-100k",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "stream": true
+          },
+          "setupMs": 8.449892000000006,
+          "totalMs": 466.74144,
+          "firstTimerMs": 460.61758,
+          "firstChunkMs": 460.51321199999995,
+          "firstBackingBytes": 299079,
+          "chunks": 5,
+          "phases": {
+            "worksheetTreesMs": 113.74707299999999,
+            "styleTreeMs": 0.0670430000000124,
+            "sharedStringsTreeMs": 0.00977100000000064,
+            "serializeAndPackageMs": 139.76566200000002,
+            "generateFilesMs": 253.66097399999998
+          },
+          "memoryStart": {
+            "rss": 78061568,
+            "heapTotal": 24588288,
+            "heapUsed": 6564752,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 294350848,
+            "heapTotal": 228929536,
+            "heapUsed": 139978104,
+            "external": 12780415,
+            "arrayBuffers": 11061279
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 78061568,
+              "heapTotal": 24588288,
+              "heapUsed": 6564752,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 188444672,
+              "heapTotal": 188428288,
+              "heapUsed": 106206392,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 188444672,
+              "heapTotal": 188428288,
+              "heapUsed": 106231768,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 188444672,
+              "heapTotal": 188428288,
+              "heapUsed": 106237216,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 284127232,
+              "heapTotal": 225587200,
+              "heapUsed": 136372144,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 284127232,
+              "heapTotal": 225587200,
+              "heapUsed": 136206976,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 280.71484375,
+          "zipBytes": 299079,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "stream-100k",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "stream": true
+          },
+          "setupMs": 8.389826999999997,
+          "totalMs": 486.080029,
+          "firstTimerMs": 480.32340600000003,
+          "firstChunkMs": 480.20773,
+          "firstBackingBytes": 299079,
+          "chunks": 5,
+          "phases": {
+            "worksheetTreesMs": 129.597488,
+            "styleTreeMs": 0.06722800000000007,
+            "sharedStringsTreeMs": 0.007278999999982716,
+            "serializeAndPackageMs": 144.972623,
+            "generateFilesMs": 274.710461
+          },
+          "memoryStart": {
+            "rss": 77737984,
+            "heapTotal": 24850432,
+            "heapUsed": 6564728,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 293203968,
+            "heapTotal": 228143104,
+            "heapUsed": 140292032,
+            "external": 12780415,
+            "arrayBuffers": 11061279
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 77737984,
+              "heapTotal": 24850432,
+              "heapUsed": 6564728,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 188084224,
+              "heapTotal": 187641856,
+              "heapUsed": 106335616,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 188084224,
+              "heapTotal": 187641856,
+              "heapUsed": 106360992,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 188084224,
+              "heapTotal": 187641856,
+              "heapUsed": 106366440,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 282718208,
+              "heapTotal": 225062912,
+              "heapUsed": 136520320,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 282718208,
+              "heapTotal": 225062912,
+              "heapUsed": 136521312,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 279.62109375,
+          "zipBytes": 299079,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "stream-500k",
+        "kind": "numeric",
+        "rows": 50000,
+        "cols": 10,
+        "stream": true
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "stream-500k",
+            "kind": "numeric",
+            "rows": 50000,
+            "cols": 10,
+            "stream": true
+          },
+          "setupMs": 47.416966999999985,
+          "totalMs": 2552.28777,
+          "firstTimerMs": 2523.859558,
+          "firstChunkMs": 2523.743271,
+          "firstBackingBytes": 1479121,
+          "chunks": 23,
+          "phases": {
+            "worksheetTreesMs": 452.09101300000003,
+            "styleTreeMs": 0.0621609999999464,
+            "sharedStringsTreeMs": 0.0074970000000575965,
+            "serializeAndPackageMs": 1045.7425429999998,
+            "generateFilesMs": 1497.98541
+          },
+          "memoryStart": {
+            "rss": 85221376,
+            "heapTotal": 46485504,
+            "heapUsed": 12048624,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 757075968,
+            "heapTotal": 684756992,
+            "heapUsed": 549270432,
+            "external": 42794476,
+            "arrayBuffers": 41075340
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 85221376,
+              "heapTotal": 46485504,
+              "heapUsed": 12048624,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 549126144,
+              "heapTotal": 484610048,
+              "heapUsed": 400635136,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 549126144,
+              "heapTotal": 484610048,
+              "heapUsed": 400660512,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 549126144,
+              "heapTotal": 484610048,
+              "heapUsed": 400665960,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 731639808,
+              "heapTotal": 684494848,
+              "heapUsed": 613439448,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 731639808,
+              "heapTotal": 684494848,
+              "heapUsed": 613421704,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 732.30078125,
+          "zipBytes": 1479121,
+          "rawBytes": 16320557,
+          "cells": 500000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "stream-500k",
+            "kind": "numeric",
+            "rows": 50000,
+            "cols": 10,
+            "stream": true
+          },
+          "setupMs": 47.81868,
+          "totalMs": 2552.199059,
+          "firstTimerMs": 2523.438388,
+          "firstChunkMs": 2523.325441,
+          "firstBackingBytes": 1479121,
+          "chunks": 23,
+          "phases": {
+            "worksheetTreesMs": 454.00337,
+            "styleTreeMs": 0.06178899999997611,
+            "sharedStringsTreeMs": 0.006958999999937987,
+            "serializeAndPackageMs": 1045.691581,
+            "generateFilesMs": 1499.844464
+          },
+          "memoryStart": {
+            "rss": 84709376,
+            "heapTotal": 46485504,
+            "heapUsed": 12048592,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 802328576,
+            "heapTotal": 708677632,
+            "heapUsed": 601533168,
+            "external": 43057382,
+            "arrayBuffers": 41338246
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 84709376,
+              "heapTotal": 46485504,
+              "heapUsed": 12048592,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 547913728,
+              "heapTotal": 483561472,
+              "heapUsed": 400440960,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 547913728,
+              "heapTotal": 483561472,
+              "heapUsed": 400466400,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 547913728,
+              "heapTotal": 483561472,
+              "heapUsed": 400471848,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 760410112,
+              "heapTotal": 692359168,
+              "heapUsed": 582724792,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 760410112,
+              "heapTotal": 692359168,
+              "heapUsed": 582688152,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 765.16015625,
+          "zipBytes": 1479121,
+          "rawBytes": 16320557,
+          "cells": 500000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "stream-500k",
+            "kind": "numeric",
+            "rows": 50000,
+            "cols": 10,
+            "stream": true
+          },
+          "setupMs": 47.143619,
+          "totalMs": 2550.2467699999997,
+          "firstTimerMs": 2521.970727,
+          "firstChunkMs": 2521.8580089999996,
+          "firstBackingBytes": 1479121,
+          "chunks": 23,
+          "phases": {
+            "worksheetTreesMs": 469.25554600000004,
+            "styleTreeMs": 0.12821900000005826,
+            "sharedStringsTreeMs": 0.00742400000001453,
+            "serializeAndPackageMs": 1037.120521,
+            "generateFilesMs": 1506.5171890000001
+          },
+          "memoryStart": {
+            "rss": 86028288,
+            "heapTotal": 46485504,
+            "heapUsed": 12047520,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 800563200,
+            "heapTotal": 707104768,
+            "heapUsed": 603277792,
+            "external": 43057382,
+            "arrayBuffers": 41338246
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 86028288,
+              "heapTotal": 46485504,
+              "heapUsed": 12047520,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 545734656,
+              "heapTotal": 481726464,
+              "heapUsed": 401148928,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 545734656,
+              "heapTotal": 481726464,
+              "heapUsed": 401174304,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 545734656,
+              "heapTotal": 481726464,
+              "heapUsed": 401179752,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 759005184,
+              "heapTotal": 690786304,
+              "heapUsed": 584431256,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 759005184,
+              "heapTotal": 690786304,
+              "heapUsed": 584432248,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 763.4765625,
+          "zipBytes": 1479121,
+          "rawBytes": 16320557,
+          "cells": 500000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "numeric-100k-level0",
+        "kind": "numeric",
+        "rows": 10000,
+        "cols": 10,
+        "level": 0
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "numeric-100k-level0",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "level": 0
+          },
+          "setupMs": 8.626779999999997,
+          "totalMs": 259.887381,
+          "firstTimerMs": 260.094809,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 104.48074600000001,
+            "styleTreeMs": 0.06845500000000015,
+            "sharedStringsTreeMs": 0.007469999999983656,
+            "serializeAndPackageMs": 139.903089,
+            "generateFilesMs": 244.530802
+          },
+          "memoryStart": {
+            "rss": 78213120,
+            "heapTotal": 24850432,
+            "heapUsed": 6563568,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 293519360,
+            "heapTotal": 228667392,
+            "heapUsed": 139815896,
+            "external": 8323171,
+            "arrayBuffers": 6604035
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 78213120,
+              "heapTotal": 24850432,
+              "heapUsed": 6563568,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 187613184,
+              "heapTotal": 188428288,
+              "heapUsed": 106409584,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 187744256,
+              "heapTotal": 188428288,
+              "heapUsed": 106434960,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 187744256,
+              "heapTotal": 188428288,
+              "heapUsed": 106440408,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 284213248,
+              "heapTotal": 225587200,
+              "heapUsed": 136528720,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 284213248,
+              "heapTotal": 225587200,
+              "heapUsed": 136408656,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 279.921875,
+          "zipBytes": 3081513,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-100k-level0",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "level": 0
+          },
+          "setupMs": 8.403369999999995,
+          "totalMs": 270.075423,
+          "firstTimerMs": 270.337559,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 112.39781100000002,
+            "styleTreeMs": 0.0747389999999939,
+            "sharedStringsTreeMs": 0.007001999999999953,
+            "serializeAndPackageMs": 141.597036,
+            "generateFilesMs": 254.17905199999998
+          },
+          "memoryStart": {
+            "rss": 77062144,
+            "heapTotal": 24850432,
+            "heapUsed": 6564064,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 292130816,
+            "heapTotal": 228143104,
+            "heapUsed": 139439280,
+            "external": 8323171,
+            "arrayBuffers": 6604035
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 77062144,
+              "heapTotal": 24850432,
+              "heapUsed": 6564064,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 187797504,
+              "heapTotal": 188166144,
+              "heapUsed": 106220536,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 187928576,
+              "heapTotal": 188166144,
+              "heapUsed": 106245912,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 187928576,
+              "heapTotal": 188166144,
+              "heapUsed": 106251360,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 282955776,
+              "heapTotal": 225062912,
+              "heapUsed": 136406496,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 282955776,
+              "heapTotal": 225062912,
+              "heapUsed": 136321256,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 278.59765625,
+          "zipBytes": 3081513,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-100k-level0",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "level": 0
+          },
+          "setupMs": 8.818928999999997,
+          "totalMs": 261.879151,
+          "firstTimerMs": 262.100376,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 105.98236800000001,
+            "styleTreeMs": 0.06771800000001349,
+            "sharedStringsTreeMs": 0.010240999999979294,
+            "serializeAndPackageMs": 140.19286200000002,
+            "generateFilesMs": 246.33017499999997
+          },
+          "memoryStart": {
+            "rss": 77410304,
+            "heapTotal": 24588288,
+            "heapUsed": 6527704,
+            "external": 2160936,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 292048896,
+            "heapTotal": 228667392,
+            "heapUsed": 139793216,
+            "external": 8323171,
+            "arrayBuffers": 6604035
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 77410304,
+              "heapTotal": 24588288,
+              "heapUsed": 6527704,
+              "external": 2160936,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 186667008,
+              "heapTotal": 187641856,
+              "heapUsed": 106373168,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 186798080,
+              "heapTotal": 187641856,
+              "heapUsed": 106398544,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 186798080,
+              "heapTotal": 187641856,
+              "heapUsed": 106403992,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 282742784,
+              "heapTotal": 225587200,
+              "heapUsed": 136950488,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 282742784,
+              "heapTotal": 225587200,
+              "heapUsed": 136548536,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 278.51953125,
+          "zipBytes": 3081513,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "numeric-100k-level1",
+        "kind": "numeric",
+        "rows": 10000,
+        "cols": 10,
+        "level": 1
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "numeric-100k-level1",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "level": 1
+          },
+          "setupMs": 8.639928999999995,
+          "totalMs": 400.284626,
+          "firstTimerMs": 302.749263,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 134.63399199999998,
+            "styleTreeMs": 0.06943100000000868,
+            "sharedStringsTreeMs": 0.010342000000008511,
+            "serializeAndPackageMs": 144.951487,
+            "generateFilesMs": 279.74659
+          },
+          "memoryStart": {
+            "rss": 77910016,
+            "heapTotal": 24326144,
+            "heapUsed": 6564728,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 315412480,
+            "heapTotal": 228929536,
+            "heapUsed": 140319104,
+            "external": 7220148,
+            "arrayBuffers": 5291555
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 77910016,
+              "heapTotal": 24326144,
+              "heapUsed": 6564728,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 187449344,
+              "heapTotal": 187904000,
+              "heapUsed": 106236512,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 187449344,
+              "heapTotal": 187904000,
+              "heapUsed": 106261888,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 187449344,
+              "heapTotal": 187904000,
+              "heapUsed": 106267336,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 282869760,
+              "heapTotal": 225062912,
+              "heapUsed": 136453328,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 282869760,
+              "heapTotal": 225062912,
+              "heapUsed": 136453888,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 300.80078125,
+          "zipBytes": 331804,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-100k-level1",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "level": 1
+          },
+          "setupMs": 8.944935999999998,
+          "totalMs": 365.953613,
+          "firstTimerMs": 271.076349,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 113.777567,
+            "styleTreeMs": 0.06529599999998936,
+            "sharedStringsTreeMs": 0.006879999999995334,
+            "serializeAndPackageMs": 134.494759,
+            "generateFilesMs": 248.41527399999998
+          },
+          "memoryStart": {
+            "rss": 78336000,
+            "heapTotal": 24326144,
+            "heapUsed": 6563968,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 316583936,
+            "heapTotal": 229715968,
+            "heapUsed": 140411704,
+            "external": 7220148,
+            "arrayBuffers": 5092820
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 78336000,
+              "heapTotal": 24326144,
+              "heapUsed": 6563968,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 188407808,
+              "heapTotal": 187641856,
+              "heapUsed": 106315344,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 188407808,
+              "heapTotal": 187641856,
+              "heapUsed": 106340720,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 188407808,
+              "heapTotal": 187641856,
+              "heapUsed": 106346168,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 283828224,
+              "heapTotal": 225325056,
+              "heapUsed": 136722512,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 283828224,
+              "heapTotal": 225325056,
+              "heapUsed": 136547840,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 302.859375,
+          "zipBytes": 331804,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-100k-level1",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "level": 1
+          },
+          "setupMs": 8.440981000000008,
+          "totalMs": 392.532614,
+          "firstTimerMs": 296.543488,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 130.629312,
+            "styleTreeMs": 0.07326999999997952,
+            "sharedStringsTreeMs": 0.009992000000011103,
+            "serializeAndPackageMs": 142.94540199999997,
+            "generateFilesMs": 273.720185
+          },
+          "memoryStart": {
+            "rss": 77811712,
+            "heapTotal": 24588288,
+            "heapUsed": 6564768,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 315904000,
+            "heapTotal": 229191680,
+            "heapUsed": 140107584,
+            "external": 7220148,
+            "arrayBuffers": 5092820
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 77811712,
+              "heapTotal": 24588288,
+              "heapUsed": 6564768,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 186757120,
+              "heapTotal": 187904000,
+              "heapUsed": 106203656,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 186757120,
+              "heapTotal": 187904000,
+              "heapUsed": 106229032,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 186757120,
+              "heapTotal": 187904000,
+              "heapUsed": 106234480,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 282570752,
+              "heapTotal": 225325056,
+              "heapUsed": 136478208,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 282570752,
+              "heapTotal": 225325056,
+              "heapUsed": 136243936,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 302.28515625,
+          "zipBytes": 331804,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "numeric-100k-level9",
+        "kind": "numeric",
+        "rows": 10000,
+        "cols": 10,
+        "level": 9
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "numeric-100k-level9",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "level": 9
+          },
+          "setupMs": 8.381923999999998,
+          "totalMs": 518.254717,
+          "firstTimerMs": 269.989655,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 112.066329,
+            "styleTreeMs": 0.06991800000000126,
+            "sharedStringsTreeMs": 0.007603000000017346,
+            "serializeAndPackageMs": 134.18847300000002,
+            "generateFilesMs": 246.40129800000003
+          },
+          "memoryStart": {
+            "rss": 78135296,
+            "heapTotal": 24850432,
+            "heapUsed": 6564768,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 317468672,
+            "heapTotal": 229453824,
+            "heapUsed": 139992672,
+            "external": 7155052,
+            "arrayBuffers": 5259006
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 78135296,
+              "heapTotal": 24850432,
+              "heapUsed": 6564768,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 187244544,
+              "heapTotal": 188690432,
+              "heapUsed": 106245912,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 187244544,
+              "heapTotal": 188690432,
+              "heapUsed": 106271288,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 187244544,
+              "heapTotal": 188690432,
+              "heapUsed": 106276736,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 283320320,
+              "heapTotal": 225849344,
+              "heapUsed": 136254944,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 283320320,
+              "heapTotal": 225849344,
+              "heapUsed": 136128616,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 302.88671875,
+          "zipBytes": 299253,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-100k-level9",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "level": 9
+          },
+          "setupMs": 8.407938000000001,
+          "totalMs": 513.299474,
+          "firstTimerMs": 264.692044,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 108.259,
+            "styleTreeMs": 0.06723299999998744,
+            "sharedStringsTreeMs": 0.010181999999986147,
+            "serializeAndPackageMs": 132.936003,
+            "generateFilesMs": 241.33909300000002
+          },
+          "memoryStart": {
+            "rss": 78581760,
+            "heapTotal": 24850432,
+            "heapUsed": 6564664,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 317128704,
+            "heapTotal": 229453824,
+            "heapUsed": 139784192,
+            "external": 7155052,
+            "arrayBuffers": 5259006
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 78581760,
+              "heapTotal": 24850432,
+              "heapUsed": 6564664,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 187301888,
+              "heapTotal": 188952576,
+              "heapUsed": 106108136,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 187301888,
+              "heapTotal": 188952576,
+              "heapUsed": 106133512,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 187301888,
+              "heapTotal": 188952576,
+              "heapUsed": 106138960,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 284557312,
+              "heapTotal": 225587200,
+              "heapUsed": 136032768,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 284557312,
+              "heapTotal": 225587200,
+              "heapUsed": 135920016,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 302.4375,
+          "zipBytes": 299253,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-100k-level9",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "level": 9
+          },
+          "setupMs": 8.699348999999998,
+          "totalMs": 523.924306,
+          "firstTimerMs": 269.650828,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 108.062947,
+            "styleTreeMs": 0.07162099999999327,
+            "sharedStringsTreeMs": 0.007754999999974643,
+            "serializeAndPackageMs": 138.377882,
+            "generateFilesMs": 246.60787700000003
+          },
+          "memoryStart": {
+            "rss": 78442496,
+            "heapTotal": 24588288,
+            "heapUsed": 6563720,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 317358080,
+            "heapTotal": 228929536,
+            "heapUsed": 140438632,
+            "external": 7155052,
+            "arrayBuffers": 5259006
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 78442496,
+              "heapTotal": 24588288,
+              "heapUsed": 6563720,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 187498496,
+              "heapTotal": 188428288,
+              "heapUsed": 106380200,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 187498496,
+              "heapTotal": 188428288,
+              "heapUsed": 106405576,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 187498496,
+              "heapTotal": 188428288,
+              "heapUsed": 106411024,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 283181056,
+              "heapTotal": 225062912,
+              "heapUsed": 136598584,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 283181056,
+              "heapTotal": 225062912,
+              "heapUsed": 136574376,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 302.65625,
+          "zipBytes": 299253,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "styled-10k-reused",
+        "kind": "styled",
+        "rows": 1000,
+        "cols": 10
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "styled-10k-reused",
+            "kind": "styled",
+            "rows": 1000,
+            "cols": 10
+          },
+          "setupMs": 1.375973000000016,
+          "totalMs": 97.47092,
+          "firstTimerMs": 35.85129600000002,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 15.416866999999996,
+            "styleTreeMs": 0.08749099999999999,
+            "sharedStringsTreeMs": 0.0069780000000037035,
+            "serializeAndPackageMs": 13.120270000000005,
+            "generateFilesMs": 28.716869000000003
+          },
+          "memoryStart": {
+            "rss": 87998464,
+            "heapTotal": 24850432,
+            "heapUsed": 6934840,
+            "external": 2435066,
+            "arrayBuffers": 620811
+          },
+          "memoryEnd": {
+            "rss": 111878144,
+            "heapTotal": 42938368,
+            "heapUsed": 7178424,
+            "external": 2639535,
+            "arrayBuffers": 1009020
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 87998464,
+              "heapTotal": 24850432,
+              "heapUsed": 6934840,
+              "external": 2435066,
+              "arrayBuffers": 620811
+            },
+            "worksheetTreesMs": {
+              "rss": 96780288,
+              "heapTotal": 46084096,
+              "heapUsed": 16579896,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "styleTreeMs": {
+              "rss": 96780288,
+              "heapTotal": 46084096,
+              "heapUsed": 16609784,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "sharedStringsTreeMs": {
+              "rss": 96911360,
+              "heapTotal": 46084096,
+              "heapUsed": 16615200,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "serializeAndPackageMs": {
+              "rss": 103202816,
+              "heapTotal": 46432256,
+              "heapUsed": 28262624,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "generateFilesMs": {
+              "rss": 103202816,
+              "heapTotal": 46432256,
+              "heapUsed": 27672144,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            }
+          },
+          "peakRSSMiB": 165.55859375,
+          "zipBytes": 33777,
+          "rawBytes": 350689,
+          "cells": 10000,
+          "sharedStrings": 0,
+          "styles": 2
+        },
+        {
+          "config": {
+            "name": "styled-10k-reused",
+            "kind": "styled",
+            "rows": 1000,
+            "cols": 10
+          },
+          "setupMs": 1.3656330000000025,
+          "totalMs": 95.44953100000001,
+          "firstTimerMs": 36.496538000000015,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 16.71169599999999,
+            "styleTreeMs": 0.0693690000000231,
+            "sharedStringsTreeMs": 0.007001999999999953,
+            "serializeAndPackageMs": 12.507916999999992,
+            "generateFilesMs": 29.36877099999998
+          },
+          "memoryStart": {
+            "rss": 87482368,
+            "heapTotal": 24588288,
+            "heapUsed": 6934840,
+            "external": 2435066,
+            "arrayBuffers": 620811
+          },
+          "memoryEnd": {
+            "rss": 111656960,
+            "heapTotal": 42414080,
+            "heapUsed": 6938368,
+            "external": 2639535,
+            "arrayBuffers": 1009020
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 87482368,
+              "heapTotal": 24588288,
+              "heapUsed": 6934840,
+              "external": 2435066,
+              "arrayBuffers": 620811
+            },
+            "worksheetTreesMs": {
+              "rss": 96526336,
+              "heapTotal": 45297664,
+              "heapUsed": 16569816,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "styleTreeMs": {
+              "rss": 96526336,
+              "heapTotal": 45297664,
+              "heapUsed": 16599704,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "sharedStringsTreeMs": {
+              "rss": 96526336,
+              "heapTotal": 45297664,
+              "heapUsed": 16686016,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "serializeAndPackageMs": {
+              "rss": 103342080,
+              "heapTotal": 45645824,
+              "heapUsed": 27658640,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "generateFilesMs": {
+              "rss": 103342080,
+              "heapTotal": 45645824,
+              "heapUsed": 27659584,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            }
+          },
+          "peakRSSMiB": 165.55859375,
+          "zipBytes": 33777,
+          "rawBytes": 350689,
+          "cells": 10000,
+          "sharedStrings": 0,
+          "styles": 2
+        },
+        {
+          "config": {
+            "name": "styled-10k-reused",
+            "kind": "styled",
+            "rows": 1000,
+            "cols": 10
+          },
+          "setupMs": 1.3316759999999874,
+          "totalMs": 96.22852800000001,
+          "firstTimerMs": 35.780591999999984,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 15.411709000000002,
+            "styleTreeMs": 0.07388399999999251,
+            "sharedStringsTreeMs": 0.007019999999982929,
+            "serializeAndPackageMs": 12.90029100000001,
+            "generateFilesMs": 28.457988
+          },
+          "memoryStart": {
+            "rss": 87855104,
+            "heapTotal": 24588288,
+            "heapUsed": 6934984,
+            "external": 2435066,
+            "arrayBuffers": 620811
+          },
+          "memoryEnd": {
+            "rss": 111968256,
+            "heapTotal": 42414080,
+            "heapUsed": 6939776,
+            "external": 2639535,
+            "arrayBuffers": 1009020
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 87855104,
+              "heapTotal": 24588288,
+              "heapUsed": 6934984,
+              "external": 2435066,
+              "arrayBuffers": 620811
+            },
+            "worksheetTreesMs": {
+              "rss": 97685504,
+              "heapTotal": 45559808,
+              "heapUsed": 16587128,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "styleTreeMs": {
+              "rss": 97685504,
+              "heapTotal": 45559808,
+              "heapUsed": 16617016,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "sharedStringsTreeMs": {
+              "rss": 97685504,
+              "heapTotal": 45559808,
+              "heapUsed": 16830576,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "serializeAndPackageMs": {
+              "rss": 103845888,
+              "heapTotal": 45907968,
+              "heapUsed": 27941216,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            },
+            "generateFilesMs": {
+              "rss": 103845888,
+              "heapTotal": 45907968,
+              "heapUsed": 27679128,
+              "external": 2435106,
+              "arrayBuffers": 620811
+            }
+          },
+          "peakRSSMiB": 165.55859375,
+          "zipBytes": 33777,
+          "rawBytes": 350689,
+          "cells": 10000,
+          "sharedStrings": 0,
+          "styles": 2
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "styled-10k-new",
+        "kind": "new-styles",
+        "rows": 1000,
+        "cols": 10
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "styled-10k-new",
+            "kind": "new-styles",
+            "rows": 1000,
+            "cols": 10
+          },
+          "setupMs": 2.698678000000001,
+          "totalMs": 170.55693399999998,
+          "firstTimerMs": 93.224546,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 7.213673,
+            "styleTreeMs": 28.488686,
+            "sharedStringsTreeMs": 0.00828599999999824,
+            "serializeAndPackageMs": 73.79717200000002,
+            "generateFilesMs": 81.15774199999998
+          },
+          "memoryStart": {
+            "rss": 116871168,
+            "heapTotal": 45559808,
+            "heapUsed": 10179584,
+            "external": 3247194,
+            "arrayBuffers": 1381915
+          },
+          "memoryEnd": {
+            "rss": 169947136,
+            "heapTotal": 80949248,
+            "heapUsed": 9132048,
+            "external": 4266500,
+            "arrayBuffers": 2535145
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 116871168,
+              "heapTotal": 45559808,
+              "heapUsed": 10179584,
+              "external": 3247194,
+              "arrayBuffers": 1381915
+            },
+            "worksheetTreesMs": {
+              "rss": 117002240,
+              "heapTotal": 45559808,
+              "heapUsed": 26474072,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "styleTreeMs": {
+              "rss": 129191936,
+              "heapTotal": 88027136,
+              "heapUsed": 31517896,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "sharedStringsTreeMs": {
+              "rss": 129191936,
+              "heapTotal": 88027136,
+              "heapUsed": 31523088,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "serializeAndPackageMs": {
+              "rss": 154226688,
+              "heapTotal": 96358400,
+              "heapUsed": 48714688,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "generateFilesMs": {
+              "rss": 154226688,
+              "heapTotal": 96358400,
+              "heapUsed": 48715632,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            }
+          },
+          "peakRSSMiB": 166.60546875,
+          "zipBytes": 134227,
+          "rawBytes": 1776754,
+          "cells": 10000,
+          "sharedStrings": 0,
+          "styles": 10001
+        },
+        {
+          "config": {
+            "name": "styled-10k-new",
+            "kind": "new-styles",
+            "rows": 1000,
+            "cols": 10
+          },
+          "setupMs": 2.833564999999993,
+          "totalMs": 178.74697300000003,
+          "firstTimerMs": 90.232527,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 6.962232999999998,
+            "styleTreeMs": 26.563714999999974,
+            "sharedStringsTreeMs": 0.007646000000022468,
+            "serializeAndPackageMs": 70.683524,
+            "generateFilesMs": 77.796235
+          },
+          "memoryStart": {
+            "rss": 117805056,
+            "heapTotal": 45559808,
+            "heapUsed": 10179424,
+            "external": 3247194,
+            "arrayBuffers": 1381915
+          },
+          "memoryEnd": {
+            "rss": 169611264,
+            "heapTotal": 80162816,
+            "heapUsed": 9100248,
+            "external": 4266500,
+            "arrayBuffers": 2535145
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 117805056,
+              "heapTotal": 45559808,
+              "heapUsed": 10179424,
+              "external": 3247194,
+              "arrayBuffers": 1381915
+            },
+            "worksheetTreesMs": {
+              "rss": 117936128,
+              "heapTotal": 45559808,
+              "heapUsed": 26495384,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "styleTreeMs": {
+              "rss": 131043328,
+              "heapTotal": 87240704,
+              "heapUsed": 31828832,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "sharedStringsTreeMs": {
+              "rss": 131043328,
+              "heapTotal": 87240704,
+              "heapUsed": 31834024,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "serializeAndPackageMs": {
+              "rss": 155947008,
+              "heapTotal": 95834112,
+              "heapUsed": 48873424,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "generateFilesMs": {
+              "rss": 155947008,
+              "heapTotal": 95834112,
+              "heapUsed": 48874368,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            }
+          },
+          "peakRSSMiB": 166.421875,
+          "zipBytes": 134227,
+          "rawBytes": 1776754,
+          "cells": 10000,
+          "sharedStrings": 0,
+          "styles": 10001
+        },
+        {
+          "config": {
+            "name": "styled-10k-new",
+            "kind": "new-styles",
+            "rows": 1000,
+            "cols": 10
+          },
+          "setupMs": 2.188668000000007,
+          "totalMs": 172.477824,
+          "firstTimerMs": 93.57865600000002,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 7.143889999999999,
+            "styleTreeMs": 27.818172000000004,
+            "sharedStringsTreeMs": 0.007598999999999023,
+            "serializeAndPackageMs": 74.35783999999998,
+            "generateFilesMs": 81.65148600000003
+          },
+          "memoryStart": {
+            "rss": 121585664,
+            "heapTotal": 45559808,
+            "heapUsed": 10179496,
+            "external": 3247194,
+            "arrayBuffers": 1580650
+          },
+          "memoryEnd": {
+            "rss": 167432192,
+            "heapTotal": 82259968,
+            "heapUsed": 9131176,
+            "external": 4266500,
+            "arrayBuffers": 2535145
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 121585664,
+              "heapTotal": 45559808,
+              "heapUsed": 10179496,
+              "external": 3247194,
+              "arrayBuffers": 1580650
+            },
+            "worksheetTreesMs": {
+              "rss": 123551744,
+              "heapTotal": 45559808,
+              "heapUsed": 26398704,
+              "external": 3247234,
+              "arrayBuffers": 1580650
+            },
+            "styleTreeMs": {
+              "rss": 128126976,
+              "heapTotal": 87764992,
+              "heapUsed": 31603576,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "sharedStringsTreeMs": {
+              "rss": 128126976,
+              "heapTotal": 87764992,
+              "heapUsed": 31608768,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "serializeAndPackageMs": {
+              "rss": 153161728,
+              "heapTotal": 96096256,
+              "heapUsed": 48713080,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            },
+            "generateFilesMs": {
+              "rss": 153161728,
+              "heapTotal": 96096256,
+              "heapUsed": 48714024,
+              "external": 3247234,
+              "arrayBuffers": 1381915
+            }
+          },
+          "peakRSSMiB": 165.55859375,
+          "zipBytes": 134227,
+          "rawBytes": 1776754,
+          "cells": 10000,
+          "sharedStrings": 0,
+          "styles": 10001
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "numeric-100k-direct-clone",
+        "kind": "numeric",
+        "rows": 10000,
+        "cols": 10,
+        "directClone": true
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "numeric-100k-direct-clone",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "directClone": true
+          },
+          "setupMs": 8.495248000000004,
+          "totalMs": 510.57286899999997,
+          "firstTimerMs": 266.103499,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 113.28599200000001,
+            "styleTreeMs": 0.060371000000003505,
+            "sharedStringsTreeMs": 0.006959999999992306,
+            "serializeAndPackageMs": 129.516768,
+            "generateFilesMs": 242.94275400000004
+          },
+          "memoryStart": {
+            "rss": 79056896,
+            "heapTotal": 24850432,
+            "heapUsed": 6560024,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 304046080,
+            "heapTotal": 220344320,
+            "heapUsed": 85484208,
+            "external": 5917890,
+            "arrayBuffers": 4022018
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 79056896,
+              "heapTotal": 24850432,
+              "heapUsed": 6560024,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 184832000,
+              "heapTotal": 201797632,
+              "heapUsed": 83774944,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 184832000,
+              "heapTotal": 201797632,
+              "heapUsed": 83800376,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 184832000,
+              "heapTotal": 201797632,
+              "heapUsed": 83805824,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 260460544,
+              "heapTotal": 204877824,
+              "heapUsed": 132917616,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 260460544,
+              "heapTotal": 204877824,
+              "heapUsed": 132918560,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 290.0859375,
+          "zipBytes": 299079,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-100k-direct-clone",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "directClone": true
+          },
+          "setupMs": 8.490127000000001,
+          "totalMs": 499.29099800000006,
+          "firstTimerMs": 259.50862099999995,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 105.202515,
+            "styleTreeMs": 0.06223900000000526,
+            "sharedStringsTreeMs": 0.007035000000001901,
+            "serializeAndPackageMs": 130.12725199999997,
+            "generateFilesMs": 235.47065800000001
+          },
+          "memoryStart": {
+            "rss": 78589952,
+            "heapTotal": 24588288,
+            "heapUsed": 6560264,
+            "external": 2160898,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 303894528,
+            "heapTotal": 220344320,
+            "heapUsed": 85465456,
+            "external": 5917890,
+            "arrayBuffers": 4022018
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 78589952,
+              "heapTotal": 24588288,
+              "heapUsed": 6560264,
+              "external": 2160898,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 185303040,
+              "heapTotal": 201797632,
+              "heapUsed": 83760440,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 185303040,
+              "heapTotal": 201797632,
+              "heapUsed": 83785872,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 185303040,
+              "heapTotal": 201797632,
+              "heapUsed": 83791320,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 260931584,
+              "heapTotal": 204877824,
+              "heapUsed": 132918144,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 260931584,
+              "heapTotal": 204877824,
+              "heapUsed": 132892040,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 289.94140625,
+          "zipBytes": 299079,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "numeric-100k-direct-clone",
+            "kind": "numeric",
+            "rows": 10000,
+            "cols": 10,
+            "directClone": true
+          },
+          "setupMs": 8.515386000000007,
+          "totalMs": 510.613755,
+          "firstTimerMs": 267.656519,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 106.747762,
+            "styleTreeMs": 0.058990000000022746,
+            "sharedStringsTreeMs": 0.010255999999998267,
+            "serializeAndPackageMs": 137.141117,
+            "generateFilesMs": 244.02718900000002
+          },
+          "memoryStart": {
+            "rss": 77996032,
+            "heapTotal": 24326144,
+            "heapUsed": 6560664,
+            "external": 2160936,
+            "arrayBuffers": 441802
+          },
+          "memoryEnd": {
+            "rss": 304181248,
+            "heapTotal": 220606464,
+            "heapUsed": 85463248,
+            "external": 5917890,
+            "arrayBuffers": 4022018
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 77996032,
+              "heapTotal": 24326144,
+              "heapUsed": 6560664,
+              "external": 2160936,
+              "arrayBuffers": 441802
+            },
+            "worksheetTreesMs": {
+              "rss": 183300096,
+              "heapTotal": 202059776,
+              "heapUsed": 83721888,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "styleTreeMs": {
+              "rss": 183300096,
+              "heapTotal": 202059776,
+              "heapUsed": 83747320,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "sharedStringsTreeMs": {
+              "rss": 183300096,
+              "heapTotal": 202059776,
+              "heapUsed": 83752768,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "serializeAndPackageMs": {
+              "rss": 258928640,
+              "heapTotal": 205139968,
+              "heapUsed": 132679648,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            },
+            "generateFilesMs": {
+              "rss": 258928640,
+              "heapTotal": 205139968,
+              "heapUsed": 132680592,
+              "external": 2160938,
+              "arrayBuffers": 441802
+            }
+          },
+          "peakRSSMiB": 290.08984375,
+          "zipBytes": 299079,
+          "rawBytes": 3080557,
+          "cells": 100000,
+          "sharedStrings": 0,
+          "styles": 1
+        }
+      ]
+    },
+    {
+      "config": {
+        "name": "unique-100k-direct-clone",
+        "kind": "unique",
+        "rows": 10000,
+        "cols": 10,
+        "directClone": true
+      },
+      "runs": [
+        {
+          "config": {
+            "name": "unique-100k-direct-clone",
+            "kind": "unique",
+            "rows": 10000,
+            "cols": 10,
+            "directClone": true
+          },
+          "setupMs": 27.345540999999997,
+          "totalMs": 850.138111,
+          "firstTimerMs": 637.6092000000001,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 156.32280299999996,
+            "styleTreeMs": 0.06778100000002496,
+            "sharedStringsTreeMs": 171.29967500000004,
+            "serializeAndPackageMs": 441.00936699999994,
+            "generateFilesMs": 597.4747160000001
+          },
+          "memoryStart": {
+            "rss": 117329920,
+            "heapTotal": 88489984,
+            "heapUsed": 19951464,
+            "external": 2673103,
+            "arrayBuffers": 846527
+          },
+          "memoryEnd": {
+            "rss": 433770496,
+            "heapTotal": 327340032,
+            "heapUsed": 236742688,
+            "external": 12895177,
+            "arrayBuffers": 10524414
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 117329920,
+              "heapTotal": 88489984,
+              "heapUsed": 19951464,
+              "external": 2673103,
+              "arrayBuffers": 846527
+            },
+            "worksheetTreesMs": {
+              "rss": 224522240,
+              "heapTotal": 203689984,
+              "heapUsed": 118572912,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "styleTreeMs": {
+              "rss": 224522240,
+              "heapTotal": 203689984,
+              "heapUsed": 118596792,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "sharedStringsTreeMs": {
+              "rss": 333426688,
+              "heapTotal": 273018880,
+              "heapUsed": 173242352,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "serializeAndPackageMs": {
+              "rss": 392667136,
+              "heapTotal": 319270912,
+              "heapUsed": 228253376,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "generateFilesMs": {
+              "rss": 392667136,
+              "heapTotal": 319270912,
+              "heapUsed": 228254320,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            }
+          },
+          "peakRSSMiB": 425.43359375,
+          "zipBytes": 546439,
+          "rawBytes": 8069472,
+          "cells": 100000,
+          "sharedStrings": 100000,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "unique-100k-direct-clone",
+            "kind": "unique",
+            "rows": 10000,
+            "cols": 10,
+            "directClone": true
+          },
+          "setupMs": 27.914566000000008,
+          "totalMs": 777.6035,
+          "firstTimerMs": 566.302993,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 146.079954,
+            "styleTreeMs": 0.06131899999996904,
+            "sharedStringsTreeMs": 111.421335,
+            "serializeAndPackageMs": 378.870596,
+            "generateFilesMs": 525.099601
+          },
+          "memoryStart": {
+            "rss": 117972992,
+            "heapTotal": 88227840,
+            "heapUsed": 19951456,
+            "external": 2673103,
+            "arrayBuffers": 846527
+          },
+          "memoryEnd": {
+            "rss": 432287744,
+            "heapTotal": 326291456,
+            "heapUsed": 236640240,
+            "external": 12895177,
+            "arrayBuffers": 10524414
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 117972992,
+              "heapTotal": 88227840,
+              "heapUsed": 19951456,
+              "external": 2673103,
+              "arrayBuffers": 846527
+            },
+            "worksheetTreesMs": {
+              "rss": 225329152,
+              "heapTotal": 203165696,
+              "heapUsed": 118731072,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "styleTreeMs": {
+              "rss": 225329152,
+              "heapTotal": 203165696,
+              "heapUsed": 118754952,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "sharedStringsTreeMs": {
+              "rss": 333266944,
+              "heapTotal": 270397440,
+              "heapUsed": 173352368,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "serializeAndPackageMs": {
+              "rss": 392134656,
+              "heapTotal": 318222336,
+              "heapUsed": 228150904,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "generateFilesMs": {
+              "rss": 392134656,
+              "heapTotal": 318222336,
+              "heapUsed": 228151848,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            }
+          },
+          "peakRSSMiB": 424.109375,
+          "zipBytes": 546439,
+          "rawBytes": 8069472,
+          "cells": 100000,
+          "sharedStrings": 100000,
+          "styles": 1
+        },
+        {
+          "config": {
+            "name": "unique-100k-direct-clone",
+            "kind": "unique",
+            "rows": 10000,
+            "cols": 10,
+            "directClone": true
+          },
+          "setupMs": 25.108353000000022,
+          "totalMs": 826.428475,
+          "firstTimerMs": 613.612845,
+          "chunks": 0,
+          "phases": {
+            "worksheetTreesMs": 145.78014199999998,
+            "styleTreeMs": 0.06355899999999792,
+            "sharedStringsTreeMs": 157.22849399999996,
+            "serializeAndPackageMs": 426.350526,
+            "generateFilesMs": 572.290458
+          },
+          "memoryStart": {
+            "rss": 119128064,
+            "heapTotal": 88227840,
+            "heapUsed": 19951072,
+            "external": 2673103,
+            "arrayBuffers": 846527
+          },
+          "memoryEnd": {
+            "rss": 434921472,
+            "heapTotal": 327077888,
+            "heapUsed": 236722016,
+            "external": 12895177,
+            "arrayBuffers": 10524414
+          },
+          "memorySnapshots": {
+            "start": {
+              "rss": 119128064,
+              "heapTotal": 88227840,
+              "heapUsed": 19951072,
+              "external": 2673103,
+              "arrayBuffers": 846527
+            },
+            "worksheetTreesMs": {
+              "rss": 225648640,
+              "heapTotal": 203427840,
+              "heapUsed": 118621368,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "styleTreeMs": {
+              "rss": 225779712,
+              "heapTotal": 203427840,
+              "heapUsed": 118645248,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "sharedStringsTreeMs": {
+              "rss": 334172160,
+              "heapTotal": 269086720,
+              "heapUsed": 173257952,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "serializeAndPackageMs": {
+              "rss": 393191424,
+              "heapTotal": 319008768,
+              "heapUsed": 228230136,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            },
+            "generateFilesMs": {
+              "rss": 393191424,
+              "heapTotal": 319008768,
+              "heapUsed": 228231080,
+              "external": 2673143,
+              "arrayBuffers": 846527
+            }
+          },
+          "peakRSSMiB": 426.3984375,
+          "zipBytes": 546439,
+          "rawBytes": 8069472,
+          "cells": 100000,
+          "sharedStrings": 100000,
+          "styles": 1
+        }
+      ]
+    }
+  ]
+}

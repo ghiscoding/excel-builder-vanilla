@@ -1,7 +1,10 @@
-import { strToU8, zip } from 'fflate';
+import { zip } from 'fflate';
 
 import { Workbook } from './Excel/Workbook.js';
 import type { ZipOptions } from './interfaces.js';
+import { toZipData, zipPath } from './utilities/zip.js';
+
+export { base64ToUint8Array } from './utilities/base64.js';
 
 type InferOutputByType<T extends 'Blob' | 'Uint8Array'> = T extends 'Blob' ? Blob : T extends 'Uint8Array' ? Uint8Array : any;
 
@@ -10,25 +13,6 @@ type InferOutputByType<T extends 'Blob' | 'Uint8Array'> = T extends 'Blob' ? Blo
  */
 export function createWorkbook() {
   return new Workbook();
-}
-
-/**
- * Convert a `base64` string to a `Uint8Array`
- * @param {String} - base64 string
- * @returns {Uint8Array} - returns a Uint8Array output
- */
-export function base64ToUint8Array(base64String: string) {
-  const normalizedBase64 = base64String.replace(/^data:[^;]+;base64,/u, '').replace(/\s+/gu, '');
-  const base64url = normalizedBase64.replace(/-/g, '+').replace(/_/g, '/');
-  const missingPadding = '='.repeat((4 - (base64url.length % 4)) % 4);
-  const base64 = base64url + missingPadding;
-  let base64decoded = '';
-  try {
-    base64decoded = atob(base64);
-  } catch {
-    throw new Error('[Excel-Builder-Vanilla] Invalid base64 payload while creating Excel media.');
-  }
-  return Uint8Array.from(base64decoded, char => char.charCodeAt(0));
 }
 
 /**
@@ -43,44 +27,28 @@ export function base64ToUint8Array(base64String: string) {
  *   - `zipOptions` to specify any `fflate` options to modify how the zip will be created.
  * @returns {Promise}
  */
-export function createExcelFile<T extends 'Blob' | 'Uint8Array' = 'Blob'>(
+export async function createExcelFile<T extends 'Blob' | 'Uint8Array' = 'Blob'>(
   workbook: Workbook,
   outputType?: T,
   options?: { fileFormat?: 'xls' | 'xlsx'; mimeType?: string; zipOptions?: ZipOptions },
 ): Promise<InferOutputByType<T>> {
-  const zipObj: { [name: string]: Uint8Array } = {};
-
-  return new Promise((resolve, reject) => {
-    workbook.generateFiles().then(files => {
-      for (const [path, content] of Object.entries(files)) {
-        const outPath = path.substr(1);
-        if (path.indexOf('.xml') !== -1 || path.indexOf('.rel') !== -1) {
-          zipObj[outPath] = strToU8(content); // regular cells except images
-        } else {
-          zipObj[outPath] = base64ToUint8Array(content); // images
-        }
-      }
-
-      return zip(zipObj, options?.zipOptions || {}, (err, data) => {
-        /* v8 ignore next 4 */
-        if (err) {
-          reject(err);
-          return;
-        }
-
-        if (outputType === 'Uint8Array') {
-          resolve(data as InferOutputByType<T>);
-        } else {
-          const format = options?.fileFormat ?? 'xlsx';
-          let mimeType = options?.mimeType;
-          if (mimeType === undefined) {
-            mimeType = format === 'xls' ? 'application/vnd.ms-excel' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-          }
-          resolve(new Blob([data as BlobPart], { type: mimeType }) as InferOutputByType<T>);
-        }
-      });
-    });
+  // Custom exporters may reuse their returned map. Release only our own references.
+  const files = { ...(await workbook.generateFiles()) };
+  const zipObj: Record<string, Uint8Array> = Object.create(null);
+  for (const path of Object.keys(files)) {
+    zipObj[zipPath(path)] = toZipData(path, files[path]);
+    delete files[path];
+  }
+  const data = await new Promise<Uint8Array>((resolve, reject) => {
+    zip(zipObj, options?.zipOptions || {}, (err, zipped) => (err ? reject(err) : resolve(zipped)));
   });
+  if (outputType === 'Uint8Array') {
+    return data as InferOutputByType<T>;
+  }
+  const mimeType =
+    options?.mimeType ??
+    (options?.fileFormat === 'xls' ? 'application/vnd.ms-excel' : 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  return new Blob([data as BlobPart], { type: mimeType }) as InferOutputByType<T>;
 }
 
 /**
