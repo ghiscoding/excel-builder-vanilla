@@ -1,4 +1,4 @@
-import { strFromU8, unzipSync } from 'fflate';
+import { strFromU8, unzipSync, Zip, ZipDeflate } from 'fflate';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { Paths } from '../Excel/Paths.js';
@@ -163,6 +163,36 @@ describe('export regressions', () => {
     const reader = stream.getReader();
 
     await expect(reader.read()).rejects.toThrow('Invalid base64 payload');
+  });
+
+  it.each([
+    ['while pushing entry data', '<worksheet/>'],
+    ['after finalizing an empty entry', ''],
+    ['after finalizing an empty archive', undefined],
+  ])('propagates ZIP callback failures %s', async (_stage, content) => {
+    const wb = new Workbook();
+    const zipError = new Error('simulated ZIP failure');
+    const generateEntries = vi.spyOn(wb, 'generateFileEntries').mockImplementation(function* () {
+      if (content !== undefined) {
+        yield ['/xl/failure.xml', content];
+      }
+    });
+    const add = vi.spyOn(Zip.prototype, 'add').mockImplementation(function () {
+      this.ondata(zipError, new Uint8Array(), false);
+    });
+    const end = vi.spyOn(Zip.prototype, 'end').mockImplementation(function () {
+      this.ondata(zipError, new Uint8Array(), true);
+    });
+    const push = vi.spyOn(ZipDeflate.prototype, 'push').mockImplementation(() => {});
+
+    try {
+      await expect(consume(nodeExcelStream(wb))).rejects.toBe(zipError);
+    } finally {
+      generateEntries.mockRestore();
+      add.mockRestore();
+      end.mockRestore();
+      push.mockRestore();
+    }
   });
 
   it.each(['aGVsbG8=', 'aG Vs\nbG8=', 'data:text/plain;base64,aGVsbG8', 'aGVsbG8'])('decodes normalized media: %s', input => {
