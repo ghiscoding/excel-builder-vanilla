@@ -12,6 +12,8 @@ export function base64ToUint8Array(base64String: string) {
     throw new Error('[Excel-Builder-Vanilla] Invalid base64 payload while creating Excel media.');
   }
   const bytes = new Uint8Array(decoded.length);
-  for (let i = 0; i < decoded.length; i++) bytes[i] = decoded.charCodeAt(i);
+  for (let i = 0; i < decoded.length; i++) {
+    bytes[i] = decoded.charCodeAt(i);
+  }
   return bytes;
 }

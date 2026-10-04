@@ -67,7 +67,9 @@ export default class Example {
     const reader = (stream as ReadableStream<Uint8Array>).getReader();
     while (true) {
       const { done, value: chunk } = await reader.read();
-      if (done) break;
+      if (done) {
+        break;
+      }
       chunks.push(chunk);
       processed += 1000;
       this.progressElm.textContent = `Exported ${Math.min(processed, ROWS)} / ${ROWS} rows...`;

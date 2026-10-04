@@ -183,7 +183,9 @@ export class Chart extends Drawing {
         node = Util.createElement(doc, chartType);
         node.appendChild(Util.createElement(doc, 'c:grouping', [['val', 'clustered']]));
         node.appendChild(Util.createElement(doc, 'c:varyColors', [['val', '1']]));
-        if (type === 'doughnut') node.appendChild(Util.createElement(doc, 'c:holeSize', [['val', '50']]));
+        if (type === 'doughnut') {
+          node.appendChild(Util.createElement(doc, 'c:holeSize', [['val', '50']]));
+        }
         break;
       }
       case 'scatter': {
@@ -271,7 +273,9 @@ export class Chart extends Drawing {
 
   /** @private Apply a basic series color if provided. Supports RGB (RRGGBB) or ARGB (AARRGGBB); leading # optional. Alpha (if provided) is stripped. */
   _applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string) {
-    if (!color || typeof color !== 'string') return;
+    if (!color || typeof color !== 'string') {
+      return;
+    }
     let hex = color.trim().replace(/^#/, '').toUpperCase();
     // Accept 6 (RGB) or 8 (ARGB) hex chars; strip leading alpha if present
     if (/^[0-9A-F]{8}$/.test(hex)) {
@@ -401,8 +405,12 @@ export class Chart extends Drawing {
       return 'clustered'; // required but cosmetic
     }
     if (type === 'line' || type === 'bar' || type === 'column') {
-      if (stacking === 'stacked') return 'stacked';
-      if (stacking === 'percent') return 'percentStacked';
+      if (stacking === 'stacked') {
+        return 'stacked';
+      }
+      if (stacking === 'percent') {
+        return 'percentStacked';
+      }
       return type === 'line' ? 'standard' : 'clustered';
     }
     // scatter doesn't use grouping; still return default for structural consistency

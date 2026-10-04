@@ -401,7 +401,9 @@ export class Workbook {
     for (let i = 0; i < this.worksheets.length; i++) {
       const worksheet = this.worksheets[i];
       paths[worksheet.id] = `worksheets/sheet${i + 1}.xml`;
-      if (worksheet.relations) worksheet.relations.paths = paths;
+      if (worksheet.relations) {
+        worksheet.relations.paths = paths;
+      }
     }
     let i: number;
     let l: number;
@@ -467,7 +469,9 @@ export class Workbook {
       files[path] = typeof value === 'string' ? value : [...value].join('');
     }
     for (const path of Object.keys(files)) {
-      if (isXmlPath(path)) files[path] = this.packageXml(files[path]);
+      if (isXmlPath(path)) {
+        files[path] = this.packageXml(files[path]);
+      }
     }
   }
 

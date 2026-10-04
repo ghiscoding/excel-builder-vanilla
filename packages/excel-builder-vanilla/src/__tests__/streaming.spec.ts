@@ -250,7 +250,9 @@ describe('browserExcelStream base64ToUint8Array branch', () => {
       let gotChunk = false;
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
+        if (done) {
+          break;
+        }
         expect(value).toBeInstanceOf(Uint8Array);
         gotChunk = true;
       }

@@ -244,7 +244,9 @@ export class Worksheet {
       ['boolean', 'v', 'b'],
     ] as const) {
       const cell = doc.createElement('c');
-      if (cellType) cell.setAttribute('t', cellType);
+      if (cellType) {
+        cell.setAttribute('t', cellType);
+      }
       const value = doc.createElement(tag);
       value.appendChild(doc.createTextNode('--temp--'));
       cell.appendChild(value);
@@ -263,7 +265,9 @@ export class Worksheet {
     const strings = new Set<string>();
     for (const row of this.data) {
       this.forEachCell(row, -1, (value, type) => {
-        if (type === 'text') strings.add(String(value));
+        if (type === 'text') {
+          strings.add(String(value));
+        }
       });
     }
     return [...strings];
@@ -317,8 +321,12 @@ export class Worksheet {
       const reference = Util.positionToLetterRef(column + 1, rowIndex + 1);
       if (doc && rowNode) {
         const cell = doc.createElement('c');
-        if (cellType) cell.setAttribute('t', cellType);
-        if (style !== undefined) cell.setAttribute('s', style);
+        if (cellType) {
+          cell.setAttribute('t', cellType);
+        }
+        if (style !== undefined) {
+          cell.setAttribute('s', style);
+        }
         cell.setAttribute('r', reference);
         const content = doc.createElement(tag);
         content.appendChild(doc.createTextNode(String(value)));
@@ -333,10 +341,16 @@ export class Worksheet {
     });
     const instructions = this._rowInstructions[rowIndex];
     const attributes: [string, string | number][] = [['r', rowIndex + 1]];
-    if (instructions?.height !== undefined) attributes.push(['customHeight', '1'], ['ht', instructions.height]);
-    if (instructions?.style !== undefined) attributes.push(['customFormat', '1'], ['s', instructions.style]);
+    if (instructions?.height !== undefined) {
+      attributes.push(['customHeight', '1'], ['ht', instructions.height]);
+    }
+    if (instructions?.style !== undefined) {
+      attributes.push(['customFormat', '1'], ['s', instructions.style]);
+    }
     if (rowNode) {
-      for (const [name, value] of attributes) rowNode.setAttribute(name, value);
+      for (const [name, value] of attributes) {
+        rowNode.setAttribute(name, value);
+      }
       return rowNode;
     }
     const rowAttrs = attributes.map(([name, value]) => ` ${name}="${htmlEscape(String(value))}"`).join('');
@@ -358,9 +372,13 @@ export class Worksheet {
     let maxX = 0;
     for (let row = 0; row < this.data.length; row++) {
       maxX = Math.max(maxX, this.data[row].length);
-      if (includeRows) sheetData.appendChild(this.serializeRow(this.data[row], row, doc));
+      if (includeRows) {
+        sheetData.appendChild(this.serializeRow(this.data[row], row, doc));
+      }
     }
-    for (let column = 0; column < maxX; column++) this.columns[column] ||= {};
+    for (let column = 0; column < maxX; column++) {
+      this.columns[column] ||= {};
+    }
 
     if (maxX !== 0) {
       worksheet.appendChild(
@@ -390,7 +408,9 @@ export class Worksheet {
     if (this.relations) {
       const ids = new Set(this.hyperlinks.map(link => (link.id ||= uniqueId('hyperlink'))));
       for (const [id, relation] of Object.entries(this.relations.relations)) {
-        if (relation.schema === Util.schemas.hyperlink && !ids.has(id)) delete this.relations.relations[id];
+        if (relation.schema === Util.schemas.hyperlink && !ids.has(id)) {
+          delete this.relations.relations[id];
+        }
       }
     }
     if (this.hyperlinks.length > 0) {
@@ -637,7 +657,9 @@ export class Worksheet {
    * Returns worksheet XML footer (everything after </sheetData>)
    */
   getWorksheetXmlFooter(): string {
-    if (!this._headers.length && !this._footers.length) return '';
+    if (!this._headers.length && !this._footers.length) {
+      return '';
+    }
     const header = this._headers.length ? `<oddHeader>${htmlEscape(this.compilePageDetailPackage(this._headers))}</oddHeader>` : '';
     const footer = this._footers.length ? `<oddFooter>${htmlEscape(this.compilePageDetailPackage(this._footers))}</oddFooter>` : '';
     return `<headerFooter>${header}${footer}</headerFooter>`;
@@ -665,7 +687,9 @@ export class Worksheet {
         chunk = '';
       }
     }
-    if (chunk) yield chunk;
+    if (chunk) {
+      yield chunk;
+    }
     yield `</sheetData>${xml.slice(marker + '<sheetData/>'.length)}`;
   }
 }

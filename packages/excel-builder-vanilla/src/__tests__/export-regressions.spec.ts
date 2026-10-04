@@ -11,7 +11,9 @@ import { createExcelFileStream, nodeExcelStream } from '../streaming.js';
 const decode = (bytes: Uint8Array) => Object.fromEntries(Object.entries(unzipSync(bytes)).map(([path, data]) => [path, strFromU8(data)]));
 async function consume(stream: AsyncIterable<Uint8Array>) {
   const chunks: Uint8Array[] = [];
-  for await (const chunk of stream) chunks.push(chunk);
+  for await (const chunk of stream) {
+    chunks.push(chunk);
+  }
   const bytes = new Uint8Array(chunks.reduce((sum, chunk) => sum + chunk.length, 0));
   let offset = 0;
   for (const chunk of chunks) {
@@ -42,7 +44,9 @@ describe('export regressions', () => {
 
   it('deduplicates direct shared-string insertion and preserves XML ordering', () => {
     const strings = new SharedStrings();
-    for (const value of ['__proto__', '', ' a&b ', 'alpha', 'alpha']) strings.addString(value);
+    for (const value of ['__proto__', '', ' a&b ', 'alpha', 'alpha']) {
+      strings.addString(value);
+    }
     expect(strings.stringArray).toEqual(['__proto__', '', ' a&b ', 'alpha']);
     const original = strings.toXML().toString();
     expect(strings.toXML().toString()).toBe(original);
@@ -167,7 +171,9 @@ describe('export regressions', () => {
 
   it('decodes base64url and rejects invalid padding or characters', () => {
     expect(base64ToUint8Array('-_8')).toEqual(new Uint8Array([251, 255]));
-    for (const invalid of ['a', 'abc===', 'a!bc', '=abc']) expect(() => base64ToUint8Array(invalid)).toThrow('Invalid base64 payload');
+    for (const invalid of ['a', 'abc===', 'a!bc', '=abc']) {
+      expect(() => base64ToUint8Array(invalid)).toThrow('Invalid base64 payload');
+    }
   });
 
   it.each([0, -1, 1.5, NaN, Infinity])('rejects invalid chunk size %s', chunkSize => {

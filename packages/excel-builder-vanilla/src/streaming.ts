@@ -16,7 +16,9 @@ export interface ExcelFileStreamOptions {
 
 function chunkSize(options?: ExcelFileStreamOptions) {
   const size = options?.chunkSize ?? 65536;
-  if (!Number.isSafeInteger(size) || size <= 0) throw new RangeError('chunkSize must be a positive safe integer.');
+  if (!Number.isSafeInteger(size) || size <= 0) {
+    throw new RangeError('chunkSize must be a positive safe integer.');
+  }
   return size;
 }
 
@@ -32,11 +34,16 @@ export function createExcelFileStream(workbook: Workbook, options?: ExcelFileStr
           try {
             const { value, done } = await iterator.next();
             if (!cancelled) {
-              if (done) controller.close();
-              else controller.enqueue(value);
+              if (done) {
+                controller.close();
+              } else {
+                controller.enqueue(value);
+              }
             }
           } catch (error) {
-            if (!cancelled) controller.error(error);
+            if (!cancelled) {
+              controller.error(error);
+            }
           }
         },
         async cancel() {
@@ -47,7 +54,9 @@ export function createExcelFileStream(workbook: Workbook, options?: ExcelFileStr
       { highWaterMark: 0 },
     );
   }
-  if (typeof process !== 'undefined' && process.versions?.node) return nodeExcelStream(workbook, options);
+  if (typeof process !== 'undefined' && process.versions?.node) {
+    return nodeExcelStream(workbook, options);
+  }
   throw new Error('Streaming is only supported in browser or NodeJS environments.');
 }
 
@@ -66,7 +75,9 @@ async function* entries(workbook: Workbook) {
 function* outputChunks(queue: Uint8Array[], size: number) {
   while (queue.length) {
     const data = queue.shift()!;
-    for (let start = 0; start < data.length; start += size) yield data.slice(start, start + size);
+    for (let start = 0; start < data.length; start += size) {
+      yield data.slice(start, start + size);
+    }
   }
 }
 
@@ -76,8 +87,11 @@ export async function* nodeExcelStream(workbook: Workbook, options?: ExcelFileSt
   const queue: Uint8Array[] = [];
   let failure: Error | undefined;
   const zip = new Zip((error, data) => {
-    if (error) failure = error;
-    else if (data.length) queue.push(data);
+    if (error) {
+      failure = error;
+    } else if (data.length) {
+      queue.push(data);
+    }
   });
   let deadline = Date.now() + 8;
   try {
@@ -93,7 +107,9 @@ export async function* nodeExcelStream(workbook: Workbook, options?: ExcelFileSt
         // Also bound compression work for large binary entries and custom string exporters.
         for (let offset = 0; offset < bytes.length; offset += 32768) {
           entry.push(bytes.subarray(offset, offset + 32768), false);
-          if (failure) throw failure;
+          if (failure) {
+            throw failure;
+          }
           yield* outputChunks(queue, size);
           if (Date.now() >= deadline) {
             await new Promise(resolve => setTimeout(resolve, 0));
@@ -102,11 +118,15 @@ export async function* nodeExcelStream(workbook: Workbook, options?: ExcelFileSt
         }
       }
       entry.push(new Uint8Array(0), true);
-      if (failure) throw failure;
+      if (failure) {
+        throw failure;
+      }
       yield* outputChunks(queue, size);
     }
     zip.end();
-    if (failure) throw failure;
+    if (failure) {
+      throw failure;
+    }
     yield* outputChunks(queue, size);
   } finally {
     zip.terminate();

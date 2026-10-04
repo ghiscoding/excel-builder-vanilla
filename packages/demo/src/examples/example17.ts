@@ -68,7 +68,9 @@ export default class Example {
     const reader = (stream as ReadableStream<Uint8Array>).getReader();
     while (true) {
       const { done, value: chunk } = await reader.read();
-      if (done) break;
+      if (done) {
+        break;
+      }
       chunks.push(chunk);
     }
     const blob = new Blob(chunks as BlobPart[], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });

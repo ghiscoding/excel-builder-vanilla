@@ -270,7 +270,9 @@ export class StyleSheet {
 
   private exportCollection<T>(doc: XMLDOM, name: string, values: T[], exportItem: (doc: XMLDOM, value: T) => XMLNode) {
     const collection = Util.createElement(doc, name, [['count', values.length]]);
-    for (const value of values) collection.appendChild(exportItem.call(this, doc, value));
+    for (const value of values) {
+      collection.appendChild(exportItem.call(this, doc, value));
+    }
     return collection;
   }
 

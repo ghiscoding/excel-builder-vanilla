@@ -8,7 +8,9 @@ async function collect(stream: ReadableStream<Uint8Array>) {
   const chunks: Uint8Array[] = [];
   while (true) {
     const { value, done } = await reader.read();
-    if (done) break;
+    if (done) {
+      break;
+    }
     chunks.push(value);
   }
   const output = new Uint8Array(chunks.reduce((sum, chunk) => sum + chunk.length, 0));

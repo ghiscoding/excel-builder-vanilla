@@ -138,7 +138,9 @@ function waitForDownload(expectedFilename?: string, timeoutMs = 60_000) {
     };
     URL.createObjectURL = value => {
       const url = originalCreateObjectURL.call(URL, value);
-      if (value instanceof Blob) blobsByUrl.set(url, value);
+      if (value instanceof Blob) {
+        blobsByUrl.set(url, value);
+      }
       return url;
     };
     HTMLAnchorElement.prototype.click = function () {
@@ -186,9 +188,15 @@ async function expectExportContract(file: Blob, contract: ExportContract) {
     .map(([, content]) => strFromU8(content))
     .join('\n');
 
-  for (const sheetName of contract.sheetNames) expect(xml).toContain(`name="${sheetName}"`);
-  for (const text of contract.text ?? []) expect(xml).toContain(text);
-  for (const path of contract.paths ?? []) expect(files[path]).toBeInstanceOf(Uint8Array);
+  for (const sheetName of contract.sheetNames) {
+    expect(xml).toContain(`name="${sheetName}"`);
+  }
+  for (const text of contract.text ?? []) {
+    expect(xml).toContain(text);
+  }
+  for (const path of contract.paths ?? []) {
+    expect(files[path]).toBeInstanceOf(Uint8Array);
+  }
 }
 
 function normalizeXmlSnapshot(content: string) {
@@ -285,8 +293,12 @@ describe('Excel exports in a real browser', () => {
           expect(anchor.download).toBe(contract?.filename);
           expect(anchor.href).toMatch(/^blob:/u);
           expect(file).toBeInstanceOf(Blob);
-          if (!file) throw new Error(`Expected ${exampleName} to create an XLSX Blob.`);
-          if (!contract) throw new Error(`Missing export contract for ${exampleName}:${button.id}.`);
+          if (!file) {
+            throw new Error(`Expected ${exampleName} to create an XLSX Blob.`);
+          }
+          if (!contract) {
+            throw new Error(`Missing export contract for ${exampleName}:${button.id}.`);
+          }
           await expectExportContract(file, contract);
           expect(await getXmlSnapshot(file)).toMatchSnapshot(`${exampleName}-${button.id}`);
         }

@@ -20,7 +20,9 @@ export class SharedStrings {
    */
   addString(str: string) {
     str = String(str);
-    if (Object.prototype.hasOwnProperty.call(this.strings, str)) return this.strings[str];
+    if (Object.prototype.hasOwnProperty.call(this.strings, str)) {
+      return this.strings[str];
+    }
     this.strings[str] = this.stringArray.length;
     this.stringArray[this.stringArray.length] = str;
     return this.strings[str];
@@ -73,7 +75,9 @@ export class SharedStrings {
         chunk = '';
       }
     }
-    if (chunk) yield chunk;
+    if (chunk) {
+      yield chunk;
+    }
     yield '</sst>';
   }
 }
