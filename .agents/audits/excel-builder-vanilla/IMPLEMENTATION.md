@@ -2,6 +2,8 @@
 
 This report preserves the initial implementation measurements. The subsequent [LOC follow-up](LOC-FOLLOWUP.md) reduces production source to **3,833 physical / 2,920 code-bearing lines**, with separate output parity and performance checks.
 
+**Coverage follow-up, October 4, 2026:** Three targeted unit tests cover the retained worksheet XML cache, XMLNode attribute cloning, and browser stream error propagation. The complete unit suite now passes **295 tests across 23 files** with **100% line coverage (1,569/1,569)**, **99.75% statement coverage**, **93.16% branch coverage**, and **100% function coverage**. This supersedes the earlier 292-test coverage figures below; the original test logs remain historical records of their runs. See the [follow-up coverage record](loc-pass/coverage-followup.json).
+
 October 3, 2026. Scope: `packages/excel-builder-vanilla`. The [original audit](REPORT.md) and its measurements are preserved as the baseline at revision `6ce5a7537b6ef2bf17997d36bab2eeeaebbc8f67`. Implementation measurements use the modified working tree at that revision. No demo or companion types package was changed. No release was published.
 
 The main result is a smaller export working set and earlier stream output. For 500,000 numeric cells, normal Node export falls from 2,628.6 to 1,423.4 ms, with peak process RSS falling from 761.9 to 346.9 MiB. Node streaming falls from 2,552.2 to 1,256.1 ms and yields its first chunk in 9.7 ms rather than 2,523.3 ms. Browser streaming becomes responsive early; its total duration remains close to baseline in the final run.
@@ -108,7 +110,7 @@ The performance harness's fresh temporary build is 68,358 JS bytes / 17,222 gzip
 
 ## Validation and limits
 
-- **292 unit tests pass** across 23 library test files. Coverage: 98.97% statements, 92.79% branches, 99.55% functions, and 99.30% lines. Retained legacy cell-template code accounts for the uncovered function; coverage is not represented as 100%. See [after/tests.txt](after/tests.txt) and [coverage summary](after/coverage/coverage-summary.json).
+- The initial implementation run passed **292 unit tests** across 23 library test files. Its coverage figures and logs are historical; see the October 4 coverage follow-up above for the current test and coverage results. See [initial test log](after/tests.txt) and [initial coverage summary](after/coverage/coverage-summary.json).
 - **Three library-only Chromium regression tests pass**: normal/stream entry equality for worksheet, table, chart, drawing, and media; demand/cancellation; and invalid media rejection. Every XML/relationship entry in the feature fixture is parsed with DOMParser. See [after/browser-tests.txt](after/browser-tests.txt). The demo-dependent browser suite was excluded from this library-only scope.
 - TypeScript no-emit checking, Biome checking, Vite production build, declaration generation, npm package dry run, and whitespace validation pass.
 - Regression coverage includes repeated exports, inherited string keys, concurrent workbooks, raw dates, formulas, row/cell style ID 0, frozen metadata, columns beyond Z, escaping, custom export overrides, compression levels 0/1/6/9, invalid chunk sizes, chunk backing buffers, and anchor endpoint offsets. [after/probes.json](after/probes.json) confirms no global path growth and rejected rather than pending invalid-media exports.

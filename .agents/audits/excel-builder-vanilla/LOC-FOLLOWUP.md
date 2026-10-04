@@ -2,6 +2,8 @@
 
 October 3, 2026. This follow-up applies the constraint to reduce LOC only where behavior and readability are preserved. Production edits are limited to `Excel/Drawing/Chart.ts` and `Excel/Workbook.ts` in `packages/excel-builder-vanilla`.
 
+**Coverage follow-up, October 4, 2026:** Three focused unit tests cover the retained worksheet XML cache, XMLNode attribute cloning, and browser stream error propagation. The full unit suite now passes **295 tests across 23 files** with **100% line coverage (1,569/1,569)**, **99.75% statement coverage**, **93.16% branch coverage**, and **100% function coverage**. The 292-test results below describe the original LOC-only pass and remain as historical evidence. See the [follow-up coverage record](loc-pass/coverage-followup.json).
+
 ## Retained changes
 
 - Combine the duplicate pie/doughnut and bar/column chart branches. Each branch keeps the same chart-specific elements and XML ordering.

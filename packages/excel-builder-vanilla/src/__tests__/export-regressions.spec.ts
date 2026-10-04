@@ -150,6 +150,17 @@ describe('export regressions', () => {
     await expect(createExcelFile(wb)).rejects.toThrow('synchronous failure');
   });
 
+  it('rejects browser stream reads when export generation fails', async () => {
+    vi.stubGlobal('window', { ReadableStream });
+    const wb = new Workbook();
+    wb.addMedia('image', 'broken.png', 'invalid!!!');
+
+    const stream = createExcelFileStream(wb) as ReadableStream<Uint8Array>;
+    const reader = stream.getReader();
+
+    await expect(reader.read()).rejects.toThrow('Invalid base64 payload');
+  });
+
   it.each(['aGVsbG8=', 'aG Vs\nbG8=', 'data:text/plain;base64,aGVsbG8', 'aGVsbG8'])('decodes normalized media: %s', input => {
     expect(strFromU8(base64ToUint8Array(input))).toBe('hello');
   });

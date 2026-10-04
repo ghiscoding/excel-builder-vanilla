@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-04",
+  "command": "pnpm exec vitest run --coverage --config vitest/vitest.config.mts",
+  "testFilesPassed": 23,
+  "testsPassed": 295,
+  "coverage": {
+    "lines": { "total": 1569, "covered": 1569, "pct": 100 },
+    "statements": { "total": 1649, "covered": 1645, "pct": 99.75 },
+    "functions": { "total": 227, "covered": 227, "pct": 100 },
+    "branches": { "total": 834, "covered": 777, "pct": 93.16 }
+  },
+  "coverageTests": [
+    "Worksheet._buildCache creates number, formula, string, and boolean XML templates and aliases the date template to number",
+    "XMLDOM.Node.Create restores attributes when it constructs a cloned XML node",
+    "Browser stream reader rejects when export generation fails"
+  ]
+}
