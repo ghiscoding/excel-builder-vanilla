@@ -198,7 +198,7 @@ describe('Excel/Worksheet', () => {
       ws.setPageMargin({ bottom: 120, footer: 21, header: 22, left: 0, right: 33, top: 8 });
 
       const xmlDom = new XMLDOM('something', 'root');
-      const xmlNode = new XMLNode({ nodeName: 'some name' });
+      const xmlNode = new XMLNode({ nodeName: 'some_name' });
       ws.exportPageSettings(xmlDom, xmlNode);
       expect(ws._margin).toEqual({ bottom: 120, footer: 21, header: 22, left: 0, right: 33, top: 8 });
     });

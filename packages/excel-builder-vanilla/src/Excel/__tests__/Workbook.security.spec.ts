@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 
+import { createExcelFile } from '../../factory.js';
 import { Workbook } from '../Workbook.js';
 
 describe('Workbook prototype pollution protection', () => {
@@ -32,5 +33,11 @@ describe('Workbook prototype pollution protection', () => {
     expect((Object.prototype.toString as any).left).toBeUndefined();
     expect(Object.getOwnPropertyDescriptor(workbook.printTitles!, 'constructor')?.value).toEqual({ top: 3 });
     expect(Object.getOwnPropertyDescriptor(workbook.printTitles!, 'toString')?.value).toEqual({ left: 'B' });
+  });
+
+  it('rejects unsafe media paths at ZIP export', async () => {
+    const workbook = new Workbook();
+    workbook.addMedia('image', '../../../outside.png', 'AA==');
+    await expect(createExcelFile(workbook, 'Uint8Array')).rejects.toThrow('Invalid ZIP entry path');
   });
 });

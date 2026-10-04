@@ -68,6 +68,15 @@ describe('ExcelExportService', () => {
         expect(output).includes('workbook.xml');
       });
 
+      it('rejects unsafe ZIP entry paths from custom workbook exporters', async () => {
+        const workbook = createWorkbook();
+        vi.spyOn(workbook, 'generateFiles').mockResolvedValueOnce({
+          '/xl/media/../../../outside.png': 'AA==',
+        });
+
+        await expect(createExcelFile(workbook, 'Uint8Array')).rejects.toThrow('Invalid ZIP entry path');
+      });
+
       it('should return an image as an Uint8Array instance when calling the method that includes an image', async () => {
         const blueSquareBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==';
 

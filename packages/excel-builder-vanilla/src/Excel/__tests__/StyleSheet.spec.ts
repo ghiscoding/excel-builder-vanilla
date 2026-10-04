@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { StyleSheet } from '../StyleSheet.js';
-import { XMLNode } from '../XMLDOM.js';
+import { XMLDOM, XMLNode } from '../XMLDOM.js';
 
 describe('StyleSheet', () => {
   test('createFormat with empty object', () => {
@@ -53,6 +53,28 @@ describe('StyleSheet', () => {
     const doc = { createElement: () => ({ setAttribute: () => {} }) };
     const protection = ss.exportProtection(doc as any, { locked: true, hidden: false });
     expect(protection).toBeDefined();
+  });
+
+  test('rejects markup in alignment and protection keys during XML export', () => {
+    const ss = new StyleSheet();
+    const doc = new XMLDOM(null, 'root');
+    const alignment = ss.exportAlignment(doc, {
+      horizontal: 'center',
+      'id="1"/><injected key': 'value',
+    });
+    const protection = ss.exportProtection(doc, {
+      locked: true,
+      'id="1"/><injected key': 'value',
+    });
+
+    expect(() => alignment.toString()).toThrow('Unsafe XML name');
+    expect(() => protection.toString()).toThrow('Unsafe XML name');
+  });
+
+  test('preserves alignment attributes without an additional allowlist', () => {
+    const ss = new StyleSheet();
+    const doc = new XMLDOM(null, 'root');
+    expect(ss.exportAlignment(doc, { indent: 2, horizontal: 'center' }).toString()).toBe('<alignment indent="2" horizontal="center"/>');
   });
 
   describe('StyleSheet.createFontStyle()', () => {

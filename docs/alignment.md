@@ -40,3 +40,5 @@ artistWorkbook.addWorksheet(albumList);
 const data = createExcelFile(artistWorkbook);
 downloader('Artist WB.xlsx', data);
 ```
+
+Alignment and protection keys become XML attribute names. Names containing markup delimiters or control characters cause serialization to fail; names that would overwrite XML node members are rejected when setting the attribute. Existing alignment attributes are preserved without an additional allowlist.

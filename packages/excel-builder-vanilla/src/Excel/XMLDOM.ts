@@ -10,6 +10,13 @@ type XMLNodeOption = {
   type?: string;
 };
 
+// Block markup delimiters; this is not a full XML Name grammar check.
+function assertSafeXMLName(name: string) {
+  if (!name || /[ <>&"'=/\p{Cc}]/u.test(name)) {
+    throw new Error(`Unsafe XML name: ${name}`);
+  }
+}
+
 export class XMLDOM {
   static readonly declaration = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
   documentElement: XMLNode;
@@ -99,9 +106,11 @@ export class XMLNode {
 
   /** Serializes this element, its attributes, and children to XML. */
   toString() {
+    assertSafeXMLName(this.nodeName);
     let string = `<${this.nodeName}`;
     for (const attr in this.attributes) {
       if (Object.prototype.hasOwnProperty.call(this.attributes, attr)) {
+        assertSafeXMLName(attr);
         string = `${string} ${attr}="${htmlEscape(this.attributes[attr])}"`;
       }
     }
@@ -137,6 +146,9 @@ export class XMLNode {
 
   /** Sets an attribute, or removes it when the value is `null`. */
   setAttribute(name: string, val: any) {
+    if (name in this && !Object.prototype.hasOwnProperty.call(this.attributes, name)) {
+      throw new Error(`Reserved XML attribute: ${name}`);
+    }
     if (val === null) {
       delete this.attributes[name];
       delete (this as any)[name];
