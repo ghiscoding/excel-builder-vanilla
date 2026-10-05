@@ -7,7 +7,7 @@ allowBuilds:
 # Define a catalog of version ranges.
 catalog:
   fflate: ^0.8.3
-  native-copyfiles: ^2.1.0
+  native-copyfiles: ^2.1.1
   remove-glob: ^1.2.3
   sass: ^1.105.1
   typescript: ^7.0.2
@@ -20,7 +20,9 @@ minimumReleaseAgeExclude:
   - '@lerna-lite/*'
   - native-copyfiles
   - remove-glob
+  - http-cache-semantics@4.3.0
 
 overrides:
+  http-cache-semantics: ^4.3.0
   ip-address: ^10.7.3
   undici: ^8.11.2
