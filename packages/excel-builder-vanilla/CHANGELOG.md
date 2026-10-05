@@ -4,6 +4,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.1](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.3.0...v5.3.1) (2026-10-05)
+
+### Bug Fixes
+
+* **types:** migrate declarations to Rolldown and TypeScript 7 ([#225](https://github.com/ghiscoding/excel-builder-vanilla/issues/225)) ([2976cf2](https://github.com/ghiscoding/excel-builder-vanilla/commit/2976cf21935f2ba2068cd75a98038c0897562d36)) - by @ghiscoding
+
 ## [5.3.0](https://github.com/ghiscoding/excel-builder-vanilla/compare/v5.2.5...v5.3.0) (2026-10-04)
 
 ### Features
