@@ -1,3 +1,4 @@
+// biome-ignore-all lint/complexity/useLiteralKeys: Bracket access intentionally exercises private members.
 import { strFromU8, unzipSync, Zip, ZipDeflate } from 'fflate';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
@@ -60,7 +61,7 @@ describe('export regressions', () => {
     const ws = wb.createWorksheet({ name: 'Features' });
     wb.addWorksheet(ws);
     const date = new Date('2026-01-01T00:00:00Z');
-    ws._timezoneOffset = 0;
+    ws['_timezoneOffset'] = 0;
     const metadata = Object.freeze({ type: 'formula', style: 0 });
     ws.setData([
       [

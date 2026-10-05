@@ -401,7 +401,7 @@ export class Workbook {
   }
 
   /** Assigns package paths and adds shared workbook parts to the file map. */
-  _generateCorePaths(files: any, paths: Record<string, string> = Paths) {
+  private _generateCorePaths(files: any, paths: Record<string, string> = Paths) {
     this.relations.paths = paths;
     for (let i = 0; i < this.worksheets.length; i++) {
       const worksheet = this.worksheets[i];
@@ -470,7 +470,9 @@ export class Workbook {
   }
 
   /** Adds metadata parts and serializes XML values in the package file map. */
-  _prepareFilesForPackaging(files: { [path: string]: XMLDOM | string }) {
+  // @ts-expect-error TS6133: Retain this runtime helper even though the library no longer calls it.
+  // biome-ignore lint/correctness/noUnusedPrivateClassMembers: Preserve this legacy runtime helper.
+  private _prepareFilesForPackaging(files: { [path: string]: XMLDOM | string }) {
     for (const [path, value] of this.metadataFiles()) {
       files[path] = typeof value === 'string' ? value : [...value].join('');
     }

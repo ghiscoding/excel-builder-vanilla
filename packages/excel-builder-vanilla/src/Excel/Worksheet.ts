@@ -35,21 +35,21 @@ interface WorksheetOption {
 export class Worksheet {
   name = '';
   id = uniqueId('Worksheet');
-  _timezoneOffset: number;
+  private _timezoneOffset: number;
   relations: RelationshipManager | null = null;
   columnFormats: ExcelColumn[] = [];
   data: (number | string | boolean | Date | null | ExcelColumnMetadata)[][] = [];
   mergedCells: string[][] = [];
   columns: ExcelColumn[] = [];
   sheetProtection: { exportXML: (doc: XMLDOM) => XMLNode } | false = false;
-  _headers: [left?: string | CharType | any[], center?: string | CharType | any[], right?: string | CharType | any[]] = [];
-  _footers: [left?: string | CharType | any[], center?: string | CharType | any[], right?: string | CharType | any[]] = [];
-  _tables: Table[] = [];
-  _drawings: Array<Table | Drawings> = [];
-  _orientation?: string;
-  _margin?: ExcelMargin;
-  _rowInstructions: any = {};
-  _freezePane: { xSplit?: number; ySplit?: number; cell?: string } = {};
+  private _headers: [left?: string | CharType | any[], center?: string | CharType | any[], right?: string | CharType | any[]] = [];
+  private _footers: [left?: string | CharType | any[], center?: string | CharType | any[], right?: string | CharType | any[]] = [];
+  private _tables: Table[] = [];
+  private _drawings: Array<Table | Drawings> = [];
+  private _orientation?: string;
+  private _margin?: ExcelMargin;
+  private _rowInstructions: any = {};
+  private _freezePane: { xSplit?: number; ySplit?: number; cell?: string } = {};
   sharedStrings: SharedStrings | null = null;
 
   hyperlinks: Array<{ cell: string; id: string; location?: string; targetMode?: string }> = [];
@@ -235,8 +235,10 @@ export class Worksheet {
     return oddFooter;
   }
 
-  /** Legacy XML cell templates retained for callers of _buildCache(). */
-  _buildCache(doc: XMLDOM) {
+  /** Legacy internal XML cell templates retained for JavaScript callers. */
+  // @ts-expect-error TS6133: Retain this runtime helper even though the library no longer calls it.
+  // biome-ignore lint/correctness/noUnusedPrivateClassMembers: Preserve this legacy runtime helper.
+  private _buildCache(doc: XMLDOM) {
     const cache = {} as Record<'number' | 'formula' | 'string' | 'boolean', XMLNode>;
     for (const [type, tag, cellType] of [
       ['number', 'v', ''],

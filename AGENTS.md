@@ -42,7 +42,7 @@ Read `CONTRIBUTING.md`, the relevant package scripts, and the affected code befo
 
 ## Toolchain and builds
 
-Use pnpm from the repository root. `package.json` declares the Node and pnpm requirements and pins the package-manager version; `pnpm-workspace.yaml` owns shared dependency versions. Do not introduce a second lockfile. TypeScript is currently kept on version 6 because of declaration-generator compatibility.
+Use pnpm from the repository root. `package.json` declares the Node and pnpm requirements and pins the package-manager version; `pnpm-workspace.yaml` owns shared dependency versions. Do not introduce a second lockfile. The workspace uses TypeScript 7's native compiler and `rolldown-plugin-dts` with its `tsgo` generator for the single declaration bundle.
 
 The commands below assume RTK is available; otherwise run the wrapped command directly.
 
@@ -60,6 +60,8 @@ The commands below assume RTK is available; otherwise run the wrapped command di
 | Check patch whitespace | `rtk proxy git diff --check` |
 
 Generated declarations come from library source. Do not hand-maintain them as an independent API. When changing public types, generate declarations and synchronize the companion package as appropriate to the requested scope; report generated changes. Preserve any unrelated edits already present there.
+
+`build-dts.mjs` and `declaration-utils.mjs` preserve the referenced type exports from the previous generator, omit private implementation fields/methods, and retain public documentation. Class members whose names start with `_`, and methods documented with `@private`, are internal and should use TypeScript `private`, even without a JSDoc annotation. Preserve their runtime names and the underscore keys in worksheet transfer data. Keep library and companion declarations identical and run the package compatibility regression test after building both. Preserve constructor and protected accessibility. Historical audit scripts using the TypeScript 6 compiler API require their original compiler environment; do not reinterpret their recorded counts using a different parser.
 
 `pnpm build:lib` cleans library and companion distribution directories, then builds JavaScript, declarations, and copies types. The root `pnpm build` also cleans workspace outputs and runs repository-wide formatting/lint fixes. Use scoped commands during focused work to avoid collateral changes. For final PR validation, follow `CONTRIBUTING.md` and CI requirements, inspect the resulting diff, and explain any checks that could not be completed.
 
@@ -90,8 +92,6 @@ Update affected user documentation in `docs/` and the relevant README when usage
 Do not invent release entries or schedules. Follow the repository's release workflow for version and changelog generation when a release is explicitly requested.
 
 ## Pull requests
-
-Return PR titles and descriptions as raw Markdown inside a fenced markdown code block so they can be copied directly.
 
 - Put the title and description in separate fenced `markdown` blocks so each can be copied without extra labels inside the block.
 - Use a Conventional Commit PR title under 73 characters, as requested by `.github/pull_request_template.md`.

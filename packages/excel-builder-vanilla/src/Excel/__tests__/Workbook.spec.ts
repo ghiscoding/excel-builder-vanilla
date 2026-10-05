@@ -1,3 +1,4 @@
+// biome-ignore-all lint/complexity/useLiteralKeys: Bracket access intentionally exercises private members.
 import { describe, expect, it, vi } from 'vitest';
 
 import { Chart } from '../Drawing/Chart.js';
@@ -224,7 +225,7 @@ describe('Workbook', () => {
       const table = { id: 't1', toXML: () => '<table/>' } as any;
       wb.tables.push(table);
       const files: any = {};
-      wb._generateCorePaths(files);
+      wb['_generateCorePaths'](files);
       expect(files['/xl/tables/table1.xml']).toBe('<table/>');
       expect(Paths[table.id]).toBe('/xl/tables/table1.xml');
     });
@@ -255,7 +256,7 @@ describe('Workbook', () => {
       const files: any = {
         '/xl/test.xml': { xml: '<test/>' },
       };
-      wb._prepareFilesForPackaging(files);
+      wb['_prepareFilesForPackaging'](files);
       expect(files['/xl/test.xml']).toContain('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>');
       expect(files['/xl/test.xml']).toContain('<test/>');
     });
@@ -273,7 +274,7 @@ describe('Workbook', () => {
           }
         },
       };
-      wb._prepareFilesForPackaging(files);
+      wb['_prepareFilesForPackaging'](files);
       expect(files['/xl/test.xml']).toContain('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>');
       expect(files['/xl/test.xml']).toContain('<mocked/>');
       delete (globalThis as any).window;
@@ -304,7 +305,7 @@ describe('Workbook', () => {
       });
       wb.addChart(chart);
       const files: any = {};
-      wb._generateCorePaths(files);
+      wb['_generateCorePaths'](files);
       expect(files['/xl/charts/chart1.xml']).toBeTruthy();
       expect(Paths[chart.id]).toBe('/xl/charts/chart1.xml');
     });

@@ -16,6 +16,18 @@ npm install excel-builder-vanilla
 import { createWorkbook, createWorksheet } from 'excel-builder-vanilla';
 ```
 
+### TypeScript declarations
+
+The library and `@excel-builder-vanilla/types` each provide a single declaration file. Use the companion package when you need types without installing the runtime library:
+
+```ts
+import type { Workbook, Worksheet } from '@excel-builder-vanilla/types';
+```
+
+Private implementation members are omitted from both declaration files so their public workbook and worksheet types remain structurally compatible across packages. Class members whose names start with `_`, and methods documented with `@private`, are implementation details declared private in source and omitted from published types. Existing type exports and consumer imports remain available.
+
+TypeScript code that accessed underscore-prefixed members must use public methods instead, such as `setHeader()`, `setFooter()`, `setRowInstructions()`, and workbook export methods. Runtime member names are retained. Underscore keys in the object returned by `Worksheet.exportData()` remain part of the worksheet transfer format accepted by `importData()`.
+
 ### Features Supported
 
 - Number and date formatting

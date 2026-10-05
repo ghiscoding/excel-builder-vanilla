@@ -6,7 +6,7 @@ import { XMLDOM, type XMLNode } from './XMLDOM.js';
  */
 
 export class Util {
-  static _idSpaces: { [space: string]: number } = {};
+  private static _idSpaces: { [space: string]: number } = {};
 
   /**
    * Returns a number based on a namespace. So, running with 'Picture' will return 1. Run again, you will get 2. Run with 'Foo', you'll get 1.
