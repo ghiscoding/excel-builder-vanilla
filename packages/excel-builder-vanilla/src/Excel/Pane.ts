@@ -12,7 +12,7 @@ export class Pane {
   ySplit: number | null = null;
   activePane = 'bottomRight';
   topLeftCell: number | string | null = null;
-  _freezePane!: { xSplit: number; ySplit: number; cell: string };
+  private _freezePane!: { xSplit: number; ySplit: number; cell: string };
 
   /** Configures the frozen pane boundaries and the first visible cell. */
   freezePane(column: number, row: number, cell: string) {

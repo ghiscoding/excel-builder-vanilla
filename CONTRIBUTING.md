@@ -6,6 +6,8 @@ Before accepting any Pull Request, we need to make sure that you followed the st
 
 **Note**: this project uses [pnpm workspaces](https://pnpm.io/workspaces), you can install pnpm by following their [installation](https://pnpm.io/installation) or via `corepack enable` to run any of the pnpm scripts shown below:
 
+Development requires Node.js 22.18+, 24.11+, or 26+, as specified in `package.json`, and the pinned pnpm version. The workspace uses TypeScript 7's native compiler. Vite builds JavaScript; `pnpm --filter excel-builder-vanilla build:dts` checks library types and uses Rolldown to generate one `dist/index.d.ts`. The declaration build preserves existing type exports and omits private implementation members before `copy:types` synchronizes the companion package. Build the library before running tests: the declaration regression test compiles both published packages together.
+
 ### Steps
 
 1. clone the lib:

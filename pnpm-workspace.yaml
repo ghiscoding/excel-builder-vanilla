@@ -10,7 +10,7 @@ catalog:
   native-copyfiles: ^2.1.0
   remove-glob: ^1.2.3
   sass: ^1.105.1
-  typescript: ^6.0.3 # can't upgrade to TS7 because dts-bundle-generator
+  typescript: ^7.0.2
   vite: ^8.3.2
 
 minimumReleaseAge: 2880 # 2 days in minutes

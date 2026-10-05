@@ -123,11 +123,8 @@ export class Chart extends Drawing {
 
   // -- private functions
 
-  /**
-   * Creates the drawing frame that positions the chart in the worksheet.
-   * @private
-   */
-  _createGraphicFrame(xmlDoc: XMLDOM) {
+  /** Creates the drawing frame that positions the chart in the worksheet. */
+  private _createGraphicFrame(xmlDoc: XMLDOM) {
     const graphicFrame = Util.createElement(xmlDoc, 'xdr:graphicFrame');
     const nvGraphicFramePr = Util.createElement(xmlDoc, 'xdr:nvGraphicFramePr');
     nvGraphicFramePr.appendChild(
@@ -170,11 +167,8 @@ export class Chart extends Drawing {
     return graphicFrame;
   }
 
-  /**
-   * Creates the primary chart element and applies its chart type and grouping.
-   * @private
-   */
-  _createPrimaryChartNode(doc: XMLDOM, type: string, stacking?: 'stacked' | 'percent'): XMLNode {
+  /** Creates the primary chart element and applies its chart type and grouping. */
+  private _createPrimaryChartNode(doc: XMLDOM, type: string, stacking?: 'stacked' | 'percent'): XMLNode {
     let node: XMLNode;
     const groupingValue = this._resolveGrouping(type, stacking);
     switch (type) {
@@ -217,11 +211,8 @@ export class Chart extends Drawing {
     return node;
   }
 
-  /**
-   * Creates one chart series with its name, values, categories, and formatting.
-   * @private
-   */
-  _createSeriesNode(
+  /** Creates one chart series with its name, values, categories, and formatting. */
+  private _createSeriesNode(
     doc: XMLDOM,
     s: { name: string; valuesRange: string; scatterXRange?: string; color?: string },
     idx: number,
@@ -281,11 +272,8 @@ export class Chart extends Drawing {
     return reference;
   }
 
-  /**
-   * Applies the configured series color to the chart series markup.
-   * @private
-   */
-  _applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string) {
+  /** Applies the configured series color to the chart series markup. */
+  private _applySeriesColor(doc: XMLDOM, serNode: XMLNode, type: string, color?: string) {
     if (!color || typeof color !== 'string') {
       return;
     }
@@ -317,11 +305,8 @@ export class Chart extends Drawing {
     serNode.appendChild(spPr);
   }
 
-  /**
-   * Creates the chart legend element from its position and overlay options.
-   * @private
-   */
-  _createLegendNode(doc: XMLDOM, legendOpts?: { position?: string; overlay?: boolean }): XMLNode {
+  /** Creates the chart legend element from its position and overlay options. */
+  private _createLegendNode(doc: XMLDOM, legendOpts?: { position?: string; overlay?: boolean }): XMLNode {
     const legend = Util.createElement(doc, 'c:legend');
     const posMap: Record<string, string> = { right: 'r', left: 'l', top: 't', bottom: 'b', topRight: 'tr' };
     const pos = posMap[legendOpts?.position || 'right'] || 'r';
@@ -331,11 +316,8 @@ export class Chart extends Drawing {
     return legend;
   }
 
-  /**
-   * Creates a chart title element containing the supplied text.
-   * @private
-   */
-  _createTitleNode(doc: XMLDOM, text: string): XMLNode {
+  /** Creates a chart title element containing the supplied text. */
+  private _createTitleNode(doc: XMLDOM, text: string): XMLNode {
     const title = Util.createElement(doc, 'c:title');
     const tx = Util.createElement(doc, 'c:tx');
     const rich = Util.createElement(doc, 'c:rich');
@@ -358,11 +340,8 @@ export class Chart extends Drawing {
     return title;
   }
 
-  /**
-   * Creates a category axis and configures its title and gridlines.
-   * @private
-   */
-  _createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string, opts?: { showGridLines?: boolean }): XMLNode {
+  /** Creates a category axis and configures its title and gridlines. */
+  private _createCategoryAxis(doc: XMLDOM, axId: number, crossAx: number, title?: string, opts?: { showGridLines?: boolean }): XMLNode {
     const catAx = Util.createElement(doc, 'c:catAx');
     catAx.appendChild(Util.createElement(doc, 'c:axId', [['val', String(axId)]]));
     const scaling = Util.createElement(doc, 'c:scaling');
@@ -382,11 +361,8 @@ export class Chart extends Drawing {
     return catAx;
   }
 
-  /**
-   * Creates a value axis and configures its title, bounds, and gridlines.
-   * @private
-   */
-  _createValueAxis(
+  /** Creates a value axis and configures its title, bounds, and gridlines. */
+  private _createValueAxis(
     doc: XMLDOM,
     axId: number,
     crossAx: number,
@@ -419,19 +395,13 @@ export class Chart extends Drawing {
     return valAx;
   }
 
-  /**
-   * Allocates the next base ID used to identify a chart's axes.
-   * @private
-   */
-  _nextAxisIdBase(): number {
+  /** Allocates the next base ID used to identify a chart's axes. */
+  private _nextAxisIdBase(): number {
     return (this.index || 1) * 1000;
   }
 
-  /**
-   * Resolves the OOXML grouping value for a chart type and stacking mode.
-   * @private
-   */
-  _resolveGrouping(type: string, stacking?: 'stacked' | 'percent') {
+  /** Resolves the OOXML grouping value for a chart type and stacking mode. */
+  private _resolveGrouping(type: string, stacking?: 'stacked' | 'percent') {
     if (type === 'pie' || type === 'doughnut') {
       return 'clustered'; // required but cosmetic
     }

@@ -55,16 +55,17 @@
     "dev:init": "vite build",
     "dev": "vite build --watch",
     "build": "pnpm clean && vite build && pnpm build:dts && pnpm copy:types",
-    "build:dts": "dts-bundle-generator -o dist/index.d.ts src/index.ts",
+    "build:dts": "tsc --noEmit && node build-dts.mjs",
     "copy:types": "node copy-types.mjs"
   },
   "dependencies": {
     "fflate": "catalog:"
   },
   "devDependencies": {
-    "dts-bundle-generator": "^9.5.1",
     "native-copyfiles": "catalog:",
     "remove-glob": "catalog:",
+    "rolldown": "^1.2.12",
+    "rolldown-plugin-dts": "^0.28.6",
     "typescript": "catalog:",
     "vite": "catalog:"
   }

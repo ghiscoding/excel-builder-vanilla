@@ -19,6 +19,8 @@ npm install excel-builder-vanilla
 import { createWorkbook } from 'excel-builder-vanilla';
 ```
 
+Types omit private implementation members, including underscore-prefixed class members, for compatibility with `@excel-builder-vanilla/types`. Use public methods such as `setHeader()` and `setRowInstructions()` to configure worksheets.
+
 ### Basic Usage
 
 ```ts

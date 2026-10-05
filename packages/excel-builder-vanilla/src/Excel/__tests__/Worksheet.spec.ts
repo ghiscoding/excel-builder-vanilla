@@ -1,3 +1,4 @@
+// biome-ignore-all lint/complexity/useLiteralKeys: Bracket access intentionally exercises private members.
 import { describe, expect, it, test, vi } from 'vitest';
 
 import { Worksheet } from '../Worksheet.js';
@@ -73,8 +74,8 @@ describe('Excel/Worksheet', () => {
 
   test('getWorksheetXmlHeader and Footer', () => {
     const ws = new Worksheet({ name: 'Test' });
-    ws._headers = ['Header'];
-    ws._footers = ['Footer'];
+    ws['_headers'] = ['Header'];
+    ws['_footers'] = ['Footer'];
     expect(ws.getWorksheetXmlHeader()).toContain('<worksheet');
     expect(ws.getWorksheetXmlFooter()).toContain('<headerFooter>');
   });
@@ -95,7 +96,7 @@ describe('Excel/Worksheet', () => {
 
   test('builds the legacy XML cell templates for compatibility callers', () => {
     const ws = new Worksheet({ name: 'LegacyCache' });
-    const cache = ws._buildCache(new XMLDOM(null, 'root'));
+    const cache = ws['_buildCache'](new XMLDOM(null, 'root'));
 
     expect(cache.number.toString()).toBe('<c><v>--temp--</v></c>');
     expect(cache.formula.toString()).toBe('<c><f>--temp--</f></c>');
@@ -200,13 +201,13 @@ describe('Excel/Worksheet', () => {
       const xmlDom = new XMLDOM('something', 'root');
       const xmlNode = new XMLNode({ nodeName: 'some_name' });
       ws.exportPageSettings(xmlDom, xmlNode);
-      expect(ws._margin).toEqual({ bottom: 120, footer: 21, header: 22, left: 0, right: 33, top: 8 });
+      expect(ws['_margin']).toEqual({ bottom: 120, footer: 21, header: 22, left: 0, right: 33, top: 8 });
     });
 
     it('should append pageSetup with orientation if _orientation is set', () => {
       const ws = new Worksheet({ name: 'Test' });
       ws.data = [[1]];
-      ws._orientation = 'landscape';
+      ws['_orientation'] = 'landscape';
       (globalThis as any).__currentWorksheet = ws;
       ws.toXML();
       // Since our Util mock doesn't track pageSetup, let's spy on Util.createElement
@@ -226,7 +227,7 @@ describe('Excel/Worksheet', () => {
 
       ws.setPageOrientation('landscape');
 
-      expect(ws._orientation).toBe('landscape');
+      expect(ws['_orientation']).toBe('landscape');
     });
   });
 
@@ -265,7 +266,7 @@ describe('Excel/Worksheet', () => {
       // Use mock Table objects with id property
       const table1 = { id: 'table1' } as any;
       const table2 = { id: 'table2' } as any;
-      ws._tables = [table1, table2];
+      ws['_tables'] = [table1, table2];
       ws.relations!.getRelationshipId = vi.fn(tbl => `rId-${tbl.id}`);
       (globalThis as any).__currentWorksheet = ws;
       ws.toXML();
@@ -279,7 +280,7 @@ describe('Excel/Worksheet', () => {
       const ws = new Worksheet({ name: 'Test' });
       // Cell with no metadata.style
       ws.data = [[{ value: 'plain', metadata: {} }]];
-      ws._rowInstructions = [{ style: 42 }];
+      ws['_rowInstructions'] = [{ style: 42 }];
       ws.sharedStrings = { strings: {}, addString: () => 0 } as any;
       (globalThis as any).__currentWorksheet = ws;
       ws.toXML();
@@ -314,7 +315,7 @@ describe('Excel/Worksheet', () => {
     it('should set cell and row style/height attributes from metadata and _rowInstructions', () => {
       const ws = new Worksheet({ name: 'Test' });
       ws.data = [[{ value: 'styled', metadata: { style: 7 } }]];
-      ws._rowInstructions = [{ height: 22, style: 9 }];
+      ws['_rowInstructions'] = [{ height: 22, style: 9 }];
       ws.sharedStrings = { strings: {}, addString: () => 0 } as any;
       // Patch: set global ref so mock can store row node
       (globalThis as any).__currentWorksheet = ws;
