@@ -20,8 +20,6 @@ minimumReleaseAgeExclude:
   - '@lerna-lite/*'
   - native-copyfiles
   - remove-glob
-  # Renovate security update: vite@8.3.3
-  - vite@8.3.3
 
 overrides:
   http-cache-semantics: ^4.3.0
