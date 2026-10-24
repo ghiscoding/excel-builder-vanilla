@@ -19,7 +19,7 @@
     "formatWithErrors": true,
     "lineWidth": 140,
     "indentStyle": "space",
-    "includes": ["**", "!**/.cache", "!**/dist/**", "!**/*.json", "!**/node_modules/**"]
+    "includes": ["**", "!**/.cache", "!**/dist/**", "!**/*.json", "!**/*.md", "!**/node_modules/**"]
   },
   "javascript": {
     "parser": {
@@ -61,6 +61,7 @@
       },
       "preset": "recommended",
       "complexity": {
+        "noUnnecessaryTemplateExpression": "error",
         "noForEach": "off",
         "noStaticOnlyClass": "off",
         "noUselessEscapeInRegex": "error",
@@ -75,15 +76,14 @@
         "noPrototypeBuiltins": "off"
       },
       "style": {
+        "useDomQuerySelector": "error",
         "noNonNullAssertion": "off",
         "noParameterAssign": "off",
         "useExponentiationOperator": "off",
         "useBlockStatements": "error"
       },
       "nursery": {
-        "noMisleadingReturnType": "error",
-        "noUnnecessaryTemplateExpression": "error",
-        "useDomQuerySelector": "error"
+        "noMisleadingReturnType": "error"
       }
     }
   },
