@@ -20,6 +20,8 @@ minimumReleaseAgeExclude:
   - '@lerna-lite/*'
   - native-copyfiles
   - remove-glob
+  # Renovate security update: happy-dom@21.0.4
+  - happy-dom@21.0.4
 
 overrides:
   http-cache-semantics: ^4.3.0
