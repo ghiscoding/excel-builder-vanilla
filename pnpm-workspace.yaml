@@ -9,7 +9,7 @@ catalog:
   fflate: ^0.8.3
   native-copyfiles: ^2.1.1
   remove-glob: ^1.2.3
-  sass: ^1.106.1
+  sass: ^1.107.0
   typescript: ^7.0.2
   vite: ^8.3.5
 
