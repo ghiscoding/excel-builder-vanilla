@@ -75,6 +75,19 @@ if ('getReader' in output) {
 
 Streaming always produces XLSX bytes. The existing `outputType`, `fileFormat`, `mimeType`, and `downloadType` options remain accepted with their previous behavior: they do not alter the stream output or select the environment. Set the filename and MIME type on your destination. Compression defaults to level 6. Level 1 trades some file size for faster export; choose a level using your own data.
 
+### ZIP compression
+
+All export functions accept `zipOptions`, including fflate's compression `level` from 0 to 9. The default is 6; level 0 stores entries without compression. For large exports, try level 1 when speed matters more than file size:
+
+```ts
+createExcelFileStream(workbook, { zipOptions: { level: 1 } });
+downloadExcelFile(workbook, 'export.xlsx', { zipOptions: { level: 1 } });
+// For a complete Uint8Array instead:
+await createExcelFile(workbook, 'Uint8Array', { zipOptions: { level: 1 } });
+```
+
+See [compression measurements and reproduction instructions](https://ghiscoding.gitbook.io/excel-builder-vanilla/streaming#zip-compression) for a comparison. Results depend on the data and environment.
+
 ### Reuse styles
 
 Create a style once and reuse its ID across cells. Every `createFormat()` call allocates a new format and may allocate nested font, fill, border, and number formats.
