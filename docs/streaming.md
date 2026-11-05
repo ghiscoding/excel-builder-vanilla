@@ -70,7 +70,7 @@ The following are median total export times and archive sizes from three Node ru
 | 0 | 0.66 s | 33.88 MB | 0.91 s | 33.88 MB |
 | 1 | 1.18 s | 5.61 MB | 1.42 s | 5.58 MB |
 | 3 | 1.28 s | 4.06 MB | 1.52 s | 4.03 MB |
-| 6 | 2.42 s | 3.93 MB | 2.72 s | 3.91 MB |
+| 6 (default) | 2.42 s | 3.93 MB | 2.72 s | 3.91 MB |
 | 9 | 3.95 s | 3.91 MB | 4.42 s | 3.89 MB |
 
 Measured on Linux x64, Intel Core i7-8750H, Node 24.16.0 and fflate 0.8.3, at revision `043dd6aa271e8c6f3c9649675a8e1a45b4d777af` (library 5.3.1). Each sample used a fresh process and a 500-row warmup at the same level. Workbook construction and ZIP validation were excluded from export time. XML generation and compression are interleaved in the streaming path, so these totals do not isolate either phase. Each archive was decompressed and its worksheet XML hash and one million cell count checked across all runs and paths; this was not a test in Excel or LibreOffice. No browser measurements were made. Timing and size vary with data, hardware, and runtime.
